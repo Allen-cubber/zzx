@@ -9,3 +9,4 @@ params:
   ShowReadingTime: true
   ShowPostNavLinks: true
   ShowCodeCopyButtons: true
+  math: true
