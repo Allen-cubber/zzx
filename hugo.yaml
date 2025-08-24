@@ -1,0 +1,11 @@
+baseURL: 'https://example.org/'
+languageCode: 'zh-cn'
+title: 'ZZX 的博客'
+theme: 'papermod'
+
+# 这是一个让 PaperMod 主题能正常显示的最小化配置
+params:
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
