@@ -3,10 +3,13 @@ languageCode: 'zh-cn'
 title: 'Z2X BLOG'
 theme: 'papermod'
 
-# 这是一个让 PaperMod 主题能正常显示的最小化配置
+# 启用不安全渲染，让 KaTeX 脚本能工作
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
+# 主题参数
 params:
-  ShowShareButtons: true
-  ShowReadingTime: true
-  ShowPostNavLinks: true
-  ShowCodeCopyButtons: true
+  # 这一行是全局开关，告诉主题“网站需要数学公式功能”
   math: true
