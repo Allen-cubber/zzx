@@ -71,14 +71,6 @@ $$
 这是一个行内的混合矢量/矩阵公式：
 `$\vec{C} \cdot (\vec{A} \times \vec{B}) = \begin{vmatrix} C_{u1} & C_{u2} & C_{u3} \\ A_{u1} & A_{u2} & A_{u3} \\ B_{u1} & B_{u2} & B_{u3} \end{vmatrix}$`
 
-这是一个独立的块级矩阵：
-$$
-\begin{pmatrix}
-a & b \\
-c & d
-\end{pmatrix}
-$$
-
 ---
 
 ### 10. 特殊函数与装饰
@@ -86,3 +78,5 @@ $$
 - **开方**: `$\sqrt{x^2+y^2}$`
 - **boxed**: `$\boxed{E=mc^2}$`
 - **上划线**: `$\bar{A}$`
+
+![测试图片](test.png)
