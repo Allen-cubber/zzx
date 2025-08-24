@@ -6,5 +6,4 @@ math: "true"
 
 这是我的第一篇用 Hugo 搭建的文章。
 
-下面是一个数学公式。
-$$ \boxed{ Q_o = \frac{\omega_o L}{R} } $$
+下面是一个数学公式。${ Q_o = \frac{\omega_o L}{R} }$
