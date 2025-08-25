@@ -1,0 +1,34 @@
+/* assets/css/extended/custom.css */
+
+/* --- 标题字号调整 --- */
+
+/* 调整文章内容区的 H1 标题 (通常是文章的大标题) */
+.post-content h1 {
+    font-size: 2.5rem; /* 默认值可能在 2rem 左右 */
+}
+
+/* 调整文章内容区的 H2 标题 (##) */
+.post-content h2 {
+    font-size: 2rem;   /* 默认值可能在 1.7rem 左右 */
+}
+
+/* 调整文章内容区的 H3 标题 (###) */
+.post-content h3 {
+    font-size: 1.6rem; /* 默认值可能在 1.4rem 左右 */
+}
+
+/* 调整文章内容区的 H4 标题 (####) */
+.post-content h4 {
+    font-size: 1.3rem;
+}
+
+/* 调整文章内容区的 H5 标题 (####) */
+.post-content h5 {
+    font-size: 1.2rem;
+}
+
+/* --- (可选) 调整标题的粗细 --- */
+.post-content h1,
+.post-content h2 {
+    font-weight: 700; /* 700 是粗体，600是半粗体, 400是正常 */
+}

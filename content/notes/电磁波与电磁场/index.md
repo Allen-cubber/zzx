@@ -1,202 +1,26 @@
-23级信息工程5班 张哲轩
-2025-06-22
+---
+title: 电磁波与电磁场
+date: 2025-06-22T14:00:00+08:00
+draft: false
+summary: 本笔记根据华南理工大学2025年第一学期《电磁波与电磁场》课件整理，系统梳理了课程的核心概念。在此，特别感谢涂治红老师在学习过程中的悉心指导与支持。
+tags:
+  - 电磁学
+  - 麦克斯韦方程组
+  - 物理
+  - 场论
+categories:
+  - 专业学习
+series:
+  - 电磁波与电磁场笔记
+Toc: true
+math: true
+---
+
 👋 **开篇寄语**
 >Never underestimate your power to change yourself!
 >
   只要清楚认识自己，不忘初心，砥砺前行，就能实现梦想。
   
----
-## 目录
-*   [[#第一章 矢量与场论基础]]
-    *   [[#1-1 矢量与正交坐标系]]
-        *   [[#1 矢量 Vector ➡️]]
-        *   [[#2 矢量运算 Vector Operations ➕➖✖️]]
-            *   [[#21 加法和减法 Addition and Subtraction S6]]
-            *   [[#22 点乘 Dot Product Scalar Product ⋅ S7]]
-            *   [[#23 叉乘 Cross Product Vector Product ✖️ S8]]
-            *   [[#24 三重积 Product of Three Vectors S9]]
-        *   [[#3 正交曲线坐标系 Orthogonal Curvilinear Coordinates 🌐 S11-S14]]
-        *   [[#4 三种基本正交坐标系 Three Basic Orthogonal Systems]]
-            *   [[#41 直角坐标系 Cartesian Coordinates 📐 S15]]
-            *   [[#42 柱坐标系 Cylindrical Coordinates 🥫 S16]]
-            *   [[#43 球坐标系 Spherical Coordinates 🌍 S17]]
-        *   [[#5 坐标系转换 Coordinate Transformations 🔄 S19-S21]]
-            *   [[#51 坐标变量转换 S20]]
-            *   [[#52 单位矢量转换 S21]]
-        *   [[#6 学习总结 🎓]]
-    *   [[#1-2 梯度与散度]]
-        *   [[#1 标量场和矢量场 Scalar and Vector Fields 🌡️💨]]
-            *   [[#11 场的定义 Definition of Field S3]]
-            *   [[#12 场线 Field Line 📈]]
-        *   [[#2 标量场的梯度 Gradient of a Scalar Field ⛰️ S7-S14]]
-            *   [[#21 标量场的方向导数 Directional Derivative S8]]
-            *   [[#22 标量场的梯度 Gradient S10-S13]]
-        *   [[#3 矢量场的散度 Divergence of a Vector Field 💧🌬️ S18-S23]]
-            *   [[#31 矢量的通量 Flux S19]]
-            *   [[#32 矢量场的散度 Divergence S20]]
-        *   [[#4 高斯散度定理 Gausss Divergence Theorem ∮∫ S24]]
-        *   [[#5 学习总结 🎓 梯度与散度]]
-    *   [[#1-3 旋度]]
-        *   [[#11 🌀 环量 Net Circulation]]
-        *   [[#12 📐 环量面密度 Surface Density of the Circulation]]
-        *   [[#13 旋度 Curl Rotation]]
-        *   [[#🧮 旋度计算公式]]
-        *   [[#💡 旋度与散度的意义]]
-        *   [[#2 斯托克斯定理 Stokess Theorem🗺️]]
-        *   [[#3 两个恒等式 Two Null Identities💡]]
-        *   [[#4 ▽ 算子和拉普拉斯算子⚙️]]
-            *   [[#41 ▽ 算子 Operator]]
-            *   [[#42 拉普拉斯算子 Laplacian Operator]]
-        *   [[#5 亥姆赫兹定理与矢量场分类🧩]]
-            *   [[#51 亥姆赫兹定理 Helmholtzs Theorem]]
-            *   [[#52 📊 矢量场分类]]
-        *   [[#6 矢径的“三度”计算📍]]
-        *   [[#7 本章学习总结🎓]]
-*   [[#第二章 静电场]]
-    *   [[#2-1 静电场的基本方程]]
-        *   [[#1 绪论与应用]]
-        *   [[#2 库仑定律 Coulombs Law 📏]]
-        *   [[#3 电场强度 Electric Field Intensity $\vec{E}$ 💪]]
-        *   [[#4 分布电荷 Distributed Charge ☁️]]
-        *   [[#5 高斯通量定理 Gausss Flux Theorem ∮]]
-        *   [[#6 静电场的旋度 Curl of Electrostatic Field 🌀]]
-        *   [[#7 电位 Electric Potential $\phi$ 📉]]
-        *   [[#8 电偶极子 Electric Dipole -]]
-        *   [[#9 静电场基本方程总结 Section 2-1]]
-    *   [[#2-2 电场中媒质和边界条件]]
-        *   [[#1 媒质的分类 🧱]]
-        *   [[#2 静电场中的导体 🪙]]
-        *   [[#3 静电场中的电介质 🏺]]
-        *   [[#4 泊松方程和拉普拉斯方程 📐]]
-        *   [[#5 静电场的边界条件 🥅]]
-    *   [[#2-3 电容和能量]]
-        *   [[#1 电容器 Capacitor 与 电容 Capacitance 🔋]]
-        *   [[#2 多导体系统的电容 🕸️]]
-        *   [[#3 静电场能量 Electrostatic Energy ⚡️]]
-        *   [[#4 静电场力 Electrostatic Force F]]
-    *   [[#本章学习总结]]
-*   [[#第三章 恒定电场]]
-    *   [[#3-1 电流和电流密度]]
-        *   [[#11 电流 Current]]
-        *   [[#12 电流密度 Current Density 🌊]]
-        *   [[#13 示例 1 旋转带电球体的面电流密度 ✅]]
-    *   [[#3-2 欧姆定律和焦耳定律]]
-        *   [[#21 欧姆定律 Ohms Law 💡]]
-        *   [[#22 焦耳定律 Joules Law 🔥]]
-        *   [[#23 示例 2 有损耗平行板电容器 ✅]]
-    *   [[#3-3 恒定电流的基本方程]]
-        *   [[#31 电流连续性方程 Continuity Equation]]
-        *   [[#32 恒定电流场的基本方程]]
-    *   [[#3-4 电流密度的边界条件]]
-    *   [[#3-5 电流电场与静电场的比拟]]
-    *   [[#3-6 电导与接地电阻]]
-        *   [[#61 电导 Conductance G 👍]]
-        *   [[#62 接地体和接地电阻]]
-        *   [[#63 示例 接地电阻计算 ✅]]
-        *   [[#64 跨步电压 Step Voltage ⚠️]]
-    *   [[#本章学习总结]]
-*   [[#第四章 静磁场]]
-    *   [[#4-1 静磁场的基本方程]]
-        *   [[#1 安培力定律与毕奥-沙伐定律 📏]]
-        *   [[#2 磁场散度与磁通连续性原理 💧]]
-        *   [[#3 安培环路定律 Amperes Circuital Law 🔄]]
-        *   [[#4 磁矢位 Magnetic Vector Potential $\vec{A}$ 🧭]]
-        *   [[#5 静磁场基本方程总结 Section 4-1]]
-    *   [[#4-2 磁化和边界条件]]
-        *   [[#1 磁偶极子 Magnetic Dipole -]]
-        *   [[#2 静磁场媒质的磁化 🧲]]
-        *   [[#3 静磁场的边界条件 🥅]]
-    *   [[#4-3 电感和能量]]
-        *   [[#1 电感 Inductance]]
-            *   [[#11 磁链 Flux Linkage 🔗]]
-            *   [[#12 单回路电感 Self-Inductance 💡]]
-            *   [[#13 双回路互感 Mutual Inductance 🤝🔄]]
-        *   [[#2 磁场能量 Magnetic Energy 🔋⚡]]
-            *   [[#21 电流回路的磁场能量]]
-            *   [[#22 用磁场表示磁场能量 🧱]]
-        *   [[#3 磁场力 Magnetic Force 💪⚙️🧲]]
-            *   [[#31 各回路磁链保持不变 $\Psi$ 常数]]
-            *   [[#32 各回路电流保持不变 $I$ 常数]]
-            *   [[#33 计算方法选择与力的方向 🤔✅]]
-        *   [[#学习总结]]
-*   [[#第五章 静态场边值问题]]
-    *   [[#5-1 镜像法]]
-        *   [[#1 静态场边值问题概述 💡]]
-        *   [[#2 唯一性定理 Uniqueness Theorem 🎯]]
-        *   [[#3 叠加原理 Superposition Principle ➕]]
-        *   [[#4 镜像法 Method of Images 🪞]]
-            *   [[#41 点电荷与无限大接地导体平面 🌍⚡]]
-            *   [[#42 点电荷与无限大介质平面 🌈]]
-            *   [[#43 点电荷与导体球 🔮]]
-            *   [[#44 接地导体劈的镜像 📐]]
-        *   [[#5 本节学习总结 🎓]]
-*   [[#第六章 时变电磁场]]
-    *   [[#6-1 麦克斯韦方程组]]
-        *   [[#📜 1 引言]]
-        *   [[#💡 2 法拉第电磁感应定律 Faradays Law of Electromagnetic Induction]]
-        *   [[#🌊 3 位移电流 Displacement Current]]
-        *   [[#🏛️ 4 麦克斯韦方程组 Maxwell Equations]]
-            *   [[#41 麦克斯韦方程组积分形式 🌍]]
-            *   [[#42 麦克斯韦方程组微分形式 点形式 📍]]
-            *   [[#43 麦克斯韦方程组的独立性 🔗]]
-            *   [[#44 本构关系 Constitutive relationship 🧱]]
-    *   [[#6-2 边界条件和波动方程]]
-        *   [[#🚧 1 时变电磁场的边界条件]]
-            *   [[#13 理想介质表面的边界条件 $\vec{J}_s0 \rho_s0 \sigma0$]]
-            *   [[#14 理想导体表面的边界条件 介质2为理想导体 $\sigma_2 \to \infty$]]
-        *   [[#💰 2 坡印廷定理和坡印廷矢量]]
-            *   [[#21 坡印廷定理 Poynting Theorem]]
-            *   [[#22 坡印廷矢量 Poynting Vector ➡️]]
-            *   [[#💰 例3 圆柱导线 证明从导体表面流入的电磁能流等于导线内部欧姆热损耗功率]]
-            *   [[#💰 例4 同轴线 说明功率是通过内外导体间的空间传递的，导体本身不传输功率，只起引导电磁波的作用]]
-        *   [[#🌊 3 波动方程]]
-        *   [[#🔑 4 时变电磁场的位函数]]
-    *   [[#6-3 时谐电磁场]]
-        *   [[#⏱️ 1 时谐电磁场的复数表示法 Complex Phasor]]
-        *   [[#🔢 2 麦克斯韦方程复数形式 频域Maxwell方程]]
-            *   [[#21 矢量齐次亥姆霍兹方程 Helmholtz Equation]]
-            *   [[#22 时谐场的位函数的复数形式]]
-        *   [[#✨ 3 复坡印廷定理 频域Poynting定理]]
-            *   [[#31 平均坡印廷矢量]]
-            *   [[#32 复坡印廷矢量]]
-            *   [[#33 对比坡印廷定理和复坡印廷定理]]
-    *   [[#📖 本章学习总结 📖]]
-*   [[#第七章 时变电磁波与平面波]]
-    *   [[#📖 本章内容提要]]
-    *   [[#📜 7-1 介质中的均匀平面波]]
-        *   [[#1 🌟 引言]]
-        *   [[#2 💡 理想介质中的均匀平面波]]
-            *   [[#21 理想介质中的波动方程]]
-            *   [[#211 🕰️ 时域场的波动方程的解 沿z轴传播]]
-            *   [[#212 ⚡ 时谐场的波动方程的解 沿z轴传播]]
-            *   [[#22 🌟 均匀平面波的特性]]
-        *   [[#3 🗺️ 沿任意方向传播的平面波]]
-    *   [[#🌀 7-2 均匀平面波的极化]]
-        *   [[#1 🌟 平面电磁波的极化]]
-        *   [[#2 🌿 极化种类]]
-        *   [[#3 💡 极化特性]]
-    *   [[#🌊 7-3 导电媒质中的均匀平面波]]
-        *   [[#1 🌟 导电媒质中的波动方程]]
-        *   [[#2 🔗 导电媒质本征波阻抗]]
-        *   [[#3 📉 导电媒质中平面波特性]]
-        *   [[#4 💨 低损耗媒质和良导体媒质]]
-        *   [[#5 🎯 穿透深度和表面电阻]]
-        *   [[#6 🌈 色散与群速]]
-    *   [[#⚔️ 7-4 均匀平面波的垂直与斜入射]]
-        *   [[#1 🌊 垂直入射 Normal Incidence]]
-            *   [[#11 一般公式 媒质1入射到媒质2]]
-            *   [[#12 理想介质 → 理想导体]]
-            *   [[#13 理想介质 → 理想介质]]
-            *   [[#14 多层理想介质的垂直入射]]
-        *   [[#2 📐 斜入射 Oblique Incidence]]
-            *   [[#21 反射定律与折射定律]]
-            *   [[#22 垂直极化波 电场垂直于入射平面 поляризация 垂直]]
-            *   [[#23 平行极化波 电场平行于入射平面 поляризация 平行]]
-            *   [[#24 全反射与全折射]]
-            *   [[#25 理想导体表面的斜入射]]
-    *   [[#🎓 本章学习总结]]
-
----
 ## 第一章 矢量与场论基础
 ### 1-1 矢量与正交坐标系
 
@@ -218,20 +42,20 @@
 
 ---
 
-#### 2. 矢量运算 (Vector Operations) ➕➖✖️
+#### 2. 矢量运算➕➖✖️
 
-#### 2.1 加法和减法 (Addition and Subtraction) (S6)
+##### 2.1 加法和减法
 
 *   **分量运算**:
     $\vec{C} = \vec{A} \pm \vec{B} = (A_x \pm B_x)\vec{a}_x + (A_y \pm B_y)\vec{a}_y + (A_z \pm B_z)\vec{a}_z$
 *   **运算律**:
-    *   交换律 (Commutative): $\vec{A}+\vec{B} = \vec{B}+\vec{A}$
-    *   结合律 (Associative): $\vec{A}+(\vec{B}+\vec{C}) = (\vec{A}+\vec{B})+\vec{C}$
+    *   交换律: $\vec{A}+\vec{B} = \vec{B}+\vec{A}$
+    *   结合律 : $\vec{A}+(\vec{B}+\vec{C}) = (\vec{A}+\vec{B})+\vec{C}$
 *   **几何方法**:
-    *   平行四边形法则 (Parallelogram rule)
-    *   首尾相接法则 (Head-to-tail rule)
+    *   平行四边形法则 
+    *   首尾相接法则
 
-#### 2.2 点乘 (Dot Product / Scalar Product) ⋅ (S7)
+##### 2.2 点乘
 
 *   **定义**:
     $\boxed{\vec{A} \cdot \vec{B} = |\vec{A}||\vec{B}| \cos \theta_{AB} = AB \cos \theta_{AB}}$
@@ -245,7 +69,7 @@
 *   **应用**: 求矢量在一个方向上的投影；判断矢量正交 ($\vec{A} \cdot \vec{B} = 0$ if $\vec{A} \perp \vec{B}$)。
 *   **示例 (S7)**: 证明三角余弦定理 $C^2 = A^2 + B^2 - 2AB \cos \alpha$ (其中 $\vec{C} = \vec{A} + \vec{B}$，$\alpha = \pi - \theta_{AB}$)。
 
-#### 2.3 叉乘 (Cross Product / Vector Product) ✖️ (S8)
+##### 2.3 叉乘  ✖️
 
 *   **定义 (大小和方向)**:
     $\boxed{\vec{A} \times \vec{B} = \vec{a}_n |\vec{A}||\vec{B}| \sin \theta_{AB}}$
@@ -261,7 +85,7 @@
 *   **自身叉乘**:
     $\vec{A} \times \vec{A} = 0$
 
-#### 2.4 三重积 (Product of Three Vectors) (S9)
+##### 2.4 三重积
 
 *   **标量三重积 (Scalar Triple Product)**:
     *   定义: $\vec{A} \cdot (\vec{B} \times \vec{C})$
@@ -279,7 +103,7 @@
 
 ---
 
-#### 3. 正交曲线坐标系 (Orthogonal Curvilinear Coordinates) 🌐 (S11-S14)
+#### 3. 正交曲线坐标系🌐
 
 *   **基本概念** (S11):
     *   <font color='orange'>曲线坐标</font>: 空间点 P 由三个有序数 $(u_1, u_2, u_3)$ 唯一确定。
@@ -287,30 +111,30 @@
     *   <font color='orange'>坐标曲线</font>: 任意两个坐标曲面的交线。沿着 $u_i$ 坐标曲线，只有 $u_i$ 变化，另两个坐标保持不变。
     *   <font color='orange'>正交</font>: 如果三个坐标曲面在任意交点处都<font color='orange'>相互垂直</font>，则称为正交曲线坐标系。
 
-*   **单位矢量** $\vec{a}_{u1}, \vec{a}_{u2}, \vec{a}_{u3}$ (S12):
+*   **单位矢量** $\vec{a}\_{u1}, \vec{a}\_{u2}, \vec{a}\_{u3}$ (S12):
     *   定义: 分别沿着 $u_1, u_2, u_3$ 坐标曲线<font color='orange'>增加</font>的方向的切向单位矢量。
-    *   正交性: $\vec{a}_{ui} \cdot \vec{a}_{uj} = \delta_{ij}$ (Kronecker delta)
-    *   右手系: 满足右手螺旋规则，如 $\vec{a}_{u1} \times \vec{a}_{u2} = \vec{a}_{u3}$ (及其轮换)。
-    *   矢量表示: $\vec{A} = A_{u1}\vec{a}_{u1} + A_{u2}\vec{a}_{u2} + A_{u3}\vec{a}_{u3}$
+    *   正交性: $\vec{a}\_{ui} \cdot \vec{a}\_{uj} = \delta\_{ij}$ (Kronecker delta)
+    *   右手系: 满足右手螺旋规则，如 $\vec{a}\_{u1} \times \vec{a}\_{u2} = \vec{a}\_{u3}$ (及其轮换)。
+    *   矢量表示: $\vec{A} = A_{u1}\vec{a}\_{u1} + A_{u2}\vec{a}\_{u2} + A_{u3}\vec{a}\_{u3}$
     *   **易错点** ❗ (S12, S18): 在正交曲线坐标系中（除直角坐标系外），单位矢量 $\vec{a}_{ui}$ 的方向通常<font color='orange'>随坐标位置变化</font>，不是常矢量！(见 S23 示例)
 
 *   **微分元** (Differential Elements) (S13, S14):
     *   <font color='orange'>度量系数</font> (Metric Coefficients) / <font color='orange'>拉梅系数</font> (Lamé Coefficients): $h_1, h_2, h_3$。它们将坐标的微分 $du_i$ 转换为实际的<font color='orange'>长度微分</font> $dl_i$。
     *   微分长度元 (Differential Length): $dl_i = h_i du_i$
         *   矢量形式:
-            $\boxed{d\vec{l} = \vec{a}_{u1} dl_1 + \vec{a}_{u2} dl_2 + \vec{a}_{u3} dl_3 = \vec{a}_{u1} h_1 du_1 + \vec{a}_{u2} h_2 du_2 + \vec{a}_{u3} h_3 du_3}$
+            $\boxed{d\vec{l} = \vec{a}\_{u1} dl_1 + \vec{a}\_{u2} dl_2 + \vec{a}\_{u3} dl_3 = \vec{a}\_{u1} h_1 du_1 + \vec{a}\_{u2} h_2 du_2 + \vec{a}\_{u3} h_3 du_3}$
     *   微分面积元 (Differential Area):
-        *   $d\vec{S}_1 = \vec{a}_{u1} (dl_2 dl_3) = \vec{a}_{u1} h_2 h_3 du_2 du_3$ (垂直于 $\vec{a}_{u1}$ 方向的面元)
-        *   $d\vec{S}_2 = \vec{a}_{u2} (dl_1 dl_3) = \vec{a}_{u2} h_1 h_3 du_1 du_3$
-        *   $d\vec{S}_3 = \vec{a}_{u3} (dl_1 dl_2) = \vec{a}_{u3} h_1 h_2 du_1 du_2$
+        *   $d\vec{S}_1 = \vec{a}\_{u1} (dl_2 dl_3) = \vec{a}\_{u1} h_2 h_3 du_2 du_3$ (垂直于 $\vec{a}\_{u1}$ 方向的面元)
+        *   $d\vec{S}_2 = \vec{a}\_{u2} (dl_1 dl_3) = \vec{a}\_{u2} h_1 h_3 du_1 du_3$
+        *   $d\vec{S}_3 = \vec{a}\_{u3} (dl_1 dl_2) = \vec{a}\_{u3} h_1 h_2 du_1 du_2$
     *   微分体积元 (Differential Volume):
         $\boxed{dv = dl_1 dl_2 dl_3 = h_1 h_2 h_3 du_1 du_2 du_3}$
 
 ---
 
-#### 4. 三种基本正交坐标系 (Three Basic Orthogonal Systems)
+#### 4. 三种基本正交坐标系
 
-#### 4.1 直角坐标系 (Cartesian Coordinates) 📐 (S15)
+##### 4.1 直角坐标系📐
 
 *   坐标: $(u_1, u_2, u_3) = (x, y, z)$
 *   单位矢量: $\vec{a}_x, \vec{a}_y, \vec{a}_z$ (<font color='orange'>是常矢量</font>)
@@ -320,36 +144,35 @@
     *   $d\vec{S}_x = \vec{a}_x dy dz$, $d\vec{S}_y = \vec{a}_y dx dz$, $d\vec{S}_z = \vec{a}_z dx dy$
     *   $dv = dx dy dz$
 
-#### 4.2 柱坐标系 (Cylindrical Coordinates) 🥫 (S16)
+##### 4.2 柱坐标系🥫
 
 *   坐标: $(u_1, u_2, u_3) = (r, \phi, z)$
     *   范围: $r \ge 0$, $0 \le \phi < 2\pi$, $-\infty < z < \infty$
-*   单位矢量: $\vec{a}_r, \vec{a}_\phi, \vec{a}_z$
-    *   **注意点** ❗: $\vec{a}_r, \vec{a}_\phi$ 的方向随 $\phi$ 变化，不是常矢量。$\vec{a}_z$ 是常矢量。
+*   单位矢量: $\vec{a}\_r, \vec{a}\_\phi, \vec{a}\_z$
+    *   **注意点** ❗: $\vec{a}_r, \vec{a}\_\phi$ 的方向随 $\phi$ 变化，不是常矢量。$\vec{a}_z$ 是常矢量。
 *   度量系数: $h_1=1, h_2=r, h_3=1$
 *   微分元:
-    *   $d\vec{l} = \vec{a}_r dr + \vec{a}_\phi r d\phi + \vec{a}_z dz$
-    *   $d\vec{S}_r = \vec{a}_r r d\phi dz$, $d\vec{S}_\phi = \vec{a}_\phi dr dz$, $d\vec{S}_z = \vec{a}_z r dr d\phi$
+    *   $d\vec{l} = \vec{a}_r dr + \vec{a}\_\phi r d\phi + \vec{a}_z dz$
+    *   $d\vec{S}_r = \vec{a}_r r d\phi dz$, $d\vec{S}\_\phi = \vec{a}\_\phi dr dz$, $d\vec{S}_z = \vec{a}_z r dr d\phi$
     *   $dv = r dr d\phi dz$
 
-#### 4.3 球坐标系 (Spherical Coordinates) 🌍 (S17)
-
+##### 4.3 球坐标系🌍
 *   坐标: $(u_1, u_2, u_3) = (R, \theta, \phi)$
     *   范围: $R \ge 0$, $0 \le \theta \le \pi$, $0 \le \phi < 2\pi$
     *   $R$: 径向距离, $\theta$: 天顶角 (与+z轴夹角), $\phi$: 方位角 (与+x轴在xy平面投影夹角)
-*   单位矢量: $\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi$
-    *   **注意点** ❗: $\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi$ 的方向都随 $\theta$ 和 $\phi$ 变化，都不是常矢量。
+*   单位矢量: $\vec{a}_R, \vec{a}\_\theta, \vec{a}\_\phi$
+    *   **注意点** ❗: $\vec{a}_R, \vec{a}\_\theta, \vec{a}\_\phi$ 的方向都随 $\theta$ 和 $\phi$ 变化，都不是常矢量。
 *   度量系数: $h_1=1, h_2=R, h_3=R \sin \theta$
 *   微分元:
-    *   $d\vec{l} = \vec{a}_R dR + \vec{a}_\theta R d\theta + \vec{a}_\phi R \sin \theta d\phi$
-    *   $d\vec{S}_R = \vec{a}_R R^2 \sin \theta d\theta d\phi$, $d\vec{S}_\theta = \vec{a}_\theta R \sin \theta dR d\phi$, $d\vec{S}_\phi = \vec{a}_\phi R dR d\theta$
+    *   $d\vec{l} = \vec{a}_R dR + \vec{a}\_\theta R d\theta + \vec{a}\_\phi R \sin \theta d\phi$
+    *   $d\vec{S}_R = \vec{a}_R R^2 \sin \theta d\theta d\phi$, $d\vec{S}\_\theta = \vec{a}\_\theta R \sin \theta dR d\phi$, $d\vec{S}\_\phi = \vec{a}\_\phi R dR d\theta$
     *   $dv = R^2 \sin \theta dR d\theta d\phi$
 
 ---
 
-#### 5. 坐标系转换 (Coordinate Transformations) 🔄 (S19-S21)
+#### 5. 坐标系转换 🔄 
 
-#### 5.1 坐标变量转换 (S20)
+##### 5.1 坐标变量转换
 
 *   **直角 $\leftrightarrow$ 柱** (S19):
     *   $x = r \cos \phi, \quad y = r \sin \phi, \quad z = z$
@@ -360,100 +183,100 @@
 *   **柱 $\leftrightarrow$ 球** (S20):
     *   $r = R \sin \theta, \quad \phi = \phi, \quad z = R \cos \theta$
     *   $R = \sqrt{r^2 + z^2}, \quad \theta = \arctan(r/z), \quad \phi = \phi$
-#### 5.2 单位矢量转换 (S21)
+##### 5.2 单位矢量转换
 
 这些矩阵用于将一个坐标系的单位矢量表示为另一个坐标系的单位矢量的线性组合。
 
-1.  **直角坐标系 (Cartesian) $\longrightarrow$ 柱坐标系 (Cylindrical)**
-    将直角坐标系的单位矢量 $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ 表示为柱坐标系单位矢量 $(\vec{a}_r, \vec{a}_\phi, \vec{a}_z)$ 的组合：
+1.**直角坐标系 $\longrightarrow$ 柱坐标系**
+    将直角坐标系的单位矢量 $(\\vec{a}\_x, \\vec{a}\_y, \\vec{a}\_z)$ 表示为柱坐标系单位矢量 $(\\vec{a}\_r, \\vec{a}\_{\phi}, \\vec{a}\_z)$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_x \\ \vec{a}_y \\ \vec{a}_z \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_{x} \\\\ \\vec{a}\_{y} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \cos\phi & -\sin\phi & 0 \\
-    \sin\phi & \cos\phi & 0 \\
+    \\begin{bmatrix}
+    \\cos\\phi & -\\sin\\phi & 0 \\\\
+    \\sin\\phi & \\cos\\phi & 0 \\\\
     0 & 0 & 1
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_r \\ \vec{a}_\phi \\ \vec{a}_z \end{bmatrix}
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_{r} \\\\ \\vec{a}\_{\\phi} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     }
     $$
 
-2.  **柱坐标系 (Cylindrical) $\longrightarrow$ 直角坐标系 (Cartesian)**
-    将柱坐标系的单位矢量 $(\vec{a}_r, \vec{a}_\phi, \vec{a}_z)$ 表示为直角坐标系单位矢量 $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ 的组合：
+2.**柱坐标系 $\longrightarrow$ 直角坐标系**
+    将柱坐标系的单位矢量 $(\\vec{a}\_r, \\vec{a}\_{\phi}, \\vec{a}\_z)$ 表示为直角坐标系单位矢量 $(\\vec{a}\_x, \\vec{a}\_y, \\vec{a}\_z)$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_r \\ \vec{a}_\phi \\ \vec{a}_z \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_{r} \\\\ \\vec{a}\_{\phi} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \cos\phi & \sin\phi & 0 \\
-    -\sin\phi & \cos\phi & 0 \\
+    \\begin{bmatrix}
+    \\cos\\phi & \\sin\\phi & 0 \\\\
+    -\\sin\\phi & \\cos\\phi & 0 \\\\
     0 & 0 & 1
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_x \\ \vec{a}_y \\ \vec{a}_z \end{bmatrix}
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_{x} \\\\ \\vec{a}\_{y} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     }
     $$
     *(注意：这个矩阵是上一个矩阵的转置，因为变换是正交的)*
 
-3.  **直角坐标系 (Cartesian) $\longrightarrow$ 球坐标系 (Spherical)**
-    将直角坐标系的单位矢量 $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ 表示为球坐标系单位矢量 $(\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi)$ 的组合：
+3.**直角坐标系 $\longrightarrow$ 球坐标系**
+    将直角坐标系的单位矢量 $(\\vec{a}\_x, \\vec{a}\_y, \\vec{a}\_z)$ 表示为球坐标系单位矢量 $(\\vec{a}\_R, \\vec{a}\_{\theta}, \\vec{a}\_{\phi})$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_x \\ \vec{a}_y \\ \vec{a}_z \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_{x} \\\\ \\vec{a}\_{y} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \sin\theta\cos\phi & \cos\theta\cos\phi & -\sin\phi \\
-    \sin\theta\sin\phi & \cos\theta\sin\phi & \cos\phi \\
-    \cos\theta & -\sin\theta & 0
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_R \\ \vec{a}_\theta \\ \vec{a}_\phi \end{bmatrix}
+    \\begin{bmatrix}
+    \\sin\\theta\\cos\\phi & \\cos\\theta\\cos\\phi & -\\sin\\phi \\\\
+    \\sin\\theta\\sin\\phi & \\cos\\theta\\sin\\phi & \\cos\\phi \\\\
+    \\cos\\theta & -\\sin\\theta & 0
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_R \\\\ \\vec{a}\_{\theta} \\\\ \\vec{a}\_{\phi} \\end{bmatrix}
     }
     $$
 
-4.  **球坐标系 (Spherical) $\longrightarrow$ 直角坐标系 (Cartesian)**
-    将球坐标系的单位矢量 $(\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi)$ 表示为直角坐标系单位矢量 $(\vec{a}_x, \vec{a}_y, \vec{a}_z)$ 的组合：
+4.**球坐标系 $\longrightarrow$ 直角坐标系**
+    将球坐标系的单位矢量 $(\\vec{a}\_R, \\vec{a}\_{\theta}, \\vec{a}\_{\phi})$ 表示为直角坐标系单位矢量 $(\\vec{a}\_x, \\vec{a}\_y, \\vec{a}\_z)$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_R \\ \vec{a}_\theta \\ \vec{a}_\phi \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_R \\\\ \\vec{a}\_{\theta} \\\\ \\vec{a}\_{\phi} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \sin\theta\cos\phi & \sin\theta\sin\phi & \cos\theta \\
-    \cos\theta\cos\phi & \cos\theta\sin\phi & -\sin\theta \\
-    -\sin\phi & \cos\phi & 0
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_x \\ \vec{a}_y \\ \vec{a}_z \end{bmatrix}
+    \\begin{bmatrix}
+    \\sin\\theta\\cos\\phi & \\sin\\theta\\sin\\phi & \\cos\\theta \\\\
+    \\cos\\theta\\cos\\phi & \\cos\\theta\\sin\\phi & -\\sin\\theta \\\\
+    -\\sin\\phi & \\cos\\phi & 0
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_{x} \\\\ \\vec{a}\_{y} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     }
     $$
     *(同样，这个矩阵是上一个矩阵的转置)*
 
-5.  **柱坐标系 (Cylindrical) $\longrightarrow$ 球坐标系 (Spherical)**
-    将柱坐标系的单位矢量 $(\vec{a}_r, \vec{a}_\phi, \vec{a}_z)$ 表示为球坐标系单位矢量 $(\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi)$ 的组合：
+5.**柱坐标系 $\longrightarrow$ 球坐标系**
+    将柱坐标系的单位矢量 $(\\vec{a}\_r, \\vec{a}\_{\phi}, \\vec{a}\_z)$ 表示为球坐标系单位矢量 $(\\vec{a}\_R, \\vec{a}\_{\theta}, \\vec{a}\_{\phi})$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_r \\ \vec{a}_\phi \\ \vec{a}_z \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_{r} \\\\ \\vec{a}\_{\phi} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \sin\theta & \cos\theta & 0 \\
-    0 & 0 & 1 \\
-    \cos\theta & -\sin\theta & 0
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_R \\ \vec{a}_\theta \\ \vec{a}_\phi \end{bmatrix}
+    \\begin{bmatrix}
+    \\sin\\theta & \\cos\\theta & 0 \\\\
+    0 & 0 & 1 \\\\
+    \\cos\\theta & -\\sin\\theta & 0
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_R \\\\ \\vec{a}\_{\theta} \\\\ \\vec{a}\_{\phi} \\end{bmatrix}
     }
     $$
-    *(注意：$\vec{a}_\phi$ 在两个坐标系中是相同的)*
+    *(注意：$\\vec{a}\_{\phi}$ 在两个坐标系中是相同的)*
 
-6.  **球坐标系 (Spherical) $\longrightarrow$ 柱坐标系 (Cylindrical)**
-    将球坐标系的单位矢量 $(\vec{a}_R, \vec{a}_\theta, \vec{a}_\phi)$ 表示为柱坐标系单位矢量 $(\vec{a}_r, \vec{a}_\phi, \vec{a}_z)$ 的组合：
+6.**球坐标系 $\longrightarrow$ 柱坐标系**
+    将球坐标系的单位矢量 $(\\vec{a}\_R, \\vec{a}\_{\theta}, \\vec{a}\_{\phi})$ 表示为柱坐标系单位矢量 $(\\vec{a}\_r, \\vec{a}\_{\phi}, \\vec{a}\_z)$ 的组合：
     $$
-    \boxed{
-    \begin{bmatrix} \vec{a}_R \\ \vec{a}_\theta \\ \vec{a}_\phi \end{bmatrix}
+    \\boxed{
+    \\begin{bmatrix} \\vec{a}\_R \\\\ \\vec{a}\_{\theta} \\\\ \\vec{a}\_{\phi} \\end{bmatrix}
     =
-    \begin{bmatrix}
-    \sin\theta & 0 & \cos\theta \\
-    \cos\theta & 0 & -\sin\theta \\
+    \\begin{bmatrix}
+    \\sin\\theta & 0 & \\cos\\theta \\\\
+    \\cos\\theta & 0 & -\\sin\\theta \\\\
     0 & 1 & 0
-    \end{bmatrix}
-    \begin{bmatrix} \vec{a}_r \\ \vec{a}_\phi \\ \vec{a}_z \end{bmatrix}
+    \\end{bmatrix}
+    \\begin{bmatrix} \\vec{a}\_{r} \\\\ \\vec{a}\_{\phi} \\\\ \\vec{a}\_{z} \\end{bmatrix}
     }
     $$
     *(这个矩阵也是上一个矩阵的转置)*
@@ -464,7 +287,6 @@
 *   如果要对<font color='orange'>不同点</font>定义的矢量（用柱坐标或球坐标表示）进行加减运算，必须先将它们<font color='orange'>转换到直角坐标系</font>下，利用直角坐标系单位矢量是常矢量的特性进行运算，然后如果需要，再转换回原来的坐标系。（见 S24-S25 示例）
 
 ---
-
 #### 6. 学习总结 🎓
 
 本节学习了矢量的基本概念和运算规则，以及正交坐标系的基础知识，是后续学习场论分析的关键：
@@ -482,10 +304,9 @@
 
 ### 1-2 梯度与散度
 
-#### 1. 标量场和矢量场 (Scalar and Vector Fields) 🌡️💨
+#### 1. 标量场和矢量场🌡️💨
 
-#### 1.1 场的定义 (Definition of Field) (S3)
-
+##### 1.1 场的定义 
 *   <font color='orange'>场 (Field)</font>: 场所、空间。如果在空间的每一点都对应某个物理量的一个确定值，则称在此空间确定了该量的一个场。
 *   <font color='orange'>标量场 (Scalar Field)</font>: 标量所在的场所或空间。空间中每一点对应一个标量值。
     *   示例: 温度场 $T(x,y,z)$，密度场 $\rho(x,y,z)$，电势场 $\phi(x,y,z)$，高度场 $h(x,y,z)$。
@@ -494,7 +315,7 @@
     *   示例: 力场 $\vec{F}(x,y,z)$，流速场 $\vec{v}(x,y,z)$，电场 $\vec{E}(x,y,z)$，磁场 $\vec{B}(x,y,z)$。
     *   数学表示: $\vec{A} = \vec{A}(x,y,z)$ 或 $\vec{A}=\vec{A}(P)$。
 
-#### 1.2 场线 (Field Line) 📈
+##### 1.2 场线 📈
 
 *   **等值线 (Contour Line)** (S4): 在<font color='orange'>平面标量场</font>中，具有相同数值的点连成的曲线。
     *   数学表示: $u(x, y) = C$ (C为任意常数)
@@ -521,13 +342,15 @@
 
 ---
 
-#### 2. 标量场的梯度 (Gradient of a Scalar Field) ⛰️ (S7-S14)
+#### 2. 标量场的梯度⛰️ 
 
 为了考察标量场在空间的分布和变换规律，引进<font color='orange'>等值面</font>、<font color='orange'>方向导数</font>和<font color='orange'>梯度</font>。
-#### 2.1 标量场的方向导数 (Directional Derivative) (S8)
+##### 2.1 标量场的方向导数
 
-*   **方向导数**: 标量场 $V=V(P)$ 自 $P_0$ 点处沿 $\vec{l}$ 方向上对空间长度（距离）的变化率。
-    $\boxed{\left. \frac{\partial V}{\partial l} \right|_{P_0} = \lim_{\Delta l \to 0} \frac{V(P) - V(P_0)}{\Delta l}}$
+* **方向导数**: 标量场 $V=V(P)$ 自 $P\_0$ 点处沿 $\\vec{l}$ 方向上对空间长度（距离）的变化率。
+    $$
+    \\boxed{\\left. \\frac{\\partial V}{\\partial l} \\right|\_{P\_0} = \\lim\_{\\Delta l \\to 0} \\frac{V(P) - V(P\_0)}{\\Delta l}}
+    $$
     其中 P 点沿 $\vec{l}$ 方向距离 $P_0$ 点 $\Delta l$。
 *   物理意义: 描述标量场沿某一<font color='orange'>特定方向</font>的变化快慢。
     *   $\frac{\partial V}{\partial l} > 0$: $V(P)$ 沿 $\vec{a}_l$ 方向增加。
@@ -538,7 +361,7 @@
     $\frac{\partial V}{\partial l} = \frac{\partial V}{\partial x} \frac{dx}{dl} + \frac{\partial V}{\partial y} \frac{dy}{dl} + \frac{\partial V}{\partial z} \frac{dz}{dl}$
     $\boxed{\frac{\partial V}{\partial l} = \frac{\partial V}{\partial x} \cos\alpha + \frac{\partial V}{\partial y} \cos\beta + \frac{\partial V}{\partial z} \cos\gamma}$
 
-#### 2.2 标量场的梯度 (Gradient) (S10-S13)
+##### 2.2 标量场的梯度 
 
 *   **梯度**(Gradient): 标量场 $V(u_1, u_2, u_3)$ 的梯度定义为一个<font color='orange'>矢量</font>，其
     *   <font color='orange'>大小</font>为标量场在该点空间<font color='orange'>最大变化率</font>。
@@ -557,16 +380,26 @@
 *   **Nabla算子 (∇)** (S11, S12):
     定义矢量微分算子 $\nabla$ 。
     *   正交曲线坐标系下的表达式:
-        $\nabla = \vec{a}_{u1} \frac{1}{h_1} \frac{\partial}{\partial u_1} + \vec{a}_{u2} \frac{1}{h_2} \frac{\partial}{\partial u_2} + \vec{a}_{u3} \frac{1}{h_3} \frac{\partial}{\partial u_3}$
+        $$
+        \nabla = \\vec{a}\_{u1} \\frac{1}{h\_1} \\frac{\\partial}{\\partial u\_1} + \\vec{a}\_{u2} \\frac{1}{h\_2} \\frac{\\partial}{\\partial u\_2} + \\vec{a}\_{u3} \\frac{1}{h\_3} \\frac{\\partial}{\\partial u\_3}
+        $$
     *   梯度是 $\nabla$ 算子作用于<font color='orange'>标量场</font>的结果:
-        $\boxed{\nabla V = \vec{a}_{u1} \frac{1}{h_1} \frac{\partial V}{\partial u_1} + \vec{a}_{u2} \frac{1}{h_2} \frac{\partial V}{\partial u_2} + \vec{a}_{u3} \frac{1}{h_3} \frac{\partial V}{\partial u_3}}$
+        $$
+        \\boxed{\\nabla V = \\vec{a}\_{u1} \\frac{1}{h\_1} \\frac{\\partial V}{\\partial u\_1} + \\vec{a}\_{u2} \\frac{1}{h\_2} \\frac{\\partial V}{\\partial u\_2} + \\vec{a}\_{u3} \\frac{1}{h\_3} \\frac{\\partial V}{\\partial u\_3}}
+        $$
 *   **三种坐标系下的梯度表达式** (S12):
-    *   直角坐标系 $(h_1=1, h_2=1, h_3=1)$:
-        $\boxed{\nabla V = \vec{a}_x \frac{\partial V}{\partial x} + \vec{a}_y \frac{\partial V}{\partial y} + \vec{a}_z \frac{\partial V}{\partial z}}$
-    *   柱坐标系 $(h_1=1, h_2=r, h_3=1)$:
-        $\boxed{\nabla V = \vec{a}_r \frac{\partial V}{\partial r} + \vec{a}_\phi \frac{1}{r} \frac{\partial V}{\partial \phi} + \vec{a}_z \frac{\partial V}{\partial z}}$
-    *   球坐标系 $(h_1=1, h_2=R, h_3=R\sin\theta)$:
-        $\boxed{\nabla V = \vec{a}_R \frac{\partial V}{\partial R} + \vec{a}_\theta \frac{1}{R} \frac{\partial V}{\partial \theta} + \vec{a}_\phi \frac{1}{R\sin\theta} \frac{\partial V}{\partial \phi}}$
+    *   直角坐标系 ($h\_1=1, h\_2=1, h\_3=1$):
+        $$
+        \\boxed{\\nabla V = \\vec{a}\_{x} \\frac{\\partial V}{\\partial x} + \\vec{a}\_{y} \\frac{\\partial V}{\\partial y} + \\vec{a}\_{z} \\frac{\\partial V}{\\partial z}}
+        $$
+    *   柱坐标系 ($h\_1=1, h\_2=r, h\_3=1$):
+        $$
+        \\boxed{\\nabla V = \\vec{a}\_{r} \\frac{\\partial V}{\\partial r} + \\vec{a}\_{\\phi} \\frac{1}{r} \\frac{\\partial V}{\\partial \\phi} + \\vec{a}\_{z} \\frac{\\partial V}{\\partial z}}
+        $$
+    *   球坐标系 ($h\_1=1, h\_2=R, h\_3=R\\sin\\theta$):
+        $$
+        \\boxed{\\nabla V = \\vec{a}\_{R} \\frac{\\partial V}{\\partial R} + \\vec{a}\_{\\theta} \\frac{1}{R} \\frac{\\partial V}{\\partial \\theta} + \\vec{a}\_{\\phi} \\frac{1}{R\\sin\\theta} \\frac{\\partial V}{\\partial \\phi}}
+        $$
 *   **梯度的性质** (S13):
     1.  标量场 $u(M)$ 中每一点 $M$ 处的梯度<font color='orange'>垂直</font>于通过该点的<font color='orange'>等值面</font>。
     2.  梯度的方向指向 $u(M)$ 的<font color='orange'>增大方向</font>。
@@ -585,16 +418,18 @@
     4.  计算方向导数:
         $\frac{\partial u}{\partial l} = \nabla u \cdot \vec{a}_l = \frac{1}{\sqrt{2}}(\vec{a}_x + \vec{a}_z) \cdot \frac{1}{3}(\vec{a}_x+2\vec{a}_y+2\vec{a}_z) = \frac{1}{3\sqrt{2}}(1\cdot 1 + 0\cdot 2 + 1\cdot 2) = \frac{3}{3\sqrt{2}} = \frac{1}{\sqrt{2}}$
 
-*   **示例 5 (S17)**: 求位置矢量模 $R = |\vec{R}|$ 的梯度 $\nabla R$。
-    在球坐标系中 $R$ 就是坐标变量 $u_1=R$。
-    $\nabla R = \vec{a}_R \frac{\partial R}{\partial R} + \vec{a}_\theta \frac{1}{R} \frac{\partial R}{\partial \theta} + \vec{a}_\phi \frac{1}{R\sin\theta} \frac{\partial R}{\partial \phi} = \vec{a}_R \cdot 1 + \vec{a}_\theta \cdot 0 + \vec{a}_\phi \cdot 0 = \vec{a}_R$
-    所以，位置矢量模的梯度就是径向单位矢量 $\vec{a}_R$。
+*   **示例 5 (S17)**: 求位置矢量模 $R = |\\vec{R}|$ 的梯度 $\\nabla R$。
+    在球坐标系中 $R$ 就是坐标变量 $u\_1=R$。
+    $$
+    \\nabla R = \\vec{a}\_{R} \\frac{\\partial R}{\\partial R} + \\vec{a}\_{\\theta} \\frac{1}{R} \\frac{\\partial R}{\\partial \\theta} + \\vec{a}\_{\\phi} \\frac{1}{R\\sin\\theta} \\frac{\\partial R}{\\partial \\phi} = \\vec{a}\_{R} \\cdot 1 + \\vec{a}\_{\\theta} \\cdot 0 + \\vec{a}\_{\\phi} \\cdot 0 = \\vec{a}\_{R}
+    $$
+    所以，位置矢量模的梯度就是径向单位矢量 $\\vec{a}\_{R}$。
 
 ---
 
-#### 3. 矢量场的散度 (Divergence of a Vector Field) 💧🌬️ (S18-S23)
+#### 3. 矢量场的散度 💧🌬️ 
 
-##### 3.1 矢量的通量 (Flux) (S19)
+##### 3.1 矢量的通量
 
 *   **通量 (Flux)**: 矢量场 $\vec{A}$ 通过某个曲面 $S$ 的通量定义为 $\vec{A}$ 在该曲面上的<font color='orange'>面积分</font>。
     $\boxed{\Phi = \int_S \vec{A} \cdot d\vec{S} = \int_S \vec{A} \cdot \vec{a}_n ds = \int_S A \cos\theta ds}$
@@ -606,7 +441,7 @@
     *   $\Phi = 0$: 曲面内部<font color='orange'>无净源</font>，或源汇代数和为零。
 *   通量可以作为判断封闭曲面内<font color='orange'>通量源</font>存在的判据。
 
-##### 3.2 矢量场的散度 (Divergence) (S20)
+##### 3.2 矢量场的散度
 
 *   **散度 (Divergence)**: 矢量场 $\vec{A}$ 在某点的散度定义为：当包围该点的<font color='orange'>闭合面</font>所围体积 $\Delta V$ 趋于零时，从该体积<font color='orange'>流出的净通量</font>与 $\Delta V$ 的比值。
     $\boxed{\text{div} \vec{A} \equiv \nabla \cdot \vec{A} = \lim_{\Delta V \to 0} \frac{\oint_S \vec{A} \cdot d\vec{S}}{\Delta V}}$
@@ -624,30 +459,16 @@
         $\boxed{\nabla \cdot \vec{A} = \frac{1}{r} \frac{\partial (r A_r)}{\partial r} + \frac{1}{r} \frac{\partial A_\phi}{\partial \phi} + \frac{\partial A_z}{\partial z}}$
     *   球坐标系:
         $\boxed{\nabla \cdot \vec{A} = \frac{1}{R^2} \frac{\partial (R^2 A_R)}{\partial R} + \frac{1}{R\sin\theta} \frac{\partial (A_\theta \sin\theta)}{\partial \theta} + \frac{1}{R\sin\theta} \frac{\partial A_\phi}{\partial \phi}}$
-    *   **注意点** ❗ (S23): 推导柱坐标和球坐标散度公式时，需要考虑<font color='orange'>单位矢量随坐标变化</font>的导数，例如 $\frac{\partial \vec{a}_r}{\partial \phi} = \vec{a}_\phi$, $\frac{\partial \vec{a}_\phi}{\partial \phi} = -\vec{a}_r$ 等。
+    *   **注意点** ❗ (S23): 推导柱坐标和球坐标散度公式时，需要考虑<font color='orange'>单位矢量随坐标变化</font>的导数，例如 $\\frac{\\partial \\vec{a}\_{r}}{\\partial \\phi} = \\vec{a}\_{\\phi}$, $\\frac{\\partial \\vec{a}\_{\\phi}}{\\partial \\phi} = -\\vec{a}\_{r}$ 等。
 
 ---
 
-#### 4. 高斯散度定理 (Gauss's Divergence Theorem) ∮∫ (S24)
+#### 4. 高斯散度定理 ∮∫ (S24)
 
 *  **高斯散度定理**: 设 $S$ 是矢量场 $\vec{A}$ 空间内的一个闭合面，$V$ 是闭合面 $S$ 所围的体积，则矢量场 $\vec{A}$ 的散度在体积 $V$ 上的积分等于矢量场 $\vec{A}$ 通过闭合面 $S$ 的<font color='orange'>通量</font>。
     $\boxed{\int_V (\nabla \cdot \vec{A}) dV = \oint_S \vec{A} \cdot d\vec{S}}$
 *   证明思路 (S24): 将体积 $V$ 分割成许多无穷小体积元 $\Delta v_i$，每个体积元边界面的通量根据散度定义近似为 $(\nabla \cdot \vec{A})_i \Delta v_i$。将所有体积元的通量相加，内部相邻界面的通量因法向相反<font color='orange'>相互抵消</font>，最终只剩下最外层闭合面 $S$ 上的通量。当 $\Delta v_i \to 0$ 时，求和变成积分。
 *   意义: 该定理建立了矢量场的<font color='orange'>体积分</font>与其在边界<font color='orange'>闭合曲面上的面积分</font>之间的关系。它将体积内的<font color='orange'>源</font>（散度）与流出边界的<font color='orange'>通量</font>联系起来。
-
-*   **示例 6 (S25)**: 验证 $A=\vec{a}_x x^2 + \vec{a}_y xy + \vec{a}_z yz$ 在单位立方体 ($0 \le x,y,z \le 1$) 内的高斯散度定理。
-    1.  计算穿出六个面的总通量 $\oint_S \vec{A} \cdot d\vec{S}$:
-        分别计算前($x=1$)、后($x=0$)、右($y=1$)、左($y=0$)、上($z=1$)、下($z=0$)六个面的通量并相加。
-        $\Phi = \int_0^1\int_0^1 A_x|_{x=1} dy dz + \int_0^1\int_0^1 (-A_x|_{x=0}) dy dz + \dots$
-        $\Phi = \int_0^1\int_0^1 (1)^2 dy dz + \int_0^1\int_0^1 (-0) dy dz + \int_0^1\int_0^1 (xy|_{y=1}) dx dz + \int_0^1\int_0^1 (-xy|_{y=0}) dx dz + \int_0^1\int_0^1 (yz|_{z=1}) dx dy + \int_0^1\int_0^1 (-yz|_{z=0}) dx dy$
-        $\Phi = 1 + 0 + \int_0^1\int_0^1 x dx dz + 0 + \int_0^1\int_0^1 y dx dy + 0 = 1 + [\frac{x^2}{2}]_0^1 [z]_0^1 + [x]_0^1 [\frac{y^2}{2}]_0^1 = 1 + \frac{1}{2} + \frac{1}{2} = 2$
-    2.  计算散度 $\nabla \cdot \vec{A}$:
-        $\nabla \cdot \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z} = \frac{\partial (x^2)}{\partial x} + \frac{\partial (xy)}{\partial y} + \frac{\partial (yz)}{\partial z} = 2x + x + y = 3x + y$
-    3.  计算散度的体积分 $\int_V (\nabla \cdot \vec{A}) dV$:
-        $\int_V (3x+y) dV = \int_0^1 \int_0^1 \int_0^1 (3x+y) dx dy dz = \int_0^1 dz \int_0^1 dy \int_0^1 (3x+y) dx$
-        $= \int_0^1 dz \int_0^1 dy [\frac{3}{2}x^2+xy]_0^1 = \int_0^1 dz \int_0^1 (\frac{3}{2}+y) dy$
-        $= \int_0^1 dz [\frac{3}{2}y + \frac{y^2}{2}]_0^1 = \int_0^1 (\frac{3}{2} + \frac{1}{2}) dz = \int_0^1 2 dz = [2z]_0^1 = 2$
-    4.  结论: $\oint_S \vec{A} \cdot d\vec{S} = 2$ 和 $\int_V (\nabla \cdot \vec{A}) dV = 2$ 相等，验证了高斯散度定理。
 
 ---
 #### 5. 学习总结 🎓 (梯度与散度)
@@ -668,7 +489,7 @@
     *   理解并掌握了该定理的内容：矢量场在某体积内<font color='orange'>散度的体积分</font>等于该矢量场穿过包围该体积<font color='orange'>闭合面的通量</font>。
     *   认识到该定理是连接场与其源的重要桥梁。
 ### 1-3 旋度
-#### 1.1 🌀 环量 (Net Circulation)
+#### 1.1 🌀 环量
 
 *   **定义**: 矢量场 $\vec{A}$ 通过一闭合路径 $C$ 的净环流（环量） $\Gamma$，定义为该矢量沿闭合路径的标量线积分。
     $$ \Gamma = \oint_C \vec{A} \cdot d\vec{l} = \oint_C A \cos\theta dl $$
@@ -681,42 +502,53 @@
     *   环量 $\neq 0 \implies$ 场中存在旋涡源。
     *   环量 $= 0 \implies$ 场中无旋涡源。
 
-#### 1.2 📐 环量面密度 (Surface Density of the Circulation)
+#### 1.2 📐 环量面密度
 
-*   **定义**: 过矢量场 $\vec{A}$ 中任一点 $M$ 处取一面元 $\Delta s$，其法向单位矢量为 $\hat{a}_n$。当 $\Delta s$ 保持 $\hat{a}_n$ 不变，并向 $M$ 点无限缩小时，环量与面积之比的极限，定义为<span style="color:orange">环量面密度</span>。
-    $$ \boxed{\lim_{\Delta s \to 0} \frac{\oint_C \vec{A} \cdot d\vec{l}}{\Delta s}} $$
-    其中 $C$ 是 $\Delta s$ 的边界。
+*   **定义**: 过矢量场 $\\vec{A}$ 中任一点 $M$ 处取一面元 $\\Delta s$，其法向单位矢量为 $\\hat{a}\_n$。当 $\\Delta s$ 保持 $\\hat{a}\_n$ 不变，并向 $M$ 点无限缩小时，环量与面积之比的极限，定义为<span style="color:orange">环量面密度</span>。
+    $$
+    \\boxed{\\lim\_{\\Delta s \\to 0} \\frac{\\oint\_C \\vec{A} \\cdot d\\vec{l}}{\\Delta s}}
+    $$
+    其中 $C$ 是 $\\Delta s$ 的边界。
 *   **特性**:
     *   反映任一点附近的<span style="color:orange">环量状态</span>。
     *   表示单位面积内的<span style="color:orange">环量</span>。
-    *   面元法向 $\hat{a}_n$ 与环路 $C$ 的方向满足<span style="color:orange">右手螺旋关系</span>。👍
+    *   面元法向 $\\hat{a}\_n$ 与环路 $C$ 的方向满足<span style="color:orange">右手螺旋关系</span>。👍
+#### 1.3 旋度
 
-#### 1.3  旋度 (Curl / Rotation)
-
-*   **定义**: 矢量场 $\vec{A}$ 在点 $M$ 处的<span style="color:orange">旋度</span>是一个矢量：
-    *   <span style="color:orange">方向</span> $\hat{a}_n$: 使得环量面密度<span style="color:orange">最大</span>的环线所围面积的法向。
+*   **定义**: 矢量场 $\\vec{A}$ 在点 $M$ 处的<span style="color:orange">旋度</span>是一个矢量：
+    *   <span style="color:orange">方向</span> $\\hat{a}\_n$: 使得环量面密度<span style="color:orange">最大</span>的环线所围面积的法向。
     *   <span style="color:orange">模</span>: 该点<span style="color:orange">最大</span>的环量面密度。
-    $$ \boxed{\text{rot}\,\vec{A} = \nabla \times \vec{A} = \hat{a}_n \lim_{\Delta s \to 0} \left| \frac{\oint_C \vec{A} \cdot d\vec{l}}{\Delta s} \right|_{\text{max}}} $$
-*   **投影**: 矢量场 $\vec{A}$ 在点 $M$ 处沿任意方向 $\hat{a}_n$ 的环量面密度等于<span style="color:orange">旋度</span>在该方向上的<span style="color:orange">投影</span>。
-    $$ \lim_{\Delta s \to 0} \frac{\oint_C \vec{A} \cdot d\vec{l}}{\Delta s} = (\text{rot}\,\vec{A})_n = (\text{rot}\,\vec{A}) \cdot \hat{a}_n = (\nabla \times \vec{A}) \cdot \hat{a}_n $$
-
+    $$
+    \\boxed{\\text{rot}\\,\\vec{A} = \\nabla \\times \\vec{A} = \\hat{a}\_n \\lim\_{\\Delta s \\to 0} \\left| \\frac{\\oint\_C \\vec{A} \\cdot d\\vec{l}}{\\Delta s} \\right|\_{\\text{max}}}
+    $$
+*   **投影**: 矢量场 $\\vec{A}$ 在点 $M$ 处沿任意方向 $\\hat{a}\_n$ 的环量面密度等于<span style="color:orange">旋度</span>在该方向上的<span style="color:orange">投影</span>。
+    $$
+    \\lim\_{\\Delta s \\to 0} \\frac{\\oint\_C \\vec{A} \\cdot d\\vec{l}}{\\Delta s} = (\\text{rot}\\,\\vec{A})\_n = (\\text{rot}\\,\\vec{A}) \\cdot \\hat{a}\_n = (\\nabla \\times \\vec{A}) \\cdot \\hat{a}\_n
+    $$
 #### 🧮 旋度计算公式
 
-*   **核心思想**: 求解 $\nabla \times \vec{A}$ 在<span style="color:orange">直角坐标系</span>中三个方向上的分量（即投影）。
+*   **核心思想**: 求解 $\\nabla \\times \\vec{A}$ 在<span style="color:orange">直角坐标系</span>中三个方向上的分量（即投影）。
 
-*   **直角坐标系 (Cartesian Coordinates)**:
-    推导 $(\nabla \times \vec{A})_x$ 分量：考虑 $yoz$ 平面上边长为 $\Delta y, \Delta z$ 的小矩形。
-    $$ (\nabla \times \vec{A})_x = \lim_{\Delta s_x \to 0} \frac{\oint_C \vec{A} \cdot d\vec{l}}{\Delta s_x} = \frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z} $$
+*   **直角坐标系**:
+    推导 $(\\nabla \\times \\vec{A})\_x$ 分量：考虑 $yoz$ 平面上边长为 $\\Delta y, \\Delta z$ 的小矩形。
+    $$
+    (\\nabla \\times \\vec{A})\_x = \\lim\_{\\Delta s\_x \\to 0} \\frac{\\oint\_C \\vec{A} \\cdot d\\vec{l}}{\\Delta s\_x} = \\frac{\\partial A\_z}{\\partial y} - \\frac{\\partial A\_y}{\\partial z}
+    $$
     同理可得 $y, z$ 分量。
     最终得到行列式形式：
-    $$ \boxed{ \nabla \times \vec{A} = \begin{vmatrix} \hat{a}_x & \hat{a}_y & \hat{a}_z \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ A_x & A_y & A_z \end{vmatrix} = \hat{a}_x \left(\frac{\partial A_z}{\partial y} - \frac{\partial A_y}{\partial z}\right) + \hat{a}_y \left(\frac{\partial A_x}{\partial z} - \frac{\partial A_z}{\partial x}\right) + \hat{a}_z \left(\frac{\partial A_y}{\partial x} - \frac{\partial A_x}{\partial y}\right) } $$
+    $$
+    \\boxed{ \\nabla \\times \\vec{A} = \\begin{vmatrix} \\hat{a}\_x & \\hat{a}\_y & \\hat{a}\_z \\\\ \\frac{\\partial}{\\partial x} & \\frac{\\partial}{\\partial y} & \\frac{\\partial}{\\partial z} \\\\ A\_x & A\_y & A\_z \\end{vmatrix} = \\hat{a}\_x \\left(\\frac{\\partial A\_z}{\\partial y} - \\frac{\\partial A\_y}{\\partial z}\\right) + \\hat{a}\_y \\left(\\frac{\\partial A\_x}{\\partial z} - \\frac{\\partial A\_z}{\\partial x}\\right) + \\hat{a}\_z \\left(\\frac{\\partial A\_y}{\\partial x} - \\frac{\\partial A\_x}{\\partial y}\\right) }
+    $$
 
-*   **圆柱坐标系 (Cylindrical Coordinates)**: 
-    $$ \nabla \times \vec{A} = \begin{vmatrix} \hat{a}_r/r & \hat{a}_\phi & \hat{a}_z/r \\ \frac{\partial}{\partial r} & \frac{\partial}{\partial \phi} & \frac{\partial}{\partial z} \\ A_r & rA_\phi & A_z \end{vmatrix}= \frac{1}{r} \begin{vmatrix} \hat{a}_r & r\hat{a}_\phi & \hat{a}_z \\ \frac{\partial}{\partial r} & \frac{\partial}{\partial \phi} & \frac{\partial}{\partial z} \\ A_r & r A_\phi & A_z \end{vmatrix} $$
+*   **圆柱坐标系**: 
+    $$
+    \\nabla \\times \\vec{A} = \\frac{1}{r} \\begin{vmatrix} \\hat{a}\_{r} & r\\hat{a}\_{\\phi} & \\hat{a}\_{z} \\\\ \\frac{\\partial}{\\partial r} & \\frac{\\partial}{\\partial \\phi} & \\frac{\\partial}{\\partial z} \\\\ A\_{r} & r A\_{\\phi} & A\_{z} \\end{vmatrix}
+    $$
 
-*   **球坐标系 (Spherical Coordinates)**:
-    $$ \nabla \times \vec{A} = \begin{vmatrix} \hat{a}_R/(R^2 \sin\theta) & \hat{a}_\theta/(R \sin\theta) & \hat{a}_\phi/R \\ \frac{\partial}{\partial R} & \frac{\partial}{\partial \theta} & \frac{\partial}{\partial \phi} \\ A_R & R A_\theta & R\sin\theta A_\phi \end{vmatrix}=\frac{1}{R^2 \sin\theta} \begin{vmatrix} \hat{a}_R & R\hat{a}_\theta & R\sin\theta\hat{a}_\phi \\ \frac{\partial}{\partial R} & \frac{\partial}{\partial \theta} & \frac{\partial}{\partial \phi} \\ A_R & R A_\theta & R\sin\theta A_\phi \end{vmatrix}$$
-
+*   **球坐标系**:
+    $$
+    \\nabla \\times \\vec{A} =\\frac{1}{R^2 \\sin\\theta} \\begin{vmatrix} \\hat{a}\_R & R\\hat{a}\_{\\theta} & R\\sin\\theta\\hat{a}\_{\\phi} \\\\ \\frac{\\partial}{\\partial R} & \\frac{\\partial}{\\partial \\theta} & \\frac{\\partial}{\\partial \\phi} \\\\ A\_R & R A\_{\\theta} & R\\sin\\theta A\_{\\phi} \\end{vmatrix}
+    $$
 #### 💡 旋度与散度的意义
 
 *   <span style="color:orange">旋度</span> (Curl, $\nabla \times \vec{A}$): **矢量函数**
@@ -728,7 +560,7 @@
 
 ---
 
-#### 2.  斯托克斯定理 (Stokes's Theorem)🗺️
+#### 2.  斯托克斯定理 🗺️
 
 *   **定理内容**: 矢量场 $\vec{A}$ 沿任意<span style="color:orange">闭合路径</span> $C$ 的线积分（环量），等于该矢量场的<span style="color:orange">旋度</span> $\nabla \times \vec{A}$ 通过以 $C$ 为边界的<span style="color:orange">任意</span><span style="color:orange">开放曲面</span> $S$ 的<span style="color:orange">面积分</span>（通量）。
     $$ \boxed{ \oint_C \vec{A} \cdot d\vec{l} = \int_S (\nabla \times \vec{A}) \cdot d\vec{s} } $$
@@ -746,7 +578,7 @@
 
 ---
 
-#### 3.  两个恒等式 (Two Null Identities)💡
+#### 3.  两个恒等式 💡
 
 *   **恒等式 1**: <span style="color:orange">标量场梯度的旋度恒等于零</span>。
     $$ \boxed{ \nabla \times (\nabla u) = 0 } $$
@@ -762,7 +594,7 @@
 
 #### 4.  ▽ 算子和拉普拉斯算子⚙️
 
-#### 4.1 ▽ 算子 (Operator)
+#### 4.1 ▽ 算子
 
 *   **定义**: 矢量微分算子，也称 Nabla 算子或 Del 算子。
     *   直角坐标系: $$ \nabla = \hat{a}_x \frac{\partial}{\partial x} + \hat{a}_y \frac{\partial}{\partial y} + \hat{a}_z \frac{\partial}{\partial z} $$
@@ -784,8 +616,7 @@
             运用恒等式 $\nabla \cdot (\vec{C} \times \vec{D}) = \vec{D} \cdot (\nabla \times \vec{C})$ （其中 $\vec{C}$ 是常数）和 $\nabla \cdot (\vec{D} \times \vec{C}) = -\vec{C} \cdot (\nabla \times \vec{D})$
             得: $\nabla \cdot (\vec{A} \times \vec{B}) = \vec{B} \cdot (\nabla \times \vec{A}_c) - \vec{A}_c \cdot (\nabla \times \vec{B}) \implies \nabla \cdot (\vec{A} \times \vec{B}) = \vec{B} \cdot (\nabla \times \vec{A}) - \vec{A} \cdot (\nabla \times \vec{B})$
 
-#### 4.2 拉普拉斯算子 (Laplacian Operator)
-
+#### 4.2 拉普拉斯算子 
 *   **定义**: $\nabla^2 = \nabla \cdot \nabla$
     *   直角坐标系: $$ \nabla^2 = \frac{\partial^2}{\partial x^2} + \frac{\partial^2}{\partial y^2} + \frac{\partial^2}{\partial z^2} $$
 *   **作用对象**:
@@ -799,8 +630,7 @@
 
 #### 5.  亥姆赫兹定理与矢量场分类🧩
 
-#### 5.1 亥姆赫兹定理 (Helmholtz's Theorem)
-
+#### 5.1 亥姆赫兹定理 
 *   **定理内容**: 任何一个行为良好（在无限远处足够快地衰减）的矢量场 $\vec{A}$，可以唯一地表示为一个<span style="color:orange">无旋场</span>（标量势 $u$ 的梯度）和一个<span style="color:orange">无散场</span>（矢量势 $\vec{F}$ 的旋度）之和。
     $$ \boxed{ \vec{A}(\vec{r}) = -\nabla u(\vec{r}) + \nabla \times \vec{F}(\vec{r}) } $$
     (注意: 梯度项前的符号有时定义为正)。
@@ -838,7 +668,7 @@
     *   $\vec{A}=(2xy+zy)\hat{a}_x + (x^2+zx)\hat{a}_y + xy\hat{a}_z$
         *   计算得 $\nabla \times \vec{A} = 0$, $\nabla \cdot \vec{A} = 2y \neq 0$.
         *   结论: $\vec{A}$ 是<span style="color:orange">无旋有散场</span>，可以表示为某个标量函数的<span style="color:orange">梯度</span> $\vec{A} = \nabla u$。其源是<span style="color:orange">通量源</span> $\nabla \cdot \vec{A} = 2y$。
-    *   $\vec{B}=-\cos\phi \hat{a}_r + \cos\phi \hat{a}_\phi + \frac{z}{r}(\sin\phi + \cos\phi)\hat{a}_z$
+    *   $\vec{B}=-\cos\phi \hat{a}_r + \cos\phi \hat{a}\_\phi + \frac{z}{r}(\sin\phi + \cos\phi)\hat{a}_z$
         *   计算得 $\nabla \cdot \vec{B} = 0$, $\nabla \times \vec{B} \neq 0$.
         *   结论: $\vec{B}$ 是<span style="color:orange">无散有旋场</span>，可以表示为某个矢量函数的<span style="color:orange">旋度</span> $\vec{B} = \nabla \times \vec{C}$。其源是<span style="color:orange">旋涡源</span> $\nabla \times \vec{B}$。
 
@@ -902,7 +732,7 @@
 *   静电除尘 🏭
 *   静电印花、农业设施（病虫预防、环境控制）等。
 
-#### 2. 库仑定律 (Coulomb's Law) 📏
+#### 2. 库仑定律 📏
 
 *   **历史背景:** 电磁学三大实验定律（库伦定律、安培定律、法拉第电磁感应定律）奠定了宏观电磁现象的定量研究基础。麦克斯韦基于此提出假设，最终建立了麦克斯韦方程组。
 *   **库仑定律:** 描述真空中两个静止点电荷 $q'$ 和 $q$ 之间的相互作用力。$q'$ 对 $q$ 的作用力为：
@@ -915,7 +745,7 @@
 *   **叠加原理:** 多个点电荷同时存在时，某一点电荷受到的总作用力等于其他所有点电荷单独作用于该点电荷的作用力的矢量和。
     $\vec{F} = \sum_{i=1}^N \frac{q_i q}{4\pi\epsilon_0 R_i^3} \vec{R}_i$
 
-#### 3. 电场强度 (Electric Field Intensity) $\vec{E}$ 💪
+#### 3. 电场强度 $\vec{E}$ 💪
 
 *   **定义:** 电场是存在于电荷周围的一种特殊物质。电场强度 $\vec{E}$ 用于描述电场的强弱和方向。定义为放入电场中某点的单位正`检验电荷` $q_0$ 所受的电场力。
     $\boxed{\vec{E} = \lim_{q_0 \to 0} \frac{\vec{F}}{q_0}}$
@@ -927,7 +757,7 @@
     $\vec{E} = \sum_{i=1}^N \frac{q_i}{4\pi\epsilon_0 |\vec{r} - \vec{r}_i'|^3} (\vec{r} - \vec{r}_i')$
 *   **电场强度方向:** `电场强度` $\vec{E}$ 的`大小`等于单位正电荷在该点所受电场力的大小，其`方向`与正电荷在该点所受电场力方向一致。
 
-#### 4. 分布电荷 (Distributed Charge) ☁️
+#### 4. 分布电荷☁️
 
 *   宏观上，电荷常连续分布在一定区域内，用电荷密度描述：
     *   **体电荷密度** ($\rho$): $\rho(\vec{r}') = \lim_{\Delta V' \to 0} \frac{\Delta q}{\Delta V'} = \frac{dq(\vec{r}')}{dV'}$ (单位: C/m³)
@@ -939,7 +769,7 @@
     *   线电荷: $\vec{E}(\vec{r}) = \int_{L'} \frac{\rho_l(\vec{r}') (\vec{r} - \vec{r}')}{4\pi\epsilon_0 |\vec{r} - \vec{r}'|^3} dl'$
     *   **技巧:** 计算分布电荷电场时，选择合适的`坐标系`并利用`对称性`可以大大简化计算。
 
-#### 5. 高斯通量定理 (Gauss's Flux Theorem) ∮
+#### 5. 高斯通量定理 ∮
 
 *   **背景:** 根据亥姆霍兹定理，矢量场由其散度和旋度唯一确定。我们需要求解静电场的散度和旋度。
 *   **立体角** ($\Omega$): 描述一个面相对一个点张开的角度。闭合曲面包围其内部任一点的立体角恒为 $4\pi$，不包围时为 0。
@@ -953,7 +783,7 @@
     *   **注意点:** 微分形式仅适用于电荷`体分布`的情况。对于面、线、点电荷，$\rho$ 需用狄拉克 $\delta$ 函数表示。
 *   **应用:** 对于具有高度对称性（球对称、柱对称、面对称）的电荷分布，可用高斯定理方便地求解电场强度。
 
-#### 6. 静电场的旋度 (Curl of Electrostatic Field) 🌀
+#### 6. 静电场的旋度 🌀
 
 *   对于点电荷电场 $\vec{E} = \frac{q}{4\pi\epsilon_0 R^3} \vec{R} = -\nabla \left( \frac{q}{4\pi\epsilon_0 R} \right)$。
 *   由于任何标量函数 $u$ 的梯度的旋度恒为零 ($\nabla \times (\nabla u) = 0$)，所以点电荷电场的旋度为零。
@@ -964,7 +794,7 @@
     $\boxed{\oint_C \vec{E} \cdot d\vec{l} = \int_S (\nabla \times \vec{E}) \cdot d\vec{S} = 0}$
     表明静电场中`沿闭合路径的线积分恒为零`。即，移动电荷在静电场中沿`任意闭合路径`一周，`电场力做功为零`。这也意味着静电场中两点间的线积分与路径无关。
 
-#### 7. 电位 (Electric Potential) $\phi$ 📉
+#### 7. 电位 $\phi$ 📉
 
 *   **定义:** 由于静电场是无旋场 ($\nabla \times \vec{E} = 0$)，电场强度 $\vec{E}$ 可以表示为一个标量函数 $\phi$ 的负梯度：
     $\boxed{\vec{E} = -\nabla \phi}$
@@ -984,7 +814,7 @@
     *   `电场线`处处`垂直`于等位面。
     *   电场线由高电位指向低电位。
 
-#### 8. 电偶极子 (Electric Dipole) +/-
+#### 8. 电偶极子  +/-
 
 *   **定义:** 相距很近 ($d$) 的一对等量异号点电荷 ($\pm q$) 构成电偶极子。
 *   **电偶极矩:** $\vec{p} = q\vec{d}$ (方向由 -q 指向 +q)。
@@ -992,7 +822,7 @@
     $\phi(\vec{r}) \approx \frac{\vec{p} \cdot \hat{a}_R}{4\pi\epsilon_0 R^2} = \frac{p \cos\theta}{4\pi\epsilon_0 R^2}$ (球坐标)
 *   **电偶极子的电场 (远场):** 通过 $\vec{E} = -\nabla \phi$ 计算得到。
 
-#### 9. 静电场基本方程总结 (Section 2-1)
+#### 9. 静电场基本方程总结
 
 | 形式       | 高斯定理 (散度)                                      | 无旋性 (旋度)                     | 辅助关系                 |
 | :--------- | :--------------------------------------------------- | :-------------------------------- | :----------------------- |
@@ -1068,10 +898,15 @@
 
 在不同媒质的`分界面`上，电场矢量 $\vec{E}$ 和电位移矢量 $\vec{D}$ 通常会发生突变，其变化规律由边界条件决定。设界面法向单位矢量 $\hat{n}$ 由媒质2指向媒质1。
 
-*   **切向分量 (Tangential Component):** 来自 $\oint \vec{E} \cdot d\vec{l} = 0$。
-    $\boxed{E_{1t} = E_{2t}}$  或  $\boxed{\hat{n} \times (\vec{E}_1 - \vec{E}_2) = 0}$
+*   *   **切向分量:** 来自 $\\oint \\vec{E} \\cdot d\\vec{l} = 0$。
+    $$
+    \\boxed{E\_{1t} = E\_{2t}} \\quad \\text{或} \\quad \\boxed{\\hat{n} \\times (\\vec{E}\_1 - \\vec{E}\_2) = 0}
+    $$
     电场强度的切向分量`在边界处恒连续`。
-    $\frac{D_{1t}}{\epsilon_1} = \frac{D_{2t}}{\epsilon_2}$ (电位移切向分量通常不连续)
+    $$
+    \\frac{D\_{1t}}{\\epsilon\_1} = \\frac{D\_{2t}}{\\epsilon\_2}
+    $$
+    (电位移切向分量通常不连续)
 *   **法向分量 (Normal Component):** 来自 $\oint \vec{D} \cdot d\vec{S} = Q_{free}$。
     $\boxed{D_{1n} - D_{2n} = \rho_s}$  或  $\boxed{\hat{n} \cdot (\vec{D}_1 - \vec{D}_2) = \rho_s}$
     电位移矢量的法向分量之差等于界面上的`自由面电荷密度` $\rho_s$。
@@ -1093,7 +928,7 @@
 
 ### 2-3 电容和能量
 
-#### 1. 电容器 (Capacitor) 与 电容 (Capacitance) 🔋
+#### 1. 电容器与电容🔋
 
 *   **电容器:** 由两个相互绝缘的导体组成的系统，可以储存电荷和电能。
 *   **电容:** 描述电容器储存电荷能力的物理量。对于一个二导体系统（极板分别带 $+\text{Q}$ 和 $-\text{Q}$），电容定义为：
@@ -1126,7 +961,7 @@
     *   $Q_i = \sum_{j=1}^N C_{ij} (\phi_i - \phi_j)$
     *   对于互易介质: $\beta_{ij} = \beta_{ji}$, $p_{ij} = p_{ji}$, $C_{ij} = C_{ji}$。
 
-#### 3. 静电场能量 (Electrostatic Energy) ⚡️
+#### 3. 静电场能量⚡️
 
 *   **能量来源:** 建立电荷分布需要克服电场力做功，这些功`储存`在静电场中，形成静电能量 (势能)。
 *   **点电荷系统能量:** 将N个点电荷从无限远处移到最终位置所做的总功。
@@ -1145,9 +980,9 @@
 *   **电容器储能:**
     $W_e = \frac{1}{2} Q U = \frac{1}{2} C U^2 = \frac{1}{2} \frac{Q^2}{C}$
 
-#### 4. 静电场力 (Electrostatic Force)  F
+#### 4. 静电场力 F
 
-*   **虚位移原理 (Principle of Virtual Displacement):** 利用能量关系计算复杂带电体系统受到的静电力。
+*   **虚位移原理:** 利用能量关系计算复杂带电体系统受到的静电力。
 *   **广义坐标 $g_i$:** 描述系统状态的独立几何参数。
 *   **广义力 $F_i$:** 对应于广义坐标 $g_i$ 的力或力矩。$F_i dg_i$ 是电场力在虚位移 $dg_i$ 中做的功。
 *   **能量平衡:** $dW_s = dW_e + F_i dg_i$ ($dW_s$ 是外源提供的能量)
@@ -1179,7 +1014,7 @@
 ## 第三章 恒定电场 
 ### 3-1 电流和电流密度 
 
-#### 1.1 电流 (Current)
+#### 1.1 电流 
 
 *   **定义:** <font color="orange">电荷</font>在<font color="orange">电场</font>作用下的宏观定向运动形成<font color="orange">电流</font>。
 *   **分类:**
@@ -1190,7 +1025,7 @@
     *   <font color="orange">运流电流</font> (Convention Current): 真空或气体中带电离子的运动。
     *   <font color="orange">位移电流</font> (Displacement Current): 由随时间变化的电场引起 (本章主要关注前两种在恒定电流情况下的表现)。
 
-#### 1.2 电流密度 (Current Density) 🌊
+#### 1.2 电流密度 🌊
 
 *   **电流强度 (I):** 单位时间内通过某截面S的电荷量 $\Delta q$。
     *   定义式: $I = \lim_{\Delta t \to 0} \frac{\Delta q}{\Delta t} = \frac{dq}{dt}$ (单位: 安培 A)
@@ -1205,7 +1040,7 @@
 *   **电流密度与电荷体密度 ($\rho$) 和速度 ($\vec{v}$) 的关系:**
     *   $\boxed{\vec{J} = \rho \vec{v}}$
     *   若由多种电荷组成: $\vec{J} = \sum_n \rho_i \vec{v}_i$
-    *   **注意点 🤔:** 可能存在某点净电荷密度为零 ($\rho = \rho_+ + \rho_- = 0$)，但由于正负电荷运动速度不同 ($\vec{v}_+ \neq \vec{v}_-$)，该点仍有电流密度 ($\vec{J} = \rho_+ \vec{v}_+ + \rho_- \vec{v}_- \neq 0$)。
+*   **注意点 🤔:** 可能存在某点净电荷密度为零 ($\\rho = \\rho\_+ + \\rho\_- = 0$)，但由于正负电荷运动速度不同 ($\\vec{v}\_+ \\neq \\vec{v}\_-$)，该点仍有电流密度 ($\\vec{J} = \\rho\_+ \\vec{v}\_+ + \\rho\_- \\vec{v}\_- \\neq 0$)。
 
 *   **面电流密度 ($\vec{J}_s$):** 电荷在厚度可忽略的薄层内定向运动形成的电流。
     *   定义式: $\vec{J}_s = \frac{dI}{dl} \vec{n}$ (单位: A/m) (dl 为垂直于电流方向的宽度元)
@@ -1221,13 +1056,13 @@
 *   **解:**
     *   球面电荷密度: $\rho_s = \frac{q}{4\pi a^2}$
     *   球面上任一点 $P(\theta)$ 的线速度: $\vec{v} = \vec{\omega} \times \vec{R} = \hat{a}_\phi (\omega a \sin\theta)$ (其中 $\theta$ 为与 $z$ 轴的夹角)
-    *   面电流密度: $\vec{J}_s = \rho_s \vec{v} = \frac{q}{4\pi a^2} (\hat{a}_\phi \omega a \sin\theta) = \hat{a}_\phi \frac{q \omega \sin\theta}{4\pi a}$
+    *   面电流密度: $\vec{J}_s = \rho_s \vec{v} = \frac{q}{4\pi a^2} (\hat{a}\_\phi \omega a \sin\theta) = \hat{a}\_\phi \frac{q \omega \sin\theta}{4\pi a}$
 
 ---
 
 ### 3-2 欧姆定律和焦耳定律 
 
-#### 2.1 欧姆定律 (Ohm's Law) 💡
+#### 2.1 欧姆定律💡
 
 *   **起因:** 导体中自由电子在外电场 $\vec{E}$ 作用下定向运动，形成传导电流 $\vec{J}$。
 *   **微分形式 (点形式):** 描述导体内<font color="orange">任意一点</font>电场强度与电流密度的关系。
@@ -1249,7 +1084,7 @@
     *   <font color="orange">局外场</font> ($\vec{E}'$): 非静电力的等效电场，非保守场。
     *   微分形式: $\boxed{\vec{J} = \sigma (\vec{E} + \vec{E}')}$ 🔋 ( $\vec{E}$ 是静电场)
 
-#### 2.2 焦耳定律 (Joule's Law) 🔥
+#### 2.2 焦耳定律🔥
 
 *   **起因:** 导电媒质中运动电子与晶格<font color="orange">碰撞</font>，将电能转化为<font color="orange">内能</font> (热能)，导致导体温度升高，即<font color="orange">电流的热效应</font>。
 *   **焦耳热:** 电能转化而来的热能。这种能量损耗需由外源不断补充以维持电流。
@@ -1277,7 +1112,7 @@
 
 ### 3-3 恒定电流的基本方程 
 
-#### 3.1 电流连续性方程 (Continuity Equation)
+#### 3.1 电流连续性方程
 
 *   **基础:** <font color="orange">电荷守恒定律</font> (Principle of Charge Conservation)。
 *   **物理意义:** 单位时间内<font color="orange">流出</font>一个闭合曲面 $S$ 的<font color="orange">净电流</font>等于该闭合曲面所包围体积 $V$ 内电荷<font color="orange">减少</font>的速率。
@@ -1361,7 +1196,7 @@
 
 ### 3-6 电导与接地电阻 
 
-#### 6.1 电导 (Conductance, G) 👍
+#### 6.1 电导 (G) 👍
 
 *   **定义:** 导体<font color="orange">导电能力</font>的量度，电阻的倒数 (对于特定导体或结构)。
     *   $G = \frac{I}{U}$ (单位: S, 西门子)
@@ -1401,7 +1236,7 @@
     *   接地电阻 $\boxed{R = \frac{U}{I} = \frac{1}{2\pi \sigma a}}$。
     *   **注意点 🤔:** 半球接地电阻是同半径全埋球体电阻的<font color="orange">两倍</font>。
 
-#### 6.4 跨步电压 (Step Voltage) ⚠️
+#### 6.4 跨步电压⚠️
 
 *   **定义:** 在接地体附近，当有<font color="orange">大电流</font> (如故障电流) 流入大地时，地面上<font color="orange">相距一步</font> (通常设为 $b$) 的两点之间的<font color="orange">电位差</font>。
 *   **危害:** 可能超过安全限值，对人或牲畜造成<font color="orange">电击</font>危险。
@@ -1428,38 +1263,43 @@
 ### 4-1 静磁场的基本方程
 #### 1. 安培力定律与毕奥-沙伐定律 📏
 
-*   **安培力定律:** 描述真空中两个<font color="orange">电流元</font> $I_1 d\vec{l}_1$ 和 $I_2 d\vec{l}_2$ 之间的相互作用力。$I_1 d\vec{l}_1$ 对 $I_2 d\vec{l}_2$ 的作用力为：
-    $\boxed{d\vec{F}_{12} = \frac{\mu_0 I_2 d\vec{l}_2 \times (I_1 d\vec{l}_1 \times \hat{a}_R)}{4\pi R_{21}^2} = \frac{\mu_0 I_1 I_2 d\vec{l}_2 \times [d\vec{l}_1 \times (\vec{r}_2 - \vec{r}_1)]}{4\pi |\vec{r}_2 - \vec{r}_1|^3}}$
+*   **安培力定律:** 描述真空中两个<font color="orange">电流元</font> $I\_1 d\\vec{l}\_1$ 和 $I\_2 d\\vec{l}\_2$ 之间的相互作用力。$I\_1 d\\vec{l}\_1$ 对 $I\_2 d\\vec{l}\_2$ 的作用力为：
+    $$
+    \\boxed{d\\vec{F}\_{12} = \\frac{\\mu\_0 I\_2 d\\vec{l}\_2 \\times (I\_1 d\\vec{l}\_1 \\times \\hat{a}\_R)}{4\\pi R\_{21}^2} = \\frac{\\mu\_0 I\_1 I\_2 d\\vec{l}\_2 \\times [d\\vec{l}\_1 \\times (\\vec{r}\_2 - \\vec{r}\_1)]}{4\\pi |\\vec{r}\_2 - \\vec{r}\_1|^3}}
+    $$
     其中：
-    *   $\mu_0 = 4\pi \times 10^{-7}$ H/m 是<font color="orange">真空磁导率</font>。
-    *   $\vec{r}_1, \vec{r}_2$ 分别是电流元 $I_1 d\vec{l}_1, I_2 d\vec{l}_2$ 的位置矢量。
-    *   $\vec{R}_{21} = \vec{r}_2 - \vec{r}_1$, $R_{21} = |\vec{R}_{21}|$, $\hat{a}_R = \vec{R}_{21}/R_{21}$。
-*   **两个闭合回路间的力:** 对 $d\vec{F}_{12}$ 沿两个回路 $C_1$ 和 $C_2$ 积分：
-    $\vec{F}_{12} = \frac{\mu_0 I_1 I_2}{4\pi} \oint_{C_2} \oint_{C_1} \frac{d\vec{l}_2 \times [d\vec{l}_1 \times (\vec{r}_2 - \vec{r}_1)]}{|\vec{r}_2 - \vec{r}_1|^3}$
-    *   作用力与反作用力关系： $\vec{F}_{12} = -\vec{F}_{21}$。
+    *   $\\mu\_0 = 4\\pi \\times 10^{-7}$ H/m 是<font color="orange">真空磁导率</font>。
+    *   $\\vec{r}\_1, \\vec{r}\_2$ 分别是电流元 $I\_1 d\\vec{l}\_1, I\_2 d\\vec{l}\_2$ 的位置矢量。
+    *   $\\vec{R}\_{21} = \\vec{r}\_2 - \\vec{r}\_1$, $R\_{21} = |\\vec{R}\_{21}|$, $\\hat{a}\_R = \\vec{R}\_{21}/R\_{21}$。
+*   **两个闭合回路间的力:** 对 $d\\vec{F}\_{12}$ 沿两个回路 $C\_1$ 和 $C\_2$ 积分：
+    $$
+    \\vec{F}\_{12} = \\frac{\\mu\_0 I\_1 I\_2}{4\\pi} \\oint\_{C\_2} \\oint\_{C\_1} \\frac{d\\vec{l}\_2 \\times [d\\vec{l}\_1 \\times (\\vec{r}\_2 - \\vec{r}\_1)]}{|\\vec{r}\_2 - \\vec{r}\_1|^3}
+    $$
+    *   作用力与反作用力关系： $\\vec{F}\_{12} = -\\vec{F}\_{21}$。
     *   力的方向与两个电流元都<font color="orange">垂直</font>。
-*   **磁感应强度 $\vec{B}$:** 安培力可看作是一个电流回路产生的磁场对另一个电流回路的作用。定义回路 $C_1$ 产生的磁感应强度 $\vec{B}_{12}$，使得作用在回路 $C_2$ 上的力为 $\vec{F}_{12} = \oint_{C_2} I_2 d\vec{l}_2 \times \vec{B}_{12}$。
-*   **毕奥-沙伐定律 (Biot-Savart Law):** 计算电流元 $Id\vec{l}'$ 在场点 $\vec{r}$ 处产生的磁感应强度 $d\vec{B}$：
-    $\boxed{d\vec{B} = \frac{\mu_0}{4\pi} \frac{Id\vec{l}' \times (\vec{r} - \vec{r}')}{|\vec{r} - \vec{r}'|^3} = \frac{\mu_0}{4\pi} \frac{Id\vec{l}' \times \hat{a}_R}{R^2}}$
-    其中 $\vec{R} = \vec{r} - \vec{r}'$, $R = |\vec{R}|$, $\hat{a}_R = \vec{R}/R$。
-    *   <font color="orange">磁感应强度</font> $\vec{B}$ 的单位是 T (特斯拉) 或 Wb/m² (韦伯/平方米)。
-    *   $d\vec{B}$ 的方向由<font color="orange">右手螺旋定则</font>确定，垂直于 $d\vec{l}'$ 和 $\vec{R}$ 构成的平面。
+*   **磁感应强度 $\\vec{B}$:** 安培力可看作是一个电流回路产生的磁场对另一个电流回路的作用。定义回路 $C\_1$ 产生的磁感应强度 $\\vec{B}\_{12}$，使得作用在回路 $C\_2$ 上的力为 $\\vec{F}\_{12} = \\oint\_{C\_2} I\_2 d\\vec{l}\_2 \\times \\vec{B}\_{12}$。
+*   **毕奥-沙伐定律:** 计算电流元 $Id\\vec{l}'$ 在场点 $\\vec{r}$ 处产生的磁感应强度 $d\\vec{B}$：
+    $$
+    \\boxed{d\\vec{B} = \\frac{\\mu\_0}{4\\pi} \\frac{Id\\vec{l}' \\times (\\vec{r} - \\vec{r}')}{|\\vec{r} - \\vec{r}'|^3} = \\frac{\\mu\_0}{4\\pi} \\frac{Id\\vec{l}' \\times \\hat{a}\_R}{R^2}}
+    $$
+    其中 $\\vec{R} = \\vec{r} - \\vec{r}'$, $R = |\\vec{R}|$, $\\hat{a}\_R = \\vec{R}/R$。
+    *   <font color="orange">磁感应强度</font> $\\vec{B}$ 的单位是 T (特斯拉) 或 Wb/m² (韦伯/平方米)。
+    *   $d\\vec{B}$ 的方向由<font color="orange">右手螺旋定则</font>确定，垂直于 $d\\vec{l}'$ 和 $\\vec{R}$ 构成的平面。
 *   **分布电流产生的磁场:**
-    *   体电流密度 $\vec{J}(\vec{r}')$: $\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int_{V'} \frac{\vec{J}(\vec{r}') \times (\vec{r} - \vec{r}')}{|\vec{r} - \vec{r}'|^3} dV'$
-    *   面电流密度 $\vec{J}_s(\vec{r}')$: $\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \int_{S'} \frac{\vec{J}_s(\vec{r}') \times (\vec{r} - \vec{r}')}{|\vec{r} - \vec{r}'|^3} dS'$
-    *   线电流 $I$: $\vec{B}(\vec{r}) = \frac{\mu_0}{4\pi} \oint_{C'} \frac{I d\vec{l}' \times (\vec{r} - \vec{r}')}{|\vec{r} - \vec{r}'|^3}$
+    *   体电流密度 $\\vec{J}(\\vec{r}')$: $\\vec{B}(\\vec{r}) = \\frac{\\mu\_0}{4\\pi} \\int\_{V'} \\frac{\\vec{J}(\\vec{r}') \\times (\\vec{r} - \\vec{r}')}{|\\vec{r} - \\vec{r}'|^3} dV'$
+    *   面电流密度 $\\vec{J}\_s(\\vec{r}')$: $\\vec{B}(\\vec{r}) = \\frac{\\mu\_0}{4\\pi} \\int\_{S'} \\frac{\\vec{J}\_s(\\vec{r}') \\times (\\vec{r} - \\vec{r}')}{|\\vec{r} - \\vec{r}'|^3} dS'$
+    *   线电流 $I$: $\\vec{B}(\\vec{r}) = \\frac{\\mu\_0}{4\\pi} \\oint\_{C'} \\frac{I d\\vec{l}' \\times (\\vec{r} - \\vec{r}')}{|\\vec{r} - \\vec{r}'|^3}$
 *   **安培力的其他形式:**
-    *   对线电流: $\vec{F} = \int_l I d\vec{l} \times \vec{B}$
-    *   对体电流: $\vec{F} = \int_V \vec{J} \times \vec{B} dV$
-    *   对面电流: $\vec{F} = \int_S \vec{J}_s \times \vec{B} dS$
+    *   对线电流: $\\vec{F} = \\int\_l I d\\vec{l} \\times \\vec{B}$
+    *   对体电流: $\\vec{F} = \\int\_V \\vec{J} \\times \\vec{B} dV$
+    *   对面电流: $\\vec{F} = \\int\_S \\vec{J}\_s \\times \\vec{B} dS$
 *   **与静电场的对比:**
     *   相同点: 都是平方反比定律，满足叠加原理。
-    *   不同点: 静电场源是电荷(标量)，磁场源是电流(矢量)；$d\vec{E}$ 方向沿 $\vec{R}$，$d\vec{B}$ 方向垂直于 $Id\vec{l}'$ 和 $\vec{R}$。
+    *   不同点: 静电场源是电荷(标量)，磁场源是电流(矢量)；$d\\vec{E}$ 方向沿 $\\vec{R}$，$d\\vec{B}$ 方向垂直于 $Id\\vec{l}'$ 和 $\\vec{R}$。
 *   **计算步骤:**
-    1.  确定电流分布，选择合适的坐标系和<font color="orange">电流元</font> $Id\vec{l}'$。
-    2.  写出电流元产生的 $d\vec{B}$ (毕奥-沙伐定律)。
-    3.  利用叠加原理，对 $d\vec{B}$ 进行积分，注意将矢量积分转化为标量积分。
-
+    1.  确定电流分布，选择合适的坐标系和<font color="orange">电流元</font> $Id\\vec{l}'$。
+    2.  写出电流元产生的 $d\\vec{B}$ (毕奥-沙伐定律)。
+    3.  利用叠加原理，对 $d\\vec{B}$ 进行积分，注意将矢量积分转化为标量积分。
 #### 2. 磁场散度与磁通连续性原理 💧
 
 *   **磁场的散度:** 对毕奥-沙伐定律求散度，并利用矢量恒等式 $\nabla \cdot (\nabla \times \vec{A}) = 0$ 和 $\nabla \times (\vec{J}/R) = (\nabla \times \vec{J})/R + \nabla(1/R) \times \vec{J}$ (对源坐标求导时 $\nabla' \cdot \vec{J}' = 0$)，可得：
@@ -1471,7 +1311,7 @@
     $\boxed{\oint_S \vec{B} \cdot d\vec{S} = 0}$
     物理意义：进入闭合曲面的磁力线等于穿出该闭合曲面的磁力线，磁力线无始无终。
 
-#### 3. 安培环路定律 (Ampere's Circuital Law) 🔄
+#### 3. 安培环路定律🔄
 
 *   **积分形式:** 磁感应强度 $\vec{B}$ 沿任意闭合路径 C 的线积分等于穿过以该路径为边界的任意曲面 S 的<font color="orange">净电流</font> $I_{enc}$ 乘以 $\mu_0$。
     $\boxed{\oint_C \vec{B} \cdot d\vec{l} = \mu_0 I_{enc} = \mu_0 \int_S \vec{J} \cdot d\vec{S}}$
@@ -1481,7 +1321,7 @@
     表明<font color="orange">电流密度</font> $\vec{J}$ 是磁感应强度 $\vec{B}$ 的<font color="orange">旋涡源</font>。
 *   **应用:** 对于具有高度对称性的电流分布 (如无限长直导线、无限长螺线管、同轴线、环形螺线管)，可用安培环路定律方便地求解磁感应强度。
 
-#### 4. 磁矢位 (Magnetic Vector Potential) $\vec{A}$ 🧭
+#### 4. 磁矢位$\vec{A}$ 🧭
 
 *   **引入:** 由于磁场是无散场 ($\nabla \cdot \vec{B} = 0$)，根据矢量恒等式 $\nabla \cdot (\nabla \times \vec{A}) = 0$，可以引入一个<font color="orange">辅助函数</font>（<font color="orange">矢量位</font>）$\vec{A}$，使得：
     $\boxed{\vec{B} = \nabla \times \vec{A}}$
@@ -1499,7 +1339,7 @@
     $\Phi_m = \int_S \vec{B} \cdot d\vec{S} = \int_S (\nabla \times \vec{A}) \cdot d\vec{S} = \oint_C \vec{A} \cdot d\vec{l}$
     物理意义：磁矢位 $\vec{A}$ 沿<font color="orange">任意闭合路径</font>的<font color="orange">线积分</font>等于穿过以该路径为边界的<font color="orange">任意曲面</font>的总磁通量。
 
-#### 5. 静磁场基本方程总结 (Section 4-1)
+#### 5. 静磁场基本方程总结
 
 | 形式       | 安培环路定律 (旋度)                                      | 磁通连续性 (散度)                           | 辅助关系                                               |
 | :------- | :----------------------------------------------- | :----------------------------------- | :------------------------------------------------- |
@@ -1510,77 +1350,97 @@
 
 ### 4-2 磁化和边界条件
 
-#### 1. 磁偶极子 (Magnetic Dipole) +/-
+#### 1. 磁偶极子+/-
 
 *   **定义:** 一个<font color="orange">线度很小</font>，形状任意的<font color="orange">电流环</font>。线度小是相对于观察点距离而言。
-*   **磁偶极矩 $\vec{p}_m$:** 对于面积为 $S$、电流为 $I$ 的平面小线圈：
-    $\vec{p}_m = I \vec{S} = I S \hat{n}$
-    其中 $\vec{S}$ 是面积矢量，方向由右手定则确定。
-*   **磁偶极子的磁矢位 (远场):**
-    $\vec{A}(\vec{r}) = \frac{\mu_0}{4\pi} \frac{\vec{p}_m \times \hat{a}_R}{R^2}$
-*   **磁偶极子的磁感应强度 (远场):**
-    $\vec{B} = \nabla \times \vec{A} = \frac{\mu_0 p_m}{4\pi R^3} (2\cos\theta \hat{a}_R + \sin\theta \hat{a}_\theta)$ (球坐标)
+*   **磁偶极矩 $\\vec{p}\_m$:** 对于面积为 $S$、电流为 $I$ 的平面小线圈：
+    $\\vec{p}\_m = I \\vec{S} = I S \\hat{n}$
+    其中 $\\vec{S}$ 是面积矢量，方向由右手定则确定。
+*   **磁偶极子的磁矢位:**
+    $\\vec{A}(\\vec{r}) = \\frac{\\mu\_0}{4\\pi} \\frac{\\vec{p}\_m \\times \\hat{a}\_R}{R^2}$
+*   **磁偶极子的磁感应强度:**
+    $\\vec{B} = \\nabla \\times \\vec{A} = \\frac{\\mu\_0 p\_m}{4\\pi R^3} (2\\cos\\theta \\hat{a}\_R + \\sin\\theta \\hat{a}\_{\theta})$ (球坐标)
     *   **注意点:** 场分布形式与<font color="orange">电偶极子</font>的电场类似。
 
 #### 2. 静磁场媒质的磁化 🧲
 
-*   **磁性来源:** 物质的磁性源于原子内部电子的<font color="orange">轨道运动</font>（轨道磁矩）和<font color="orange">电子自旋</font>（自旋磁矩）。宏观上，可将分子等效为<font color="orange">分子电流环</font>（束缚电流），具有<font color="orange">分子磁矩</font> $\vec{p}_m$。
-*   **磁化 (Magnetization):** 在<font color="orange">外磁场</font>作用下，物质内部的分子磁矩发生<font color="orange">取向排列</font>或感生出附加磁矩，使得物质宏观上呈现出净磁矩的现象。
-*   **磁化强度矢量 $\vec{M}$:** 定义为单位体积内的<font color="orange">磁偶极矩</font>矢量和。
-    $\boxed{\vec{M} = \lim_{\Delta v \to 0} \frac{\sum \vec{p}_{mi}}{\Delta v}}$
+*   **磁性来源:** 物质的磁性源于原子内部电子的<font color="orange">轨道运动</font>（轨道磁矩）和<font color="orange">电子自旋</font>（自旋磁矩）。宏观上，可将分子等效为<font color="orange">分子电流环</font>（束缚电流），具有<font color="orange">分子磁矩</font> $\\vec{p}\_m$。
+*   **磁化:** 在<font color="orange">外磁场</font>作用下，物质内部的分子磁矩发生<font color="orange">取向排列</font>或感生出附加磁矩，使得物质宏观上呈现出净磁矩的现象。
+*   **磁化强度矢量 $\\vec{M}$:** 定义为单位体积内的<font color="orange">磁偶极矩</font>矢量和。
+    $$
+    \\boxed{\\vec{M} = \\lim\_{\\Delta v \\to 0} \\frac{\\sum \\vec{p}\_{mi}}{\\Delta v}}
+    $$
     单位：A/m。
 *   **磁化电流 (<font color="orange">等效束缚电流</font>):** 磁化在宏观上等效于产生了额外的电流。
-    *   <font color="orange">磁化体电流密度</font>: $\boxed{\vec{J}_m = \nabla \times \vec{M}}$
-    *   <font color="orange">磁化面电流密度</font>: $\boxed{\vec{J}_{ms} = \vec{M} \times \hat{n}}$ ($\hat{n}$ 为表面外法线)
+    *   <font color="orange">磁化体电流密度</font>: 
+        $$
+        \\boxed{\\vec{J}\_m = \\nabla \\times \\vec{M}}
+        $$
+    *   <font color="orange">磁化面电流密度</font>: 
+        $$
+        \\boxed{\\vec{J}\_{ms} = \\vec{M} \\times \\hat{n}}
+        $$
+        ($\\hat{n}$ 为表面外法线)
     *   **注意点:** 磁化电流是束缚电流，不是自由电荷的定向移动。
-*   **媒质分类 (根据磁化特性):**
-    *   <font color="orange">抗磁性</font> (Diamagnetism): $\vec{M}$ 与外场方向相反，<font color="orange">减弱</font>磁场。$\chi_m < 0$ (很小)。
-    *   <font color="orange">顺磁性</font> (Paramagnetism): $\vec{M}$ 与外场方向相同，<font color="orange">微弱增强</font>磁场。$\chi_m > 0$ (较小)。
-    *   <font color="orange">铁磁性</font> (Ferromagnetism): 存在<font color="orange">磁畴</font>，$\vec{M}$ 显著增强磁场。$\chi_m \gg 1$，具有磁滞、非线性。
-    *   <font color="orange">亚铁磁性</font> (Ferrimagnetism): 磁化比铁磁质弱，电阻率高。
+*   **媒质分类:**
+    *   <font color="orange">抗磁性</font>: $\\vec{M}$ 与外场方向相反，<font color="orange">减弱</font>磁场。$\\chi\_m < 0$ (很小)。
+    *   <font color="orange">顺磁性</font>: $\\vec{M}$ 与外场方向相同，<font color="orange">微弱增强</font>磁场。$\\chi\_m > 0$ (较小)。
+    *   <font color="orange">铁磁性</font>: 存在<font color="orange">磁畴</font>，$\\vec{M}$ 显著增强磁场。$\\chi\_m \\gg 1$，具有磁滞、非线性。
+    *   <font color="orange">亚铁磁性</font>: 磁化比铁磁质弱，电阻率高。
 
-*   **磁场强度 $\vec{H}$:** 引入辅助矢量 $\vec{H}$ 以便仅考虑<font color="orange">自由电流</font>的作用。安培环路定律包含总电流 $\vec{J}_{total} = \vec{J}_{free} + \vec{J}_m$。
-    $\nabla \times \vec{B} = \mu_0 (\vec{J}_{free} + \nabla \times \vec{M})$
-    $\nabla \times (\frac{\vec{B}}{\mu_0} - \vec{M}) = \vec{J}_{free}$
-    定义<font color="orange">磁场强度</font> $\vec{H}$：
-    $\boxed{\vec{H} = \frac{\vec{B}}{\mu_0} - \vec{M}}$
+*   **磁场强度 $\\vec{H}$:** 引入辅助矢量 $\\vec{H}$ 以便仅考虑<font color="orange">自由电流</font>的作用。安培环路定律包含总电流 $\\vec{J}\_{\\text{total}} = \\vec{J}\_{\\text{free}} + \\vec{J}\_m$。
+    $\\nabla \\times \\vec{B} = \\mu\_0 (\\vec{J}\_{\\text{free}} + \\nabla \\times \\vec{M})$
+    $\\nabla \\times (\\frac{\\vec{B}}{\\mu\_0} - \\vec{M}) = \\vec{J}\_{\\text{free}}$
+    定义<font color="orange">磁场强度</font> $\\vec{H}$：
+    $$
+    \\boxed{\\vec{H} = \\frac{\\vec{B}}{\\mu\_0} - \\vec{M}}
+    $$
     单位：A/m。
     则<font color="orange">媒质中的安培环路定律</font>为：
-    *   微分形式: $\boxed{\nabla \times \vec{H} = \vec{J}_{free}}$
-    *   积分形式: $\boxed{\oint_C \vec{H} \cdot d\vec{l} = I_{free, enc}}$
-    *   $\vec{H}$ 的旋度源是<font color="orange">自由电流</font>。
+    *   微分形式: 
+        $$
+        \\boxed{\\nabla \\times \\vec{H} = \\vec{J}\_{\\text{free}}}
+        $$
+    *   积分形式: 
+        $$
+        \\boxed{\\oint\_C \\vec{H} \\cdot d\\vec{l} = I\_{\\text{free, enc}}}
+        $$
+    *   $\\vec{H}$ 的旋度源是<font color="orange">自由电流</font>。
 *   **本构关系:** 对于<font color="orange">线性</font>、<font color="orange">各向同性</font>媒质：
-    $\vec{M} = \chi_m \vec{H}$ ($\chi_m$ 是<font color="orange">磁化率</font>)
-    $\vec{B} = \mu_0 (\vec{H} + \vec{M}) = \mu_0 (1 + \chi_m) \vec{H} = \mu_0 \mu_r \vec{H} = \mu \vec{H}$
-    *   $\mu = \mu_0 \mu_r$ 是媒质的<font color="orange">磁导率</font> (permeability)。
-    *   $\mu_r = 1 + \chi_m$ 是<font color="orange">相对磁导率</font> (relative permeability)，无量纲。
+    $\\vec{M} = \\chi\_m \\vec{H}$ ($\\chi\_m$ 是<font color="orange">磁化率</font>)
+    $\\vec{B} = \\mu\_0 (\\vec{H} + \\vec{M}) = \\mu\_0 (1 + \\chi\_m) \\vec{H} = \\mu\_0 \\mu\_r \\vec{H} = \\mu \\vec{H}$
+    *   $\\mu = \\mu\_0 \\mu\_r$ 是媒质的<font color="orange">磁导率</font>。
+    *   $\\mu\_r = 1 + \\chi\_m$ 是<font color="orange">相对磁导率</font>，无量纲。
 
 #### 3. 静磁场的边界条件 🥅
 
-描述不同媒质<font color="orange">分界面</font>上磁场矢量 $\vec{B}$ 和 $\vec{H}$ 的关系。设 $\hat{n}$ 为由媒质2指向媒质1的法向单位矢量。
+描述不同媒质<font color="orange">分界面</font>上磁场矢量 $\\vec{B}$ 和 $\\vec{H}$ 的关系。设 $\\hat{n}$ 为由媒质2指向媒质1的法向单位矢量。
 
-*   **法向分量:** 由 $\oint_S \vec{B} \cdot d\vec{S} = 0$ 得到：
-    $\boxed{B_{1n} = B_{2n}}$ 或 $\boxed{\hat{n} \cdot (\vec{B}_1 - \vec{B}_2) = 0}$
+*   **法向分量:** 由 $\\oint\_S \\vec{B} \\cdot d\\vec{S} = 0$ 得到：
+    $$
+    \\boxed{B\_{1n} = B\_{2n}} \\quad \\text{或} \\quad \\boxed{\\hat{n} \\cdot (\\vec{B}\_1 - \\vec{B}\_2) = 0}
+    $$
     磁感应强度的法向分量<font color="orange">在边界处恒连续</font>。
-    $\mu_1 H_{1n} = \mu_2 H_{2n}$ (磁场强度的法向分量通常不连续)
-*   **切向分量:** 由 $\oint_C \vec{H} \cdot d\vec{l} = I_{free}$ 得到：
-    $\boxed{\hat{n} \times (\vec{H}_1 - \vec{H}_2) = \vec{J}_s}$
-    其中 $\vec{J}_s$ 是界面上的<font color="orange">自由面电流密度</font>矢量。
-    *   如果界面上<font color="orange">无自由面电流</font> ($\vec{J}_s = 0$)，则 $H_{1t} = H_{2t}$。
+    $\\mu\_1 H\_{1n} = \\mu\_2 H\_{2n}$ (磁场强度的法向分量通常不连续)
+*   **切向分量:** 由 $\\oint\_C \\vec{H} \\cdot d\\vec{l} = I\_{\\text{free}}$ 得到：
+    $$
+    \\boxed{\\hat{n} \\times (\\vec{H}\_1 - \\vec{H}\_2) = \\vec{J}\_s}
+    $$
+    其中 $\\vec{J}\_s$ 是界面上的<font color="orange">自由面电流密度</font>矢量。
+    *   如果界面上<font color="orange">无自由面电流</font> ($\\vec{J}\_s = 0$)，则 $H\_{1t} = H\_{2t}$。
     *   磁场强度的切向分量仅在无自由面电流时连续。
-    $\frac{B_{1t}}{\mu_1} - \frac{B_{2t}}{\mu_2} = J_s$ (磁感应强度的切向分量通常不连续)
-*   **磁场线折射 (无 $\vec{J}_s$):**
-    $\frac{\tan\alpha_1}{\tan\alpha_2} = \frac{\mu_1}{\mu_2}$ ($\alpha$ 是磁场线与法线的夹角)。
+    $\\frac{B\_{1t}}{\\mu\_1} - \\frac{B\_{2t}}{\\mu\_2} = J\_s$ (磁感应强度的切向分量通常不连续)
+*   **磁场线折射 (无 $\\vec{J}\_s$):**
+    $\\frac{\\tan\\alpha\_1}{\\tan\\alpha\_2} = \\frac{\\mu\_1}{\\mu\_2}$ ($\\alpha$ 是磁场线与法线的夹角)。
 *   **磁矢位边界条件:**
-    $\vec{A}_1 = \vec{A}_2$ (<font color="orange">磁矢位</font>在界面连续)
-    $\hat{n} \times (\frac{1}{\mu_1} \nabla \times \vec{A}_1 - \frac{1}{\mu_2} \nabla \times \vec{A}_2) = \vec{J}_s$ (结合了切向 $\vec{H}$)
+    $\\vec{A}\_1 = \\vec{A}\_2$ (<font color="orange">磁矢位</font>在界面连续)
+    $\\hat{n} \\times (\\frac{1}{\\mu\_1} \\nabla \\times \\vec{A}\_1 - \\frac{1}{\\mu\_2} \\nabla \\times \\vec{A}\_2) = \\vec{J}\_s$ (结合了切向 $\\vec{H}$)
 
 ---
-
 ### 4-3 电感和能量
-#### 1. 电感 (Inductance) 
+#### 1. 电感 
 
-##### 1.1 <font color="orange">磁链 (Flux Linkage)</font> 🔗
+##### 1.1 <font color="orange">磁链</font> 🔗
 
 *   **定义:** 在线性、各向同性媒质中，穿过一个回路的<font color="orange">磁通量</font> $\Phi$ 与产生该磁场的电流 $I$ 成正比。
     *   磁通量公式: $\Phi = \int_S \vec{B} \cdot d\vec{S}$
@@ -1602,7 +1462,7 @@
         *   Φ: 反映通过某个**面积**的磁场量，不体现与哪个电流交链。
         *   Ψ: 考虑了与电流**交链**的贡献，是与整个回路相关的概念。
 
-##### 1.2 单回路<font color="orange">电感 (Self-Inductance)</font> 💡
+##### 1.2 单回路<font color="orange">电感</font> 💡
 
 *   **定义:** 载有电流 $I$ 的回路 $C$ 的<font color="orange">磁链</font> $\Psi$ 与电流 $I$ 之比，称为该回路的<font color="orange">自感</font> $L$。
     *   公式: $\boxed{L = \frac{\Psi}{I}}$ (单位: 亨利 H)
@@ -1645,7 +1505,7 @@
         *   回路总内自感: $L_{in, total} = 2 \times \frac{\mu_0}{8\pi} = \boxed{\frac{\mu_0}{4\pi}}$
     *   **总自感 (单位长度):** $\boxed{L = L_{in, total} + L_{ex} = \frac{\mu_0}{4\pi} + \frac{\mu_0}{\pi} \ln(\frac{D}{a})}$
 
-##### 1.3 双回路<font color="orange">互感 (Mutual Inductance)</font> 🤝🔄
+##### 1.3 双回路<font color="orange">互感</font> 🤝🔄
 
 *   **定义:** 一个回路中的电流在另一个回路中产生的磁链与该电流之比。
 *   **场景:** 回路 $C_1$ (电流 $I_1$) 和 $C_2$ (电流 $I_2$)。
@@ -1658,10 +1518,12 @@
 *   **自感:** $L_{11} = \frac{\Psi_{11}}{I_1}$, $L_{22} = \frac{\Psi_{22}}{I_2}$。
 *   **互感:** $M_{12} = \frac{\Psi_{12}}{I_2}$, $M_{21} = \frac{\Psi_{21}}{I_1}$。
 *   **重要定理:** $\boxed{M_{12} = M_{21} = M}$。两个回路之间只有一个互感值 $M$。
-*   **计算公式 (诺依曼公式 Neumann Formula):**
-    *   $\Psi_{21} = \oint_{C_2} \vec{A}_1 \cdot d\vec{l}_2 = \oint_{C_2} \left( \frac{\mu I_1}{4\pi} \oint_{C_1} \frac{d\vec{l}_1}{R} \right) \cdot d\vec{l}_2$
-    *   $\boxed{M = M_{21} = \frac{\mu}{4\pi} \oint_{C_1} \oint_{C_2} \frac{d\vec{l}_1 \cdot d\vec{l}_2}{R}}$
-        *   $R$: $d\vec{l}_1$ 和 $d\vec{l}_2$ 之间的距离。
+*   **计算公式 (诺依曼公式):**
+    *   $\\Psi\_{21} = \\oint\_{C\_2} \\vec{A}\_1 \\cdot d\\vec{l}\_2 = \\oint\_{C\_2} \\left( \\frac{\\mu I\_1}{4\\pi} \\oint\_{C\_1} \\frac{d\\vec{l}\_1}{R} \\right) \\cdot d\\vec{l}\_2$
+    *   $$
+        \\boxed{M = M\_{21} = \\frac{\\mu}{4\\pi} \\oint\_{C\_1} \\oint\_{C\_2} \\frac{d\\vec{l}\_1 \\cdot d\\vec{l}\_2}{R}}
+        $$
+        *   $R$: $d\\vec{l}\_1$ 和 $d\\vec{l}\_2$ 之间的距离。
 *   **N1匝和N2匝线圈:** $M = N_1 N_2 \left( \frac{\mu}{4\pi} \oint_{C_{1,unit}} \oint_{C_{2,unit}} \frac{d\vec{l}_1 \cdot d\vec{l}_2}{R} \right)$。互感是单匝情况的 $N_1 N_2$ 倍。
 *   **矩阵形式 (N个回路):**
     $\begin{bmatrix} \Psi_1 \\ \Psi_2 \\ \vdots \\ \Psi_N \end{bmatrix} = \begin{bmatrix} L_{11} & M_{12} & \dots & M_{1N} \\ M_{21} & L_{22} & \dots & M_{2N} \\ \vdots & \vdots & \ddots & \vdots \\ M_{N1} & M_{N2} & \dots & L_{NN} \end{bmatrix} \begin{bmatrix} I_1 \\ I_2 \\ \vdots \\ I_N \end{bmatrix}$ 或 $[\Psi] = [L][I]$ (其中 $L_{ij} = M_{ij}$ for $i \ne j$, $L_{ii}$ 是自感)。
@@ -1685,7 +1547,7 @@
 
 ---
 
-#### 2. <font color="orange">磁场能量 (Magnetic Energy)</font> 🔋⚡
+#### 2. <font color="orange">磁场能量</font> 🔋⚡
 
 ##### 2.1 电流回路的磁场能量
 
@@ -1727,7 +1589,7 @@
 
 ---
 
-#### 3. <font color="orange">磁场力 (Magnetic Force)</font> 💪⚙️🧲
+#### 3. <font color="orange">磁场力 </font> 💪⚙️🧲
 
 *   **来源:** 运动电荷(电流)在磁场中受到的力。
 *   **安培力定律 (宏观):**
@@ -1740,7 +1602,7 @@
     *   **完整洛伦兹力 (含电场 $\vec{E}$):** $\boxed{\vec{F} = q(\vec{E} + \vec{v} \times \vec{B})}$。
 *   **虚位移法计算磁场力:** 利用能量守恒原理计算力或力矩。
 
-##### 3.1 各回路磁链保持不变 ($\Psi$ = 常数)
+##### 3.1 各回路磁链保持不变
 
 *   **条件:** 假设在虚位移 $dg$ (广义坐标)过程中，所有回路的磁链 $\Psi_k$ 保持不变。
 *   **能量关系:** $dW_{source} = dW_m + dW_{mech}$ ($dW_{mech} = F_g dg$)。
@@ -1749,7 +1611,7 @@
 *   **力:** $0 = dW_m + F_g dg \implies \boxed{F_g = - \frac{\partial W_m}{\partial g} \bigg|_{\Psi=const}}$。
     *   **结论:** 恒定磁链下，磁场力做的功等于系统磁场能量的减少量。力倾向于使系统磁能减小。
 
-##### 3.2 各回路电流保持不变 ($I$ = 常数)
+##### 3.2 各回路电流保持不变
 
 *   **条件:** 假设在虚位移 $dg$ 过程中，所有回路的电流 $I_k$ 保持不变。
 *   **位移导致 $\Psi_k$ 变化:** $d\Psi_k \ne 0$。
@@ -1814,8 +1676,6 @@
 *   注意公式的适用条件（如线性媒质、特定几何近似等）。
 
 ---
-
-**作业:** 4-17 
 ## 第五章 静态场边值问题
 ### 5-1 镜像法
 
@@ -1837,7 +1697,7 @@
     *   **数值计算法:** 如有限差分法、有限元法等。适用于复杂边界问题。
     *   **实验研究法:** 如导电纸模拟法等。
 
-#### 2. 唯一性定理 (Uniqueness Theorem) 🎯
+#### 2. 唯一性定理🎯
 
 *   **定理内容:** 对于给定的体积 $V$ 内的<font color='orange'>源分布</font>（电荷密度 $\rho$ 或电流密度 $\vec{J}$），以及包围该体积的边界 $S$ 上的<font color='orange'>边界条件</font>（第一类、第二类或混合类），则体积 $V$ 内的场（电位 $\phi$ 或磁矢位 $\vec{A}$）是<font color='orange'>唯一确定</font>的。
 *   **指导意义:**
@@ -1852,7 +1712,7 @@
     *   根据齐次边界条件，const = 0。
     *   因此 $\phi_d = 0 \implies \phi_1 = \phi_2$。
 
-#### 3. 叠加原理 (Superposition Principle) ➕
+#### 3. 叠加原理➕
 
 *   **适用性:** 仅适用于<font color='orange'>线性</font>方程和<font color='orange'>线性</font>媒质。
 *   **对于拉普拉斯方程:** 若 $\phi_1, \phi_2, \dots, \phi_n$ 分别是 $\nabla^2 \phi = 0$ 的解，则其线性组合 $\phi = \sum a_i \phi_i$ 也是解。
@@ -1863,7 +1723,7 @@
 
 ---
 
-#### 4. 镜像法 (Method of Images) 🪞
+#### 4. 镜像法🪞
 
 *   **基本思想:** 用<font color='orange'>场域以外</font>的若干<font color='orange'>虚拟电荷 (镜像电荷)</font> 来等效替代原有边界 (如导体表面、介质分界面) 上的<font color='orange'>感应电荷</font>或<font color='orange'>极化电荷</font>的影响。
 *   **核心目标:**
@@ -1892,7 +1752,7 @@
 *   **应用:** 计算点电荷对导体平面的作用力 $\vec{F} = \frac{-q^2}{4\pi\epsilon (2h)^2} \hat{a}_z$ (吸引力)。
 
 ##### 4.2 点电荷与无限大<font color="orange">介质平面</font> 🌈
-![[5.1.png]]
+![点电荷与无限大介质平面](5.1.png)
 *   **问题:** 点电荷 $q$ 位于介质1 ($\epsilon_1$) 中 $z=h$ 处，下方为 $z=0$ 处的介质2 ($\epsilon_2$) 与介质1的无限大分界面。求两区域的电场/电位。
 *   **镜像系统:**
     *   **在介质1区域 ($z>0$):** 电位由原电荷 $q$ (位于 $(0,0,h)$) 和位于 $(0,0,-h)$ 的镜像电荷 $q'$ 共同产生，整个空间视为均匀介质 $\epsilon_1$。
@@ -1903,10 +1763,10 @@
         *   $\boxed{q'' = \frac{2\epsilon_2}{\epsilon_1 + \epsilon_2} q}$
         *   $\phi_2(x,y,z) = \frac{1}{4\pi\epsilon_2} \frac{q''}{R_1}$
 *   **边界条件 (在 $z=0$ 处):**
-    *   $\phi_1|_{z=0} = \phi_2|_{z=0}$ (电位连续)
-    *   $\epsilon_1 \frac{\partial \phi_1}{\partial z}|_{z=0} = \epsilon_2 \frac{\partial \phi_2}{\partial z}|_{z=0}$ (法向电位移矢量连续)
+    *   $\phi_1|\_{z=0} = \phi_2|\_{z=0}$ (电位连续)
+    *   $\epsilon_1 \frac{\partial \phi_1}{\partial z}|\_{z=0} = \epsilon_2 \frac{\partial \phi_2}{\partial z}|\_{z=0}$ (法向电位移矢量连续)
 *   **介质分界面上的<font color='orange'>极化电荷面密度</font> $\rho_{sp}$:**
-    *   $\rho_{sp} = (\vec{P}_1 - \vec{P}_2) \cdot \hat{a}_z|_{z=0}$
+    *   $\rho\_{sp} = (\vec{P}_1 - \vec{P}_2) \cdot \hat{a}_z|\_{z=0}$
     *   或者，由于镜像系统在原场域内等效，可以用 $q'$ 和 $q''$ 来理解分界面上的效应。
 *   **特殊情况:**
     *   若 $\epsilon_2 \to \infty$ (介质2为理想导体)，则 $q' = -q$, $q''=0$。退化为接地导体平面情况。
@@ -1980,7 +1840,7 @@
 
 ---
 
-#### 💡 2. 法拉第电磁感应定律 (Faraday's Law of Electromagnetic Induction)
+#### 💡 2. 法拉第电磁感应定律
 
 <font color="orange">核心</font>：时变的磁场产生时变电场。
 
@@ -1993,9 +1853,11 @@
 
 *   **感应电动势的本质:** <font color="orange">感应电场</font> $\vec{E}_{in}$！
     麦克斯韦认为：感应电场是磁场随时间变化的结果，不仅存在于导体内，也存在于导体周围的空间。适用于导体回路，也适用于空间任意回路。
-*   **总电场:** 空间总电场 $\vec{E}$ 是库仑电场 $\vec{E}_c$ (由电荷产生，无旋) 和感应电场 $\vec{E}_{in}$ (由变化磁场产生，有旋) 的叠加：
-    $$ \vec{E} = \vec{E}_c + \vec{E}_{in} $$
-    其中，库仑电场环路积分为零：$\oint_C \vec{E}_c \cdot d\vec{l} = 0$。
+*   **总电场:** 空间总电场 $\\vec{E}$ 是库仑电场 $\\vec{E}\_c$ (由电荷产生，无旋) 和感应电场 $\\vec{E}\_{in}$ (由变化磁场产生，有旋) 的叠加：
+    $$
+    \\vec{E} = \\vec{E}\_c + \\vec{E}\_{in}
+    $$
+    其中，库仑电场环路积分为零：$\\oint\_C \\vec{E}\_c \\cdot d\\vec{l} = 0$。
 *   **推广的法拉第电磁感应定律积分形式:**
     $$ \boxed{ \oint_C \vec{E} \cdot d\vec{l} = -\frac{d}{dt}\int_S \vec{B} \cdot d\vec{s} } $$
     <font color="orange">注意点</font>：磁通变化可由磁场随时间变化引起，也可由回路移动引起，或两者共同引起。
@@ -2012,7 +1874,7 @@
 
 ---
 
-#### 🌊 3. 位移电流 (Displacement Current)
+#### 🌊 3. 位移电流
 
 法拉第电磁感应定律揭示：$\nabla \times \vec{E} = -\frac{\partial\vec{B}}{\partial t}$ (变化的磁场激发有旋电场)。
 那么，<font color="orange">变化的电场能否激发磁场</font> ($\frac{\partial\vec{E}}{\partial t}$ → $\vec{H}$)？
@@ -2031,14 +1893,21 @@
     矛盾！
 
 *   **麦克斯韦的修正:**
-    麦克斯韦认为电容器两板间存在另一种形式的电流——<font color="orange">位移电流</font> (displacement current)，其值与传导电流 $i(t)$ 相等。它是由时变电场引起的。
-    假设高斯定理对时变场仍成立：$\nabla \cdot \vec{D} = \rho$。
+    麦克斯韦认为电容器两板间存在另一种形式的电流——<font color="orange">位移电流</font>，其值与传导电流 $i(t)$ 相等。它是由时变电场引起的。
+    假设高斯定理对时变场仍成立：$\\nabla \\cdot \\vec{D} = \\rho$。
     代入电荷守恒定律：
-    $\nabla \cdot \vec{J} = -\frac{\partial\rho}{\partial t} = -\frac{\partial(\nabla \cdot \vec{D})}{\partial t} = -\nabla \cdot (\frac{\partial\vec{D}}{\partial t})$
-    整理得：$\nabla \cdot (\vec{J} + \frac{\partial\vec{D}}{\partial t}) = 0$。
-    定义<font color="orange">位移电流密度</font> $\vec{J}_D$：
-    $$ \boxed{ \vec{J}_D = \frac{\partial\vec{D}}{\partial t} } \quad (A/m^2) $$
-    此时，总电流密度 $\vec{J}_{total} = \vec{J} + \vec{J}_D$ 的散度为零，满足电流连续性。
+    $$
+    \\nabla \\cdot \\vec{J} = -\\frac{\\partial\\rho}{\\partial t} = -\\frac{\\partial(\\nabla \\cdot \\vec{D})}{\\partial t} = -\\nabla \\cdot (\\frac{\\partial\\vec{D}}{\\partial t})
+    $$
+    整理得：
+    $$
+    \\nabla \\cdot (\\vec{J} + \\frac{\\partial\\vec{D}}{\\partial t}) = 0
+    $$
+    定义<font color="orange">位移电流密度</font> $\\vec{J}\_D$：
+    $$
+    \\boxed{ \\vec{J}\_D = \\frac{\\partial\\vec{D}}{\\partial t} } \\quad (A/m^2)
+    $$
+    此时，总电流密度 $\\vec{J}\_{\\text{total}} = \\vec{J} + \\vec{J}\_D$ 的散度为零，满足电流连续性。
 
 *   **安培-麦克斯韦全电流定律:**
     *   **微分形式:**
@@ -2064,8 +1933,7 @@
 
 ---
 
-#### 🏛️ 4. 麦克斯韦方程组 (Maxwell Equations)
-
+#### 🏛️ 4. 麦克斯韦方程组
 库仑定律、毕奥-萨伐尔定律、法拉第电磁感应定律是三大实验定律，分别适用于静电场、静磁场和缓变电磁场，不具普遍性。但它们为麦克斯韦理论提供了基础。
 
 *   **麦克斯韦的科学假设:**
@@ -2131,7 +1999,7 @@
 
 在<font color="orange">无源</font>情况下，独立方程只有两个（两个旋度方程）。
 
-##### 4.4 本构关系 (Constitutive relationship) 🧱
+##### 4.4 本构关系 🧱
 
 麦克斯韦方程组中有 $\vec{E}, \vec{D}, \vec{B}, \vec{H}, \vec{J}, \rho$ 等场量，共16个标量变量（$\vec{E},\vec{D},\vec{B},\vec{H},\vec{J}$各3个，$\rho$ 1个）。
 独立方程只有7个标量方程（两个旋度方程各3个，一个散度方程1个，或一个旋度+一个电流连续性）。
@@ -2158,61 +2026,65 @@ $$ \nabla \cdot \vec{J} = -\frac{\partial \rho}{\partial t} \quad \text{或} \qu
 与静态场相比，时变场的两个旋度方程多了时间导数项。
 
 1.  **磁场强度 H 的切向分量:**
-    在分界面取小矩形回路，应用 $\oint_C \vec{H} \cdot d\vec{l} = \int_S (\vec{J} + \frac{\partial\vec{D}}{\partial t}) \cdot d\vec{S}$。
-    当小矩形高趋于0时，$\frac{\partial\vec{D}}{\partial t}$ 项的面积分为0（因 $\frac{\partial\vec{D}}{\partial t}$ 有限）。
-    $$ \boxed{ \vec{n} \times (\vec{H}_1 - \vec{H}_2) = \vec{J}_s } $$
-    其中 $\vec{n}$ 为从介质2指向介质1的法向量，$\vec{J}_s$ 为分界面上的自由面电流密度。
-    若无自由面电流，$\vec{H}_{1t} = \vec{H}_{2t}$。
+    在分界面取小矩形回路，应用 $\\oint\_C \\vec{H} \\cdot d\\vec{l} = \\int\_S (\\vec{J} + \\frac{\\partial\\vec{D}}{\\partial t}) \\cdot d\\vec{S}$。
+    当小矩形高趋于0时，$\\frac{\\partial\\vec{D}}{\\partial t}$ 项的面积分为0（因 $\\frac{\\partial\\vec{D}}{\\partial t}$ 有限）。
+    $$
+    \\boxed{ \\vec{n} \\times (\\vec{H}\_1 - \\vec{H}\_2) = \\vec{J}\_s }
+    $$
+    其中 $\\vec{n}$ 为从介质2指向介质1的法向量，$\\vec{J}\_s$ 为分界面上的自由面电流密度。
+    若无自由面电流，$\\vec{H}\_{1t} = \\vec{H}\_{2t}$。
 
 2.  **电场强度 E 的切向分量:**
-    类似地，应用 $\oint_C \vec{E} \cdot d\vec{l} = -\int_S \frac{\partial\vec{B}}{\partial t} \cdot d\vec{S}$。
-    当小矩形高趋于0时，$\frac{\partial\vec{B}}{\partial t}$ 项的面积分为0。
-    $$ \boxed{ \vec{n} \times (\vec{E}_1 - \vec{E}_2) = 0 \quad \Rightarrow \quad \vec{E}_{1t} = \vec{E}_{2t} } $$
+    类似地，应用 $\\oint\_C \\vec{E} \\cdot d\\vec{l} = -\\int\_S \\frac{\\partial\\vec{B}}{\\partial t} \\cdot d\\vec{S}$。
+    当小矩形高趋于0时，$\\frac{\\partial\\vec{B}}{\\partial t}$ 项的面积分为0。
+    $$
+    \\boxed{ \\vec{n} \\times (\\vec{E}\_1 - \\vec{E}\_2) = 0 \\quad \\Rightarrow \\quad \\vec{E}\_{1t} = \\vec{E}\_{2t} }
+    $$
     电场强度的切向分量总是连续的。
 
 3.  **磁感应强度 B 的法向分量:**
-    在分界面取小扁鼓形闭合面，应用 $\oint_S \vec{B} \cdot d\vec{S} = 0$。
+    在分界面取小扁鼓形闭合面，应用 $\\oint\_S \\vec{B} \\cdot d\\vec{S} = 0$。
     当小扁鼓高趋于0时，侧面积分为0。
-    $$ \boxed{ \vec{n} \cdot (\vec{B}_1 - \vec{B}_2) = 0 \quad \Rightarrow \quad B_{1n} = B_{2n} } $$
+    $$
+    \\boxed{ \\vec{n} \\cdot (\\vec{B}\_1 - \\vec{B}\_2) = 0 \\quad \\Rightarrow \\quad B\_{1n} = B\_{2n} }
+    $$
     磁感应强度的法向分量总是连续的。
 
 4.  **电位移矢量 D 的法向分量:**
-    类似地，应用 $\oint_S \vec{D} \cdot d\vec{S} = \int_V \rho dV$。
-    当小扁鼓高趋于0时，体积分为 $\rho_s dS$ (面电荷)。
-    $$ \boxed{ \vec{n} \cdot (\vec{D}_1 - \vec{D}_2) = \rho_s } $$
-    其中 $\rho_s$ 为分界面上的自由面电荷密度。
-    若无自由面电荷，$D_{1n} = D_{2n}$。
+    类似地，应用 $\\oint\_S \\vec{D} \\cdot d\\vec{S} = \\int\_V \\rho dV$。
+    当小扁鼓高趋于0时，体积分为 $\\rho\_s dS$ (面电荷)。
+    $$
+    \\boxed{ \\vec{n} \\cdot (\\vec{D}\_1 - \\vec{D}\_2) = \\rho\_s }
+    $$
+    其中 $\\rho\_s$ 为分界面上的自由面电荷密度。
+    若无自由面电荷，$D\_{1n} = D\_{2n}$。
 
 <font color="orange">总结</font>:
 *   分界面上<font color="orange">切向电场强度</font>和<font color="orange">法向磁感应强度</font>总是连续。
 *   分界面上<font color="orange">切向磁场强度</font>和<font color="orange">法向电位移</font>可能不连续，不连续量取决于面电流密度和面电荷密度。
 <font color="orange">注意点</font>：Maxwell方程只有三个独立，边界条件也只有三个独立。例如，由第二边界条件可推导第三边界条件（在静态场const=0条件下）。
 
-##### 1.3 理想介质表面的边界条件 ($\vec{J}_s=0, \rho_s=0, \sigma=0$)
+##### 1.3 理想介质表面的边界条件 ($\\vec{J}\_s=0, \\rho\_s=0, \\sigma=0$)
 
-*   $\vec{H}_{1t} = \vec{H}_{2t}$
-*   $\vec{E}_{1t} = \vec{E}_{2t}$
-*   $B_{1n} = B_{2n}$
-*   $D_{1n} = D_{2n}$
+*   $\\vec{H}\_{1t} = \\vec{H}\_{2t}$
+*   $\\vec{E}\_{1t} = \\vec{E}\_{2t}$
+*   $B\_{1n} = B\_{2n}$
+*   $D\_{1n} = D\_{2n}$
 所有切向和法向分量都连续。
 
-##### 1.4 理想导体表面的边界条件 (介质2为理想导体 $\sigma_2 \to \infty$)
+##### 1.4 理想导体表面的边界条件 (介质2为理想导体 $\\sigma\_2 \\to \\infty$)
 
-理想导体内：$\vec{E}_2 = 0$, $\vec{B}_2 = 0$ (因时变场不能在理想导体内建立静态场，$\frac{\partial\vec{B}_2}{\partial t}$ 使 $\vec{B}_2$ 无法维持非零)。
-*   $\vec{n} \times \vec{H}_1 = \vec{J}_s$ (磁场在表面相切，大小等于面电流密度)
-*   $\vec{n} \times \vec{E}_1 = 0$  (电场在表面垂直)
-*   $\vec{n} \cdot \vec{B}_1 = 0$  (磁场在表面相切)
-*   $\vec{n} \cdot \vec{D}_1 = \rho_s$ (法向电位移等于面电荷密度)
+理想导体内：$\\vec{E}\_2 = 0$, $\\vec{B}\_2 = 0$ (因时变场不能在理想导体内建立静态场，$\\frac{\\partial\\vec{B}\_2}{\\partial t}$ 使 $\\vec{B}\_2$ 无法维持非零)。
+*   $\\vec{n} \\times \\vec{H}\_1 = \\vec{J}\_s$ (磁场在表面相切，大小等于面电流密度)
+*   $\\vec{n} \\times \\vec{E}\_1 = 0$  (电场在表面垂直)
+*   $\\vec{n} \\cdot \\vec{B}\_1 = 0$  (磁场在表面相切)
+*   $\\vec{n} \\cdot \\vec{D}\_1 = \\rho\_s$ (法向电位移等于面电荷密度)
 <font color="orange">结论</font>:
 *   电场总是<font color="orange">垂直</font>于理想导体表面。
 *   磁场总是与理想导体表面<font color="orange">相切</font>。
 *   理想导体表面法向电位移等于面电荷密度，切向磁场强度等于面电流密度。
 *   理想导体表面切向电场和法向磁场为零。
-
-*   **例2 (矩形波导):** 应用理想导体边界条件求内壁电荷和电流分布。
-
 ---
-
 #### 💰 2. 坡印廷定理和坡印廷矢量
 
 ##### 2.1 坡印廷定理 (Poynting Theorem)
@@ -2255,108 +2127,163 @@ $$ -\oint_S \vec{S} \cdot d\vec{s} = \frac{dW}{dt} + P_j $$
 ##### 💰 例3 (圆柱导线): 证明从导体表面流入的电磁能流等于导线内部欧姆热损耗功率。
 
 **问题设置：**
-考虑一根半径为 $a$，长度为 $l$，电导率为 $\sigma$ 的圆柱形导线，导线中通有稳恒电流 $I$。
+考虑一根半径为 $a$，长度为 $l$，电导率为 $\\sigma$ 的圆柱形导线，导线中通有稳恒电流 $I$。
 
 **1. 导线内部的场量 (稳恒电流情况):**
 
-*   **电流密度 $\vec{J}$：** 假设电流均匀分布在导线横截面上。
-    $$ \vec{J} = \frac{I}{\pi a^2} \vec{a}_z \quad (\text{假设电流沿 z 轴方向}) $$
-*   **电场强度 $\vec{E}$：** 根据欧姆定律的微分形式 $\vec{J} = \sigma \vec{E}$。
-    $$ \vec{E} = \frac{\vec{J}}{\sigma} = \frac{I}{\sigma \pi a^2} \vec{a}_z $$
+*   **电流密度 $\\vec{J}$：** 假设电流均匀分布在导线横截面上。
+    $$
+    \\vec{J} = \\frac{I}{\\pi a^2} \\vec{a}\_z \\quad (\\text{假设电流沿 z 轴方向})
+    $$
+*   **电场强度 $\\vec{E}$：** 根据欧姆定律的微分形式 $\\vec{J} = \\sigma \\vec{E}$。
+    $$
+    \\vec{E} = \\frac{\\vec{J}}{\\sigma} = \\frac{I}{\\sigma \\pi a^2} \\vec{a}\_z
+    $$
     电场方向与电流方向一致，沿导线轴向。
-*   **磁场强度 $\vec{H}$：** 根据安培环路定律，在导线表面 (径向距离 $r=a$)：
-    $\oint_C \vec{H} \cdot d\vec{l} = I_{enc} = I$
-    $H_{\phi} \cdot 2\pi a = I$
-    $$ \vec{H} = \frac{I}{2\pi a} \vec{a}_{\phi} \quad (\text{在导线表面 } r=a) $$
+*   **磁场强度 $\\vec{H}$：** 根据安培环路定律，在导线表面 (径向距离 $r=a$)：
+    $\\oint\_C \\vec{H} \\cdot d\\vec{l} = I\_{\\text{enc}} = I$
+    $H\_{\\phi} \\cdot 2\\pi a = I$
+    $$
+    \\vec{H} = \\frac{I}{2\\pi a} \\vec{a}\_{\\phi} \\quad (\\text{在导线表面 } r=a)
+    $$
     磁场方向为环绕导线的同心圆方向（根据右手定则）。
 
 **2. 导体表面流入的电磁能流 (坡印廷矢量积分):**
 
-坡印廷矢量 $\vec{S} = \vec{E} \times \vec{H}$。我们需要计算在导线表面的坡印廷矢量，并对其在整个导线表面（不包括两端，因为我们考虑的是从侧面流入的能量）进行面积分。
+坡印廷矢量 $\\vec{S} = \\vec{E} \\times \\vec{H}$。我们需要计算在导线表面的坡印廷矢量，并对其在整个导线表面（不包括两端，因为我们考虑的是从侧面流入的能量）进行面积分。
 
 *   **在导线表面 ($r=a$) 的坡印廷矢量：**
-    $$ \vec{S} = \vec{E} \times \vec{H} = \left( \frac{I}{\sigma \pi a^2} \vec{a}_z \right) \times \left( \frac{I}{2\pi a} \vec{a}_{\phi} \right) $$
-    利用柱坐标系中单位矢量的叉乘关系：$\vec{a}_z \times \vec{a}_{\phi} = -\vec{a}_r$。
-    $$ \vec{S} = \frac{I^2}{2\sigma \pi^2 a^3} (-\vec{a}_r) = -\frac{I^2}{2\sigma \pi^2 a^3} \vec{a}_r $$
-    <font color="orange">注意：</font>坡印廷矢量的方向是 $-\vec{a}_r$，即指向导线内部（径向向内）。这表示能量是从导线外部流入导线内部的。
+    $$
+    \\vec{S} = \\vec{E} \\times \\vec{H} = \\left( \\frac{I}{\\sigma \\pi a^2} \\vec{a}\_z \\right) \\times \\left( \\frac{I}{2\\pi a} \\vec{a}\_{\\phi} \\right)
+    $$
+    利用柱坐标系中单位矢量的叉乘关系：$\\vec{a}\_z \\times \\vec{a}\_{\\phi} = -\\vec{a}\_r$。
+    $$
+    \\vec{S} = \\frac{I^2}{2\\sigma \\pi^2 a^3} (-\\vec{a}\_r) = -\\frac{I^2}{2\\sigma \\pi^2 a^3} \\vec{a}\_r
+    $$
+    <font color="orange">注意：</font>坡印廷矢量的方向是 $-\\vec{a}\_r$，即指向导线内部（径向向内）。这表示能量是从导线外部流入导线内部的。
 
-*   **计算通过导体侧表面的总功率 $P_{in}$：**
-    导线的侧表面积元 $d\vec{s} = a \, d\phi \, dz \, \vec{a}_r$ (法向量指向外部)。
-    我们计算的是<font color="orange">流入</font>的功率，所以应该是 $-\oint_S \vec{S} \cdot d\vec{s}$，或者直接积分 $\vec{S} \cdot (-d\vec{s})$。
-    这里我们用坡印廷定理的左边：$-\oint_S \vec{S} \cdot d\vec{s}$。
-    由于导线侧表面的法向量是 $\vec{a}_r$，而 $\vec{S}$ 的方向是 $-\vec{a}_r$：
-    $$ P_{in} = -\oint_{侧面} \vec{S} \cdot d\vec{s} = -\int_0^l \int_0^{2\pi} \left( -\frac{I^2}{2\sigma \pi^2 a^3} \vec{a}_r \right) \cdot (a \, d\phi \, dz \, \vec{a}_r) $$
-    $$ P_{in} = \int_0^l \int_0^{2\pi} \frac{I^2}{2\sigma \pi^2 a^3} a \, d\phi \, dz $$
-    $$ P_{in} = \frac{I^2 a}{2\sigma \pi^2 a^3} \int_0^l dz \int_0^{2\pi} d\phi $$
-    $$ P_{in} = \frac{I^2}{2\sigma \pi^2 a^2} \cdot l \cdot 2\pi $$
-    $$ P_{in} = \frac{I^2 l}{\sigma \pi a^2} $$
+*   **计算通过导体侧表面的总功率 $P\_{in}$：**
+    导线的侧表面积元 $d\\vec{s} = a \\, d\\phi \\, dz \\, \\vec{a}\_r$ (法向量指向外部)。
+    我们计算的是<font color="orange">流入</font>的功率，所以应该是 $-\\oint\_S \\vec{S} \\cdot d\\vec{s}$，或者直接积分 $\\vec{S} \\cdot (-d\\vec{s})$。
+    这里我们用坡印廷定理的左边：$-\\oint\_S \\vec{S} \\cdot d\\vec{s}$。
+    由于导线侧表面的法向量是 $\\vec{a}\_r$，而 $\\vec{S}$ 的方向是 $-\\vec{a}\_r$：
+    $$
+    P\_{in} = -\\oint\_{\\text{侧面}} \\vec{S} \\cdot d\\vec{s} = -\\int\_0^l \\int\_0^{2\\pi} \\left( -\\frac{I^2}{2\\sigma \\pi^2 a^3} \\vec{a}\_r \\right) \\cdot (a \\, d\\phi \\, dz \\, \\vec{a}\_r)
+    $$
+    $$
+    P\_{in} = \\int\_0^l \\int\_0^{2\\pi} \\frac{I^2}{2\\sigma \\pi^2 a^3} a \\, d\\phi \\, dz
+    $$
+    $$
+    P\_{in} = \\frac{I^2 a}{2\\sigma \\pi^2 a^3} \\int\_0^l dz \\int\_0^{2\\pi} d\\phi
+    $$
+    $$
+    P\_{in} = \\frac{I^2}{2\\sigma \\pi^2 a^2} \\cdot l \\cdot 2\\pi
+    $$
+    $$
+    P\_{in} = \\frac{I^2 l}{\\sigma \\pi a^2}
+    $$
 
-**3. 导线内部的欧姆热损耗功率 $P_{loss}$：**
+**3. 导线内部的欧姆热损耗功率 $P\_{loss}$：**
 
-欧姆损耗功率密度为 $p_j = \vec{E} \cdot \vec{J}$。总损耗功率是将其在导线体积内积分。
-$$ p_j = \vec{E} \cdot \vec{J} = \left( \frac{I}{\sigma \pi a^2} \vec{a}_z \right) \cdot \left( \frac{I}{\pi a^2} \vec{a}_z \right) = \frac{I^2}{\sigma (\pi a^2)^2} $$
-导线的体积元 $dV = r \, dr \, d\phi \, dz$。
-$$ P_{loss} = \int_V p_j \, dV = \int_0^l \int_0^{2\pi} \int_0^a \frac{I^2}{\sigma (\pi a^2)^2} r \, dr \, d\phi \, dz $$
-$$ P_{loss} = \frac{I^2}{\sigma (\pi a^2)^2} \int_0^l dz \int_0^{2\pi} d\phi \int_0^a r \, dr $$
-$$ P_{loss} = \frac{I^2}{\sigma (\pi a^2)^2} \cdot l \cdot 2\pi \cdot \left[ \frac{r^2}{2} \right]_0^a $$
-$$ P_{loss} = \frac{I^2 \cdot l \cdot 2\pi}{\sigma \pi^2 a^4} \cdot \frac{a^2}{2} $$
-$$ P_{loss} = \frac{I^2 l}{\sigma \pi a^2} $$
-我们也可以用更熟悉的方式计算：导线电阻 $R = \frac{l}{\sigma S_{section}} = \frac{l}{\sigma \pi a^2}$。
-则 $P_{loss} = I^2 R = I^2 \frac{l}{\sigma \pi a^2}$。
+欧姆损耗功率密度为 $p\_j = \\vec{E} \\cdot \\vec{J}$。总损耗功率是将其在导线体积内积分。
+$$
+p\_j = \\vec{E} \\cdot \\vec{J} = \\left( \\frac{I}{\\sigma \\pi a^2} \\vec{a}\_z \\right) \\cdot \\left( \\frac{I}{\\pi a^2} \\vec{a}\_z \\right) = \\frac{I^2}{\\sigma (\\pi a^2)^2}
+$$
+导线的体积元 $dV = r \\, dr \\, d\\phi \\, dz$。
+$$
+P\_{loss} = \\int\_V p\_j \\, dV = \\int\_0^l \\int\_0^{2\\pi} \\int\_0^a \\frac{I^2}{\\sigma (\\pi a^2)^2} r \\, dr \\, d\\phi \\, dz
+$$
+$$
+P\_{loss} = \\frac{I^2}{\\sigma (\\pi a^2)^2} \\int\_0^l dz \\int\_0^{2\\pi} d\\phi \\int\_0^a r \\, dr
+$$
+$$
+P\_{loss} = \\frac{I^2}{\\sigma (\\pi a^2)^2} \\cdot l \\cdot 2\\pi \\cdot \\left[ \\frac{r^2}{2} \\right]\_0^a
+$$
+$$
+P\_{loss} = \\frac{I^2 \\cdot l \\cdot 2\\pi}{\\sigma \\pi^2 a^4} \\cdot \\frac{a^2}{2}
+$$
+$$
+P\_{loss} = \\frac{I^2 l}{\\sigma \\pi a^2}
+$$
+我们也可以用更熟悉的方式计算：导线电阻 $R = \\frac{l}{\\sigma S\_{\\text{section}}} = \\frac{l}{\\sigma \\pi a^2}$。
+则 $P\_{loss} = I^2 R = I^2 \\frac{l}{\\sigma \\pi a^2}$。
 
 **4. 结论：**
 
-比较 $P_{in}$ 和 $P_{loss}$：
-$$ P_{in} = \frac{I^2 l}{\sigma \pi a^2} $$
-$$ P_{loss} = \frac{I^2 l}{\sigma \pi a^2} $$
-因此，$P_{in} = P_{loss}$。
+比较 $P\_{in}$ 和 $P\_{loss}$：
+$$
+P\_{in} = \\frac{I^2 l}{\\sigma \\pi a^2}
+$$
+$$
+P\_{loss} = \\frac{I^2 l}{\\sigma \\pi a^2}
+$$
+因此，$P\_{in} = P\_{loss}$。
 **证明了从导体表面流入的电磁能流等于导线内部的欧姆热损耗功率。** 这符合能量守恒。电磁场将能量从外部“泵入”导线，然后在导线内部转化为热能。
 
 ---
-
 ##### 💰 例4 (同轴线): 说明功率是通过内外导体间的空间传递的，导体本身不传输功率，只起引导电磁波的作用。
 
 **问题设置：**
-考虑一根理想同轴传输线，内导体半径为 $a$，外导体半径为 $b$。内外导体间填充理想介质 (电导率 $\sigma_{dielectric} = 0$，介电常数为 $\varepsilon$，磁导率为 $\mu$)。假设内导体通有电流 $I$ (例如沿 $+z$ 方向)，外导体通有电流 $-I$ (沿 $-z$ 方向)。内外导体间存在电压 $U$。
+考虑一根理想同轴传输线，内导体半径为 $a$，外导体半径为 $b$。内外导体间填充理想介质 (电导率 $\\sigma\_{\\text{dielectric}} = 0$，介电常数为 $\\varepsilon$，磁导率为 $\\mu$)。假设内导体通有电流 $I$ (例如沿 $+z$ 方向)，外导体通有电流 $-I$ (沿 $-z$ 方向)。内外导体间存在电压 $U$。
 
 **1. 内外导体间的场量 (假设为 TEM 模，即电场和磁场都垂直于传播方向 $z$):**
 
-*   **电场强度 $\vec{E}$ (径向)：**
+*   **电场强度 $\\vec{E}$ (径向)：**
     根据高斯定律，在半径为 $r$ ($a < r < b$) 的高斯圆柱面上：
-    $\oint_S \vec{D} \cdot d\vec{s} = Q_{enc}$ (单位长度上的电荷为 $\lambda$)
-    $D_r \cdot 2\pi r \cdot 1 = \lambda \Rightarrow E_r = \frac{\lambda}{2\pi\varepsilon r}$
-    电压 $U = -\int_b^a E_r dr = -\int_b^a \frac{\lambda}{2\pi\varepsilon r} dr = \frac{\lambda}{2\pi\varepsilon} \ln(\frac{b}{a})$
-    所以 $\lambda = \frac{2\pi\varepsilon U}{\ln(b/a)}$。
-    代回 $E_r$：
-    $$ \vec{E} = \frac{U}{r \ln(b/a)} \vec{a}_r $$
-*   **磁场强度 $\vec{H}$ (角向)：**
+    $\\oint\_S \\vec{D} \\cdot d\\vec{s} = Q\_{\\text{enc}}$ (单位长度上的电荷为 $\\lambda$)
+    $D\_r \\cdot 2\\pi r \\cdot 1 = \\lambda \\Rightarrow E\_r = \\frac{\\lambda}{2\\pi\\varepsilon r}$
+    电压 $U = -\\int\_b^a E\_r dr = -\\int\_b^a \\frac{\\lambda}{2\\pi\\varepsilon r} dr = \\frac{\\lambda}{2\\pi\\varepsilon} \\ln(\\frac{b}{a})$
+    所以 $\\lambda = \\frac{2\\pi\\varepsilon U}{\\ln(b/a)}$。
+    代回 $E\_r$：
+    $$
+    \\vec{E} = \\frac{U}{r \\ln(b/a)} \\vec{a}\_r
+    $$
+*   **磁场强度 $\\vec{H}$ (角向)：**
     根据安培环路定律，在半径为 $r$ ($a < r < b$) 的圆形回路上：
-    $\oint_C \vec{H} \cdot d\vec{l} = I_{enc} = I$
-    $H_{\phi} \cdot 2\pi r = I$
-    $$ \vec{H} = \frac{I}{2\pi r} \vec{a}_{\phi} $$
+    $\\oint\_C \\vec{H} \\cdot d\\vec{l} = I\_{\\text{enc}} = I$
+    $H\_{\\phi} \\cdot 2\\pi r = I$
+    $$
+    \\vec{H} = \\frac{I}{2\\pi r} \\vec{a}\_{\\phi}
+    $$
 
 **2. 计算通过内外导体间横截面的功率流 (坡印廷矢量积分):**
 
-*   **坡印廷矢量 $\vec{S} = \vec{E} \times \vec{H}$：**
-    $$ \vec{S} = \left( \frac{U}{r \ln(b/a)} \vec{a}_r \right) \times \left( \frac{I}{2\pi r} \vec{a}_{\phi} \right) $$
-    利用 $\vec{a}_r \times \vec{a}_{\phi} = \vec{a}_z$。
-    $$ \vec{S} = \frac{UI}{2\pi r^2 \ln(b/a)} \vec{a}_z $$
-    <font color="orange">注意：</font>坡印廷矢量的方向是 $\vec{a}_z$，即沿着同轴线的轴向传播。这表示能量是在内外导体之间的介质中沿轴向流动的。
+*   **坡印廷矢量 $\\vec{S} = \\vec{E} \\times \\vec{H}$：**
+    $$
+    \\vec{S} = \\left( \\frac{U}{r \\ln(b/a)} \\vec{a}\_r \\right) \\times \\left( \\frac{I}{2\\pi r} \\vec{a}\_{\\phi} \\right)
+    $$
+    利用 $\\vec{a}\_r \\times \\vec{a}\_{\\phi} = \\vec{a}\_z$。
+    $$
+    \\vec{S} = \\frac{UI}{2\\pi r^2 \\ln(b/a)} \\vec{a}\_z
+    $$
+    <font color="orange">注意：</font>坡印廷矢量的方向是 $\\vec{a}\_z$，即沿着同轴线的轴向传播。这表示能量是在内外导体之间的介质中沿轴向流动的。
 
-*   **计算通过内外导体间横截面的总功率 $P_{trans}$：**
-    横截面积元 $d\vec{s} = r \, dr \, d\phi \, \vec{a}_z$。
-    $$ P_{trans} = \int_S \vec{S} \cdot d\vec{s} = \int_0^{2\pi} \int_a^b \left( \frac{UI}{2\pi r^2 \ln(b/a)} \vec{a}_z \right) \cdot (r \, dr \, d\phi \, \vec{a}_z) $$
-    $$ P_{trans} = \frac{UI}{2\pi \ln(b/a)} \int_0^{2\pi} d\phi \int_a^b \frac{1}{r} dr $$
-    $$ P_{trans} = \frac{UI}{2\pi \ln(b/a)} \cdot 2\pi \cdot [\ln r]_a^b $$
-    $$ P_{trans} = \frac{UI}{\ln(b/a)} \cdot (\ln b - \ln a) $$
-    $$ P_{trans} = \frac{UI}{\ln(b/a)} \cdot \ln(b/a) $$
-    $$ P_{trans} = UI $$
+*   **计算通过内外导体间横截面的总功率 $P\_{\\text{trans}}$：**
+    横截面积元 $d\\vec{s} = r \\, dr \\, d\\phi \\, \\vec{a}\_z$。
+    $$
+    P\_{\\text{trans}} = \\int\_S \\vec{S} \\cdot d\\vec{s} = \\int\_0^{2\\pi} \\int\_a^b \\left( \\frac{UI}{2\\pi r^2 \\ln(b/a)} \\vec{a}\_z \\right) \\cdot (r \\, dr \\, d\\phi \\, \\vec{a}\_z)
+    $$
+    $$
+    P\_{\\text{trans}} = \\frac{UI}{2\\pi \\ln(b/a)} \\int\_0^{2\\pi} d\\phi \\int\_a^b \\frac{1}{r} dr
+    $$
+    $$
+    P\_{\\text{trans}} = \\frac{UI}{2\\pi \\ln(b/a)} \\cdot 2\\pi \\cdot [\\ln r]\_a^b
+    $$
+    $$
+    P\_{\\text{trans}} = \\frac{UI}{\\ln(b/a)} \\cdot (\\ln b - \\ln a)
+    $$
+    $$
+    P\_{\\text{trans}} = \\frac{UI}{\\ln(b/a)} \\cdot \\ln(b/a)
+    $$
+    $$
+    P\_{\\text{trans}} = UI
+    $$
 
 **3. 讨论：**
 
-*   计算得到的传输功率 $P_{trans} = UI$，这与我们从电路理论中得到的直流功率公式是一致的。
-*   **关键在于能量的流动路径：** 坡印廷矢量 $\vec{S}$ 完全位于内外导体之间的<font color="orange">介质空间</font>中，并且其方向沿着同轴线的轴向。
-*   **理想导体的作用：** 如果我们考虑的是理想导体（电导率 $\sigma \to \infty$），那么导体内部的电场为零（对于时变场，准确说是切向电场为零；对于直流，内部电场为零）。因此，在理想导体内部，$\vec{E} = 0$，所以导体内部的坡印廷矢量 $\vec{S} = \vec{E} \times \vec{H} = 0$。这意味着<font color="orange">能量不会在理想导体内部传输</font>。
+*   计算得到的传输功率 $P\_{\\text{trans}} = UI$，这与我们从电路理论中得到的直流功率公式是一致的。
+*   **关键在于能量的流动路径：** 坡印廷矢量 $\\vec{S}$ 完全位于内外导体之间的<font color="orange">介质空间</font>中，并且其方向沿着同轴线的轴向。
+*   **理想导体的作用：** 如果我们考虑的是理想导体（电导率 $\\sigma \\to \\infty$），那么导体内部的电场为零（对于时变场，准确说是切向电场为零；对于直流，内部电场为零）。因此，在理想导体内部，$\\vec{E} = 0$，所以导体内部的坡印廷矢量 $\\vec{S} = \\vec{E} \\times \\vec{H} = 0$。这意味着<font color="orange">能量不会在理想导体内部传输</font>。
 *   **实际导体：** 对于实际导体，其电导率有限，内部会有微弱的电场，因此会有少量能量流入导体并转化为欧姆损耗（如例3所示），但这部分能量通常远小于在介质中传输的能量。
 
 **4. 结论：**
@@ -2368,7 +2295,6 @@ $$ P_{loss} = \frac{I^2 l}{\sigma \pi a^2} $$
 这两个例子都很好地体现了坡印廷定理的应用，并帮助我们理解电磁能量是如何流动和转换的。
 
 ---
-
 #### 🌊 3. 波动方程
 
 在时变情况下，电场与磁场相互激励，形成电磁波。
@@ -2399,60 +2325,73 @@ $\nabla \times (\nabla \times \vec{H}) = \nabla(\nabla \cdot \vec{H}) - \nabla^2
 
 引入位函数简化计算。
 *   **矢量磁位 A:**
-    由 $\nabla \cdot \vec{B} = 0$，可引入矢量磁位 $\vec{A}$，使得：
-    $$ \vec{B} = \nabla \times \vec{A} $$
+    由 $\\nabla \\cdot \\vec{B} = 0$，可引入矢量磁位 $\\vec{A}$，使得：
+    $$
+    \\vec{B} = \\nabla \\times \\vec{A}
+    $$
 *   **标量电位 φ:**
-    将 $\vec{B} = \nabla \times \vec{A}$ 代入 $\nabla \times \vec{E} = -\frac{\partial\vec{B}}{\partial t}$：
-    $\nabla \times \vec{E} = -\frac{\partial(\nabla \times \vec{A})}{\partial t} = -\nabla \times (\frac{\partial\vec{A}}{\partial t})$
-    $\nabla \times (\vec{E} + \frac{\partial\vec{A}}{\partial t}) = 0$
-    由于无旋场的旋度为零，可引入标量电位 $\phi$ (利用 $\nabla \times (\nabla\phi) = 0$)：
-    $\vec{E} + \frac{\partial\vec{A}}{\partial t} = -\nabla\phi$
-    $$ \vec{E} = \underbrace{-\nabla\phi}_{\text{无旋部分}} + \underbrace{(-\frac{\partial\vec{A}}{\partial t})}_{\text{有旋部分 (如果A随时间变化)}} $$
-    *   $-\nabla\phi$ 这一项代表了电场中类似于静电场的那种“有源”但“无旋”的贡献。
-    *   $-\frac{\partial\vec{A}}{\partial t}$ 这一项则与变化的磁场（通过 $\vec{A}$ 与 $\vec{B}$ 的关系）产生的感应电场（有旋电场）有关。
-    因此，在时变场中，$\phi$ 通常被称为**标量电位** (scalar electric potential) 或简称为**电位**，但要理解它的含义已经从单纯的静电势扩展了。它与矢量磁位 $\vec{A}$ 一起，共同决定了电场 $\vec{E}$。
+    将 $\\vec{B} = \\nabla \\times \\vec{A}$ 代入 $\\nabla \\times \\vec{E} = -\\frac{\\partial\\vec{B}}{\\partial t}$：
+    $\\nabla \\times \\vec{E} = -\\frac{\\partial(\\nabla \\times \\vec{A})}{\\partial t} = -\\nabla \\times (\\frac{\\partial\\vec{A}}{\\partial t})$
+    $\\nabla \\times (\\vec{E} + \\frac{\\partial\\vec{A}}{\\partial t}) = 0$
+    由于无旋场的旋度为零，可引入标量电位 $\\phi$ (利用 $\\nabla \\times (\\nabla\\phi) = 0$)：
+    $\\vec{E} + \\frac{\\partial\\vec{A}}{\\partial t} = -\\nabla\\phi$
+    $$
+    \\vec{E} = \\underbrace{-\\nabla\\phi}\_{\\text{无旋部分}} + \\underbrace{(-\\frac{\\partial\\vec{A}}{\\partial t})}\_{\\text{有旋部分 (如果A随时间变化)}}
+    $$
+    *   $-\\nabla\\phi$ 这一项代表了电场中类似于静电场的那种“有源”但“无旋”的贡献。
+    *   $-\\frac{\\partial\\vec{A}}{\\partial t}$ 这一项则与变化的磁场（通过 $\\vec{A}$ 与 $\\vec{B}$ 的关系）产生的感应电场（有旋电场）有关。
+    因此，在时变场中，$\\phi$ 通常被称为**标量电位** 或简称为**电位**，但要理解它的含义已经从单纯的静电势扩展了。它与矢量磁位 $\\vec{A}$ 一起，共同决定了电场 $\\vec{E}$。
 
-<font color="orange">注意点</font>: 上述定义不能唯一确定 $\vec{A}$ 和 $\phi$。若令 $\vec{A}' = \vec{A} + \nabla\Phi$，$\phi' = \phi - \frac{\partial\Phi}{\partial t}$ (其中 $\Phi$ 为任意标量函数)，则 $\vec{E}$ 和 $\vec{B}$ 保持不变。这种变换称为<font color="orange">规范变换</font>。
+<font color="orange">注意点</font>: 上述定义不能唯一确定 $\\vec{A}$ 和 $\\phi$。若令 $\\vec{A}' = \\vec{A} + \\nabla\\Phi$，$\\phi' = \\phi - \\frac{\\partial\\Phi}{\\partial t}$ (其中 $\\Phi$ 为任意标量函数)，则 $\\vec{E}$ 和 $\\vec{B}$ 保持不变。这种变换称为<font color="orange">规范变换</font>。
 
-*   **洛伦兹规范条件 (Lorentz's gauge):**
-    为了使 $\vec{A}$ 和 $\phi$ 唯一，并简化方程，引入规范条件。常用的为洛伦兹规范：
-    $$ \boxed{ \nabla \cdot \vec{A} + \mu\varepsilon\frac{\partial\phi}{\partial t} = 0 } $$
+*   **洛伦兹规范条件:**
+    为了使 $\\vec{A}$ 和 $\\phi$ 唯一，并简化方程，引入规范条件。常用的为洛伦兹规范：
+    $$
+    \\boxed{ \\nabla \\cdot \\vec{A} + \\mu\\varepsilon\\frac{\\partial\\phi}{\\partial t} = 0 }
+    $$
 *   **位函数的波动方程 (达朗贝尔方程):**
-    将 $\vec{E}$ 和 $\vec{B}$ 用 $\vec{A}$ 和 $\phi$ 表示，代入麦克斯韦方程组，并应用洛伦兹规范，可得到：
-    $$ \boxed{ \nabla^2\vec{A} - \mu\varepsilon\frac{\partial^2\vec{A}}{\partial t^2} = -\mu\vec{J} } $$
-    $$ \boxed{ \nabla^2\phi - \mu\varepsilon\frac{\partial^2\phi}{\partial t^2} = -\frac{\rho}{\varepsilon} } $$
+    将 $\\vec{E}$ 和 $\\vec{B}$ 用 $\\vec{A}$ 和 $\\phi$ 表示，代入麦克斯韦方程组，并应用洛伦兹规范，可得到：
+    $$
+    \\boxed{ \\nabla^2\\vec{A} - \\mu\\varepsilon\\frac{\\partial^2\\vec{A}}{\\partial t^2} = -\\mu\\vec{J} }
+    $$
+    $$
+    \\boxed{ \\nabla^2\\phi - \\mu\\varepsilon\\frac{\\partial^2\\phi}{\\partial t^2} = -\\frac{\\rho}{\\varepsilon} }
+    $$
 <font color="orange">优点</font>:
-*   将求解6个标量的 $\vec{E}$ 和 $\vec{H}$ 问题，转化为求解4个标量的 $\vec{A}$ (3个分量) 和 $\phi$ (1个分量) 的问题。
-*   求解步骤：已知源 $\vec{J}, \rho$ → 求解位函数 $\vec{A}, \phi$ 的波动方程 → 利用 $\vec{E} = -\nabla\phi - \frac{\partial\vec{A}}{\partial t}$ 和 $\vec{B} = \nabla \times \vec{A}$ 计算场量。
+*   将求解6个标量的 $\\vec{E}$ 和 $\\vec{H}$ 问题，转化为求解4个标量的 $\\vec{A}$ (3个分量) 和 $\\phi$ (1个分量) 的问题。
+*   求解步骤：已知源 $\\vec{J}, \\rho$ → 求解位函数 $\\vec{A}, \\phi$ 的波动方程 → 利用 $\\vec{E} = -\\nabla\\phi - \\frac{\\partial\\vec{A}}{\\partial t}$ 和 $\\vec{B} = \\nabla \\times \\vec{A}$ 计算场量。
 
 ---
-
 ### 6-3 时谐电磁场
 
-#### ⏱️ 1. 时谐电磁场的复数表示法 (Complex Phasor)
+#### ⏱️ 1. 时谐电磁场的复数表示法
 
 时变场对时间变化方式任意，但可通过傅里叶变换分解为不同频率简谐场的叠加。
-如果场源以一定角频率 $\omega$ 作<font color="orange">时谐</font> (正弦或余弦) 变化，产生的电磁场也以同样角频率作时谐变化，称为<font color="orange">时谐电磁场</font>或正弦电磁场。工程中常用正弦激励。
+如果场源以一定角频率 $\\omega$ 作<font color="orange">时谐</font> (正弦或余弦) 变化，产生的电磁场也以同样角频率作时谐变化，称为<font color="orange">时谐电磁场</font>或正弦电磁场。工程中常用正弦激励。
 
-*   **时谐标量函数:** $u(\vec{r}, t) = u_m(\vec{r}) \cos[\omega t + \phi(\vec{r})]$
-    其中 $u_m(\vec{r})$ 为振幅，$\phi(\vec{r})$ 为初始相位。它们是空间坐标的函数，与时间无关。
-    根据欧拉公式 $e^{j\alpha} = \cos\alpha + j\sin\alpha$:
-    $u(\vec{r}, t) = \text{Re}[u_m(\vec{r}) e^{j(\omega t+\phi(\vec{r}))}] = \text{Re}[u_m(\vec{r}) e^{j\phi(\vec{r})} e^{j\omega t}]$
-    定义<font color="orange">复振幅</font> (或相量) $\dot{U}_m(\vec{r})$:
-    $$ \dot{U}_m(\vec{r}) = u_m(\vec{r})e^{j\phi(\vec{r})} $$
+*   **时谐标量函数:** $u(\\vec{r}, t) = u\_m(\\vec{r}) \\cos[\\omega t + \\phi(\\vec{r})]$
+    其中 $u\_m(\\vec{r})$ 为振幅，$\\phi(\\vec{r})$ 为初始相位。它们是空间坐标的函数，与时间无关。
+    根据欧拉公式 $e^{j\\alpha} = \\cos\\alpha + j\\sin\\alpha$:
+    $u(\\vec{r}, t) = \\text{Re}[u\_m(\\vec{r}) e^{j(\\omega t+\\phi(\\vec{r}))}] = \\text{Re}[u\_m(\\vec{r}) e^{j\\phi(\\vec{r})} e^{j\\omega t}]$
+    定义<font color="orange">复振幅</font> (或相量) $\\dot{U}\_m(\\vec{r})$:
+    $$
+    \\dot{U}\_m(\\vec{r}) = u\_m(\\vec{r})e^{j\\phi(\\vec{r})}
+    $$
     则瞬时值可表示为：
-    $$ u(\vec{r}, t) = \text{Re}[\dot{U}_m(\vec{r})e^{j\omega t}] $$
+    $$
+    u(\\vec{r}, t) = \\text{Re}[\\dot{U}\_m(\\vec{r})e^{j\\omega t}]
+    $$
     <font color="orange">好处</font>:
-    1.  时间变量 $t$ 转化为时间因子 $e^{j\omega t}$。
+    1.  时间变量 $t$ 转化为时间因子 $e^{j\\omega t}$。
     2.  空间和时间部分相互独立。
-    3.  时间导数运算 $\frac{\partial}{\partial t}$ 变换为代数运算 $j\omega$：
-        $\frac{\partial u}{\partial t} = \text{Re}[j\omega \dot{U}_m(\vec{r}) e^{j\omega t}]$
+    3.  时间导数运算 $\\frac{\\partial}{\\partial t}$ 变换为代数运算 $j\\omega$：
+        $\\frac{\\partial u}{\\partial t} = \\text{Re}[j\\omega \\dot{U}\_m(\\vec{r}) e^{j\\omega t}]$
 
 *   **时谐矢量函数 (复矢量):**
-    $\vec{E}(x,y,z,t) = \text{Re}[\vec{\dot{E}}_m(x,y,z) e^{j\omega t}]$
-    其中<font color="orange">复矢量</font> $\vec{\dot{E}}_m(x,y,z)$ 为：
-    $\vec{\dot{E}}_m = \vec{a}_x \dot{E}_{xm} + \vec{a}_y \dot{E}_{ym} + \vec{a}_z \dot{E}_{zm}$
-    $\dot{E}_{xm}(x,y,z) = E_{xm}(x,y,z) e^{j\phi_x(x,y,z)}$ (各分量为复振幅)
+    $\\vec{E}(x,y,z,t) = \\text{Re}[\\vec{\\dot{E}}\_m(x,y,z) e^{j\\omega t}]$
+    其中<font color="orange">复矢量</font> $\\vec{\\dot{E}}\_m(x,y,z)$ 为：
+    $\\vec{\\dot{E}}\_m = \\vec{a}\_x \\dot{E}\_{xm} + \\vec{a}\_y \\dot{E}\_{ym} + \\vec{a}\_z \\dot{E}\_{zm}$
+    $\\dot{E}\_{xm}(x,y,z) = E\_{xm}(x,y,z) e^{j\\phi\_x(x,y,z)}$ (各分量为复振幅)
 
 <font color="orange">易错点</font>:
 *   复矢量/复振幅只与空间有关，与时间无关。
@@ -2460,8 +2399,7 @@ $\nabla \times (\nabla \times \vec{H}) = \nabla(\nabla \cdot \vec{H}) - \nabla^2
 *   只有频率相同的时谐场之间才能用复矢量运算。
 
 ---
-
-#### 🔢 2. 麦克斯韦方程复数形式 (频域Maxwell方程)
+#### 🔢 2. 麦克斯韦方程复数形式
 
 将 $\frac{\partial}{\partial t}$ 替换为 $j\omega$，场量用其复矢量表示 (通常省去下标 $m$ 和点号，用 $\vec{E}, \vec{H}, \vec{D}, \vec{B}, \vec{J}, \rho$ 表示复振幅/复矢量)。
 1.  $$ \boxed{ \nabla \times \vec{H} = \vec{J} + j\omega\vec{D} } $$
@@ -2470,7 +2408,7 @@ $\nabla \times (\nabla \times \vec{H}) = \nabla(\nabla \cdot \vec{H}) - \nabla^2
 4.  $$ \boxed{ \nabla \cdot \vec{D} = \rho } $$
 本构关系仍为：$\vec{D} = \varepsilon\vec{E}$, $\vec{B} = \mu\vec{H}$, $\vec{J} = \sigma\vec{E}$。
 
-##### 2.1 矢量齐次亥姆霍兹方程 (Helmholtz Equation)
+##### 2.1 矢量齐次亥姆霍兹方程
 
 对于无源区的齐次波动方程，$\frac{\partial^2}{\partial t^2}$ 替换为 $(j\omega)^2 = -\omega^2$。
 $$ \nabla^2\vec{E} - \mu\varepsilon(-\omega^2)\vec{E} = 0 \quad \Rightarrow \quad \boxed{ \nabla^2\vec{E} + k^2\vec{E} = 0 } $$
@@ -2492,13 +2430,14 @@ $$ \nabla^2\vec{H} - \mu\varepsilon(-\omega^2)\vec{H} = 0 \quad \Rightarrow \qua
 
 ##### 3.1 平均坡印廷矢量
 
-瞬时坡印廷矢量 $\vec{S}(\vec{r},t) = \vec{E}(\vec{r},t) \times \vec{H}(\vec{r},t)$。
-对其在一个周期内取平均值，得到<font color="orange">平均坡印廷矢量</font> $\vec{S}_{av}(\vec{r})$:
-$\vec{S}_{av}(\vec{r}) = \frac{1}{T} \int_{0}^{T} \vec{S}(\vec{r},t) dt$
+瞬时坡印廷矢量 $\\vec{S}(\\vec{r},t) = \\vec{E}(\\vec{r},t) \\times \\vec{H}(\\vec{r},t)$。
+对其在一个周期内取平均值，得到<font color="orange">平均坡印廷矢量</font> $\\vec{S}\_{av}(\\vec{r})$:
+$\\vec{S}\_{av}(\\vec{r}) = \\frac{1}{T} \\int\_{0}^{T} \\vec{S}(\\vec{r},t) dt$
 可以证明 (参考P229 例6-9)：
-$$ \boxed{ \vec{S}_{av}(\vec{r}) = \frac{1}{2}\text{Re}[\vec{E}(\vec{r}) \times \vec{H}^*(\vec{r})] } $$
-其中 $\vec{H}^*(\vec{r})$ 是磁场复矢量的共轭。
-
+$$
+\\boxed{ \\vec{S}\_{av}(\\vec{r}) = \\frac{1}{2}\\text{Re}[\\vec{E}(\\vec{r}) \\times \\vec{H}\*(\\vec{r})] }
+$$
+其中 $\\vec{H}\*(\\vec{r})$ 是磁场复矢量的共轭。
 ##### 3.2 复坡印廷矢量
 
 定义<font color="orange">复坡印廷矢量</font> $\vec{\dot{S}}(\vec{r})$:
@@ -2524,31 +2463,39 @@ $$ \boxed{ \vec{\dot{S}}(\vec{r}) = \frac{1}{2}\vec{E}(\vec{r}) \times \vec{H}^*
     这样，有耗介质和理想介质的麦克斯韦方程在形式上完全相同。
 
 *   **复坡印廷定理 (时谐场):**
-    对 $\frac{1}{2}\nabla \cdot (\vec{E} \times \vec{H}^*)$ 展开，可得 (参考P228)：
-    $$ -\oint_S \frac{1}{2}(\vec{E} \times \vec{H}^*) \cdot d\vec{s} = \int_V \frac{1}{2}\vec{J}\cdot\vec{E}^* \,dV + j2\omega\int_V (\frac{1}{4}\mu H H^* - \frac{1}{4}\varepsilon E E^*) \,dV $$
+    对 $\\frac{1}{2}\\nabla \\cdot (\\vec{E} \\times \\vec{H}\*)$ 展开，可得 (参考P228)：
+    $$
+    -\\oint\_S \\frac{1}{2}(\\vec{E} \\times \\vec{H}\*) \\cdot d\\vec{s} = \\int\_V \\frac{1}{2}\\vec{J}\\cdot\\vec{E}\* \\,dV + j2\\omega\\int\_V (\\frac{1}{4}\\mu H H\* - \\frac{1}{4}\\varepsilon E E\*) \\,dV
+    $$
     或
-    $$ -\oint_S \vec{\dot{S}} \cdot d\vec{s} = P_{Loss,av} + j2\omega(W_{m,av} - W_{e,av}) $$
+    $$
+    -\\oint\_S \\vec{\\dot{S}} \\cdot d\\vec{s} = P\_{\\text{Loss,av}} + j2\\omega(W\_{m,av} - W\_{e,av})
+    $$
     <font color="orange">物理意义</font>:
     *   等号左边：流入闭合面S的<font color="orange">复功率</font>。
-    *   右边实部 $P_{Loss,av}$: S面所包围体积内<font color="orange">平均损耗功率</font> ($\frac{1}{2}\sigma\vec{E}\cdot\vec{E}^* = \frac{1}{2}\sigma|\vec{E}|^2$ 的体积积分)。
-    *   右边虚部 $2\omega(W_{m,av} - W_{e,av})$: S面所包围体积内<font color="orange">平均磁场储能</font>与<font color="orange">平均电场储能</font>之差乘以 $2\omega$。
+    *   右边实部 $P\_{\\text{Loss,av}}$: S面所包围体积内<font color="orange">平均损耗功率</font> ($\\frac{1}{2}\\sigma\\vec{E}\\cdot\\vec{E}\* = \\frac{1}{2}\\sigma|\\vec{E}|^2$ 的体积积分)。
+    *   右边虚部 $2\\omega(W\_{m,av} - W\_{e,av})$: S面所包围体积内<font color="orange">平均磁场储能</font>与<font color="orange">平均电场储能</font>之差乘以 $2\\omega$。
 
     <font color="orange">注意点</font>：
-    *   平均电场能量密度: $w_{e,av} = \frac{1}{4}\text{Re}[\vec{E}\cdot\vec{D}^*]$
-    *   平均磁场能量密度: $w_{m,av} = \frac{1}{4}\text{Re}[\vec{B}\cdot\vec{H}^*]$
-    *   平均损耗功率密度: $p_{av} = \frac{1}{2}\text{Re}[\vec{J}\cdot\vec{E}^*]$
+    *   平均电场能量密度: $w\_{e,av} = \\frac{1}{4}\\text{Re}[\\vec{E}\\cdot\\vec{D}\*]$
+    *   平均磁场能量密度: $w\_{m,av} = \\frac{1}{4}\\text{Re}[\\vec{B}\\cdot\\vec{H}\*]$
+    *   平均损耗功率密度: $p\_{av} = \\frac{1}{2}\\text{Re}[\\vec{J}\\cdot\\vec{E}\*]$
 
 ##### 3.3 对比坡印廷定理和复坡印廷定理 
 
 **1. （瞬时）坡印廷定理：**
-$$ -\oint_S (\vec{E} \times \vec{H}) \cdot d\vec{s} = \frac{\partial}{\partial t}\int_V (\underbrace{\frac{1}{2}\vec{D}\cdot\vec{E}}_{w_e} + \underbrace{\frac{1}{2}\vec{B}\cdot\vec{H}}_{w_m}) \,dV + \int_V \vec{E}\cdot\vec{J} \,dV $$
-这里，$\frac{\partial}{\partial t}\int_V (w_e + w_m) \,dV$ 表示的是体积 $V$ 内<font color="orange">总瞬时电磁场能量的增加率</font>。$w_e$ 和 $w_m$ 都是瞬时能量密度，它们是时间和空间的函数，可以独立变化。在这个瞬时描述中，电场能量和磁场能量是<font color="orange">直接相加</font>来构成总能量的。
+$$
+-\\oint\_S (\\vec{E} \\times \\vec{H}) \\cdot d\\vec{s} = \\frac{\\partial}{\\partial t}\\int\_V (\\underbrace{\\frac{1}{2}\\vec{D}\\cdot\\vec{E}}\_{w\_e} + \\underbrace{\\frac{1}{2}\\vec{B}\\cdot\\vec{H}}\_{w\_m}) \\,dV + \\int\_V \\vec{E}\\cdot\\vec{J} \\,dV
+$$
+这里，$\\frac{\\partial}{\\partial t}\\int\_V (w\_e + w\_m) \\,dV$ 表示的是体积 $V$ 内<font color="orange">总瞬时电磁场能量的增加率</font>。$w\_e$ 和 $w\_m$ 都是瞬时能量密度，它们是时间和空间的函数，可以独立变化。在这个瞬时描述中，电场能量和磁场能量是<font color="orange">直接相加</font>来构成总能量的。
 
 **2. 复坡印廷定理 (时谐场)：**
-$$ -\oint_S \underbrace{\frac{1}{2}(\vec{E} \times \vec{H}^*)}_{\vec{\dot{S}}} \cdot d\vec{s} = \underbrace{\int_V \frac{1}{2}\vec{J}\cdot\vec{E}^* \,dV}_{P_{Loss,av}} + j2\omega\int_V (\underbrace{\frac{1}{4}\mu H H^*}_{W_{m,av}} - \underbrace{\frac{1}{4}\varepsilon E E^*}_{W_{e,av}}) \,dV $$
-这里，等号右边的虚部是 $j2\omega(W_{m,av} - W_{e,av})$，其中：
-*   $W_{m,av} = \int_V \frac{1}{4}\mu |\vec{H}|^2 dV$ 是体积 $V$ 内的<font color="orange">平均磁场储能</font>。
-*   $W_{e,av} = \int_V \frac{1}{4}\varepsilon |\vec{E}|^2 dV$ 是体积 $V$ 内的<font color="orange">平均电场储能</font>。
+$$
+-\\oint\_S \\frac{1}{2}(\\vec{E} \\times \\vec{H}\*) \\cdot d\\vec{s} = \\int\_V \\frac{1}{2}\\vec{J}\\cdot\\vec{E}\* \\,dV + j2\\omega\\int\_V (\\frac{1}{4}\\mu H H\* - \\frac{1}{4}\\varepsilon E E\*) \\,dV
+$$
+这里，等号右边的虚部是 $j2\\omega(W\_{m,av} - W\_{e,av})$，其中：
+*   $W\_{m,av} = \\int\_V \\frac{1}{4}\\mu |\\vec{H}|^2 dV$ 是体积 $V$ 内的<font color="orange">平均磁场储能</font>。
+*   $W\_{e,av} = \\int\_V \\frac{1}{4}\\varepsilon |\\vec{E}|^2 dV$ 是体积 $V$ 内的<font color="orange">平均电场储能</font>。
 
 **为什么会有这种差异？**
 
@@ -2556,7 +2503,7 @@ $$ -\oint_S \underbrace{\frac{1}{2}(\vec{E} \times \vec{H}^*)}_{\vec{\dot{S}}} \
 
 **1. 瞬时能量的存储与转化：**
 
-在瞬时情况下，电场能量和磁场能量可以相互转化。例如，在一个LC振荡回路中，能量会在电容器的电场和电感器的磁场之间来回转换。总能量（在无损耗情况下）保持不变，但 $w_e$ 和 $w_m$ 会随时间变化。瞬时坡印廷定理的能量项是 $w_e + w_m$ 的变化率，反映了总能量的净增减。
+在瞬时情况下，电场能量和磁场能量可以相互转化。例如，在一个LC振荡回路中，能量会在电容器的电场和电感器的磁场之间来回转换。总能量（在无损耗情况下）保持不变，但 $w\_e$ 和 $w\_m$ 会随时间变化。瞬时坡印廷定理的能量项是 $w\_e + w\_m$ 的变化率，反映了总能量的净增减。
 
 **2. 时谐稳态下的平均储能与无功功率：**
 
@@ -2569,41 +2516,47 @@ $$ -\oint_S \underbrace{\frac{1}{2}(\vec{E} \times \vec{H}^*)}_{\vec{\dot{S}}} \
 **从数学推导角度看差异的来源：**
 
 回顾复坡印廷定理的推导，我们从麦克斯韦方程的复数形式出发：
-$\nabla \times \vec{E} = -j\omega\vec{B}$
-$\nabla \times \vec{H}^* = \vec{J}^* - j\omega\vec{D}^*$ (取共轭)
+$\\nabla \\times \\vec{E} = -j\\omega\\vec{B}$
+$\\nabla \\times \\vec{H}\* = \\vec{J}\* - j\\omega\\vec{D}\*$ (取共轭)
 
-然后计算 $\nabla \cdot (\vec{E} \times \vec{H}^*) = \vec{H}^* \cdot (\nabla \times \vec{E}) - \vec{E} \cdot (\nabla \times \vec{H}^*)$
-$$ \nabla \cdot (\vec{E} \times \vec{H}^*) = \vec{H}^* \cdot (-j\omega\vec{B}) - \vec{E} \cdot (\vec{J}^* - j\omega\vec{D}^*) $$
-$$ \nabla \cdot (\vec{E} \times \vec{H}^*) = -j\omega (\vec{H}^* \cdot \vec{B}) - \vec{E} \cdot \vec{J}^* + j\omega (\vec{E} \cdot \vec{D}^*) $$
+然后计算 $\\nabla \\cdot (\\vec{E} \\times \\vec{H}\*) = \\vec{H}\* \\cdot (\\nabla \\times \\vec{E}) - \\vec{E} \\cdot (\\nabla \\times \\vec{H}\*)$
+$$
+\\nabla \\cdot (\\vec{E} \\times \\vec{H}\*) = \\vec{H}\* \\cdot (-j\\omega\\vec{B}) - \\vec{E} \\cdot (\\vec{J}\* - j\\omega\\vec{D}\*)
+$$
+$$
+\\nabla \\cdot (\\vec{E} \\times \\vec{H}\*) = -j\\omega (\\vec{H}\* \\cdot \\vec{B}) - \\vec{E} \\cdot \\vec{J}\* + j\\omega (\\vec{E} \\cdot \\vec{D}\*)
+$$
 整理后得到（乘以 $1/2$ 并体积分）：
-$$ -\oint_S \frac{1}{2}(\vec{E} \times \vec{H}^*) \cdot d\vec{s} = \int_V \frac{1}{2}\vec{E}\cdot\vec{J}^* \,dV + j\omega \int_V \frac{1}{2} (\vec{H}^* \cdot \vec{B} - \vec{E} \cdot \vec{D}^*) \,dV $$
-对于线性各向同性媒质，$\vec{B} = \mu\vec{H}$ 和 $\vec{D} = \varepsilon\vec{E}$，并且 $\mu, \varepsilon$ 是实数（对于无耗储能部分）：
-*   $\frac{1}{2} \vec{H}^* \cdot \vec{B} = \frac{1}{2} \vec{H}^* \cdot (\mu\vec{H}) = \frac{1}{2} \mu |\vec{H}|^2$
-*   $\frac{1}{2} \vec{E} \cdot \vec{D}^* = \frac{1}{2} \vec{E} \cdot (\varepsilon\vec{E}^*) = \frac{1}{2} \varepsilon |\vec{E}|^2$
+$$
+-\\oint\_S \\frac{1}{2}(\\vec{E} \\times \\vec{H}\*) \\cdot d\\vec{s} = \\int\_V \\frac{1}{2}\\vec{E}\\cdot\\vec{J}\* \\,dV + j\\omega \\int\_V \\frac{1}{2} (\\vec{H}\* \\cdot \\vec{B} - \\vec{E} \\cdot \\vec{D}\*) \\,dV
+$$
+对于线性各向同性媒质，$\\vec{B} = \\mu\\vec{H}$ 和 $\\vec{D} = \\varepsilon\\vec{E}$，并且 $\\mu, \\varepsilon$ 是实数（对于无耗储能部分）：
+*   $\\frac{1}{2} \\vec{H}\* \\cdot \\vec{B} = \\frac{1}{2} \\vec{H}\* \\cdot (\\mu\\vec{H}) = \\frac{1}{2} \\mu |\\vec{H}|^2$
+*   $\\frac{1}{2} \\vec{E} \\cdot \\vec{D}\* = \\frac{1}{2} \\vec{E} \\cdot (\\varepsilon\\vec{E}\*) = \\frac{1}{2} \\varepsilon |\\vec{E}|^2$
 
-注意，在一个周期内，时谐场的瞬时能量密度 $w_e(t) = \frac{1}{2}\varepsilon |\vec{\mathcal{E}}(t)|^2$ 和 $w_m(t) = \frac{1}{2}\mu |\vec{\mathcal{H}}(t)|^2$ 的平均值分别是：
-*   $W_{e,av} = \frac{1}{T}\int_0^T \frac{1}{2}\varepsilon (\text{Re}[\vec{E}e^{j\omega t}])^2 dt = \frac{1}{4}\varepsilon |\vec{E}|^2$
-*   $W_{m,av} = \frac{1}{T}\int_0^T \frac{1}{2}\mu (\text{Re}[\vec{H}e^{j\omega t}])^2 dt = \frac{1}{4}\mu |\vec{H}|^2$
+注意，在一个周期内，时谐场的瞬时能量密度 $w\_e(t) = \\frac{1}{2}\\varepsilon |\\vec{\\mathcal{E}}(t)|^2$ 和 $w\_m(t) = \\frac{1}{2}\\mu |\\vec{\\mathcal{H}}(t)|^2$ 的平均值分别是：
+*   $W\_{e,av} = \\frac{1}{T}\\int\_0^T \\frac{1}{2}\\varepsilon (\\text{Re}[\\vec{E}e^{j\\omega t}])^2 dt = \\frac{1}{4}\\varepsilon |\\vec{E}|^2$
+*   $W\_{m,av} = \\frac{1}{T}\\int\_0^T \\frac{1}{2}\\mu (\\text{Re}[\\vec{H}e^{j\\omega t}])^2 dt = \\frac{1}{4}\\mu |\\vec{H}|^2$
 
 所以，我们代回到上面的积分项中：
-$j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|^2) \,dV = j\omega \int_V (2W_{m,av\_density} - 2W_{e,av\_density}) \,dV$
-这里 $W_{m,av\_density} = \frac{1}{4}\mu |\vec{H}|^2$ 和 $W_{e,av\_density} = \frac{1}{4}\varepsilon |\vec{E}|^2$ 分别是平均磁场和电场能量密度。
-因此，虚部可以写成 $j2\omega (W_{m,av} - W_{e,av})$，其中 $W_{m,av}$ 和 $W_{e,av}$ 是体积内的总平均储能。
+$j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |\\vec{E}|^2) \\,dV = j\\omega \\int\_V (2W\_{m,av\\\_density} - 2W\_{e,av\\\_density}) \\,dV$
+这里 $W\_{m,av\\\_density} = \\frac{1}{4}\\mu |\\vec{H}|^2$ 和 $W\_{e,av\\\_density} = \\frac{1}{4}\\varepsilon |\\vec{E}|^2$ 分别是平均磁场和电场能量密度。
+因此，虚部可以写成 $j2\\omega (W\_{m,av} - W\_{e,av})$，其中 $W\_{m,av}$ 和 $W\_{e,av}$ 是体积内的总平均储能。
 
 **物理意义的解释：**
 
-*   **瞬时定理的能量项 $\frac{\partial}{\partial t}(w_e+w_m)$：** 它直接描述了系统总能量的<font color="orange">净变化速率</font>。如果这个值为正，说明系统总能量在增加；如果为负，则在减少。
-*   **复数定理的虚部 $2\omega(W_{m,av} - W_{e,av})$：** 这个量与系统在一个周期内<font color="orange">无功功率的交换</font>有关。
-    *   如果 $W_{m,av} > W_{e,av}$，系统整体呈现“感性”，意味着在一个周期内，磁场储能占主导，系统会从源吸收无功功率用于建立磁场，然后再返还给源。
-    *   如果 $W_{e,av} > W_{m,av}$，系统整体呈现“容性”，电场储能占主导，系统会从源吸收无功功率用于建立电场，然后再返还给源。
-    *   这个差值乘以 $2\omega$ 正比于系统与外部交换的峰值无功功率。它不代表能量的净增加或减少，而是代表能量在源和场之间来回“摆动”的幅度。
+*   **瞬时定理的能量项 $\\frac{\\partial}{\\partial t}(w\_e+w\_m)$：** 它直接描述了系统总能量的<font color="orange">净变化速率</font>。如果这个值为正，说明系统总能量在增加；如果为负，则在减少。
+*   **复数定理的虚部 $2\\omega(W\_{m,av} - W\_{e,av})$：** 这个量与系统在一个周期内<font color="orange">无功功率的交换</font>有关。
+    *   如果 $W\_{m,av} > W\_{e,av}$，系统整体呈现“感性”，意味着在一个周期内，磁场储能占主导，系统会从源吸收无功功率用于建立磁场，然后再返还给源。
+    *   如果 $W\_{e,av} > W\_{m,av}$，系统整体呈现“容性”，电场储能占主导，系统会从源吸收无功功率用于建立电场，然后再返还给源。
+    *   这个差值乘以 $2\\omega$ 正比于系统与外部交换的峰值无功功率。它不代表能量的净增加或减少，而是代表能量在源和场之间来回“摆动”的幅度。
 
 **类比电路：**
 
 *   **瞬时功率：** 在一个RLC电路中，瞬时功率 $p(t) = u(t)i(t)$ 可以分解为电阻消耗的功率和电感、电容储能的变化率。
-*   **复功率：** 在交流稳态电路中，复功率 $\vec{S} = P + jQ$。
+*   **复功率：** 在交流稳态电路中，复功率 $\\vec{S} = P + jQ$。
     *   $P$ (有功功率) 对应于电阻的平均功耗。
-    *   $Q$ (无功功率) 对应于电感和电容的储能。$Q = \omega L I_{rms}^2 - \frac{1}{\omega C} I_{rms}^2 = 2\omega (W_L - W_C)$，其中 $W_L = \frac{1}{2} L I_{rms}^2$ 是平均磁能，$W_C = \frac{1}{2} C U_{C,rms}^2 = \frac{1}{2C\omega^2}I_{rms}^2$ 是平均电能（这里用电流有效值表示方便比较）。这个差值形式与电磁场中的 $W_{m,av} - W_{e,av}$ 是类似的。
+    *   $Q$ (无功功率) 对应于电感和电容的储能。$Q = \\omega L I\_{rms}^2 - \\frac{1}{\\omega C} I\_{rms}^2 = 2\\omega (W\_L - W\_C)$，其中 $W\_L = \\frac{1}{2} L I\_{rms}^2$ 是平均磁能，$W\_C = \\frac{1}{2} C U\_{C,rms}^2 = \\frac{1}{2C\\omega^2}I\_{rms}^2$ 是平均电能（这里用电流有效值表示方便比较）。这个差值形式与电磁场中的 $W\_{m,av} - W\_{e,av}$ 是类似的。
 
 **总结：**
 
@@ -2611,7 +2564,6 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
 复坡印廷定理（的虚部）关注的是时谐稳态下，系统与外界<font color="orange">周期性能量交换的净效应</font>，这与平均磁场储能和平均电场储能的<font color="orange">差值</font>有关，反映了系统整体的感性或容性，以及无功功率的大小。数学上的推导自然地引出了这个差值形式，这与能量在电场和磁场之间以不同相位进行存储和释放有关。
 
 ---
-
 ### 📖 本章学习总结 📖
 
 本章系统学习了时变电磁场的基本规律和分析方法：
@@ -2715,12 +2667,22 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
         自由空间：$\eta_0 = \sqrt{\frac{\mu_0}{\epsilon_0}} \approx 120\pi \Omega \approx 377 \Omega$。
 
 ##### 2.1.2 ⚡ 时谐场的波动方程的解 (沿z轴传播)
-*   频域方程：$\frac{d^2 \dot{E}_x}{dz^2} + \beta^2 \dot{E}_x = 0$，其中<font color="orange">相位常数</font> $\boxed{\beta = \omega\sqrt{\mu\epsilon} = k}$。
+*   频域方程：
+    $$
+    \\frac{d^2 \\dot{E}\_x}{dz^2} + \\beta^2 \\dot{E}\_x = 0
+    $$
+    其中<font color="orange">相位常数</font>
+    $$
+    \\boxed{\\beta = \\omega\\sqrt{\\mu\\epsilon} = k}
+    $$
 *   频域解：
-    $\dot{E}_x(z) = E_{xm}^+ e^{-j\beta z} + E_{xm}^- e^{j\beta z}$
-    $\dot{H}_y(z) = \frac{1}{\eta} (E_{xm}^+ e^{-j\beta z} - E_{xm}^- e^{j\beta z})$
-*   瞬时值：通过 $\text{Re}[\dot{E}_x(z)e^{j\omega t}]$ 和 $\text{Re}[\dot{H}_y(z)e^{j\omega t}]$ 得到。
-
+    $$
+    \\dot{E}\_x(z) = E\_{xm}^+ e^{-j\\beta z} + E\_{xm}^- e^{j\\beta z}
+    $$
+    $$
+    \\dot{H}\_y(z) = \\frac{1}{\\eta} (E\_{xm}^+ e^{-j\\beta z} - E\_{xm}^- e^{j\\beta z})
+    $$
+*   瞬时值：通过 $\\text{Re}[\\dot{E}\_x(z)e^{j\\omega t}]$ 和 $\\text{Re}[\\dot{H}\_y(z)e^{j\\omega t}]$ 得到。
 ##### 2.2 🌟 均匀平面波的特性
 1.  **构成**：一维电磁场构成均匀平面波，具有波的传播特性。
 2.  **TEM波**：$\vec{E} \perp \vec{H} \perp \vec{a}_n$ (传播方向)，构成右手系。$\vec{E} = \eta \vec{H} \times \vec{a}_n$。
@@ -2869,8 +2831,7 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
 
 ### ⚔️ 7-4 均匀平面波的垂直与斜入射
 
-#### 1. 🌊 垂直入射 (Normal Incidence)
-
+#### 1. 🌊 垂直入射
 ##### 1.1 一般公式 (媒质1入射到媒质2)
 *   入射波：$\vec{E}_i, \vec{H}_i$；反射波：$\vec{E}_r, \vec{H}_r$；折射波 (透射波)：$\vec{E}_t, \vec{H}_t$。
 *   媒质1中合成场：$\vec{E}_1 = \vec{E}_i + \vec{E}_r$, $\vec{H}_1 = \vec{H}_i + \vec{H}_r$。
@@ -2889,8 +2850,8 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
 *   $T = \frac{2 \cdot 0}{0+\eta_1} = 0 \Rightarrow E_{tm} = 0$ (无透射波)
 *   反射波电场与入射波电场在界面处大小相等、方向相反（相位差 $\pi$）。
 *   媒质1中合成场 (驻波)：
-    $\vec{E}_1(z,t) = \vec{a}_x [-2E_{im}\sin(\beta_1 z)] \sin(\omega t)$
-    $\vec{H}_1(z,t) = \vec{a}_y [\frac{2E_{im}}{\eta_1}\cos(\beta_1 z)] \cos(\omega t)$
+    $\vec{E}\_1(z,t) = \vec{a}_x [-2E\_{im}\sin(\beta_1 z)] \sin(\omega t)$
+    $\vec{H}\_1(z,t) = \vec{a}_y [\frac{2E\_{im}}{\eta_1}\cos(\beta_1 z)] \cos(\omega t)$
     *   <font color="orange">驻波 (Standing Wave)</font>：合成波在空间没有移动，只是在原位置振动。
     *   波节点 (电场为0)：$\beta_1 z = -n\pi \Rightarrow z = -n\lambda_1/2$。
     *   波腹点 (电场最大)：$\beta_1 z = -(n+1/2)\pi \Rightarrow z = -(n+1/2)\lambda_1/2$。
@@ -2898,17 +2859,24 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
     *   平均坡印廷矢量为0，无净能量传输。
 
 ##### 1.3 理想介质 $\rightarrow$ 理想介质
-*   $\eta_{c1}=\eta_1, \eta_{c2}=\eta_2$ (均为实数)。$R, T$ 均为实数。
+*   $\\eta\_{c1}=\\eta\_1, \\eta\_{c2}=\\eta\_2$ (均为实数)。$R, T$ 均为实数。
 *   媒质1中合成场 (<font color="orange">行驻波</font>)：
-    $\vec{E}_1(z) = \vec{a}_x E_{im} [(1+R)e^{-j\beta_1 z} - 2R\sin(\beta_1 z)j e^{-j\pi/2}]$ (假设相位，与课件略有不同，但本质一致)
-    或者 $\vec{E}_1(z) = \vec{a}_x E_{im} (e^{-j\beta_1 z} + Re^{j\beta_1 z})$
-    $\vec{H}_1(z) = \vec{a}_y \frac{E_{im}}{\eta_1} (e^{-j\beta_1 z} - Re^{j\beta_1 z})$
-*   <font color="orange">驻波系数</font> $\rho$ (驻波比)：$\rho = \frac{|\vec{E}|_{max}}{|\vec{E}|_{min}} = \frac{1+|R|}{1-|R|}$。
-    *   行波：$|R|=0 \Rightarrow \rho=1$。
-    *   纯驻波：$|R|=1 \Rightarrow \rho=\infty$。
-*   能量关系：$S_{av}^i = S_{av}^r + S_{av}^t \Rightarrow 1 = |R|^2 + \frac{\eta_1}{\eta_2}|T|^2$ (注意这里 $|T|^2$ 指的是电场透射系数的平方)。
-    或者，功率关系：$1 = R^2 + T\frac{\eta_1}{\eta_2}$ (若 $R,T$ 定义为场强比)。
-
+    $\\vec{E}\_1(z) = \\vec{a}\_x E\_{im} [(1+R)e^{-j\\beta\_1 z} - 2R\\sin(\\beta\_1 z)j e^{-j\\pi/2}]$ (假设相位，与课件略有不同，但本质一致)
+    或者
+    $$
+    \\vec{E}\_1(z) = \\vec{a}\_x E\_{im} (e^{-j\\beta\_1 z} + Re^{j\\beta\_1 z})
+    $$
+    $$
+    \\vec{H}\_1(z) = \\vec{a}\_y \\frac{E\_{im}}{\\eta\_1} (e^{-j\\beta\_1 z} - Re^{j\\beta\_1 z})
+    $$
+*   <font color="orange">驻波系数</font> $\\rho$ (驻波比)：
+    $$
+    \\rho = \\frac{|\\vec{E}|\_{\\text{max}}}{|\\vec{E}|\_{\\text{min}}} = \\frac{1+|R|}{1-|R|}
+    $$
+    *   行波：$|R|=0 \\Rightarrow \\rho=1$。
+    *   纯驻波：$|R|=1 \\Rightarrow \\rho=\\infty$。
+*   能量关系：$S\_{av}^i = S\_{av}^r + S\_{av}^t \\Rightarrow 1 = |R|^2 + \\frac{\\eta\_1}{\\eta\_2}|T|^2$ (注意这里 $|T|^2$ 指的是电场透射系数的平方)。
+    或者，功率关系：$1 = R^2 + T\\frac{\\eta\_1}{\\eta\_2}$ (若 $R,T$ 定义为场强比)。
 ##### 1.4 多层理想介质的垂直入射
 *   引入<font color="orange">总场波阻抗 (输入波阻抗) $Z_{in}(z)$</font>：$Z_{in}(z) = E(z)/H(z)$。
 *   对于两层介质，在 $z<0$ (媒质1) 处看媒质2：
@@ -2919,7 +2887,7 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
     *   <font color="orange">半波介质窗</font> ($\eta_1=\eta_3, d=n\lambda_2/2$): $R_1=0$，全透射。
     *   <font color="orange">四分之一波长匹配层</font> ($\eta_1 \neq \eta_3, d=(2n+1)\lambda_2/4$): 若 $\eta_2 = \sqrt{\eta_1\eta_3}$，则 $R_1=0$，全透射。
 
-#### 2. 📐 斜入射 (Oblique Incidence)
+#### 2. 📐 斜入射
 
 ##### 2.1 反射定律与折射定律
 *   <font color="orange">入射平面</font>：入射波矢量 $\vec{k}_i$ 与分界面法线构成的平面。
@@ -2951,14 +2919,15 @@ $j\omega \int_V (\frac{1}{2} \mu |\vec{H}|^2 - \frac{1}{2} \varepsilon |\vec{E}|
     *   当 $\sin\theta_i > n_2/n_1 = \sqrt{\epsilon_2/\epsilon_1}$ 时，$\cos\theta_t$ 为纯虚数，$R_\perp, R_\|$ 的模为1，即 $|R_\perp|=1, |R_\|=1$。
     *   对于非磁性媒质 ($\mu_1=\mu_2=\mu_0$)，<font color="orange">临界角</font>$\theta_c$：$\boxed{\sin\theta_c = \frac{n_2}{n_1} = \sqrt{\frac{\epsilon_2}{\epsilon_1}}}$
     *   当 $\theta_i > \theta_c$ 时发生全反射。折射波沿界面传播并指数衰减进入第二媒质，称为<font color="orange">隐失波</font>或<font color="orange">表面波</font>。
+
 *   <font color="orange">全折射 (Total Refraction / Brewster Angle)</font>：仅对平行极化波存在。
     *   当 $R_\| = 0$ 时，$\eta_2 \cos\theta_t = \eta_1 \cos\theta_i$。
     *   对于非磁性媒质 ($\mu_1=\mu_2=\mu_0$)，全折射角 (布儒斯特角 $\theta_B$) 满足：
         $\boxed{\tan\theta_B = \frac{n_2}{n_1} = \sqrt{\frac{\epsilon_2}{\epsilon_1}}}$
     *   此时反射波中无平行极化分量，只有垂直极化分量，可用于起偏。
-![[电磁波与电磁场图片/Figure_1.png]]
+![全折射](Figure_1.png)
+![全折射](Figure_2.png)
 
-![[电磁波与电磁场图片/Figure_2.png]]
 ##### 2.5 理想导体表面的斜入射
 *   $\eta_2=0 \Rightarrow R_\perp = -1, T_\perp = 0$
 *   $\eta_2=0 \Rightarrow R_\| = -1, T_\| = 0$ (这里 E_x' 定义为沿传播方向投影，若按切向分量，符号会变)

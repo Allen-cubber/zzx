@@ -3,13 +3,12 @@ languageCode: 'zh-cn'
 title: 'Z2X BLOG'
 theme: 'papermod'
 
-# hugo.yaml
-
+# 菜单配置
 menu:
   main:
-    - name: Blog Setup   # 这是显示在菜单上的名字
-      url: "/blog-setup/" # 这是链接到的分区路径
-      weight: 10          # weight 决定了菜单项的顺序，数字越小越靠前
+    - name: Blog Setup
+      url: "/blog-setup/"
+      weight: 10
     - name: Study Notes
       url: "/notes/"
       weight: 20
@@ -17,8 +16,28 @@ menu:
       url: "/musings/"
       weight: 30
 
-# 启用不安全渲染，让 KaTeX 脚本能工作
+# Markdown 渲染器配置 (核心)
 markup:
   goldmark:
     renderer:
+      # 必须开启，允许 KaTeX 脚本生成的 HTML 标签通过
       unsafe: true
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+    ordered: false
+
+# 主题参数配置 (核心)
+params:
+  # ... 你可能还有其他 PaperMod 参数 ...
+  ShowShareButtons: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowCodeCopyButtons: true
+  
+  # ↓↓↓ 下面这两个是开启目录功能的全局开关 ↓↓↓
+  ShowToc: true
+  TocOpen: true
+
+  # ↓↓↓ 这一行是开启 KaTeX 功能的全局开关 ↓↓↓
+  math: true
