@@ -3,13 +3,22 @@ languageCode: 'zh-cn'
 title: 'Z2X BLOG'
 theme: 'papermod'
 
+# hugo.yaml
+
+menu:
+  main:
+    - name: Blog Setup   # 这是显示在菜单上的名字
+      url: "/blog-setup/" # 这是链接到的分区路径
+      weight: 10          # weight 决定了菜单项的顺序，数字越小越靠前
+    - name: Study Notes
+      url: "/notes/"
+      weight: 20
+    - name: Musings
+      url: "/musings/"
+      weight: 30
+
 # 启用不安全渲染，让 KaTeX 脚本能工作
 markup:
   goldmark:
     renderer:
       unsafe: true
-
-# 主题参数
-params:
-  # 这一行是全局开关，告诉主题“网站需要数学公式功能”
-  math: true
