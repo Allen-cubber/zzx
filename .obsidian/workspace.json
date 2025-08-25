@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/高频电子线路/index.md",
+                "file": "content/musings/工作簿.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "工作簿"
             }
           }
         ]
@@ -94,7 +94,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/notes/高频电子线路/index.md",
+                "file": "content/musings/工作簿.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,7 +104,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "index 的反向链接列表"
+              "title": "工作簿 的反向链接列表"
             }
           },
           {
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/高频电子线路/index.md",
+                "file": "content/musings/工作簿.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "工作簿 的大纲"
             }
           }
         ],
@@ -172,6 +172,7 @@
   },
   "active": "a72631a5830603aa",
   "lastOpenFiles": [
+    "content/notes/高频电子线路/index.md",
     "public/notes/高频电子线路/Pasted-image-20250826004857.png",
     "content/notes/高频电子线路/Pasted-image-20250826004857.png",
     "Pasted-image-20250826004857.png",
@@ -182,7 +183,6 @@
     "content/notes/高频电子线路/Pasted-image-20250826001955.png",
     "Pasted-image-20250826001955.png",
     "Pasted-image-20250826001900.png",
-    "Pasted image 20250826001955.png",
     "content/notes/电磁波与电磁场/index.md",
     "public/notes/高频电子线路/index.html",
     "public/tags/电路/index.xml",
@@ -200,7 +200,6 @@
     "Pasted.md",
     "content/notes/微机原理与接口技术/微机系统与接口技术.md",
     "content/notes/高频电子线路/高频电子线路填空题.md",
-    "content/notes/高频电子线路/index.md",
     "content/notes/微机原理与接口技术/微机与接口填空.md",
     "content/notes/微机原理与接口技术/单片机例题.md",
     "content/musings/工作簿.md",
