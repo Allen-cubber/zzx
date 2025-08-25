@@ -1,7 +1,20 @@
- 23级信息工程5班 张哲轩
-2025-06-22
-
 ---
+title: 信号与系统
+date: 2025-06-22T14:00:00+08:00
+draft: false
+summary: 本笔记根据华南理工大学2025年第一学期《信号与系统》课件整理，系统梳理了课程的核心概念。
+tags:
+  - 信号
+  - 系统
+  - 大二下
+categories:
+  - 专业学习
+series:
+  - 信号与系统
+Toc: true
+math: true
+---
+
 ## 第一章 信号与系统 (S&S)📚
 ### 1.1 基本概念
 
@@ -490,25 +503,25 @@
 
 卷积运算（卷积和与卷积积分）的性质直接反映了LTI系统的特性。
 
-1.  **交换律**: $x*h = h*x$
+1.  **交换律**: $x\*h = h\*x$
     *   **系统意义**: 输入信号与系统冲激响应的角色可以互换，即冲激响应为 $x$ 的系统对输入 $h$ 的响应，与冲激响应为 $h$ 的系统对输入 $x$ 的响应相同。
-2.  **分配律**: $x*(h_1+h_2) = x*h_1 + x*h_2$
+2.  **分配律**: $x\*(h_1+h_2) = x\*h_1 + x\*h_2$
     *   **系统意义**: 两个LTI系统<font color="orange">并联</font>，总系统的冲激响应等于各子系统冲激响应之<font color="orange">和</font>。
-3.  **结合律**: $(x*h_1)*h_2 = x*(h_1*h_2)$
+3.  **结合律**: $(x\*h_1)\*h_2 = x\*(h_1\*h_2)$
     *   **系统意义**: 两个LTI系统<font color="orange">级联</font>，总系统的冲激响应等于各子系统冲激响应的<font color="orange">卷积</font>。
     *   由于卷积满足交换律，级联系统的<font color="orange">先后次序</font>可以<font color="orange">调换</font>而不影响最终输出。
     *   **前提条件**: ① 系统必须是<font color="orange">LTI</font>系统；② 所有涉及的卷积运算必须<font color="orange">收敛</font>。
 4.  **微分和积分特性 (CT)**:
-    *   若 $y(t) = x(t)*h(t)$，则:
-        *   $x'(t)*h(t) = x(t)*h'(t) = y'(t)$
-        *   $(\int_{-\infty}^t x(\tau)d\tau)*h(t) = x(t)*(\int_{-\infty}^t h(\tau)d\tau) = \int_{-\infty}^t y(\tau)d\tau$
+    *   若 $y(t) = x(t)\*h(t)$，则:
+        *   $x'(t)\*h(t) = x(t)\*h'(t) = y'(t)$
+        *   $(\int_{-\infty}^t x(\tau)d\tau)\*h(t) = x(t)\*(\int_{-\infty}^t h(\tau)d\tau) = \int_{-\infty}^t y(\tau)d\tau$
 5.  **差分和求和特性 (DT)**:
-    *   若 $y[n] = x[n]*h[n]$，则:
-        *   $(x[n]-x[n-1])*h[n] = x[n]*(h[n]-h[n-1]) = y[n]-y[n-1]$
-        *   $(\sum_{k=-\infty}^n x[k])*h[n] = x[n]*(\sum_{k=-\infty}^n h[k]) = \sum_{k=-\infty}^n y[k]$
+    *   若 $y[n] = x[n]\*h[n]$，则:
+        *   $(x[n]-x[n-1])\*h[n] = x[n]\*(h[n]-h[n-1]) = y[n]-y[n-1]$
+        *   $(\sum_{k=-\infty}^n x[k])\*h[n] = x[n]\*(\sum_{k=-\infty}^n h[k]) = \sum_{k=-\infty}^n y[k]$
 6.  **时移特性**:
-    *   若 $y(t) = x(t)*h(t)$，则 $x(t-t_0)*h(t) = x(t)*h(t-t_0) = y(t-t_0)$。
-    *   若 $y[n] = x[n]*h[n]$，则 $x[n-n_0]*h[n] = x[n]*h[n-n_0] = y[n-n_0]$。
+    *   若 $y(t) = x(t)\*h(t)$，则 $x(t-t_0)\*h(t) = x(t)\*h(t-t_0) = y(t-t_0)$。
+    *   若 $y[n] = x[n]\*h[n]$，则 $x[n-n_0]\*h[n] = x[n]\*h[n-n_0] = y[n-n_0]$。
     *   **应用**: 可以利用这些性质简化卷积计算，如先微分再卷积，最后积分。
 
 #### LTI系统性质与 $h(t)$/$h[n]$ 的关系 🔗
@@ -597,7 +610,7 @@
 
 *   $\delta(t)$ 是<font color="orange">恒等系统</font>的单位冲激响应。
 *   **定义式**: $\boxed{x(t)*\delta(t) = x(t)}$ 对任意 "良好" 函数 $x(t)$ 成立。
-*   **推论**: $\delta(t)*\delta(t)=\delta(t)$, $\delta(t-t_0)*\delta(t)=\delta(t-t_0)$。
+*   **推论**: $\delta(t)\*\delta(t)=\delta(t)$, $\delta(t-t_0)\*\delta(t)=\delta(t-t_0)$。
 
 #### 二、通过积分定义 $\delta(t)$ (筛选特性)
 
@@ -615,7 +628,7 @@
     *   **卷积定义**: $\boxed{x(t)*u_1(t) = \frac{dx(t)}{dt}}$。
     *   **积分定义**: $\boxed{\int_{-\infty}^{\infty} g(t)u_1(t)dt = -g'(0)}$。
     *   **性质**: $u_1(t)$ 是<font color="orange">奇函数</font> ($u_1(-t)=-u_1(t)$), $\int_{-\infty}^{\infty} u_1(t)dt = 0$。 $f(t)u_1(t) = f(0)u_1(t) - f'(0)\delta(t)$。
-2.  **高阶导数**: $u_k(t) = \frac{d^k\delta(t)}{dt^k} = u_1(t)*u_{k-1}(t) = \underbrace{u_1(t)*...*u_1(t)}_{k \text{ times}}$。
+2.  **高阶导数**: $u_k(t) = \frac{d^k\delta(t)}{dt^k} = u_1(t)\*u_{k-1}(t) = \underbrace{u_1(t)\*...\*u_1(t)}_{k \text{ times}}$。
     *   **积分定义**: $\boxed{\int_{-\infty}^{\infty} g(t)u_k(t)dt = (-1)^k g^{(k)}(0)}$。
 3.  **$\delta(t)$ 的积分**:
     *   $u_{-1}(t) = \int_{-\infty}^t \delta(\tau)d\tau = u(t)$ (单位阶跃)。
@@ -772,7 +785,7 @@
 4.  **<font color="orange">尺度变换</font>**: $x(\alpha t)$ 的周期变为 $T_0/\alpha$。其傅里叶系数与 $a_k$ 相同，但基频变为 $\alpha \omega_0$。
     (注意: 严格来说频谱形状不变，但横轴刻度变化)
 5.  **<font color="orange">相乘</font>**: $x(t)y(t) \stackrel{FS}{\longleftrightarrow} c_k = \sum_{l=-\infty}^{\infty} a_l b_{k-l} = a_k * b_k$ (时域相乘对应频域<font color="orange">周期卷积</font>)
-6.  **<font color="orange">共轭对称性</font>**: $x^*(t) \stackrel{FS}{\longleftrightarrow} a_{-k}^*$ (对实信号 $x(t)$, $a_k = a_{-k}^*$)
+6.  **<font color="orange">共轭对称性</font>**: $x^\*(t) \stackrel{FS}{\longleftrightarrow} a_{-k}^\*$ (对实信号 $x(t)$, $a_k = a_{-k}^\*$)
 7.  **<font color="orange">Parseval 定理</font>** (帕塞瓦尔定理):
     $\boxed{\frac{1}{T_0} \int_{T_0} |x(t)|^2 dt = \sum_{k=-\infty}^{\infty} |a_k|^2}$
     物理意义: 信号在一个周期内的<font color="orange">平均功率</font>等于其所有<font color="orange">谐波分量</font>的<font color="orange">平均功率之和</font>。
@@ -783,15 +796,15 @@
 
 *   **基础**: 周期为 $N$ 的离散时间谐波复指数信号集 $\{\Phi_k[n]\} = \{e^{j k (2\pi/N) n}\}$。这个集合中只有 $N$ 个<font color="orange">不同</font>的信号 (例如 $k=0, 1, ..., N-1$)。
 *   **离散傅里叶级数 (DFS)**: 周期为 $N$ 的序列 $x[n]$ 可以表示为：
-    $\boxed{x[n] = \sum_{k=<N>} a_k e^{j k (2\pi/N) n}}$
-    其中 $\sum_{k=<N>}$ 表示对任意连续 $N$ 个 $k$ 值求和 (如 $k=0$ 到 $N-1$)。
+    $\boxed{x[n] = \sum_{k=\<N\>} a_k e^{j k (2\pi/N) n}}$
+    其中 $\sum_{k=\<N\>}$ 表示对任意连续 $N$ 个 $k$ 值求和 (如 $k=0$ 到 $N-1$)。
 *   **意义**: 周期序列可以分解为<font color="orange">有限个 (N个)</font> 频率成谐波关系 ($\Omega = k \frac{2\pi}{N}$) 的<font color="orange">复指数序列</font>的线性组合。
 *   **系数确定 (分析公式)**:
-    $\boxed{a_k = \frac{1}{N} \sum_{n=<N>} x[n] e^{-j k (2\pi/N) n}}$
+    $\boxed{a_k = \frac{1}{N} \sum_{n=\<N\>} x[n] e^{-j k (2\pi/N) n}}$
     求和区间是任意一个完整周期 $N$。
 *   **系数的周期性**: DFS 系数 $a_k$ 是以 $N$ 为周期的，即 $\boxed{a_{k+N} = a_k}$。
 *   **频谱**: DFS 的频谱 $a_k$ 也是<font color="orange">离散</font>的，并且是<font color="orange">周期</font>的 (周期为 $N$)。通常只画主值区间 ($k=0$ 到 $N-1$)。
-*   **实信号系数对称性**: 若 $x[n]$ 是实序列，则 $a_k$ 具有共轭对称性 $\boxed{a_k = a_{-k}^*}$，并且满足 $a_k = a_{N-k}^*$。
+*   **实信号系数对称性**: 若 $x[n]$ 是实序列，则 $a_k$ 具有共轭对称性 $\boxed{a_k = a_{-k}^\*}$，并且满足 $a_k = a_{N-k}^\*$。
 
 #### 二、周期性方波序列的频谱 (重要示例) 📊📶
 
@@ -816,26 +829,26 @@
 与 CTFS 类似，许多性质平行对应 (注意求和/卷积范围)。设 $x[n] \stackrel{DFS}{\longleftrightarrow} a_k$ 和 $y[n] \stackrel{DFS}{\longleftrightarrow} b_k$ (周期均为 $N$)
 
 1.  **<font color="orange">线性</font>**: $Ax[n] + By[n] \stackrel{DFS}{\longleftrightarrow} Aa_k + Bb_k$
-2.  **<font color="orange">相乘</font>**: $x[n]y[n] \stackrel{DFS}{\longleftrightarrow} c_k = \sum_{l=<N>} a_l b_{k-l}$ (<font color="orange">周期卷积</font>)
+2.  **<font color="orange">相乘</font>**: $x[n]y[n] \stackrel{DFS}{\longleftrightarrow} c_k = \sum_{l=\<N\>} a_l b\_{k-l}$ (<font color="orange">周期卷积</font>)
 3.  **<font color="orange">差分</font>**: $x[n]-x[n-n_0] \stackrel{DFS}{\longleftrightarrow} (1-e^{-j k(2\pi/N)n_0})a_k$
 4.  **<font color="orange">时域内插</font>**: 若 $x_m[n] = x[n/m]$ (n=rm) 且 $x_m[n]=0$ (n≠rm)，周期为 $mN$。则 $x_m[n] \stackrel{DFS}{\longleftrightarrow} h_k = \frac{1}{m} a_k$ (频谱被 "稀释" m 倍)。
 5.  **<font color="orange">Parseval 定理</font>**:
-    $\boxed{\frac{1}{N} \sum_{n=<N>} |x[n]|^2 = \sum_{k=<N>} |a_k|^2}$
+    $$\\boxed{\\frac{1}{N} \\sum\_{n=\<N\>} |x[n]|^2 = \\sum\_{k=\<N\>} |a\_k|^2}$$
     周期序列的<font color="orange">平均功率</font>等于其所有<font color="orange">谐波分量</font>的<font color="orange">总功率</font>。
 
 ### 3.8 傅里叶级数与LTI系统 ➡️🎶
 
 *   **核心思想**: 利用 LTI 系统对特征函数 (复指数) 的响应特性来分析系统对周期信号的响应。
 *   **<font color="orange">频率响应</font> (Frequency Response)**: 系统函数 $H(s)$ 或 $H(z)$ 在虚轴或单位圆上的取值。
-    *   CT: $\boxed{H(j\omega) = H(s)|_{s=j\omega} = \int_{-\infty}^{\infty} h(t)e^{-j\omega t}dt}$
-    *   DT: $\boxed{H(e^{j\omega}) = H(z)|_{z=e^{j\omega}} = \sum_{n=-\infty}^{\infty} h[n]e^{-j\omega n}}$
+    *   CT: $\boxed{H(j\omega) = H(s)|_{s=j\omega} = \int\_{-\infty}^{\infty} h(t)e^{-j\omega t}dt}$
+    *   DT: $\boxed{H(e^{j\omega}) = H(z)|\_{z=e^{j\omega}} = \sum_{n=-\infty}^{\infty} h[n]e^{-j\omega n}}$
     *   $H(j\omega)$ 或 $H(e^{j\omega})$ 描述了系统对<font color="orange">不同频率</font>正弦输入的<font color="orange">稳态响应</font>的<font color="orange">幅度和相位</font>变化。
     *   **注意点**: $H(e^{j\omega})$ 是以 $2\pi$ 为<font color="orange">周期</font>的函数。
 *   **LTI 系统对周期信号的响应**:
     *   若输入为周期信号 $x(t) = \sum a_k e^{jk\omega_0 t}$
     *   输出为 $\boxed{y(t) = \sum_{k=-\infty}^{\infty} a_k H(jk\omega_0) e^{jk\omega_0 t}}$
     *   若输入为周期序列 $x[n] = \sum a_k e^{j k(2\pi/N)n}$
-    *   输出为 $\boxed{y[n] = \sum_{k=<N>} a_k H(e^{j k(2\pi/N)}) e^{j k(2\pi/N)n}}$
+    *   输出为 $\boxed{y[n] = \sum_{k=\<N\>} a_k H(e^{j k(2\pi/N)}) e^{j k(2\pi/N)n}}$
     *   **结论**:
         *   LTI 系统对周期信号的响应<font color="orange">仍是</font>同周期的信号。
         *   系统作用相当于对输入的每个谐波分量 $a_k$ 乘以对应的<font color="orange">频率响应</font>值 $H(jk\omega_0)$ 或 $H(e^{j k(2\pi/N)})$。即对不同频率成分进行<font color="orange">幅度</font>和<font color="orange">相位</font>的<font color="orange">加权</font>处理。
@@ -1155,8 +1168,8 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 2.  **DTFT 定义**:
     *   周期信号 $\tilde{x}[n]$ 的 DFS 对：
-        *   $\tilde{x}[n] = \sum_{k=<N>} a_k e^{j \frac{2\pi}{N} kn}$
-        *   $a_k = \frac{1}{N} \sum_{n=<N>} \tilde{x}[n] e^{-j \frac{2\pi}{N} kn}$
+        *   $\tilde{x}[n] = \sum_{k=\<N\>} a_k e^{j \frac{2\pi}{N} kn}$
+        *   $a_k = \frac{1}{N} \sum\_{n=\<N\>} \tilde{x}[n] e^{-j \frac{2\pi}{N} kn}$
     *   令 $N \to \infty$, $\frac{2\pi}{N}k \to \omega$ (连续频率变量), $\omega_0 = \frac{2\pi}{N} \to d\omega$, $\sum \to \int$, $a_k \approx \frac{1}{N} X(e^{j\omega})$。
     *   **<font color="orange">DTFT 分析公式</font> (正变换)** 👇:
         $X(e^{j\omega}) = \sum_{n=-\infty}^{\infty} x[n]e^{-j\omega n}$
@@ -1305,8 +1318,8 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     *   频移 (调制): $e^{j\omega_0 n} x[n] \leftrightarrow X(e^{j(\omega-\omega_0)})$
 *   **时域反转**: $x[-n] \leftrightarrow X(e^{-j\omega})$
 *   **共轭对称性**:
-    *   一般: $x^*[n] \leftrightarrow X^*(e^{-j\omega})$
-    *   **实信号 $x[n]$**: $x^*[n] = x[n] \implies X^*(e^{j\omega}) = X(e^{-j\omega})$
+    *   一般: $x^*[n] \leftrightarrow X^\*(e^{-j\omega})$
+    *   **实信号 $x[n]$**: $x^*[n] = x[n] \implies X^\*(e^{j\omega}) = X(e^{-j\omega})$
         *   $|X(e^{j\omega})| = |X(e^{-j\omega})|$ (幅度是<font color="orange">偶函数</font>)
         *   $\angle X(e^{j\omega}) = -\angle X(e^{-j\omega})|$ (相位是<font color="orange">奇函数</font>)
         *   $\text{Re}[X(e^{j\omega})]$ 是<font color="orange">偶函数</font>。
@@ -1325,7 +1338,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 *   **Parseval 定理 (能量守恒)** ⚡:
     $\sum_{n=-\infty}^{\infty} |x[n]|^2 = \frac{1}{2\pi} \int_{2\pi} |X(e^{j\omega})|^2 d\omega$
     *   $|X(e^{j\omega})|^2$ 称为 $x[n]$ 的<font color="orange">能量谱密度</font>。
-    *   比较 DFS: $\frac{1}{N}\sum_{n=<N>} |x[n]|^2 = \sum_{k=<N>} |a_k|^2$ ($|a_k|^2$ 称为<font color="orange">功率谱</font>)。
+    *   比较 DFS: $\frac{1}{N}\sum_{n=\<N\>} |x[n]|^2 = \sum_{k=\<N\>} |a_k|^2$ ($|a_k|^2$ 称为<font color="orange">功率谱</font>)。
 *   **卷积特性** ✨:
     $y[n] = x[n] * h[n] \leftrightarrow Y(e^{j\omega}) = X(e^{j\omega})H(e^{j\omega})$
     *   时域卷积对应<font color="orange">频域相乘</font>。
@@ -1343,10 +1356,10 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 1.  **DFS 对偶**:
     *   原始 DFS 对: $x[n] \leftrightarrow a_k$
     *   对偶关系: 序列 $a_n$ (将 $k$ 换成 $n$) 的 DFS 系数是 $\frac{1}{N}x[-k]$ (将 $n$ 换成 $-k$)。
-        $a_n \xleftrightarrow{DFS} \frac{1}{N}x[-k]$
+        $a_n\leftrightarrow\frac{1}{N}x[-k]$
     *   应用: 可方便地由时域性质推导频域性质 (反之亦然)。
         *   例: 时移 $x[n-n_0] \leftrightarrow e^{-j\frac{2\pi}{N}kn_0} a_k$  $\underleftrightarrow{\text{对偶}}$ 频移 $e^{j\frac{2\pi}{N}nk_0} x[n] \leftrightarrow a_{k-k_0}$。
-        *   例: 时域卷积 $x_1[n]*x_2[n] \leftrightarrow N a_k b_k$ $\underleftrightarrow{\text{对偶}}$ 时域相乘 $x_1[n]x_2[n] \leftrightarrow \sum_{m=<N>} a_m b_{k-m}$ (DFS 的周期卷积)。
+        *   例: 时域卷积 $x_1[n]*x_2[n] \leftrightarrow N a_k b_k$ $\underleftrightarrow{\text{对偶}}$ 时域相乘 $x_1[n]x_2[n] \leftrightarrow \sum_{m=\<N\>} a_m b_{k-m}$ (DFS 的周期卷积)。
 
 2.  **DTFT 与 CFS 间的对偶**:
     *   DTFT: $x[n] \leftrightarrow X(e^{j\omega})$ ($X(e^{j\omega})$ 是周期为 $2\pi$ 的连续函数)
@@ -1363,7 +1376,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
         *   例: CFS 时域微分 $\frac{d}{dt}X(e^{jt}) \leftrightarrow jk a_k = jk x[-k]$ $\underleftrightarrow{\text{对偶}}$ DTFT 频域微分 $nx[n] \leftrightarrow j \frac{d}{d\omega}X(e^{j\omega})$。
         *   例: CFS 卷积 $X_1(e^{jt}) * X_2(e^{jt}) \leftrightarrow 2\pi a_k b_k = 2\pi x_1[-k] x_2[-k]$ $\underleftrightarrow{\text{对偶}}$ DTFT 相乘 $x_1[n]x_2[n] \leftrightarrow \frac{1}{2\pi} X_1(e^{j\omega}) \circledast X_2(e^{j\omega})$ (周期卷积)。
 
-3.  **四种傅里叶变换的关系总结 (图示核心思想)**:![[Pasted image 20250422202730.png]]
+3.  **四种傅里叶变换的关系总结 (图示核心思想)**:![图片](Pasted-image-20250422202730.png)
     *   **时域** vs **频域**
     *   **连续** vs **离散**
     *   **周期** vs **非周期**
@@ -1404,7 +1417,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 ---
 
-### 5.9 本章小结 (Summary) ✅🏁
+### 5.9 本章小结✅
 
 *   本章系统讨论了<font color="orange">离散时间傅里叶变换 (DTFT)</font>，方法与思路同 CTFT 类似。
 *   **核心内容**:
@@ -1455,7 +1468,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 | **线性性质**             | $\alpha x(t) + \beta y(t) \leftrightarrow \alpha a_k + \beta b_k$                      | $\alpha x[n] + \beta y[n] \leftrightarrow \alpha a_k + \beta b_k$                                                      | $\alpha x(t) + \beta y(t) \leftrightarrow \alpha X(j\omega) + \beta Y(j\omega)$                                   | $\alpha x[n] + \beta y[n] \leftrightarrow \alpha X(e^{j\Omega}) + \beta Y(e^{j\Omega})$                                        |
 | **时移 (Time Shift)**  | $x(t - t_0) \leftrightarrow a_k e^{-j k \omega_0 t_0}$                                 | $x[n - n_0] \leftrightarrow a_k e^{-j k \Omega_0 n_0}$                                                                 | $x(t - t_0) \leftrightarrow X(j\omega) e^{-j \omega t_0}$                                                         | $x[n - n_0] \leftrightarrow X(e^{j\Omega}) e^{-j \Omega n_0}$                                                                  |
 | **频移 (Modulation)**  | $x(t) e^{j M \omega_0 t} \leftrightarrow a_{k-M}$ ($M$ 整数)                             | $x[n] e^{j M \Omega_0 n} \leftrightarrow a_{k-M}$                                                                      | $x(t) e^{j \omega_c t} \leftrightarrow X(j(\omega - \omega_c))$                                                   | $x[n] e^{j \Omega_c n} \leftrightarrow X(e^{j(\Omega - \Omega_c)})$                                                            |
-| **共轭 (Conjugation)** | $x^*(t) \leftrightarrow a_{-k}^*$                                                      | $x^*[n] \leftrightarrow a_{-k}^*$                                                                                      | $x^*(t) \leftrightarrow X^*(-j\omega)$                                                                            | $x^*[n] \leftrightarrow X^*(e^{-j\Omega})$                                                                                     |
+| **共轭 (Conjugation)** | $x^\*(t) \leftrightarrow a_{-k}^\*$                                                    | $x^\*[n] \leftrightarrow a_{-k}^\*$                                                                                    | $x^\*(t) \leftrightarrow X^\*(-j\omega)$                                                                          | $x^\*[n] \leftrightarrow X^\*(e^{-j\Omega})$                                                                                   |
 | **时间反转**             | $x(-t) \leftrightarrow a_{-k}$                                                         | $x[-n] \leftrightarrow a_{-k}$                                                                                         | $x(-t) \leftrightarrow X(-j\omega)$                                                                               | $x[-n] \leftrightarrow X(e^{-j\Omega})$                                                                                        |
 | **时间域尺度变换**          | $x(\alpha t)\leftrightarrow a_k$ 的周期变为 $T_0/\alpha$基频变为 $\alpha \omega_0$。             | $x_m[n] \stackrel{DFS}{\longleftrightarrow} h_k = \frac{1}{m} a_k$ (插入0后，频谱被 "稀释" m 倍）                                 | $x(at) \longleftrightarrow \frac{1}{\|a\|}X(j\frac{\omega}{a})$                                                   | 复杂, 涉及内插/抽取                                                                                                                    |
 | **时间域微分**            | $\frac{dx(t)}{dt} \leftrightarrow j k \omega_0 a_k$                                    | $x[n] - x[n-1] \leftrightarrow (1 - e^{-j k \Omega_0}) a_k$ (差分)                                                       | $\frac{dx(t)}{dt} \leftrightarrow j\omega X(j\omega)$                                                             | $x[n] - x[n-1] \leftrightarrow (1 - e^{-j\Omega}) X(e^{j\Omega})$ (差分)                                                         |
@@ -1463,7 +1476,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 | **频率域微分**            | 不适用 (时域需非周期)                                                                           | 不适用 (时域需非周期)                                                                                                           | $t x(t) \leftrightarrow j\frac{dX(j\omega)}{d\omega}$                                                             | $n x[n] \leftrightarrow j\frac{dX(e^{j\Omega})}{d\Omega}$                                                                      |
 | **时域卷积**             | $x(t) \text{ (周期卷积)} y(t) \leftrightarrow T_0 a_k b_k$                                 | $x[n] \text{ (循环卷积)} y[n] \leftrightarrow N a_k b_k$                                                                   | $x(t) * y(t) \leftrightarrow X(j\omega) Y(j\omega)$ (线性卷积)                                                        | $x[n] * y[n] \leftrightarrow X(e^{j\Omega}) Y(e^{j\Omega})$ (线性卷积)                                                             |
 | **时域相乘**             | $x(t) y(t) \leftrightarrow \sum_{m=-\infty}^{\infty} a_m b_{k-m}$ (系数离散卷积)             | $x[n] y[n] \leftrightarrow \sum_{m=\langle N \rangle} a_m b_{k-m}$ (系数循环卷积)                                            | $x(t) y(t) \leftrightarrow \frac{1}{2\pi} [X(j\omega) * Y(j\omega)]$ (频域线性卷积)                                     | $x[n] y[n] \leftrightarrow \frac{1}{2\pi} \int_{2\pi} X(e^{j\theta}) Y(e^{j(\Omega-\theta)}) d\theta$ (频域周期卷积)                 |
-| **Parseval 定理**      | $\boxed{\frac{1}{T_0} \int_{T_0} \|x(t)\|^2 dt = \sum_{k=-\infty}^{\infty} \|a_k\|^2}$ | $\boxed{\frac{1}{N} \sum_{n=<N>} \|x[n]\|^2 = \sum_{k=<N>} \|a_k\|^2}$                                                 | $\boxed{\int_{-\infty}^{\infty} \|x(t)\|^2 dt = \frac{1}{2\pi} \int_{-\infty}^{\infty} \|X(j\omega)\|^2 d\omega}$ | $\boxed{\sum_{n=-\infty}^{\infty} \|x[n]\|^2 = \frac{1}{2\pi} \int_{2\pi} \|X(e^{j\omega})\|^2 d\omega}$                       |
+| **Parseval 定理**      | $\boxed{\frac{1}{T_0} \int_{T_0} \|x(t)\|^2 dt = \sum_{k=-\infty}^{\infty} \|a_k\|^2}$ | $\boxed{\frac{1}{N} \sum_{n=\<N\>} \|x[n]\|^2 = \sum_{k=\<N\>} \|a_k\|^2}$                                             | $\boxed{\int_{-\infty}^{\infty} \|x(t)\|^2 dt = \frac{1}{2\pi} \int_{-\infty}^{\infty} \|X(j\omega)\|^2 d\omega}$ | $\boxed{\sum_{n=-\infty}^{\infty} \|x[n]\|^2 = \frac{1}{2\pi} \int_{2\pi} \|X(e^{j\omega})\|^2 d\omega}$                       |
 | **对偶性 (Duality)**    | 有限                                                                                     | 有限                                                                                                                     | $X(jt) \leftrightarrow 2\pi x(-\omega)$                                                                           | 有限                                                                                                                             |
 
 **注意:**
@@ -1756,7 +1769,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 ## 第七章 采样 📏
 
-### 7.0 引言 (Introduction) 🤔
+### 7.0 引言🤔
 
 *   **背景**: 日常生活中，常用<font color="orange">离散时间信号</font>表示<font color="orange">连续时间信号</font>。
     *   例子: 照片 📸、电视屏幕画面 📺、电影胶片 🎞️ 等，本质上都是由离散的点（像素）构成的。
@@ -1862,7 +1875,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 *   **滤波器**: <font color="orange">理想低通滤波器</font>。
 *   **内插函数**: $h_r(t) = T h_{LPF}(t)$，其中 $h_{LPF}(t)$ 是增益为 1 的理想低通滤波器的冲激响应。
-    *   $H_{LPF}(j\omega) = \begin{cases} 1, & |\omega|<\omega_c \\ 0, & |\omega|>\omega_c \end{cases}$
+    *   $H_{LPF}(j\omega) = \begin{cases} 1, & |\omega|<\omega_c \\\\ 0, & |\omega|>\omega_c \end{cases}$
     *   $h_{LPF}(t) = \frac{\sin(\omega_c t)}{\pi t}$
     *   **内插函数**: $h_r(t) = T \frac{\sin(\omega_c t)}{\pi t} = \frac{T \omega_c}{\pi} \text{Sa}(\omega_c t)$
 *   **重建公式 (Whittaker–Shannon interpolation formula)**:
@@ -1882,7 +1895,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 #### 三、一阶保持内插 (线性内插) 📈📉
 
 *   **内插函数**: <font color="orange">三角形脉冲</font> $h_1(t)$ (幻灯片 28)。
-    $h_1(t) = \begin{cases} 1 - |t|/T, & |t| \le T \\ 0, & |t| > T \end{cases}$
+    $h_1(t) = \begin{cases} 1 - |t|/T, & |t| \le T \\\\ 0, & |t| > T \end{cases}$
 *   **重建信号**: 将相邻采样点用<font color="orange">直线</font>连接起来。
 *   **频域**: $H_1(j\omega) = T \text{Sa}^2(\frac{\omega T}{2})$。与 ZOH 相比，旁瓣衰减更快，高频抑制更好。
 *   **效果**: 比零阶保持更平滑 (幻灯片 29-30)，但仍是近似恢复。
@@ -1936,9 +1949,9 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
         $X_d(e^{j\Omega}) = \sum_{n=-\infty}^{\infty} x_d[n] e^{-j\Omega n} = \sum_{n=-\infty}^{\infty} x_c(nT) e^{-j\Omega n}$
     *   比较 $X_p(j\omega) = \sum x_c(nT) e^{-j\omega nT}$ (冲激串的傅里叶级数形式) 与 $X_d(e^{j\Omega})$。
     *   发现它们在形式上非常相似，只需进行<font color="orange">频率变量的尺度变换</font>:
-        $\boxed{X_d(e^{j\Omega}) = X_p(j\omega)|_{\omega = \Omega/T}}$
+        $\boxed{X_d(e^{j\Omega}) = X_p(j\omega)|\_{\omega = \Omega/T}}$
         或等价地：
-        $\boxed{X_p(j\omega) = X_d(e^{j\Omega})|_{\Omega = \omega T}}$
+        $\boxed{X_p(j\omega) = X_d(e^{j\Omega})|\_{\Omega = \omega T}}$
     *   结合 $X_p(j\omega)$ 与 $X_c(j\omega)$ 的关系，得到 $X_d(e^{j\Omega})$ 与 $X_c(j\omega)$ 的关系：
         $\boxed{X_d(e^{j\Omega}) = \frac{1}{T} \sum_{k=-\infty}^{\infty} X_c(j(\frac{\Omega}{T} - k\frac{2\pi}{T}))}$
     *   **物理意义**: C/D 转换在时域是<font color="orange">归一化</font> ($t \to n = t/T$)，在频域是<font color="orange">去归一化</font> ($\omega \to \Omega = \omega T$) 并进行<font color="orange">周期延拓</font>。
@@ -1958,15 +1971,20 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 *   **级联模型** (幻灯片 42-43): C/D → $H_d(e^{j\Omega})$ → D/C
 *   **等效连续时间系统 $H_c(j\omega)$**:
     *   推导过程:
-        $Y_c(j\omega) = Y_d(e^{j\omega T}) H_{LPF}(j\omega)$
+	    
+        $Y_c(j\omega) = Y_d(e^{j\omega T}) H\_{LPF}(j\omega)$
+        
         $Y_d(e^{j\Omega}) = X_d(e^{j\Omega}) H_d(e^{j\Omega})$
-        $X_d(e^{j\Omega}) = X_p(j\omega)|_{\omega=\Omega/T} = \frac{1}{T} \sum_k X_c(j(\omega - k\omega_s))|_{\omega=\Omega/T}$
+        
+        $X_d(e^{j\Omega}) = X_p(j\omega)\|\_{\omega=\Omega/T} = \frac{1}{T} \sum_k X_c(j(\omega - k\omega_s))\|\_{\omega=\Omega/T}$
+        
         代入并考虑 $H_{LPF}(j\omega)$ 的滤波作用（假设无混叠，只保留 $k=0$ 项）：
         $Y_c(j\omega) = [\frac{1}{T} X_c(j\omega) H_d(e^{j\omega T})] H_{LPF}(j\omega)$
+        
         $Y_c(j\omega) = [\frac{1}{T} X_c(j\omega) H_d(e^{j\omega T})] \cdot T \quad$ (在 $|\omega| < \pi/T$ 内)
         $Y_c(j\omega) = X_c(j\omega) H_d(e^{j\omega T})$
     *   因此，等效连续时间频率响应为：
-        $\boxed{H_c(j\omega) = \begin{cases} H_d(e^{j\omega T}), & |\omega| < \omega_s/2 \\ 0, & |\omega| > \omega_s/2 \end{cases}}$
+        $\boxed{H_c(j\omega) = \begin{cases} H_d(e^{j\omega T}), & |\omega| < \omega_s/2 \\\\ 0, & |\omega| > \omega_s/2 \end{cases}}$
 *   **重要条件**: 上述等效关系<font color="orange">仅在</font> C/D 转换时<font color="orange">没有发生频谱混叠</font> (即 $x_c(t)$ 带限且 $\omega_s > 2\omega_M$) 的情况下成立。
 *   **结论** (幻灯片 46-47):
     *   当满足采样定理时，用离散时间系统 $H_d$ 处理连续时间信号 $x_c$，等效于用一个频率响应为 $H_d(e^{j\omega T})$ (仅在 $|\omega|<\omega_s/2$ 区间内) 的<font color="orange">连续时间 LTI 系统</font> $H_c$ 来处理 $x_c$。
@@ -2030,12 +2048,11 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 *   **背景**: 采样的本质是将<font color="orange">连续变量</font>的函数<font color="orange">离散化</font>。不仅可以对时域信号采样，也可以对<font color="orange">频域信号</font> (频谱) 进行采样。
 *   **对偶性**: 频域采样与时域采样是<font color="orange">完全对偶</font>的。
 *   **模型**: 对连续频谱 $X(j\omega)$ 乘以一个<font color="orange">频域冲激串</font> $P(j\omega) = \sum_{k=-\infty}^{\infty} \delta(\omega - k\omega_0)$。
-    *   频域采样后信号: $\tilde{X}_p(j\omega) = X(j\omega)P(j\omega) = \sum_{k=-\infty}^{\infty} X(jk\omega_0)\delta(\omega - k\omega_0)$。
+    *   频域采样后信号: $\tilde{X}\_p(j\omega) = X(j\omega)P(j\omega) = \sum_{k=-\infty}^{\infty} X(jk\omega_0)\delta(\omega - k\omega_0)$。
 *   **时域效果**:
     *   频域相乘对应时域卷积。
     *   频域冲激串 $P(j\omega)$ 的反变换是时域冲激串 $p(t) = \frac{1}{2\pi} \sum_{k=-\infty}^{\infty} e^{jk\omega_0 t}$ (需要用FS反变换) 或者 $p(t) = \frac{1}{\omega_0} \sum_{n=-\infty}^{\infty} \delta(t - n \frac{2\pi}{\omega_0})$。
-    *   采样后的时域信号 $\tilde{x}_p(t) = \frac{1}{2\pi} [x(t) * (\omega_0 \sum \delta(t-n\frac{2\pi}{\omega_0}))] = \frac{\omega_0}{2\pi} \sum_{n=-\infty}^{\infty} x(t - n \frac{2\pi}{\omega_0})$。
-        (这里课件推导为 $p(t) = \frac{1}{\omega_0}\sum \delta(t-k\frac{2\pi}{\omega_0})$, $\tilde{x}_p(t) = x(t)*p(t) = \frac{1}{\omega_0}\sum x(t-k\frac{2\pi}{\omega_0})$)
+    *   采样后的时域信号 $\tilde{x}\_p(t) = \frac{1}{2\pi} [x(t) \* (\omega_0 \sum \delta(t-n\frac{2\pi}{\omega_0}))] = \frac{\omega_0}{2\pi} \sum_{n=-\infty}^{\infty} x(t - n \frac{2\pi}{\omega_0})$。
     *   **结论**: 对频谱在频域进行<font color="orange">理想采样</font> (乘以冲激串)，相当于在<font color="orange">时域</font>将原始信号 $x(t)$ 以 $T_p = 2\pi/\omega_0$ 为周期进行<font color="orange">周期性延拓</font>并叠加（幅度 scaled by $1/\omega_0$ 或 $\omega_0/(2\pi)$，取决于冲激串定义）。
 
 *   **从频域样本恢复连续频谱**:
@@ -2241,7 +2258,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     1.  找出 $X(s)$ 的<font color="orange">所有极点</font> $p_k$。
     2.  **因果部分 (t > 0)**: $x(t) = \sum_{k} \text{Res}[X(s)e^{st}]_{s=p_k}$，求和包含 ROC <font color="orange">左边</font>的所有极点。
     3.  **反因果部分 (t < 0)**: $x(t) = -\sum_{k} \text{Res}[X(s)e^{st}]_{s=p_k}$，求和包含 ROC <font color="orange">右边</font>的所有极点。
-*   **注意**: 留数计算方法与部分分式系数计算类似。对单极点 $p_k$，$\text{Res}[F(s)]_{s=p_k} = \lim_{s\to p_k} (s-p_k)F(s)$。
+*   **注意**: 留数计算方法与部分分式系数计算类似。对单极点 $p_k$，$\text{Res}[F(s)]\_{s=p_k} = \lim_{s\to p_k} (s-p_k)F(s)$。
 
 ### 9.4 由零极点图对傅里叶变换几何求值 📐
 
@@ -2272,7 +2289,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     3.  **S 域平移**: $e^{s_0 t}x(t) \leftrightarrow X(s-s_0)$，ROC 为 $R + \text{Re}[s_0]$ (原 ROC 平移 $\text{Re}[s_0]$)。
     4.  **时域尺度变换**: $x(at) \leftrightarrow \frac{1}{|a|}X(s/a)$，ROC 为 $aR$ (原 ROC 尺度伸缩 $a$ 倍)。
     5.  **共轭对称性**:
-        *   $x^*(t) \leftrightarrow X^*(s^*)$，ROC 不变。
+        *   $x^\*(t) \leftrightarrow X^\*(s^\*)$，ROC 不变。
         *   若 $x(t)$ 是实信号，则 $X(s) = X^*(s^*)$，零极点必<font color="orange">共轭成对</font>出现。
     6.  **卷积**: $x_1(t)*x_2(t) \leftrightarrow X_1(s)X_2(s)$，ROC 包含 $R_1 \cap R_2$。（可能因零极点对消而扩大）。
     7.  **时域微分**: $\frac{dx(t)}{dt} \leftrightarrow sX(s)$，ROC 包含 $R$。（可能因 $s=0$ 处的极点被对消而扩大）。

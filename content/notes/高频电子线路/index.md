@@ -1,5 +1,19 @@
-23级信息工程5班 张哲轩
-2025-06-22
+---
+title: 高频电子线路
+date: 2025-06-22T14:00:00+08:00
+draft: false
+summary: 本笔记根据华南理工大学2025年第一学期《高频电子线路》课件整理，系统梳理了课程的核心概念。
+tags:
+  - 高频
+  - 电路
+  - 大二下
+categories:
+  - 专业学习
+series:
+  - 高频电子线路笔记
+Toc: true
+math: true
+---
 
 | 章节           | 作业题                                     | 题量     |
 | :----------- | :-------------------------------------- | :----- |
@@ -32,30 +46,7 @@
     *   **载频信号 (Carrier Frequency)**  : 作为运载信息的工具，它承载着信息信号向空间辐射。其频率范围通常在 MHz 到 GHz 量级。
 
 4.  **简化流程示意**:
-```mermaid
-graph TD
-
-    subgraph "声频处理路径"
-        A0[声音] --> A1[话筒]
-        A1 --> A2[低频电压放大级]
-        A2 --> A3[低频功放级]
-        A3 --> A4[调制器]
-    end
-
-    subgraph "射频处理路径"
-        B1[主振] --> B2[缓冲]
-        B2 --> B3[倍频器]
-        B3 --> B4[中间放大器]
-        B4 --> B5[功放推动级]
-    end
-
-    C1[受调放大器]
-    C2((天线))
-
-    A4 --> C1
-    B5 --> C1
-    C1 --> C2
-```
+![图片](Pasted-image-20250826001312.png)
 
 5.  **调幅广播发射机方框图示例**:
     *   **音频部分**: 声音 🎤 $\rightarrow$ 话筒 $\rightarrow$ 音频放大器 $\rightarrow$ 调制器
@@ -64,7 +55,7 @@ graph TD
     *   **目的**: 信号通过逐级放大，在末级功率放大处获得所需的发射功率电平。💪
 
 ### 1.2 无线电接收机的基本工作原理 📻
-![[Pasted image 20250418151656.png]]
+![图片](Pasted-image-20250418151656.png)
 1.  **基本概念**:
     *   无线电信号的**接收过程**与发送过程正好相反。
     *   **接收天线**将空间中的电磁波转变为**已调波电流**。
@@ -284,8 +275,8 @@ graph TD
     *   次级反射到初级: $\boxed{ Z_{f1} = \frac{(\omega M)^2}{Z_{22}} }$
     *   初级反射到次级: $\boxed{ Z_{f2} = \frac{(\omega M)^2}{Z_{11}} }$
 *   **等效电路**:
-    *   初级等效: 电压源 $\dot{V}_1$ 驱动总阻抗 $Z_{e1} = Z_{11} + Z_{f1}$。
-    *   次级等效: 等效电压源 $\dot{V}_{e2} = j\omega M \dot{I}_1 = \frac{j\omega M}{Z_{11}+Z_{f1}}\dot{V}_1$ 驱动总阻抗 $Z_{e2} = Z_{22} + Z_{f2}$ (注意课件图示 $Z_{e2}$ 似乎仅为 $Z_{22}$ 串 $Z_{f2}$，等效源为 $\frac{j\omega M}{Z_{11}}\dot{V}_1$)。 🔗➡️🔌+🔌
+    *   初级等效: 电压源 $\dot{V}\_1$ 驱动总阻抗 $Z\_{e1} = Z\_{11} + Z\_{f1}$。
+    *   次级等效: 等效电压源 $\dot{V}\_{e2} = j\omega M \dot{I}\_1 = \frac{j\omega M}{Z\_{11}+Z\_{f1}}\dot{V}\_1$ 驱动总阻抗 $Z\_{e2} = Z\_{22} + Z\_{f2}$ (注意课件图示 $Z\_{e2}$ 似乎仅为 $Z\_{22}$ 串 $Z\_{f2}$，等效源为 $\frac{j\omega M}{Z_{11}}\dot{V}\_1$)。 🔗➡️🔌+🔌
 *   **反射阻抗性质**: $Z_{f1} = R_{f1} + jX_{f1} = \frac{(\omega M)^2 R_{22}}{|Z_{22}|^2} - j\frac{(\omega M)^2 X_{22}}{|Z_{22}|^2}$
     1.  **反射电阻** $R_{f1}$ 永远为**正**，代表从次级回路转移（或损耗）到初级的能量。💪
     2.  **反射电抗** $X_{f1}$ 的性质与次级回路电抗 $X_{22}$ 的性质**相反**。若 $X_{22}$ 感性 ($>0$)，则 $X_{f1}$ 容性 ($<0$)；反之亦然。🔄
@@ -426,10 +417,10 @@ graph TD
       *   通用形式: $\begin{cases} i_1 = y_i u_1 + y_r u_2 \\ i_2 = y_f u_1 + y_o u_2 \end{cases}$
       *   共发射极 (CE) 连接: $\boxed{ \begin{cases} i_b = y_{ie} u_{be} + y_{re} u_{ce} \\ i_c = y_{fe} u_{be} + y_{oe} u_{ce} \end{cases} }$
    *   **y参数释义 (CE):**
-      *   $y_{ie} = g_{ie} + j\omega C_{ie} = \frac{\dot{I}_b}{\dot{V}_{be}} \Big|_{V_{ce}=0}$: 输入导纳 (输出端交流短路)
-      *   $y_{re} = g_{re} + j\omega C_{re} = \frac{\dot{I}_b}{\dot{V}_{ce}} \Big|_{V_{be}=0}$: 反向传输导纳 (输入端交流短路)，反映输出电压对输入端的影响。
-      *   $y_{fe} = g_{fe} - j\omega C_{fe} = \frac{\dot{I}_c}{\dot{V}_{be}} \Big|_{V_{ce}=0}$: 正向传输导纳 (输出端交流短路)，反映输入电压对输出电流的控制作用，决定放大能力。
-      *   $y_{oe} = g_{oe} + j\omega C_{oe} = \frac{\dot{I}_c}{\dot{V}_{ce}} \Big|_{V_{be}=0}$: 输出导纳 (输入端交流短路)
+      *   $y\_{ie} = g\_{ie} + j\omega C\_{ie} = \frac{\dot{I}\_b}{\dot{V}\_{be}} \Big\|\_{V\_{ce}=0}$: 输入导纳 (输出端交流短路)
+      *   $y\_{re} = g\_{re} + j\omega C\_{re} = \frac{\dot{I}\_b}{\dot{V}\_{ce}} \Big\|\_{V\_{be}=0}$: 反向传输导纳 (输入端交流短路)，反映输出电压对输入端的影响。
+      *   $y\_{fe} = g\_{fe} - j\omega C\_{fe} = \frac{\dot{I}\_c}{\dot{V}\_{be}} \Big\|\_{V\_{ce}=0}$: 正向传输导纳 (输出端交流短路)，反映输入电压对输出电流的控制作用，决定放大能力。
+      *   $y\_{oe} = g\_{oe} + j\omega C\_{oe} = \frac{\dot{I}\_c}{\dot{V}\_{ce}} \Big\|\_{V\_{be}=0}$: 输出导纳 (输入端交流短路)
    *   **注意点:** ⚠️ 以上短路参数是晶体管本身的参数 (**内参数**)，只与晶体管特性有关，与外电路无关。
    *   **y参数求法:**
       1.  实际测量: 通过短路相应端口并施加测试信号来测量。
@@ -440,16 +431,11 @@ graph TD
 
 **4. 晶体管的频率参数:** ⏱️
    *   **(1) 截止频率 $f_\beta$ (Beta Cutoff Frequency):**
-      *   定义：共发射极电路电流放大系数 $|\beta|$ 下降到其低频值 $\beta_0$ 的 $\frac{1}{\sqrt{2}} \approx 0.707$ 倍时的频率。
-      *   $\boxed{ f_\beta }$
+      *   定义：共发射极电路电流放大系数 $|\beta|$ 下降到其低频值 $\beta_0$ 的 $\frac{1}{\sqrt{2}} \approx 0.707$ 倍时的频率。 $\boxed{ f_\beta }$
    *   **(2) 特征频率 $f_T$ (Transition Frequency):**
-      *   定义：共发射极电流放大系数 $|\beta|$ 下降到 1 时的频率。
-      *   $\boxed{ f_T }$
-      *   估算：$|\beta| \approx f_T / f$ (当 $f \gg f_\beta$)。
+      *   定义：共发射极电流放大系数 $|\beta|$ 下降到 1 时的频率。 $\boxed{ f_T }$ 估算：$|\beta| \approx f_T / f$ (当 $f \gg f_\beta$)。
    *   **(3) 最高振荡频率 $f_{max}$ (Maximum Oscillation Frequency):**
-      *   定义：晶体管的功率增益 $G_p$ 下降到 1 (0dB) 时的频率。
-      *   $\boxed{ f_{max} }$
-      *   实际工作频率通常选取为 $(1/3 \sim 1/4) f_{max}$。
+      *   定义：晶体管的功率增益 $G_p$ 下降到 1 (0dB) 时的频率。 $\boxed{ f_{max} }$ 实际工作频率通常选取为 $(1/3 \sim 1/4) f_{max}$。
 
 ---
 
@@ -474,44 +460,64 @@ graph TD
    *   **接入系数 (Coupling Coefficients):** 用于阻抗匹配。
       *   晶体管接入回路: $p_1 = N_1/N$ (抽头)
       *   负载接入回路: $p_2 = N_2/N$ (变压器)
-   *   **(1) 放大器输入导纳 $Y_i$:** 📥
-      *   考虑 $y_{re}$ 时: $\boxed{ Y_i = y_{ie} - \frac{y_{re} y_{fe}}{y_{oe} + Y''_L} }$
-      *   其中 $Y''_L$ 是经 $p_1$ 折合到集电极的总负载导纳。
-      *   近似：通常 $Y_i \approx y_{ie}$ (忽略 $y_{re}$ 的反馈作用)。
-   *   **(2) 放大器输出导纳 $Y_o$:** 📤
-      *   考虑 $y_{re}$ 时: $\boxed{ Y_o = y_{oe} - \frac{y_{re} y_{fe}}{Y_s + y_{ie}} }$
-      *   其中 $Y_s$ 是信号源内导纳。
-      *   近似：通常 $Y_o \approx y_{oe}$ (忽略 $y_{re}$ 的直通作用和信号源内阻影响)。
-   *   **(3) 电压增益 $A_v$:** 📈 (参考 P70)
-      *   定义: $A_v = \frac{u_{RL}}{u_{be}}$ (负载电压 / 基极电压)
-      *   表达式: $A_v = \frac{-p_1 p_2 y_{fe}}{y'}$
-      *   其中 $y'$ 是回路的总导纳（包括晶体管输出导纳 $y_{oe}$ 经 $p_1$ 折合、回路自身损耗 $g_o$ 和折合的负载导纳 $p_2^2 Y_L$）。 $y' = p_1^2 y_{oe} + g_o + p_2^2 Y_L + j(\omega C_\Sigma - \frac{1}{\omega L})$ 。
-      *   令 $g_\Sigma$ 为回路总电导 (在谐振时)， $y' = g_\Sigma + j(\omega C_\Sigma - \frac{1}{\omega L})$。
-      *   电压增益表达式: $A_v = \frac{-p_1 p_2 y_{fe}}{g_\Sigma [1 + j 2Q_L \frac{\Delta f}{f_0}]}$
-      *   **谐振时电压增益:**
-          $\boxed{ A_{v0} = \frac{-p_1 p_2 y_{fe}}{g_\Sigma} }$
-      *   **结论:**
-          *   $|A_{v0}| \propto |y_{fe}|$
-          *   $|A_{v0}| \propto 1/g_\Sigma$ (总电导越小，增益越高)
-          *   $|A_{v0}| \propto Q_L$ (有载品质因数越高，增益越高)
-          *   $A_{v0}$ 与输入电压反相 (180°)。
-   *   **(4) 功率增益 $G_p$:** 💪 (参考 P71)
-      *   谐振时功率增益: $G_{po} = \frac{P_o}{P_i}$
-      *   若输入输出端匹配（例如 $p_2^2 g_L = p_1^2 g_{oe}$，并且忽略 $g_o$），则 $G_{po} \approx \frac{|y_{fe}|^2}{4 p_1^2 g_{oe} g_{ie}}$ (假设源内阻为 $1/g_{ie}$)。
-      *   **匹配条件 (忽略回路损耗 $g_o$):** $p_2^2 g_L \approx p_1^2 g_{oe} = g_\Sigma / 2$
-      *   **最大功率增益 (匹配时):** $(G_{po})_{\text{max}} = \frac{|y_{fe}|^2}{4 g_{oe} g_{ie}}$
-      *   **插入损耗 $K_1$:** 考虑回路自身损耗 $G_o$ 引起增益下降的因素。
-          $K_1 = \frac{P_o}{P_o'} = (1 - \frac{G_o}{g_\Sigma})^{-2} = (1 - \frac{Q_L}{Q_o})^{-2}$ (功率比，表示损耗带来的影响， $P_o'$ 为无损耗时功率)
-          其中 $Q_L = \frac{\omega_0 C_\Sigma}{g_\Sigma}$ (有载Q值)， $Q_o = \frac{\omega_0 C_\Sigma}{G_o}$ (空载Q值)。
-      *   **注意点:** 💡 为获得较大功率增益，应使插入损耗尽量小，即 $G_o \ll g_\Sigma$ ($Q_L \ll Q_o$)，也就是负载效应远大于回路自身损耗。
+*   **(1) 放大器输入导纳 $Y\_i$:** 📥
+    *   考虑 $y\_{re}$ 时:
+        $$
+        \\boxed{ Y\_i = y\_{ie} - \\frac{y\_{re} y\_{fe}}{y\_{oe} + Y''\_L}}
+        $$
+    *   其中 $Y''\_L$ 是经 $p\_1$ 折合到集电极的总负载导纳。
+    *   近似：通常 $Y\_i \\approx y\_{ie}$ (忽略 $y\_{re}$ 的反馈作用)。
+*   **(2) 放大器输出导纳 $Y\_o$:** 📤
+    *   考虑 $y\_{re}$ 时:
+        $$
+        \\boxed{ Y\_o = y\_{oe} - \\frac{y\_{re} y\_{fe}}{Y\_s + y\_{ie}} }
+        $$
+    *   其中 $Y\_s$ 是信号源内导纳。
+    *   近似：通常 $Y\_o \\approx y\_{oe}$ (忽略 $y\_{re}$ 的直通作用和信号源内阻影响)。
+*   **(3) 电压增益 $A\_v$:** 📈 (参考 P70)
+    *   定义: $A\_v = \\frac{u\_{RL}}{u\_{be}}$ (负载电压 / 基极电压)
+    *   表达式: $A\_v = \\frac{-p\_1 p\_2 y\_{fe}}{y'}$
+    *   其中 $y'$ 是回路的总导纳（包括晶体管输出导纳 $y\_{oe}$ 经 $p\_1$ 折合、回路自身损耗 $g\_o$ 和折合的负载导纳 $p\_2^2 Y\_L$）。 $y' = p\_1^2 y\_{oe} + g\_o + p\_2^2 Y\_L + j(\\omega C\_\\Sigma - \\frac{1}{\\omega L})$ 。
+    *   令 $g\_\\Sigma$ 为回路总电导 (在谐振时)， $y' = g\_\\Sigma + j(\\omega C\_\\Sigma - \\frac{1}{\\omega L})$。
+    *   电压增益表达式:
+        $$
+        A\_v = \\frac{-p\_1 p\_2 y\_{fe}}{g\_\\Sigma [1 + j 2Q\_L \\frac{\\Delta f}{f\_0}]}
+        $$
+    *   **谐振时电压增益:**
+        $$
+        \\boxed{ A\_{v0} = \\frac{-p\_1 p\_2 y\_{fe}}{g\_\\Sigma} }
+        $$
+    *   **结论:**
+        *   $|A\_{v0}| \\propto |y\_{fe}|$
+        *   $|A\_{v0}| \\propto 1/g\_\\Sigma$ (总电导越小，增益越高)
+        *   $|A\_{v0}| \\propto Q\_L$ (有载品质因数越高，增益越高)
+        *   $A\_{v0}$ 与输入电压反相 (180°)。
+*   **(4) 功率增益 $G\_p$:** 💪 (参考 P71)
+    *   谐振时功率增益:
+        $$
+        G\_{po} = \\frac{P\_o}{P\_i}
+        $$
+    *   若输入输出端匹配（例如 $p\_2^2 g\_L = p\_1^2 g\_{oe}$，并且忽略 $g\_o$），则 $G\_{po} \\approx \\frac{|y\_{fe}|^2}{4 p\_1^2 g\_{oe} g\_{ie}}$ (假设源内阻为 $1/g\_{ie}$)。
+    *   **匹配条件 (忽略回路损耗 $g\_o$):** $p\_2^2 g\_L \\approx p\_1^2 g\_{oe} = g\_\\Sigma / 2$
+    *   **最大功率增益 (匹配时):**
+        $$
+        (G\_{po})\_{\\text{max}} = \\frac{|y\_{fe}|^2}{4 g\_{oe} g\_{ie}}
+        $$
+    *   **插入损耗 $K\_1$:** 考虑回路自身损耗 $G\_o$ 引起增益下降的因素。
+        $$
+        K\_1 = \\frac{P\_o}{P\_o'} = (1 - \\frac{G\_o}{g\_\\Sigma})^{-2} = (1 - \\frac{Q\_L}{Q\_o})^{-2}
+        $$
+        (功率比，表示损耗带来的影响， $P\_o'$ 为无损耗时功率)
+        其中 $Q\_L = \\frac{\\omega\_0 C\_\\Sigma}{g\_\\Sigma}$ (有载Q值)， $Q\_o = \\frac{\\omega\_0 C\_\\Sigma}{G\_o}$ (空载Q值)。
+    *   **注意点:** 💡 为获得较大功率增益，应使插入损耗尽量小，即 $G\_o \\ll g\_\\Sigma$ ($Q\_L \\ll Q\_o$)，也就是负载效应远大于回路自身损耗。
    *   **(5) 通频带 $BW_{0.7}$:** 📏
       *   由并联谐振回路理论: $\boxed{ BW_{0.7} = 2\Delta f_{0.7} = \frac{f_0}{Q_L} }$
       *   与总电导关系: $BW_{0.7} = \frac{g_\Sigma}{2\pi C_\Sigma}$
       *   **增益带宽积:**
-          $\boxed{ |A_{v0}| \cdot BW_{0.7} = \frac{p_1 p_2 |y_{fe}|}{g_\Sigma} \cdot \frac{g_\Sigma}{2\pi C_\Sigma} = \frac{p_1 p_2 |y_{fe}|}{2\pi C_\Sigma} \approx \text{常数} }$
+          $\boxed{ |A_{v0}| \cdot BW_{0.7} = \frac{p_1 p_2 |y_{fe}|}{g_\Sigma} \cdot \frac{g_\Sigma}{2\pi C_\Sigma} = \frac{p_1 p_2 |y_{fe}|}{2\pi C_\Sigma} \approx \text{常数}\ \ \ \ \ }$
       *   **结论:** 放大器的通频带 与 电压增益 是一对矛盾。增益越高，带宽越窄，反之亦然。
    *   **(6) 选择性 (矩形系数 $K_{r0.1}$):** 📉
-      *   对于单调谐回路: $\boxed{ K_{r0.1} = \frac{\Delta f_{0.1}}{\Delta f_{0.7}} = \sqrt{10^2-1} / \sqrt{(\frac{1}{0.707})^2-1} = \sqrt{99} \approx 9.95 }$
+      *   对于单调谐回路: $\boxed{ K_{r0.1} = \frac{\Delta f_{0.1}}{\Delta f_{0.7}} = \sqrt{10^2-1} / \sqrt{(\frac{1}{0.707})^2-1} = \sqrt{99} \approx 9.95\ \ }$
       *   **结论:** $K_{r0.1}$ 远大于1，表明谐振曲线尖锐，邻道选择性差，这是单调谐回路放大器的主要缺点。
 
 ---
@@ -551,63 +557,78 @@ graph TD
 **1. 单级双调谐回路谐振放大器:** (参考 P79)
    *   采用两个互感耦合的谐振回路。
    *   **分析模型:** 通过等效变换，可简化为两个参数相同的、通过互感 M 耦合的 RLC 并联回路。
-   *   **耦合系数 $\eta$:**
-      *   定义: $\boxed{\eta = \frac{k}{k_{crit}} = \frac{M/ \sqrt{L_1 L_2}}{1/\sqrt{Q_1 Q_2}} = k \sqrt{Q_1 Q_2}}$ （对于并联回路， $k=M/\sqrt{L_1 L_2}$）
-      *   若回路参数相同 $Q_1=Q_2=Q_L$: $\eta = k Q_L$
-      *   $\eta$ 决定了回路间的耦合松紧程度和频率响应特性。
-   *   **频率特性曲线 (由 $\eta$ 决定):**
-      *   $\eta < 1$ (弱耦合): 单峰，峰值在 $f_0$，峰值随 $\eta$ 增大而增高，带宽窄，选择性差。
-      *   $\eta = 1$ (临界耦合): 单峰，峰值在 $f_0$，峰值最高且顶部最平坦 (马克西玛利平坦)，综合性能较好，应用最多。
-      *   $\eta > 1$ (强耦合/过耦合): 双峰，峰值在 $f_0$ 两侧对称分布，中心 $f_0$ 处有凹陷。$\eta$ 越大，双峰距离越远，中心凹陷越深。带宽宽，矩形系数好，但带内不平坦。
+   *   **耦合系数 $\\eta$:**
+      *   定义:
+          $$
+          \\boxed{\\eta = \\frac{k}{k\_{crit}} = \\frac{M/ \\sqrt{L\_1 L\_2}}{1/\\sqrt{Q\_1 Q\_2}} = k \\sqrt{Q\_1 Q\_2}}
+          $$
+          （对于并联回路， $k=M/\\sqrt{L\_1 L\_2}$）
+      *   若回路参数相同 $Q\_1=Q\_2=Q\_L$: $\\eta = k Q\_L$
+      *   $\\eta$ 决定了回路间的耦合松紧程度和频率响应特性。
+   *   **频率特性曲线 (由 $\\eta$ 决定):**
+      *   $\\eta < 1$ (弱耦合): 单峰，峰值在 $f\_0$，峰值随 $\\eta$ 增大而增高，带宽窄，选择性差。
+      *   $\\eta = 1$ (临界耦合): 单峰，峰值在 $f\_0$，峰值最高且顶部最平坦 (马克西玛利平坦)，综合性能较好，应用最多。
+      *   $\\eta > 1$ (强耦合/过耦合): 双峰，峰值在 $f\_0$ 两侧对称分布，中心 $f\_0$ 处有凹陷。$\\eta$ 越大，双峰距离越远，中心凹陷越深。带宽宽，矩形系数好，但带内不平坦。
 
-**2. 双调谐回路性能 (临界耦合 $\eta=1$ 时):** ✨
+**2. 双调谐回路性能 (临界耦合 $\\eta=1$ 时):** ✨
    *   **(1) 电压增益:**
-      *   谐振时最大: $\boxed{ A_{v0, \eta=1} = \frac{-p_1 p_2 |y_{fe}|}{2g} }$ (g 为单边回路等效电导, $g = g_\Sigma/2$)
+      *   谐振时最大:
+          $$
+          \\boxed{ A\_{v0, \\eta=1} = \\frac{-p\_1 p\_2 |y\_{fe}|}{2g} }
+          $$
+          (g 为单边回路等效电导, $g = g\_\\Sigma/2$)
    *   **(2) 通频带:**
-      *   $\boxed{ BW_{0.7, double} = \sqrt{2} \frac{f_0}{Q_L} = \sqrt{2} \cdot BW_{0.7, single} }$
-      *   **结论:** 在 $Q_L$ 相同条件下，临界耦合双调谐回路的通频带是单调谐回路的 $\sqrt{2}$ 倍。
+      *   $$
+          \\boxed{ BW\_{0.7, double} = \\sqrt{2} \\frac{f\_0}{Q\_L} = \\sqrt{2} \\cdot BW\_{0.7, single} }
+          $$
+      *   **结论:** 在 $Q\_L$ 相同条件下，临界耦合双调谐回路的通频带是单调谐回路的 $\\sqrt{2}$ 倍。
    *   **(3) 选择性 (矩形系数):**
-      *   $\boxed{ K_{r0.1, \eta=1} \approx 3.16 }$
+      *   $$
+          \\boxed{ K\_{r0.1, \\eta=1} \\approx 3.16 }
+          $$
       *   **结论:** 矩形系数远小于单调谐回路 (9.95)，曲线形状更接近理想矩形，选择性更好。
    *   **解决方法:** 实际中常采用“双-单-双”组合方式，利用双调谐展宽频带，利用单调谐补偿中心凹陷，获得较平坦的带内响应。通常双调谐工作在临界耦合状态。
 
 **3. 多级双调谐回路谐振放大器 (临界耦合):**
    *   **(1) 通频带:**
-      *   $\boxed{ BW_m = BW_{1, double} \sqrt[4]{2^{1/m}-1} }$
+      *   $$
+          \\boxed{ BW\_m = BW\_{1, double} \\sqrt[4]{2^{1/m}-1} }
+          $$
    *   **(2) 矩形系数:**
-      *   $\boxed{ K_{r0.1,m} = \frac{\sqrt[4]{10^{2/m}-1}}{\sqrt[4]{2^{1/m}-1}} }$
+      *   $$
+          \\boxed{ K\_{r0.1,m} = \\frac{\\sqrt[4]{10^{2/m}-1}}{\\sqrt[4]{2^{1/m}-1}} }
+          $$
 
 ---
-
 ### 3.6 谐振放大器的稳定性与稳定措施
 
-**背景:** 前面分析多假设 $y_{re}=0$ (单向化)。实际 $y_{re} \neq 0$ 存在内部反馈。
+**背景:** 前面分析多假设 $y\_{re}=0$ (单向化)。实际 $y\_{re} \\neq 0$ 存在内部反馈。
 
-**1. $y_{re}$ 的影响:** 😟
-   *   使输入导纳 $Y_i$ 与负载 $Y''_L$ 有关 (反馈)。
-   *   使输出导纳 $Y_o$ 与信号源 $Y_s$ 有关 (直通)。
+**1. $y\_{re}$ 的影响:** 😟
+   *   使输入导纳 $Y\_i$ 与负载 $Y''\_L$ 有关 (反馈)。
+   *   使输出导纳 $Y\_o$ 与信号源 $Y\_s$ 有关 (直通)。
    *   导致输入输出相互影响，调谐困难。
    *   严重时，可能导致放大器工作不稳定，甚至自激振荡。
 
 **2. 实现晶体管单向化的方法:** 🛡️
 
-   *   **(1) 失配法 (Mismatch Method):**
-      *   原理：通过故意使信号源内阻与晶体管输入阻抗、负载阻抗与晶体管输出阻抗不匹配，来减小 $y_{re}$ 的影响。
+   *   **(1) 失配法:**
+      *   原理：通过故意使信号源内阻与晶体管输入阻抗、负载阻抗与晶体管输出阻抗不匹配，来减小 $y\_{re}$ 的影响。
       *   实现：
-          *   使负载 $Y''_L$ 很大（轻载），减小 $Y_i$ 中的反馈项 ($\frac{y_{re}y_{fe}}{y_{oe}+Y''_L}$)。
-          *   使 $Y_s$ 或 $y_{ie}$ 很大，减小 $Y_o$ 中的直通项 ($\frac{y_{re}y_{fe}}{Y_s+y_{ie}}$)。
-      *   物理意义：轻载时，输出电压 $V_o \downarrow$，反馈电压 $\downarrow$。
+          *   使负载 $Y''\_L$ 很大（轻载），减小 $Y\_i$ 中的反馈项 ($\\frac{y\_{re}y\_{fe}}{y\_{oe}+Y''\_L}$)。
+          *   使 $Y\_s$ 或 $y\_{ie}$ 很大，减小 $Y\_o$ 中的直通项 ($\\frac{y\_{re}y\_{fe}}{Y\_s+y\_{ie}}$)。
+      *   物理意义：轻载时，输出电压 $V\_o \\downarrow$，反馈电压 $\\downarrow$。
       *   代价：牺牲增益来换取稳定性（单向化）。
-      *   **典型应用: 共射-共基级联电路 (Cascode):**
-          *   CE 级的负载是 CB 级的输入阻抗 $1/y_{ib}$ (很小，即 $Y''_L = y_{ib}$ 很大)，使 CE 级的 $Y_i$ 反馈项减小。
-          *   CB 级的信号源是 CE 级的输出阻抗 $1/y_{oe}$ (较大，即 $Y_s = y_{oe}$ 较小)。CB 级的 $y_{rb}$ 很小，本身反向传输弱。
+      *   **典型应用: 共射-共基级联电路:**
+          *   CE 级的负载是 CB 级的输入阻抗 $1/y\_{ib}$ (很小，即 $Y''\_L = y\_{ib}$ 很大)，使 CE 级的 $Y\_i$ 反馈项减小。
+          *   CB 级的信号源是 CE 级的输出阻抗 $1/y\_{oe}$ (较大，即 $Y\_s = y\_{oe}$ 较小)。CB 级的 $y\_{rb}$ 很小，本身反向传输弱。
           *   优点：工作稳定、增益较高、上限频率高、噪声系数较低。适用于大量生产。
           *   Cascode 电路是采用失配法实现晶体管单向化的典型例子。
 
-   *   **(2) 中和法 (Neutralization Method):**
-      *   原理：在放大器外部外加一个反馈电路（如中和电容 $C_N$），产生一个与晶体管内部反馈 ($y_{re}$ 或 $C_{b'c}$) 大小相等、极性相反的反馈信号，两者互相抵消。
+   *   **(2) 中和法:**
+      *   原理：在放大器外部外加一个反馈电路（如中和电容 $C\_N$），产生一个与晶体管内部反馈 ($y\_{re}$ 或 $C\_{b'c}$) 大小相等、极性相反的反馈信号，两者互相抵消。
       *   实现：通常需要变压器或抽头电感来获得反相信号。
-      *   条件：$\dot{I}_{feedback, ext} = -\dot{I}_{feedback, int}$
+      *   条件：$\\dot{I}\_{\\text{feedback, ext}} = -\\dot{I}\_{\\text{feedback, int}}$
       *   **注意点:** ⚠️
           *   完全中和通常只能在一个频率点实现。
           *   需要精心调节中和元件的数值。
@@ -615,7 +636,6 @@ graph TD
           *   中和电路的效果有限。
 
 ---
-
 ### 🌟 本章总结
 
 本章主要学习了高频小信号放大器的基本概念、性能指标、分析方法和典型电路。
@@ -684,7 +704,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
 
 *   **<font color="orange">变频</font>** (混频 Mixing)：利用<font color="orange">非线性器件</font>的特性，将两个不同频率的信号进行频率变换，取出其中的<font color="orange">和频</font>或<font color="orange">差频</font>的过程。
 *   **超外差接收机中的混频** (典型应用)：
-    ![[Pasted image 20250418151656.png]]
+    ![图片](Pasted-image-20250418151656.png)
     *   输入信号：高频已调信号 $v_s(f_s)$
     *   本地振荡信号 (本振)： $v_o(f_o)$
     *   输出信号 (中频 IF)： $v_i(f_i)$
@@ -735,7 +755,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
     *   输入方式：基极输入 / 射极输入
     *   注入方式 (本振信号)：基极注入 / 射极注入
     *   放大方式：共射 (CE) / 共基 (CB)
-    ![[Pasted image 20250418151828.png]]
+    ![图片](Pasted-image-20250418151828.png)
 *   **特点比较 (P147)**：
     *   **共同点**：$v_s$ 和 $v_o$ 都作用于 BJT 的输入结 (BE结)，利用 $i_c$ 与 $v_{be}$ 的非线性关系 (转移特性) 进行频率变换。
     *   **共基 (CB) vs 共射 (CE)**：
@@ -804,7 +824,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   缺点：匹配困难，组合频率分量多。
         *   优点：结构简单。
 *   **二极管平衡混频器**：
-    ![[Pasted image 20250418152020.png]]
+    ![图片](Pasted-image-20250418152020.png)
     (示意图描述：使用两个二极管和中心抽头变压器构成平衡结构)
     *   原理：利用电路的<font color="orange">对称性</font>抵消某些不需要的频率分量。
     *   总电流 $i = i_1 - i_2$。
@@ -930,9 +950,9 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
     *   **频率与带宽**: 低频功放频率低、带宽宽；高频功放频率高、带宽窄。
     *   **负载**: 低频功放常用<font color="orange">无调谐负载</font> (电阻、变压器)；高频功放采用<font color="orange">选频网络</font>负载。
     *   **工作状态**: 低频功放可工作于甲、甲乙、乙类；高频功放常工作于<font color="orange">丙类</font>，甚至丁类、戊类等以追求更高效率。
-6.  **晶体管特性曲线与偏置**:![[Pasted image 20250417203703.png]]
-    *   **转移特性**: $i_c = f(u_{BE})|_{u_{CE}=常量}$
-    *   **输出特性**: $i_c = f(u_{CE})|_{i_{BE}=常量}$ 或 $i_c = f(u_{CE})|_{u_{BE}=常量}$
+6.  **晶体管特性曲线与偏置**:![图片](Pasted-image-20250417203703.png)
+    *   **转移特性**: $i_c = f(u\_{BE})|_{u\_{CE}=常量}$
+    *   **输出特性**: $i_c = f(u\_{CE})\|\_{i\_{BE}=常量}$ 或 $i\_c = f(u_{CE})\|\_{u\_{BE}=常量}$
     *   **偏置点 (Q点) 与导通角**:
         *   A类: Q点在放大区中央，$\theta=180^\circ$。
         *   B类: Q点在截止区边缘，$V_{BB} \approx V_{BZ}$ (或 $V_{BEQ}=0$)，$\theta=90^\circ$。
@@ -951,22 +971,22 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   措施: 尽量减小 $v_{CE}$ 和 $i_c$ <font color="orange">同时不为零</font>的时间；即当 $i_c$ 较大时 $v_{CE}$ 尽量小，当 $v_{CE}$ 较大时 $i_c$ 尽量小 (趋近开关状态)。
     *   **理论效率**: 甲类 $\le 50\%$, 乙类 $\le 78.5\%$, 丙类 $\le 100\%$ (理想状态下，实际丙类可达85%左右)。
 8.  **高频功放输入要求**: 要求<font color="orange">输入电压幅度大</font>，且需要一定的<font color="orange">驱动功率</font>。
-9.  **分析方法 (折线法)**:![[Pasted image 20250417203448.png]]
+9.  **分析方法 (折线法)**:![图片](Pasted-image-20250417203448.png)
 	*   将晶体管特性曲线<font color="orange">线性化</font>。
     *   **输出特性折线化**: 用<font color="orange">临界线</font> (斜率 $g_{cr}$) 分隔放大区和饱和区。定义<font color="orange">欠压</font>(放大)、<font color="orange">临界</font>、<font color="orange">过压</font>(饱和) 状态。
     *   **转移特性折线化**: 用斜线 ($g_c$) 和横轴 ($i_c=0$) 近似。
-        *   跨导: $g_c = \frac{\Delta i_c}{\Delta v_B}|_{v_{CE}}$
-        *   电流表达式: $i_c = g_c (v_B - V_{BZ})$  (当 $v_B > V_{BZ}$)
+        *   跨导: $g_c = \frac{\Delta i_c}{\Delta v_B}|\_{v_{CE}}$
+        *   电流表达式: $i_c = g_c (v_B - V\_{BZ})$  (当 $v_B > V_{BZ}$)
 
 ### 5.2 谐振功率放大器的工作原理 💡
 
-1.  **基本电路结构**:![[Pasted image 20250417203816.png]]
+1.  **基本电路结构**:![图片](Pasted-image-20250417203816.png)
     *   **晶体管**: 选用大功率、高 $f_T$ 管，通常工作在<font color="orange">丙类</font> (发射极反偏)。
     *   **输入激励电路**: 提供所需信号电压 $u_b$。
     *   **输出谐振回路 (LC并联)**:
         *   <font color="orange">滤波选频</font>: 从集电极电流脉冲中选出<font color="orange">基波</font>分量。
         *   <font color="orange">阻抗匹配</font>: 将负载阻抗变换为晶体管所需的最佳负载阻抗。
-![[Pasted image 20250417204941.png]]
+![图片](Pasted-image-20250417204941.png)
 2.  **工作原理分析 (集电极电流 $i_c$)**:
     *   设输入信号为 $u_b = U_{bm} \cos \omega t$。
     *   基极有效电压: $u_{BE} = u_b - V_{BB} = -V_{BB} + U_{bm} \cos \omega t$。
@@ -1005,7 +1025,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
     *   减小 $\theta_c$ (增大负偏压 $V_{BB}$ 或减小激励 $U_{bm}$) 可以提高 $g_1(\theta_c)$，从而提高效率，但会导致 $I_{cm1}$ 减小，输出功率 $P_o$ 下降。需<font color="orange">权衡</font>。
     *   通常选择 $\theta_c$ 在 $60^\circ \sim 80^\circ$ 之间。（$70^\circ$最佳）
 
-![[Pasted image 20250417210225.png]]
+![图片](Pasted-image-20250417210225.png)
 ### 5.3 晶体管谐振功率放大器动态分析 📈
 
 1.  **动态特性**: 研究 $i_c$ 与 $u_{CE}$ 在交流信号作用下的关系，即<font color="orange">动态负载线</font>。
@@ -1023,7 +1043,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   **Q点 (静态工作点，近似)**: $\omega t = 90^\circ$, $u_{CE} = V_{CC}$, $u_{BE} = -V_{BB}$ (若 $<-V_{BZ}$ 则 $i_c=0$), $i_c=g_c(-V_{BB}-V_{BZ})$。
         *   **A点 (峰值点)**: $\omega t = 0^\circ$, $u_{CE} = u_{cemin} = V_{CC} - U_{cm}$, $u_{BE} = u_{bemax} = -V_{BB} + U_{bm}$, $i_c = i_{cmax} = g_c (-V_{BB}- V_{BZ} + U_{bm} )$。
         *   连接 Q 点和 A 点即得动态特性线。
-        ![[Pasted image 20250417210342.png]]
+        ![图片](Pasted-image-20250417210342.png)
 4.  **工作状态分析**: 动态特性线与晶体管输出特性曲线簇的关系决定工作状态。
     *   **欠压状态 (Under-voltage)** 📉:
         *   负载 $R_p$ 较小 $\rightarrow$ $U_{cm} = I_{cm1} R_p$ 较小 $\rightarrow$ $|g_d|$ 较大 (线较陡)。
@@ -1040,13 +1060,13 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   临界状态电压利用系数: $\xi_{cr} = \frac{V_{CC} - U_{CES}}{V_{CC}} \approx 1 - \frac{U_{CES}}{V_{CC}}$。
         *   临界状态最大电流: $I_{cmax} = g_{cr} u_{ces} = g_{cr} (V_{CC} - U_{cm})$ (其中 $g_{cr}$ 为临界线斜率)。
 
- ![[Pasted image 20250417210430.png]]
+ ![图片](Pasted-image-20250417210430.png)
 5.  **负载特性 (Load Characteristics)**: 分析 $R_p$ 变化对性能的影响 (假设 $V_{CC}, V_{BB}, U_{bm}$ 不变)。
     *   **欠压区 ($R_p$ 小 $\rightarrow$ 临界)**: $R_p \uparrow \rightarrow i_{cmax}$ 基本不变 $\rightarrow I_{co}, I_{c1}$ 基本不变 (近似<font color="orange">恒流源</font>) $\rightarrow U_{c1}=I_{c1}R_p \uparrow \rightarrow P_o \uparrow \rightarrow \xi \uparrow \rightarrow \eta_c \uparrow \rightarrow P_c = P_= - P_o \downarrow$。
     *   **过压区 (临界 $\rightarrow R_p$ 大)**: $R_p \uparrow \rightarrow$ 进入过压 $\rightarrow i_{cmax} \downarrow$, $I_{co}, I_{c1} \downarrow$ (缓慢) $\rightarrow U_{c1} \approx V_{CC}$ 基本不变 (近似<font color="orange">恒压源</font>) $\rightarrow P_o = U_{c1}I_{c1}/2 \downarrow$ (缓慢) $\rightarrow P_= = V_{CC}I_{co} \downarrow$ (缓慢) ${\rightarrow \eta_c = P_o/P_= }$ 缓慢变化 (可能略升后降) $\rightarrow P_c = P_= - P_o \downarrow$ (缓慢)。
     *   **结论**: <font color="orange">临界状态</font>时，输出功率 $P_o$ 最大，效率也较高，是<font color="orange">最佳工作状态</font>。
     *   **注意点**: 实际应用中为保证可靠性或进行幅度调制，可能选择工作在轻微欠压或过压状态。
- ![[Pasted image 20250417210720.png]]
+ ![图片](Pasted-image-20250417210720.png)
  
 6.  **调制特性 (Modulation Characteristics)**:
     *   **集电极调幅 (Vcc 变化)**:
@@ -1094,19 +1114,19 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   对<font color="orange">直流分量</font> $I_{co}$，外部电路应<font color="orange">短路</font> (保证 $V_{CC}$ 加在集电极)。
         *   对<font color="orange">基波分量</font> $I_{c1}$，只应在<font color="orange">负载回路</font>上产生压降。
         *   对<font color="orange">高次谐波分量</font> $I_{cn}$，外部电路应<font color="orange">短路</font> (不消耗功率)。
-        * ![[Pasted image 20250610214044.png]]
+        * ![图片](Pasted-image-20250610214044.png)
     *   **常用元件**:
         *   <font color="orange">高频扼流圈</font> ($L_c$): 通直流，阻交流。
         *   <font color="orange">高频旁路电容</font> ($C_c$): 通交流，隔直流。
         *   <font color="orange">隔直电容</font> ($C_{C1}$): 通交流，隔直流 (用于耦合)。
-    *   **基极馈电**: 也有串联和并联形式，常用<font color="orange">自给偏压</font>方式 (电阻分压、射极电阻) 替代单独的 $V_{BB}$ 电源。![[Pasted image 20250610214102.png]]
+    *   **基极馈电**: 也有串联和并联形式，常用<font color="orange">自给偏压</font>方式 (电阻分压、射极电阻) 替代单独的 $V_{BB}$ 电源。![图片](Pasted-image-20250610214102.png)
 3.  **耦合网络 (匹配网络)**:
     *   **功能**:
         *   <font color="orange">阻抗匹配</font> 👍: 将实际负载阻抗 $R_L$ 变换为放大器所需的最佳负载阻抗 $R_p$ (通常指临界状态对应的阻抗)，实现效率最大，功率较大传输。
         *   <font color="orange">滤波</font> 🧹: 抑制不需要的频率成分 (谐波)。
         *   <font color="orange">隔离</font> 🛡: 减少多个器件之间的相互影响。
     *   **匹配概念 (非线性电路)**: 不同于线性电路的<font color="orange">共轭匹配</font>，高频功放的匹配是为了获得所需的 $R_p = (V_{CC} - U_{CES})^2 / (2 P_o)$，通常以<font color="orange">临界状态</font>为目标。
-    *   **输出匹配电路示例 (并联谐振型)**:![[Pasted image 20250611212211.png]]
+    *   **输出匹配电路示例 (并联谐振型)**:![图片](Pasted-image-20250611212211.png)
         *   采用 $\pi$ 型或 L 型网络、耦合回路等。
         *   **中介耦合回路 ($L_1C_1$)**: 连接放大器与天线回路。
         *   **天线回路 ($R_A, C_A, L_2, C_2$)**: 天线等效电路及调谐元件。
@@ -1121,7 +1141,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
     *   导通时: 进入<font color="orange">饱和区</font>，$v_c \approx V_{CES}$ (很小)，$i_c = i_{ces}$。
     *   截止时: 进入<font color="orange">截止区</font>，$i_c = 0$。
     *   理想情况下，管耗 $P_c = v_c i_c \approx 0$，效率 $\eta_c \approx 100\%$。
-3.  **电压开关型D类放大器**:![[Pasted image 20250610214233.png]]
+3.  **电压开关型D类放大器**:![图片](Pasted-image-20250610214233.png)
     *   采用<font color="orange">推挽结构</font>，两个管子交替开关。
     *   输入激励为极性相反的方波或脉冲。
     *   输出端 (如A点) 电压波形为<font color="orange">矩形波</font>，幅值约为 $V_{CC}-2U_{CES}$。
@@ -1389,7 +1409,7 @@ LC 振荡器主要由三部分构成：
     *   当振荡幅度因某种原因<font color="orange">增大</font>时 ($V_{OM} > V_{OMQ}$)，环路增益 $AF$ 应<font color="orange">小于 1</font>，使幅度<font color="orange">减小</font>。
     *   当振荡幅度因某种原因<font color="orange">减小</font>时 ($V_{OM} < V_{OMQ}$)，环路增益 $AF$ 应<font color="orange">大于 1</font>，使幅度<font color="orange">增大</font>。
     *   数学表达: 放大器的增益 $A$ 必须是输出幅度 $V_{OM}$ 的<font color="orange">减函数</font>。即在平衡点 Q 附近：
-        $\boxed{\frac{\partial A}{\partial V_{OM}} \Bigg|_{V_{OM}=V_{OMQ}} < 0}$
+        $\boxed{\frac{\partial A}{\partial V\_{OM}} \Bigg|\_{V\_{OM}=V\_{OMQ}} < 0}$
     *   **软自激**: 起振时 $AF > 1$，幅度自动增长，直至 $AF=1$ 达到稳定点 Q。无需外部激励。
     *   **硬自激**: (出现在某些非线性特性下) 起振时 $AF < 1$，需要外部信号<font color="orange">预加激励</font>，使幅度达到某个阈值以上才能进入稳定振荡区。(见 Slide 12 图示)
 
@@ -1808,41 +1828,11 @@ $V \cos(\omega_0 t) \cos(\Omega t) + V \sin(\omega_0 t) \sin(\Omega t) = V \cos(
 $V_{SSBU}(t) = V \cos(\omega_0 t \cdot \cos \Omega t - V \sin \omega_0 t \cdot \sin \Omega t$ (slide 25)
 $V_{SSBL}(t) = V \cos \omega_0 t \cdot \cos \Omega t + V \sin \omega_0 t \cdot \sin \Omega t$ (slide 25)
 需要对<font color="orange">调制信号</font>和<font color="orange">载波信号</font>都进行精确的90°移相。
-```mermaid
-graph LR
-    subgraph hartley_modulator_sg [哈特莱调制器]
-        mod_signal_node["调制信号<br>vm(t) = Vm cos(Ωt)"]
-        carrier_signal_node["载波信号<br>vc(t) = Vc cos(ωct)"]
-
-        ps_mod_node["90° 相移器<br>(调制信号通路)"]
-        ps_carrier_node["90° 相移器<br>(载波信号通路)"]
-
-        bm1_node["平衡调幅器 1"]
-        bm2_node["平衡调幅器 2"]
-
-        adder_sub_node["加法器 / 减法器<br>(Σ / Δ)"]
-
-        ssb_out_node["单边带输出"]
-
-        mod_signal_node --> bm1_node
-        carrier_signal_node --> bm1_node
-
-        mod_signal_node --> ps_mod_node
-        ps_mod_node -- "vm'(t) = Vm sin(Ωt)" --> bm2_node
-
-        carrier_signal_node --> ps_carrier_node
-        ps_carrier_node -- "vc'(t) = Vc sin(ωct)" --> bm2_node
-
-        bm1_node -- "vm(t)vc(t)" --> adder_sub_node
-        bm2_node -- "vm'(t)vc'(t)" --> adder_sub_node
-
-        adder_sub_node --> ssb_out_node
-    end
-```
+![图片](Pasted-image-20250826004857.png)
 #### (3) 修正的滤波相移法 (第三种方法/Hartley调制器)
 
 一种更实用的相移法，结合了滤波和相移的思想。
-![[Pasted image 20250601154713.png]]
+![图片](Pasted-image-20250601154713.png)
 
 ---
 
@@ -1894,7 +1884,7 @@ $V_B(t) = -V_{BB} + V_\Omega \cos(\Omega t)$
 *   DSB调制, SSB调制 → <font color="orange">同步检波</font>
 
 #### 1. 二极管峰值包络检波器 (用于AM信号)
-![[Pasted image 20250601160740.png]]
+![图片](Pasted-image-20250601160740.png)
 *   **基本电路结构**：
     *   输入回路：相当于末级中放的输出回路，输入AM信号。
     *   二极管D：相当于一个非线性元件。
@@ -1911,7 +1901,7 @@ $V_B(t) = -V_{BB} + V_\Omega \cos(\Omega t)$
 #### 2. 电路性能分析
 
 **(1) 传输系数 (检波效率 $K_d$)**
-$\boxed{K_d = \frac{\text{输出低频交流电压振幅}}{\text{输入已调波包络振幅}} = \frac{V_\Omega}{m V_0} = \cos\theta}$
+$\boxed{K_d = \frac{\text{输出低频交流电压振幅}}{\text{输入已调波包络振幅}} = \frac{V_\Omega}{m V_0} = \cos\theta\ \ }$
 其中 $\theta=(\frac{3\pi*R_d}{R})^{1/3}$ 为电流导通角。在大信号检波中，$\theta$ 为恒定值，故 $K_d$ 恒定，输入与输出之间为<font color="orange">线性关系</font>，称为<font color="orange">线性检波</font>。一般当 $gR > 50$，$K_d > 0.9$。
 
 **(2) 检波的等效输入电阻 $R_{id}$**
@@ -2059,7 +2049,7 @@ $V_m \approx V_0 + V_1 \cos(\Omega t)$
 *   载波信号（高频信号）: $v_0 = V_0 \cos(ω_0 t)$
 
 #### 调制方式对比
-![[Pasted image 20250522185754.png]]
+![图片](Pasted-image-20250522185754.png)
 上图左侧为<font color="orange">调幅 (AM)</font> 波形，右侧为<font color="orange">调频 (FM)</font> 波形。
 *   **AM (Amplitude Modulation - 幅度调制)**：载波的<font color="orange">幅度</font>随调制信号的瞬时值变化，频率和相位不变。
 *   **FM (Frequency Modulation - 频率调制)**：载波的瞬时<font color="orange">频率</font>随调制信号的瞬时值变化，幅度和初始相位不变。
@@ -2086,11 +2076,11 @@ $V_m \approx V_0 + V_1 \cos(\Omega t)$
     2.  经过<font color="orange">波形变换</font>电路，得到 $v_{AM-FM}(t)$ (幅度也随频率变化)
     3.  经过<font color="orange">振幅检波</font>电路，得到解调输出信号 $v_Ω(t)$
 
-![[Pasted image 20250522210026.png]]
+![图片](Pasted-image-20250522210026.png)
     *(a) 方框图 (b) 波形图*
 
 *   **鉴频特性曲线** (图8.1.2): 表示鉴频器输出电压与输入信号频率偏移之间的关系。理想情况下，在中心频率附近应为线性。
-![[Pasted image 20250522210046.png]]
+![图片](Pasted-image-20250522210046.png)
     横轴 $Δf$ 为频率偏移，纵轴 $V_A$ 为输出电压。
 
 #### 鉴频器的指标 ✨
@@ -2155,7 +2145,7 @@ $V_m \approx V_0 + V_1 \cos(\Omega t)$
 
 ##### (3) FM与PM比较表 (调制信号 $v_Ω(t)$，载波 $V_0 \cos(\omega_0 t)$)
 
-![[Pasted image 20250522185903.png]]
+![图片](Pasted-image-20250522185903.png)
 
 ##### (4) 以单音调制波为例 🎶
 设调制信号为 $v_Ω(t) = V_Ω \cos(Ωt)$。
@@ -2173,7 +2163,7 @@ $V_m \approx V_0 + V_1 \cos(\Omega t)$
     *   已调相信号: $a(t) = V_0 \cos(\omega_0 t + k_p V_Ω \cos(Ωt) + \theta_0) = V_0 \cos(\omega_0 t + m_p \cos(Ωt) + \theta_0)$
     *   调相指数: $\boxed{m_p = k_p V_Ω}$
     *   最大角频偏: $\Delta\omega_p = m_p Ω$
-        *   <font color="orange">注意</font>：PM的调制指数 $m_p$ 与调制信号频率 $Ω$ <font color="orange">无关</font>，但其最大角频偏与 $Ω$ 成<font color="orange">正比</font>。![[Pasted image 20250522210128.png]]
+        *   <font color="orange">注意</font>：PM的调制指数 $m_p$ 与调制信号频率 $Ω$ <font color="orange">无关</font>，但其最大角频偏与 $Ω$ 成<font color="orange">正比</font>。![图片](Pasted-image-20250522210128.png)
     *上图为FM，下图为PM。横轴为调制信号角频率 $Ω$。*
     *   FM: $m_f$ 随 $Ω$ 增大而减小， $\Delta\omega_m$ (即 $\Delta\omega_f$) 不变。
     *   PM: $m_p$ 不随 $Ω$ 变化， $\Delta\omega_m$ (即 $\Delta\omega_p$) 随 $Ω$ 增大而增大。
@@ -2191,7 +2181,7 @@ $a(t) = V_0 [\cos(\omega_0 t)\cos(m_f \sin(Ωt)) – \sin(\omega_0 t)\sin(m_f \s
 $\cos(m_f \sin(Ωt)) = J_0(m_f) + 2\sum_{n=1}^{\infty} J_{2n}(m_f) \cos(2nΩt)$
 $\sin(m_f \sin(Ωt)) = 2\sum_{n=0}^{\infty} J_{2n+1}(m_f) \sin((2n+1)Ωt)$
 $J_n(m_f)$ 是以 $m_f$ 为自变量的 $n$ 阶<font color="orange">第一类贝塞尔函数</font>。
-![[Pasted image 20250522210148.png]]
+![图片](Pasted-image-20250522210148.png)
 *图：不同阶数贝塞尔函数 $J_n(m)$ 随 $m$ 变化的曲线*
 
 最终展开式包含载波分量 $\omega_0$ 和无数对边频分量 $\omega_0 \pm nΩ$：
@@ -2252,12 +2242,11 @@ $a(t) = V_0 \{ J_0(m_f)\cos(\omega_0 t) + \sum_{n=1}^{\infty} J_n(m_f)[\cos((\om
 
 #### 8.3.2 间接调频原理 🔄
 利用调相器得到调频波。
-核心思想：$\omega(t) = \frac{d\theta(t)}{dt}$
-如果要使瞬时频率 $\omega(t) = \omega_0 + k_f v_Ω(t)$，则瞬时相位 $\theta(t) = \omega_0 t + k_f \int v_Ω(t)dt + \theta_0$。
-若使用调相器，其瞬时相位为 $\theta(t) = \omega_0 t + k_p v'_{Ω}(t) + \theta_0$。
-要使调相器输出为调频波，则需要 $k_p v'_{Ω}(t) = k_f \int v_Ω(t)dt$。
-这意味着，如果将调制信号 $v_Ω(t)$ 先积分，得到 $\int v_Ω(t)dt$，然后将其作为调相器的调制输入 $v'_{Ω}(t)$，则调相器的输出就是一个调频波。
-
+核心思想：$\\omega(t) = \\frac{d\\theta(t)}{dt}$
+如果要使瞬时频率 $\\omega(t) = \\omega\_0 + k\_f v\_\\Omega(t)$，则瞬时相位 $\\theta(t) = \\omega\_0 t + k\_f \\int v\_\\Omega(t)dt + \\theta\_0$。
+若使用调相器，其瞬时相位为 $\\theta(t) = \\omega\_0 t + k\_p v'\_\\Omega(t) + \\theta\_0$。
+要使调相器输出为调频波，则需要 $k\_p v'\_\\Omega(t) = k\_f \\int v\_\\Omega(t)dt$。
+这意味着，如果将调制信号 $v\_\\Omega(t)$ 先积分，得到 $\\int v\_\\Omega(t)dt$，然后将其作为调相器的调制输入 $v'\_\\Omega(t)$，则调相器的输出就是一个调频波。
 
 *图 8.3.1 借助于调相器得到调频波*
 1.  调制信号首先经过一个<font color="orange">积分器</font>。
@@ -2266,7 +2255,6 @@ $a(t) = V_0 \{ J_0(m_f)\cos(\omega_0 t) + \sum_{n=1}^{\infty} J_n(m_f)[\cos((\om
 4.  调相器输出即为调频波。
 
 ---
-
 ### 8.4 变容二极管调频 💎
 
 这是一种<font color="orange">直接调频</font>方法。
@@ -2314,7 +2302,7 @@ $\omega(t) \approx \omega_0 [1 + \frac{\gamma}{2}m\cos(Ωt) + \frac{\gamma(\gamm
 主体是 LC 互感耦合正弦振荡电路。
 
 **举例**: 90MHz 直接调频电路 (图 8.4.4)
-![[Pasted image 20250522210338.png]]
+![图片](Pasted-image-20250522210338.png)
 *(a) 直接调频电路 (b) 高频通路*
 
 ---
@@ -2326,7 +2314,7 @@ $\omega(t) \approx \omega_0 [1 + \frac{\gamma}{2}m\cos(Ωt) + \frac{\gamma(\gamm
 变容二极管接入振荡回路有两种方式：
 1.  与石英晶体<font color="orange">相串联</font>。
 2.  与石英晶体<font color="orange">相并联</font>。
-变容二极管与晶体并联连接方式有一个较大的缺点，就是变容管参数的不稳定性直接严重地影响调频信号中心频率的稳定度。因而用得比较广泛的还是变容管**与石英晶体相串联**的方式。![[Pasted image 20250522210356.png]]
+变容二极管与晶体并联连接方式有一个较大的缺点，就是变容管参数的不稳定性直接严重地影响调频信号中心频率的稳定度。因而用得比较广泛的还是变容管**与石英晶体相串联**的方式。![图片](Pasted-image-20250522210356.png)
 *图 8.5.1 变容管与晶体的两种连接方式及其电抗曲线*
 
 **电路示例**: Pierce Oscillators (c-b型) 振荡器 (图 8.5.2)
@@ -2349,7 +2337,7 @@ $\omega(t) \approx \omega_0 [1 + \frac{\gamma}{2}m\cos(Ωt) + \frac{\gamma(\gamm
 ##### 1. 数学模型 (思想)
 先将输入调频信号和经过<font color="orange">相移网络</font>后的信号<font color="orange">相加</font> (或相减)，产生振幅反映附加相位 $\Delta\theta$ 变化的调幅波，而后通过<font color="orange">包络检波器</font>检出振幅的变化，就可完成鉴相功能。
 ##### 2. 实现电路 (图 8.8.1)
-![[Pasted image 20250522210447.png]]
+![图片](Pasted-image-20250522210447.png)
 *图 8.8.1 相位鉴频器原理电路*
 *   $L_1C_1$ 和 $L_2C_2$ 构成<font color="orange">互感耦合的双调谐回路</font>，作为相位鉴频器的<font color="orange">相移网络</font>。
 *   两个二极管 ($D_1, D_2$) 包络检波器构成相位鉴频器的<font color="orange">平衡鉴相电路</font>。
@@ -2357,29 +2345,28 @@ $\omega(t) \approx \omega_0 [1 + \frac{\gamma}{2}m\cos(Ωt) + \frac{\gamma(\gamm
 *   $C_4$ (图中标为 $C_M$ 或 $C_C$) 为耦合电容，对输入信号频率呈短路；对直流和低频输出信号呈开路，用来为包络检波器的平均电流提供通路。
 
 ##### 3. 原理分析
-设输入调频信号 $a(t) = V_0 \cos(\omega_0 t + m_f \sin(Ωt)) = V_0 \cos(\theta_0(t))$
-经过相移网络后得到 $b(t) = V_{bm} \cos[\theta_0(t) + \theta(\omega_0) + \Delta\theta(t)]$
-其中 $\theta(\omega_0)$ 是中心频率时的固定相移，$\Delta\theta(t)$ 是由频率变化引起的附加相移。
-通常调整使 $\theta(\omega_0) = -\pi/2$。
-则 $b(t) = V_{bm} \cos[\theta_0(t) - \pi/2 + \Delta\theta(t)]$
-上检波器输入为 $a(t)+b(t)$，下检波器输入为 $a(t)-b(t)$ (或类似组合，取决于 $b(t)$ 如何从 $L_2$ 两端取出)。
-课件中的分析 (P46-P51) 是基于 $V_{12}$ (代表 $a(t)$) 和 $V_{ab}$ (代表 $b(t)$) 的矢量叠加。
-$D_1$ 检波电压 $V_{d1}$ 正比于 $| \dot{V}_{12} + \frac{1}{2}\dot{V}_{ab} |$
-$D_2$ 检波电压 $V_{d2}$ 正比于 $| \dot{V}_{12} - \frac{1}{2}\dot{V}_{ab} |$
-输出电压 $V_o = V_{d1} - V_{d2}$。
-当输入信号频率偏离中心频率时，$\dot{V}_{ab}$ 相对于 $\dot{V}_{12}$ 的相位会变化 (即 $\Delta\theta(t)$ 变化)，导致 $V_{d1}$ 和 $V_{d2}$ 不等，从而产生输出电压。
+设输入调频信号 $a(t) = V\_0 \\cos(\\omega\_0 t + m\_f \\sin(\\Omega t)) = V\_0 \\cos(\\theta\_0(t))$
+经过相移网络后得到 $b(t) = V\_{bm} \\cos[\\theta\_0(t) + \\theta(\\omega\_0) + \\Delta\\theta(t)]$
+其中 $\\theta(\\omega\_0)$ 是中心频率时的固定相移，$\\Delta\\theta(t)$ 是由频率变化引起的附加相移。
+通常调整使 $\\theta(\\omega\_0) = -\\pi/2$。
+则 $b(t) = V\_{bm} \\cos[\\theta\_0(t) - \\pi/2 + \\Delta\\theta(t)]$
+上检波器输入为 $a(t)+b(t)$，下检波器输入为 $a(t)-b(t)$ (或类似组合，取决于 $b(t)$ 如何从 $L\_2$ 两端取出)。
+课件中的分析 (P46-P51) 是基于 $V\_{12}$ (代表 $a(t)$) 和 $V\_{ab}$ (代表 $b(t)$) 的矢量叠加。
+$D\_1$ 检波电压 $V\_{d1}$ 正比于 $| \\dot{V}\_{12} + \\frac{1}{2}\\dot{V}\_{ab} |$
+$D\_2$ 检波电压 $V\_{d2}$ 正比于 $| \\dot{V}\_{12} - \\frac{1}{2}\\dot{V}\_{ab} |$
+输出电压 $V\_o = V\_{d1} - V\_{d2}$。
+当输入信号频率偏离中心频率时，$\\dot{V}\_{ab}$ 相对于 $\\dot{V}\_{12}$ 的相位会变化 (即 $\\Delta\\theta(t)$ 变化)，导致 $V\_{d1}$ 和 $V\_{d2}$ 不等，从而产生输出电压。
 
 详细数学推导 (P47-P51) 表明，对于<font color="orange">平衡鉴相电路</font>：
-$V_1(t) - V_2(t) = \sqrt{V_0^2 + V_{bm}^2} [M\sin\Delta\theta(t) + \frac{1}{8}M^3\sin^3\Delta\theta(t) + \dots]$
-其中 $M = \frac{2V_0 V_{bm}}{V_0^2 + V_{bm}^2}$。
-当 $\Delta\theta(t)$ 较小时，$\sin\Delta\theta(t) \approx \Delta\theta(t)$，输出近似与 $\Delta\theta(t)$ (即频偏) 成正比。
-平衡结构可以<font color="orange">抵消直流项</font>和 $\sin\Delta\theta$ 的<font color="orange">二次方项及其以上的各偶次方项</font>，并使 $\sin\Delta\theta$ 项幅值增强为二倍，改善线性。
+$V\_1(t) - V\_2(t) = \\sqrt{V\_0^2 + V\_{bm}^2} [M\\sin\\Delta\\theta(t) + \\frac{1}{8}M^3\\sin^3\\Delta\\theta(t) + \\dots]$
+其中 $M = \\frac{2V\_0 V\_{bm}}{V\_0^2 + V\_{bm}^2}$。
+当 $\\Delta\\theta(t)$ 较小时，$\\sin\\Delta\\theta(t) \\approx \\Delta\\theta(t)$，输出近似与 $\\Delta\\theta(t)$ (即频偏) 成正比。
+平衡结构可以<font color="orange">抵消直流项</font>和 $\\sin\\Delta\\theta$ 的<font color="orange">二次方项及其以上的各偶次方项</font>，并使 $\\sin\\Delta\\theta$ 项幅值增强为二倍，改善线性。
 
 <font color="orange">注意点</font>: 相位鉴频器对输入信号的<font color="orange">幅度变化敏感</font>，因此通常在其前端需要加<font color="orange">限幅器</font>。
-
 #### 8.8.2 相位鉴频器回路参数的选择
 鉴频特性曲线的形状与耦合系数 $\eta = kQ$ (或 $M=k\sqrt{Q_1Q_2}$) 有关。
-![[Pasted image 20250522210533.png]]
+![图片](Pasted-image-20250522210533.png)
 *图 8.8.4 对应于不同耦合因数 (或失谐量 $\xi$) 的鉴频特性曲线*
 *   耦合很弱 ($\eta$ 很小) 时，<font color="orange">线性范围小</font>，鉴频跨导高。
 *   耦合较紧 ($\eta$ 较大) 时，<font color="orange">线性范围大</font>，鉴频跨导小。
@@ -2398,15 +2385,15 @@ $V_1(t) - V_2(t) = \sqrt{V_0^2 + V_{bm}^2} [M\sin\Delta\theta(t) + \frac{1}{8}M^
 如果 $V_{d1}+V_{d2}$ 能保持恒定，则输出电压将不受输入信号幅度变化的影响。
 
 #### 1. 工作原理
-![[Pasted image 20250522210628.png]]
+![图片](Pasted-image-20250522210628.png)
 *图：比例鉴频器电路 (P58)。注意二极管 $D_2$ 方向与相位鉴频器相反，并增加大电容 $C_6$。*
 关键改动：
 1.  其中一个二极管 ($D_2$) <font color="orange">反接</font>。
 2.  在两个检波器负载电阻两端并联一个<font color="orange">大电容</font> $C_6$(时间常数远大于最低调制频率周期)。
 这使得 $V_{d1} + V_{d2} = V_{C6} \approx \text{常数}$。$V_{C6}$ 的电压会缓慢跟随输入信号平均幅度的变化，从而提供动态限幅。
 输出电压从 $R_1, R_2$ 的中点和 $L_3$ 的中心抽头取出（或类似差分结构）。
-$v'_o = K_d(V_{d1} + V_{d2}) = V_{C6} \approx \text{常数}$ (指对快速幅度变化)
-$v_o = \frac{K_d}{2} (V_{d1} - V_{d2})$。比例鉴频器的输出<font color="orange">恰好等于</font>相位鉴频器输出的<font color="orange">一半</font>。
+$v'_o = K_d(V\_{d1} + V\_{d2}) = V\_{C6} \approx \text{常数}$ (指对快速幅度变化)
+$v_o = \frac{K_d}{2} (V\_{d1} - V\_{d2})$。比例鉴频器的输出<font color="orange">恰好等于</font>相位鉴频器输出的<font color="orange">一半</font>。
 
 #### 2. 动态限幅特性
 *   当输入信号幅度 $V_{12}$ 增大 $\uparrow$ 时，检波电流 $i_d$ 增大 $\uparrow$。
@@ -2452,45 +2439,10 @@ $v_o = \frac{K_d}{2} (V_{d1} - V_{d2})$。比例鉴频器的输出<font color="o
 ---
 ## 全书总结
 ### 1.信号的发射与接收
-```mermaid
-graph TD
-    subgraph "发射机 (TRANSMITTER)"
-        TR_A["音频信号 <br/> (麦克风等) <br/> 第1章"] --> TR_B["音频放大器 <br/> (低频)"]
-        TR_B --> TR_D["调制器 <br/> (调幅: 第7章 / 调频: 第8章) <br/> (需要时使用第4章非线性电路)"]
-        TR_C["振荡器 <br/> (LC, 晶体) <br/> 第6章 <br/> (使用第2章进行调谐)"] --> TR_D
-        TR_C --> TR_E_OPT["(可选)<br/>倍频器/混频器 <br/> (第4章混频器, 第5章倍频器) <br/> (使用第2章进行滤波)"]
-        TR_D --> TR_E_OPT
-        TR_E_OPT --> TR_F["高频功率放大器 <br/> (丙类等) <br/> 第5章 <br/> (使用第2章进行负载/匹配)"]
-        TR_D --> TR_F
-        TR_F --> TR_G["发射天线 <br/> 第1章"]
-    end
-
-    subgraph "无线电波传播 (第1章)"
-        PROP["~ 电磁波传播 ~ <br/> (地波, 天波, 空间波)"]
-    end
-    TR_G ~~~ PROP
-
-    subgraph "接收机 (超外差式 RECEIVER)"
-        REC_A["接收天线 <br/> 第1章"] --> REC_B["高频放大器 (RF放大) <br/> (调谐式, 第3章) <br/> (使用第2章调谐信号频率fs) <br/> (噪声系数重要)"]
-        REC_B --> REC_D["混频器 <br/> 第4章 <br/> (使用第2章进行输入/输出滤波)"]
-        REC_C["本机振荡器 (LO) <br/> (LC, 晶体) <br/> 第6章 <br/> (使用第2章调谐本振频率fLO)"] --> REC_D
-        REC_D -- "中频信号 (fIF)" --> REC_E["中频放大器 (IF放大) <br/> (调谐式, 第3章) <br/> (使用第2章进行固定中频滤波) <br/> (例如双调谐回路)"]
-        REC_E --> REC_F["解调器 (检波器) <br/> (调幅: 第7章 / 调频: 第8章) <br/> (例如: 包络检波器; <br/> 鉴频器)"]
-        REC_F --> REC_G["音频放大器 <br/> (低频)"]
-        REC_G --> REC_H["扬声器 <br/> 第1章"]
-    end
-    PROP ~~~ REC_A
-
-    %% 样式 (可选, 但能让图表更清晰)
-    classDef transmitter fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef receiver fill:#ccf,stroke:#333,stroke-width:2px;
-    classDef propagation fill:#cfc,stroke:#333,stroke-width:2px;
-    class TR_A,TR_B,TR_C,TR_D,TR_E_OPT,TR_F,TR_G transmitter;
-    class REC_A,REC_B,REC_C,REC_D,REC_E,REC_F,REC_G,REC_H receiver;
-    class PROP propagation;
-```
-![[电磁波与电磁场图片/Figure_2.png]]
-![[Figure_3.png]]
+![图片](Pasted-image-20250826001900.png)
+![图片](Pasted-image-20250826001955.png)
+![图片](Figure_2.png)
+![图片](Figure_3.png)
 ### 2.对信号的操作
 对信号进行操作的主要方法可以归纳为以下几个方面，这些方法贯穿了无线电发射与接收系统的各个环节：
 1.  **信号的产生 (振荡 Signal Generation / Oscillation)**

@@ -1,7 +1,21 @@
-23级信息工程5班  张哲轩
-2025-06-22
-
 ---
+title: 微机原理与接口技术
+date: 2025-06-22T14:00:00+08:00
+draft: false
+summary: 本笔记根据华南理工大学2025年第一学期《微机原理与接口技术》课件整理，系统梳理了课程的核心概念。
+tags:
+  - 微机
+  - 单片机
+  - 汇编语言
+  - 大二下
+categories:
+  - 专业学习
+series:
+  - 微机原理与接口技术笔记
+Toc: true
+math: true
+---
+
 ## 📖 微机系统与接口 - 课程概述
 
 *   **本门课程安排:**
@@ -142,7 +156,7 @@
             *   **功能:** 传递 **地址** 信息。
             *   **方向:** **单向** (CPU -> 内存/I/O接口)。
             *   **作用:** 决定CPU可访问的 **内存容量** 大小。
-                *   $\boxed{N \text{ 条地址线可访问 } 2^N \text{ 个存储单元}}$
+                *   $\boxed{N \text{ 条地址线可访问 } 2^N \text{ 个存储单元}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }$
                 *   例: 16条 -> $2^{16}$ = 64 KB； 20条 -> $2^{20}$ = 1 MB。
         *   **数据总线 (DB - Data Bus):**
             *   **功能:** 传递 **数据** 信息。
@@ -609,8 +623,8 @@
 *   **表示**: `MOV reg, 位移量[寄存器]` 或 `MOV reg, [寄存器 + 位移量]`
 *   **默认段**: 规则同寄存器间接寻址 (即 `BX, SI, DI` 默认 DS，`BP` 默认 SS)。
 *   **物理地址**:
-    *   若用 SI: $\boxed{PA = DS \times 16 + [SI] + \text{位移量}}$
-    *   若用 BP: $\boxed{PA = SS \times 16 + [BP] + \text{位移量}}$ (其他类似)
+    *   若用 SI: $\boxed{PA = DS \times 16 + [SI] + \text{位移量}\ \ \ \ \ }$
+    *   若用 BP: $\boxed{PA = SS \times 16 + [BP] + \text{位移量}\ \ \ \ \ }$ 
 *   **例 3.12**: `MOV BX, COUNT[SI]` (假设 `COUNT` 是一个值为 `4000H` 的位移量)
     *   📝 设 `DS=3000H`, `SI=2000H`, `COUNT=4000H`, 内存 `(36000H)=78H`, `(36001H)=56H`。
     *   $EA = [SI] + COUNT = 2000H + 4000H = 6000H$。
@@ -641,8 +655,8 @@
 *   **表示**: `MOV reg, 位移量[基址寄存器][变址寄存器]` 或 `MOV reg, [基址寄存器 + 变址寄存器 + 位移量]` 等。
 *   **默认段**: 规则同基址变址寻址 (即 `BX` 默认 DS，`BP` 默认 SS)。
 *   **物理地址**:
-    *   若用 BX+SI: $\boxed{PA = DS \times 16 + [BX] + [SI] + \text{位移量}}$
-    *   若用 BP+DI: $\boxed{PA = SS \times 16 + [BP] + [DI] + \text{位移量}}$ (其他类似)
+    *   若用 BX+SI: $\boxed{PA = DS \times 16 + [BX] + [SI] + \text{位移量}\ \ \ \ \ }$
+    *   若用 BP+DI: $\boxed{PA = SS \times 16 + [BP] + [DI] + \text{位移量}\ \ \ \ \ }$ 
 *   **例 3.14**: `MOV AX, MASK[BX][SI]` (假设 `MASK` 是值为 `0200H` 的位移量)
     *   📝 设 `DS=2000H`, `BX=1500H`, `SI=0300H`, `MASK=0200H`, 内存 `(21A00H)=BFH`, `(21A01H)=26H`。
     *   $EA = [BX] + [SI] + MASK = 1500H + 0300H + 0200H = 1A00H$。
@@ -772,14 +786,14 @@
 *   **2) `LDS` 将双字送到寄存器和DS指令 (Load Pointer using DS)**
     *   格式: `LDS 目的, 源`
     *   功能: 从源操作数（内存地址）加载一个32位数（双字）到指定的目的寄存器和`DS`段寄存器。
-    *   操作: $\boxed{目的寄存器 \leftarrow [源地址]}$ , $\boxed{DS \leftarrow [源地址+2]}$
+    *   操作: $\boxed{目的寄存器 \leftarrow [源地址]}$ , $\boxed{DS \leftarrow [源地址+2]\ \ \ \ }$
     *   操作数: 源是内存双字单元, 目的是16位通用寄存器 (常用`SI`)。
     *   ❗注意: 不能使用段寄存器作为目的操作数。
 
 *   **3) `LES` 将双字送到寄存器和ES指令 (Load Pointer using ES)**
     *   格式: `LES 目的, 源`
     *   功能: 类似于`LDS`，但加载的是`ES`段寄存器。
-    *   操作: $\boxed{目的寄存器 \leftarrow [源地址]}$ , $\boxed{ES \leftarrow [源地址+2]}$
+    *   操作: $\boxed{目的寄存器 \leftarrow [源地址]}$ , $\boxed{ES \leftarrow [源地址+2]\ \ \ \ }$
     *   操作数: 源是内存双字单元, 目的是16位通用寄存器 (常用`DI`)。
 
 **4. 标志传送指令 (Flag Transfers)**
@@ -1625,15 +1639,7 @@ END START ; 指定程序入口点为 START
 
 *   **目标:** 如果 `AL == BL`，则将 'Y' 存入 DL；否则，将 'N' 存入 DL。最后通过 DOS 功能调用显示 DL 中的字符。
 *   **流程图逻辑:**
-    ```mermaid
-    graph TD
-        A[开始] --> B{AL == BL?};
-        B -- Y --> C[DL ← 'Y'];
-        B -- N --> D[DL ← 'N'];
-        C --> E[MOV AH, 2 / INT 21H 输出字符];
-        D --> E;
-        E --> F[结束];
-    ```
+![图片](Pasted-image-20250825203707.png)
 *   **实现方法一 (课件 P14):** 先判断相等 (`JE`)，再处理不等 (`JNE`)。
     ```assembly
     CMP AL, BL      ; 比较 AL 和 BL
@@ -1715,17 +1721,7 @@ END START ; 指定程序入口点为 START
     *   同一个字母的大小写 ASCII 码相差 20H ('a' - 'A' = 61H - 41H = 20H)。
     *   需要判断 AL 是否在 'A' 和 'Z' 之间。
 *   **流程图逻辑 (课件 P17 右侧):**
-    ```mermaid
-    graph TD
-        Start --> CheckA{AL < 'A'?};
-        CheckA -- Y --> Exit;
-        CheckA -- N --> CheckZ{AL > 'Z'?};
-        CheckZ -- Y --> Exit;
-        CheckZ -- N --> Convert[AL ← AL + 20H];
-        Convert --> Process[处理/后续代码];
-        Exit --> Process;
-        Process --> End;
-    ```
+![图片](Pasted-image-20250825203848.png)
 *   **实现代码 (参考 P17 左侧):**
     ```assembly
     CMP AL, 'A'     ; 比较 AL 和 'A'
@@ -1750,19 +1746,7 @@ END START ; 指定程序入口点为 START
 
 *   **问题:** 设某学生的英语成绩（0-100范围）已存放在 AL 寄存器中。根据成绩打印等级：低于 60 分打印 'F'；高于等于 85 分打印 'G'；否则（即 >= 60 且 < 85）打印 'P'。
 *   **流程图 (课件 P18 右侧):**
-    ```mermaid
-    graph TD
-        Start --> Input[AL ← 英语成绩]
-        Input --> Check60{AL < 60?};
-        Check60 -- Y --> PrintF[打印 'F'];
-        Check60 -- N --> Check85{AL ≥ 85?};
-        Check85 -- Y --> PrintG[打印 'G'];
-        Check85 -- N --> PrintP[打印 'P'];
-        PrintF --> End;
-        PrintG --> End;
-        PrintP --> End;
-        End --> Finish[结束];
-    ```
+![图片](Pasted-image-20250825203956.png)
 *   **实现代码 (参考 P19):**
     ```assembly
     CMP AL, 60      ; 比较 AL 和 60
@@ -2017,7 +2001,7 @@ END START ; 指定程序入口点为 START
     *   **辅助存储器 (外存)** 💿
     *   **大容量存储器** 🗄️
     *   **规律**: <font color="orange">越靠近CPU的存储器速度越快，但容量通常越小，成本越高</font>。
-![[Pasted image 20250603222750.png]]
+![图片](Pasted-image-20250603222750.png)
 *   **内存 vs 外存**: (P3)
     *   **<font color="orange">外存</font>**: 能长期保存信息，断电不丢失（如硬盘、光盘、U盘）。
     *   **<font color="orange">内存</font> (主存)**: 通常指主板上的存储部件（如内存条），用于存放**当前正在执行**的数据和程序。速度快，但一般是**易失**的，关闭电源或断电后数据会丢失。
@@ -2113,7 +2097,7 @@ END START ; 指定程序入口点为 START
         *   **读操作**: $\overline{CS}=0, \overline{OE}=0, \overline{WE}=1$
         *   **写操作**: $\overline{CS}=0, \overline{OE}=1, \overline{WE}=0$ (注意：$\overline{OE}$通常在写操作时置高电平，防止数据冲突)
         *   **高阻态 (未选中)**: $\overline{CS}=1$ (此时数据线呈高阻态，与总线断开)
-						![[Pasted image 20250605115537.png]]
+						![图片](Pasted-image-20250605115537.png)
 ---
 
 ### 4. 存储器的连接与扩充 🔌
@@ -2134,7 +2118,7 @@ END START ; 指定程序入口点为 START
         *   CPU的访存/访IO信号 ($IO/\overline{M}$ 或 $M/\overline{IO}$) 通常参与片选译码逻辑，确保只有在访问存储器时才选中存储芯片。
 
 *   **存储器容量扩充方法**: 当单个存储芯片的容量或位数不能满足系统要求时，需要使用多个芯片进行扩充。
-    *   **<font color="orange">位数扩充 (位扩展)</font>**: (P11-P12)![[Pasted image 20250605115945.png]]
+    *   **<font color="orange">位数扩充 (位扩展)</font>**: (P11-P12)![图片](Pasted-image-20250605115945.png)
         *   **目的**: 增加存储器系统的**数据位数 (字长)**。当芯片的数据位数小于系统数据总线宽度时采用。
         *   **方法**: 将多个芯片**并联**工作。
             *   地址线: 所有芯片的地址线**并联**，连接到CPU的低位地址线。
@@ -2145,7 +2129,7 @@ END START ; 指定程序入口点为 START
             *   需要芯片数: $8 / 4 = 2$ 片。
             *   连接见 P12 图示。
 
-    *   **<font color="orange">字数扩充 (字扩展)</font>**: (P13-P14)![[Pasted image 20250605120107.png]]
+    *   **<font color="orange">字数扩充 (字扩展)</font>**: (P13-P14)![图片](Pasted-image-20250605120107.png)
         *   **目的**: 增加存储器系统的**存储单元数量 (地址空间)**。当芯片的存储单元数小于系统所需地址空间时采用。
         *   **方法**:
             *   地址线: 所有芯片的**低位地址线** (片内地址) **并联**。
@@ -2157,7 +2141,7 @@ END START ; 指定程序入口点为 START
             *   2716有11根地址线 ($2^{11}=2K$)。CPU需要13根地址线来寻址8K ($2^{13}=8K$)。
             *   连接: CPU的A0-A10接所有芯片的A0-A10。CPU的D0-D7接所有芯片的D0-D7。$\overline{OE}$ (接$\overline{RD}$), $\overline{CE}$ (即$\overline{CS}$) 分别控制。CPU的**A11, A12** (高位地址线) 通过一个**2-4译码器**产生4个独立的片选信号，分别接到4片2716的$\overline{CE}$端。见 P14 图示 (图中是8088系统，M/IO参与译码)。
 
-    *   **<font color="orange">位字双重扩充</font>**: (P15)![[Pasted image 20250605120554.png]]
+    *   **<font color="orange">位字双重扩充</font>**: (P15)![图片](Pasted-image-20250605120554.png)
         *   当芯片的位数和字数都不满足要求时，同时进行位扩展和字扩展。
         *   **[例]** 用 256×4 位的存储芯片组成 1K×8 (1KB)位的RAM。
             *   字数扩展: $1K / 256 = 4$ 倍。
@@ -2179,12 +2163,12 @@ END START ; 指定程序入口点为 START
         *   优点: **最简单**，无需译码器。
         *   缺点: 地址重叠**严重**，可选择的芯片数量受地址线数量限制，需要软件保证每次只选中一个芯片。
 
-*   **译码器示例: 74LS138**: (P18)![[Pasted image 20250605120721.png]]
+*   **译码器示例: 74LS138**: (P18)![图片](Pasted-image-20250605120721.png)
     *   功能: 3线-8线译码器。根据3个输入地址线 (A, B, C) 的状态，在8个输出端 ($\overline{Y0} \sim \overline{Y7}$) 中选择一个输出**低电平**。
     *   使能端: 有三个使能端 ($G1, \overline{G2A}, \overline{G2B}$)。只有当 $G1=1$ 且 $\overline{G2A}=0$ 且 $\overline{G2B}=0$ 时，译码器才工作。否则所有输出端均为高电平。
 
 *   **地址译码实例分析**:
-    *   **[例 P19]**: 2764 (8K×8 EPROM) 的地址范围确定。![[Pasted image 20250605120746.png]]
+    *   **[例 P19]**: 2764 (8K×8 EPROM) 的地址范围确定。![图片](Pasted-image-20250605120746.png)
         *   2764需要A0-A12 (13根地址线)。
         *   74LS138译码器输入为A13, A14, A15。
         *   使能条件: $\overline{G2B}=0$ (接 $\overline{MEMR}$，低有效表示内存读), $G2A=0$ (接地?), $G1=1$ (由A19-A16经与非门产生，假设A19-A16=1111时G1=1)。
@@ -2392,7 +2376,7 @@ END START ; 指定程序入口点为 START
 *   **2) 条件传送方式** (也称<font color="orange">查询式传送方式</font>) ❓
     *   原因：CPU与外设交换数据通常<font color="orange">不满足</font>无条件传送的条件（即外设并非总准备好）。
     *   过程：传送前，CPU先执行IN指令读取外设<font color="orange">状态端口</font>，检查其状态位（如Ready/Busy）。如果外设未准备好（如数据未到或正忙），CPU需<font color="orange">反复执行</font>读状态指令，不断检测，直到外设准备好/不忙时，才执行数据传送指令。
-    *   **查询式输入** (图6.3, 图6.4)![[Pasted image 20250605194124.png]]
+    *   **查询式输入** (图6.3, 图6.4)![图片](Pasted-image-20250605194124.png)
         *   **电路**：包括输入数据口（锁存器+缓冲器）和状态口（D触发器+三态门，产生<font color="orange">READY</font>信号）。
         *   **工作过程**：
             1.  输入设备准备好数据，发选通信号，数据打入锁存器，同时置位D触发器 (Q=1, READY=1)。
@@ -2415,7 +2399,7 @@ END START ; 指定程序入口点为 START
             ; --- 全部传送完 ---
                 ...               ; 结束
             ```
-    *   **查询式输出** (图6.5, 图6.6)![[Pasted image 20250605194731.png]]
+    *   **查询式输出** (图6.5, 图6.6)![图片](Pasted-image-20250605194731.png)
         *   **电路**：包括输出数据口（锁存器）和状态口（D触发器+三态门，产生<font color="orange">BUSY</font>信号）。
         *   **工作过程**：
             1.  CPU准备输出数据，先执行IN指令读状态口，检查<font color="orange">BUSY</font>状态 (D触发器Q端，假设在D1位读入)。BUSY=1表示外设忙，BUSY=0表示空闲。
@@ -2454,7 +2438,7 @@ END START ; 指定程序入口点为 START
 ---
 
 **3. DMA方式 (Direct Memory Access)** 🚚💨
-![[Pasted image 20250605195307.png]]
+![图片](Pasted-image-20250605195307.png)
 *   **动机**：对于高速I/O设备（如磁盘）或需要成组数据交换时，即使是中断方式，CPU频繁介入处理中断和数据传送，也可能显得<font color="orange">太慢</font>。
 *   **定义**：<font color="orange">直接存储器存取</font>方式。在存储器和外设之间建立起<font color="orange">直接的高速数据传送通道</font>。
 *   **核心部件**：<font color="orange">DMA控制器 (DMAC)</font>。
@@ -2544,7 +2528,7 @@ END START ; 指定程序入口点为 START
     *   **与CPU接口**: $D_0 \sim D_7, \overline{RD}, \overline{WR}, A_1, A_0, \overline{CS}, RESET$。
     *   **与外设接口**: $PA_0 \sim PA_7, PB_0 \sim PB_7, PC_0 \sim PC_7$。
 
-*   **内部结构图**: (参考课件 P3)![[Pasted image 20250424213504.png]]
+*   **内部结构图**: (参考课件 P3)![图片](Pasted-image-20250424213504.png)
 ```mermaid
 graph TD
     %% CPU Subgraph
@@ -2902,7 +2886,7 @@ MSB                                      LSB
 ### 11. 8086系统中8255端口地址确定 🗺️
 
 *   **背景**: 8086有16位数据总线 ($D_0 \sim D_{15}$)。8255是8位接口芯片 ($D_0 \sim D_7$)。
-	![[Pasted image 20250605214322.png]]
+	![图片](Pasted-image-20250605214322.png)
 *   **连接方式与地址**:
     *   **情况1: 8255 $D_0 \sim D_7$ 连接到 CPU $D_0 \sim D_7$ (低8位)**
         *   CPU访问时，使用<font color="orange">偶地址</font>。
@@ -2964,7 +2948,7 @@ MSB                                      LSB
         *   提供**系统调用**途径，通过 `INT n` 指令调用操作系统或BIOS提供的服务程序（中断服务程序），方便控制标准外设（例如 `INT 21H` 是DOS系统功能调用）。
 
 2.  **中断源和中断分类** 🔍
-    *   **<font color="orange">中断源</font>**: 引起中断的原因或发出中断请求的来源。![[Pasted image 20250424213924.png]]
+    *   **<font color="orange">中断源</font>**: 引起中断的原因或发出中断请求的来源。![图片](Pasted-image-20250424213924.png)
     *   **8086中断分类**: 主要分为两大类：
         *   **1) <font color="orange">外部中断</font> (硬件中断)**: 由CPU外部事件引起，通过CPU的特定引脚引入。
             *   **<font color="orange">NMI</font> (Non-Maskable Interrupt, 不可屏蔽中断)(类型2)**: 通过NMI引脚引入，优先级高，不受中断标志位IF的影响，通常用于处理紧急事件（如电源掉电、存储器校验错）。
@@ -3021,7 +3005,7 @@ MSB                                      LSB
 #### 8.1.2 中断的响应与处理过程
 
 **8086的中断响应与处理流程**  主要分为三个阶段：
-![[Pasted image 20250424214028.png]]
+![图片](Pasted-image-20250424214028.png)
 1.  **<font color="orange">中断查询</font>** (Interrupt Query) ❓
     *   CPU在**每条指令执行结束**后，按特定顺序检查是否有中断请求发生：
         *   内部中断 (INT n, INTO, 除法错等)
@@ -3083,7 +3067,7 @@ MSB                                      LSB
 MCS-51单片机是一个集成了多种功能部件的微型计算机系统。其主要组成部分通过<font color="orange">内部总线</font>连接。
 
 **核心组成部件：**
-					![[Pasted image 20250607192704.png]]
+					![图片](Pasted-image-20250607192704.png)
 
 1.  🧠 **8位CPU (1)**: 中央处理单元，负责指令译码和执行运算。
 2.  💾 **ROM (程序存储器) (2)**: 通常为 4KB ~ 8KB，用于<font color="orange">存放程序</font>和固定数据（如常数表）。掉电后内容<font color="orange">不丢失</font>。
@@ -3187,19 +3171,6 @@ MCS-51单片机是一个集成了多种功能部件的微型计算机系统。�
         *   `Vss` (或GND): 电源地。
     *   **2. 时钟电路引脚**:
         *   `XTAL1`, `XTAL2`: 外接晶体振荡器和微调电容，构成片内振荡电路。XTAL1是输入端，XTAL2是输出端。
-        ```mermaid
-        graph LR
-            subgraph 8051 Clock Circuit
-                XTAL1 --- C1 --- GND
-                XTAL1 --- Crystal --- XTAL2
-                XTAL2 --- C2 --- GND
-            end
-            C1[C1 30pf] -- To XTAL1 & GND --> GND
-            C2[C2 30pf] -- To XTAL2 & GND --> GND
-            Crystal[Crystal Oscillator]
-            XTAL1 -- Input --> 8051[8051]
-            XTAL2 -- Output --> 8051
-        ```
         *   **注意点**: 两个电容 C1, C2 通常取 30pf 左右，用于稳定频率和帮助起振。
     *   **3. 控制信号引脚**:
         *   <font color="orange">RST</font>/VPD (Reset/Backup Power): 复位输入端。当此引脚出现<font color="orange">持续2个机器周期以上</font>的高电平时，单片机复位。VPD是备用电源输入（较少使用）。
@@ -3222,31 +3193,6 @@ MCS-51单片机是一个集成了多种功能部件的微型计算机系统。�
                 *   ② 扩展存储器或I/O时: 作为<font color="orange">地址/数据分时复用</font>总线 (AD0 ~ AD7)。在ALE信号作用下输出低8位地址，之后在读写信号控制下传输8位数据。
                 *   ③ 带负载能力: 能以<font color="orange">吸收电流</font>方式驱动8个LS型TTL负载。
             *   **易错点**: P0口作输出<font color="orange">必须</font>外接上拉电阻才能正常输出高电平。作输入前<font color="orange">必须</font>先写1。
-            ```mermaid
-             graph TD
-                 subgraph P0.i Pin Structure
-                     InternalBus --> D_Latch[D Latch Q /Q]
-                     D_Latch -- Q --> Mux1[MUX]
-                     ControlSignal --> Mux1
-                     AddressData --> Mux1
-
-                     D_Latch -- /Q --> V1_Gate(G)
-                     InternalBus --> ReadPinBuffer --> PinValue(Read Pin)
-                     Mux1 --> V2_Gate(G)
-
-                     Vcc -- Internal Connection --> V2_Source(S)
-                     V2_Source -- V2(P-MOS) --> V2_Drain(D)
-                     V2_Drain --> Pin(P0.i Pin)
-                     V1_Gate --> V1(N-MOS) --> V1_Drain(D)
-                     V1_Drain --> Pin
-                     V1_Source(S) --> GND
-
-                     Pin --> ExternalPullUp[External Pull-up Resistor] --> Vcc_Ext[Vcc]
-                 end
-                 ReadLatchBuffer --Reads Q --> LatchValue(Read Latch)
-                 WriteLatch --> CLK(CLK) --> D_Latch
-                 D_Latch -- Q --> ReadLatchBuffer
-            ```
         *   **P1口 (P1.0 ~ P1.7)**:
             *   结构: 8位带<font color="orange">内部上拉电阻</font>的准双向I/O口。
             *   特点:
@@ -3254,22 +3200,6 @@ MCS-51单片机是一个集成了多种功能部件的微型计算机系统。�
                 *   作输入时，同样需要先向锁存器<font color="orange">写'1'</font>，使内部上拉电阻生效，外部信号可以直接驱动引脚。
                 *   作输出时，可以直接输出高低电平。
             *   **注意点**: 内部上拉电阻阻值较大，驱动能力有限。
-            ```mermaid
-             graph TD
-                 subgraph P1.i Pin Structure
-                     InternalBus --> D_Latch[D Latch Q /Q]
-                     InternalBus --> ReadPinBuffer --> PinValue(Read Pin)
-                     D_Latch -- /Q --> V1_Gate(G)
-
-                     Vcc -- Internal Pull-up --> Pin(P1.i Pin)
-                     V1_Gate --> V1(N-MOS) --> V1_Drain(D)
-                     V1_Drain --> Pin
-                     V1_Source(S) --> GND
-                 end
-                 ReadLatchBuffer --Reads Q --> LatchValue(Read Latch)
-                 WriteLatch --> CLK(CLK) --> D_Latch
-                 D_Latch -- Q --> ReadLatchBuffer
-            ```
         *   **P2口 (P2.0 ~ P2.7)**:
             *   结构: 8位带<font color="orange">内部上拉电阻</font>的准双向I/O口。
             *   特点:
@@ -4151,7 +4081,7 @@ END
         *   然后 $PC \leftarrow PC + rel$
     *   偏移量 `rel` 是8位带符号数，数值范围: $-128 \sim +127$。
     *   指令的转移目标地址范围是<font color="orange">相对于当前指令之后-126到+129字节</font>。2字节指令。
-    *   偏移量计算公式: $\boxed{rel = [\text{目标地址} - \text{指令地址} - \text{指令字节数}]_{\text{补}}}$
+    *   偏移量计算公式: $\boxed{rel = [\text{目标地址} - \text{指令地址} - \text{指令字节数}]_{\text{补}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }$
         *   或者 $rel = \text{目标地址} - (PC+2)$
     *   【例】`0060H: SJMP $` ($表示当前地址)
         *   目标地址 = `0060H`, 指令地址 = `0060H`, 指令字节数 = 2。
@@ -4610,7 +4540,7 @@ END                  ; 源程序结束
         *   EA (External Access)引脚：接<font color="orange">高电平</font> (+5V)，表示访问片内程序存储器。
         *   VCC, GND: 接电源。
         *   P0, P1, P2, P3: I/O端口。
-![[Pasted image 20250525185339.png]]
+![图片](Pasted-image-20250525185339.png)
     *(示意图，基于课件P2图示)*
 
 ✨ **注意点**：8051/8751因为有片内ROM，所以$\overline{EA}$接高电平以执行片内程序。
@@ -4624,7 +4554,7 @@ END                  ; 源程序结束
         *   P2口：作为高8位地址总线 (A8-A15)。
         *   ALE (Address Latch Enable)信号：用于控制地址锁存器锁存P0口的低8位地址。
         *   PSEN (Program Store Enable)信号：作为片外程序存储器的读选通信号。
-![[Pasted image 20250525185659.png]]
+![图片](Pasted-image-20250525185659.png)
     *(示意图，基于课件P3图示)*
 
 ✨ **注意点**：8031因为无片内ROM，所以`EA`必须接低电平，并且必须外扩程序存储器。
@@ -4634,7 +4564,7 @@ END                  ; 源程序结束
 ### 6.2 MCS-51单片机的并行扩展总线 🚌
 
 MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地址总线、数据总线和控制总线，用于系统扩展。
-![[Pasted image 20250525190119.png]]
+![图片](Pasted-image-20250525190119.png)
 *(示意图，基于课件P4图示)*
 
 1.  **<font color="orange">地址总线 (AB)</font>**
@@ -4663,7 +4593,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
     *   常用双向总线驱动器：如 <font color="orange">74LS245</font>。
         *   74LS245有两个方向的8位数据通路（A和B）。
         *   DIR (Direction)引脚：控制数据传输方向 (A→B 或 B→A)。
-        *   G (Enable)引脚：片选使能信号，低电平有效时，总线驱动器工作。![[Pasted image 20250525190410.png]]
+        *   G (Enable)引脚：片选使能信号，低电平有效时，总线驱动器工作。![图片](Pasted-image-20250525190410.png)
     *(示意图，基于课件P6图示)*
 
 ---
@@ -4705,7 +4635,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
                 至
                 `0   0   0   0` | `1   1   1   1` | `1   1   1   1` | `1   1   1   1`  (0FFFH)
                 所以基本地址范围是 $\boxed{0000H \sim 0FFFH}$ (4KB)。（无关位取0称为基本地址）
-	![[Pasted image 20250525190549.png]]
+	![图片](Pasted-image-20250525190549.png)
     *(示意图，基于课件P8图示)*
     ✨ **易错点**：程序存储器扩展使用 <font color="orange">PSEN</font> 信号作为读选通。
 
@@ -4719,7 +4649,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
 *   **不同之处**：
     *   程序存储器读选通信号是 <font color="orange">PSEN</font>。
     *   数据存储器读信号是 <font color="orange">RD</font>，写信号是 <font color="orange">WR</font>。
-	![[Pasted image 20250525192011.png]]
+	![图片](Pasted-image-20250525192011.png)
     *(示意图，基于课件P9图示)*
 
 *   **数据存储器与程序存储器比较**：
@@ -4749,7 +4679,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
                           至
                           `000   0   1   | 111..111`  (0FFFH)
                 即 $\boxed{0800H \sim 0FFFH}$
-	![[Pasted image 20250525193101.png]]
+	![图片](Pasted-image-20250525193101.png)
     *(示意图，基于课件P10图示)*
 
     ✨ **注意点**：数据存储器扩展使用 <font color="orange">RD</font> 和 <font color="orange">WR</font> 信号。
@@ -4775,7 +4705,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
         *   若口地址只与P2.0有关，P2.0=0时选中。其余地址线为无关位。
         *   若无关位都取1，则该输出口地址为 `1111 1110 1111 1111B` = $\boxed{0FEFFH}$。
         *   CPU执行 `MOVX @DPTR, A`，DPTR=0FEFFH，WR=0。P2.0 (A8) 由DPTR高字节提供，为0。WR信号由低变高时，CLK产生**上升沿**，P0口数据锁存。
-	![[Pasted image 20250525193615.png]]
+	![图片](Pasted-image-20250525193615.png)
     *(示意图，基于课件P11图示)*
 
 2.  **并行输入口的扩展 (用74LS244)**
@@ -4788,7 +4718,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
         *   若地址线P2.4必须取0 (即A12=0)，其余为无关位。
         *   若无关位全取1，则口地址为 `1110 1111 1111 1111B` = $\boxed{0EFFFH}$。
         *   CPU执行 `MOVX A, @DPTR`，DPTR=0EFFFH，RD=0。P2.4 (A12)为0。1G/2G有效，数据读入。
-	![[Pasted image 20250525193845.png]]
+	![图片](Pasted-image-20250525193845.png)
     *(示意图，基于课件P12图示)*
 
 *   **外部I/O端口与数据存储器比较**：
@@ -5288,7 +5218,7 @@ MCS-51单片机对外形成<font color="orange">三总线结构</font>，即地�
 ---
 
 ### 4.2 中断系统结构及中断控制 🛠️
-![[Pasted image 20250530190410.png]]
+![图片](Pasted-image-20250530190410.png)
 *上图为中断系统逻辑结构示意图，展示了从中断源发出请求，经过中断标志、源允许、总允许、优先级判断，最终由硬件查询得到中断向量地址并送入PC的过程。*
 
 #### 4.2.1 中断源和中断请求标志 🚩
@@ -5483,7 +5413,7 @@ CPU响应中断以后，在中断返回之前应将<font color="orange">中断�
 *   利用单片机的外部中断功能实现单步执行。
 *   设置：外部中断0 (INT0) 设为<font color="orange">电平触发</font>且允许中断。
 *   电路：INT0 (P3.2) 通过一个按键接低电平 (按下为高，释放为低，假设上拉电阻存在，按键接地)。
-![[Pasted image 20250530192426.png]]
+![图片](Pasted-image-20250530192426.png)
     *   正常INT0 (P3.2) 保持高电平。按键按下，P3.2为低电平，触发中断。
     *   (课件图示为按键一端接+5V，另一端通过电阻接地，同时接INT0。这表示平时INT0为低，按下为高。但文字描述“INT0保持为低电平，则CPU进入执行中断服务程序”，则应理解为平时INT0低电平有效，按键控制其电平变化。)
     *   假设按键按下使P3.2变高，松开变低，INT0设为电平触发（低有效）。
@@ -5609,9 +5539,9 @@ END
             *   1位或1.5位或2位 <font color="orange">停止位</font> (高电平)：表示该字符的结束。
         *   **异步通信字符帧的格式图示**：
             *   无空闲位字符帧:
-                ![[Pasted image 20250609144910.png]]
+                ![图片](Pasted-image-20250609144910.png)
             *   带空闲位字符帧:
-                ![[Pasted image 20250609144924.png]]
+                ![图片](Pasted-image-20250609144924.png)
             *   <font color="orange">字符帧之间可以不连续，发送高电平的空闲位。</font>
 
     *   **(2) 同步通信方式** 同步，通信双方依赖共同的时钟信号。
@@ -5621,7 +5551,7 @@ END
         *   <font color="orange">每个字符数据传送不需添加起始位和停止位，字符数据之间无间隙。</font>
         *   同步通信的传输速率要比异步通信高，可达56Kbps。
         *   图示：
-            ![[Pasted image 20250609145052.png]]
+            ![图片](Pasted-image-20250609145052.png)
 
 3.  **串行通信的传输方式**
     *   (1) <font color="orange">单工方式</font>: 只允许数据向一个方向传输。📡➡️
@@ -6019,7 +5949,7 @@ END
     *   **图示分析 (Page 2)**：
         *   **键按下过程**：存在<font color="orange">前沿抖动</font> ➡ 闭合稳定
         *   **键释放过程**：存在<font color="orange">后沿抖动</font> ➡ 释放稳定
-        * ![[Pasted image 20250609151643.png]]
+        * ![图片](Pasted-image-20250609151643.png)
         *(图示示意按键按下和释放时的抖动波形)*
 
 2.  **消除按键抖动的硬件方法** 🔧 (Page 3)
@@ -6037,14 +5967,14 @@ END
 *   **特点**：每个按键<font color="orange">占用一条I/O口线</font>。
 *   **连接方式**：按键一端接I/O口，另一端接地。I/O口通常接有上拉电阻（如课件中P0口外接8个10kΩ上拉电阻到+5V）。当按键按下时，对应I/O口线被拉低。
 *   **适用场合**：按键数量不多的场合。
-*   课件图示为51系列单片机P0.0 ~ P0.7口连接8个独立按键。![[Pasted image 20250609151757.png]]
+*   课件图示为51系列单片机P0.0 ~ P0.7口连接8个独立按键。![图片](Pasted-image-20250609151757.png)
 
 #### 🎹 7.1.3 行列式键盘 (Page 5)
 
 *   **特点**：I/O口线组成键盘的<font color="orange">行线和列线</font>，从而用较少的I/O口线实现较多按键的识别。
 *   **连接方式**：按键位于行线和列线的交叉点上。当某个按键按下时，其对应的行线和列线被<font color="orange">短接</font>。
 *   **适用场合**：按键较多的场合。
-* ![[Pasted image 20250609151745.png]]
+* ![图片](Pasted-image-20250609151745.png)
 *   课件图示为一个3行4列（共12键）的行列式键盘，行线接P1.0-P1.2，列线接P1.3-P1.6，列线通过电阻上拉到+5V。
 
 ---
@@ -6128,7 +6058,7 @@ END
 *   **核心思想**：不管按键所在行和列，对键盘两次操作，就能获取键值。
 
 **图示 (Page 9)**：
-![[Pasted image 20250609153615.png]]
+![图片](Pasted-image-20250609153615.png)
 *   图a): 行线输出0，列线输入。
 *   图b): 列线输出0，行线输入。
 
@@ -6261,38 +6191,3 @@ END
 *   键值表（如`KEYT`）的正确建立是键值转换的关键。
 *   进行位操作时，要注意I/O口作为输入前通常需要先写1（对于P0-P3口）。
 *   反极法和位操作法都是获取键值的有效手段，各有其适用场景和编程复杂度。
-
-```mermaid
-graph TD
-    subgraph "启动阶段"
-        A[上电复位] --> B(STARTUP.A51)
-        B --> C{_main}
-        C --> D[硬件/定时器/中断 初始化]
-        D --> E[加载EEPROM设置]
-        E --> F[首次启动温度转换]
-    end
-
-    subgraph "运行阶段"
-        F --> G{while1 主循环}
-
-        subgraph "后台中断 每1ms"
-            H(Timer0 中断) --> I[计时器++]
-            I --> J[刷新一位数码管]
-        end
-
-        subgraph "前台任务 循环执行"
-            G --> K{处理红外/按键}
-            K --> L{处理核心逻辑}
-            L --> M{处理报警表现}
-            M --> N{检查是否需更新显示}
-            N --> G
-        end
-
-        subgraph "事件驱动"
-            O[用户按键/遥控] --> P{中断/轮询检测}
-            P --> Q[修改状态变量]
-            Q --> R[设置'更新显示'标志]
-            R --> N
-        end
-    end
-```
