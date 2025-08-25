@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/posts/hello-hugo/index.md",
+                "file": "content/posts/the-second/index.md",
                 "mode": "preview",
                 "source": false
               },
@@ -171,11 +171,13 @@
   },
   "active": "7f75b3b462cfe72d",
   "lastOpenFiles": [
+    "content/posts/hello-hugo/index.md",
     "content/posts/hello-hugo/test.png",
+    "content/posts/the-second/index.md",
+    "content/posts/the-second",
     "content/posts/hello-hugo/d.png",
     "content/posts/hello-hugo/屏幕截图 2025-08-02 110037.png",
     "content/posts/hello-hugo/hello-hugo.md",
-    "content/posts/hello-hugo/index.md",
     "content/posts/hello-hugo.md",
     "content/posts/hello-hugo",
     "content/posts/新建文件夹",
@@ -186,7 +188,6 @@
     "layouts/partials",
     "layouts/新建文件夹",
     "themes/papermod/layouts/partials/mathjax.html",
-    "themes/papermod/layouts/partials/新建 文本文档.txt",
     "themes/papermod/README.md",
     "themes/papermod/images/screenshot.png",
     "themes/papermod/images/tn.png"
