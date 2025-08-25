@@ -1,9 +1,8 @@
 ---
 title: 我的第一篇blog
 date: 2024-07-25T15:00:00+08:00
-math: true
 ---
-这个页面用来测试 Yihui Xie's Method 的数学公式渲染功能。如果这个页面的公式能正常显示，说明你的网站配置（注入的 JavaScript 脚本）是正确的。
+这个页面用来测试 Yihui Xie's Method 的数学公式渲染功能。如果这个页面的公式能正常显示，说明网站配置（注入的 JavaScript 脚本）是正确的。
 
 ---
 
