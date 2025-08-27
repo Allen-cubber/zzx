@@ -29,7 +29,6 @@ markup:
 
 # 主题参数配置 (核心)
 params:
-  # ... 你可能还有其他 PaperMod 参数 ...
   ShowShareButtons: true
   ShowReadingTime: true
   ShowPostNavLinks: true
@@ -42,3 +41,14 @@ params:
 
   # ↓↓↓ 这一行是开启 KaTeX 功能的全局开关 ↓↓↓
   math: true
+  
+  # 个人主页模式配置
+  profileMode:
+    enabled: true
+    title: "欢迎来到 Z2X BLOG"
+    subtitle: "探索技术、分享知识、记录生活"
+  
+  # 网站标签配置
+  labels:
+    icon: "📝"
+    text: "Z2X Blog"
