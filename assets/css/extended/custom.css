@@ -32,3 +32,27 @@
 .post-content h2 {
     font-weight: 700; /* 700 是粗体，600是半粗体, 400是正常 */
 }
+
+/* --- 为首页添加背景图片 --- */
+
+/* body.home.list 选择器精确地指向了你的博客主页 */
+body.home.list {
+    background-image: url('/images/homepage-bg.jpg'); /* 图片路径 */
+    background-size: cover; /* 让图片铺满整个屏幕，不变形 */
+    background-position: center center; /* 将图片居中显示 */
+    background-repeat: no-repeat; /* 防止图片重复平铺 */
+    background-attachment: fixed; /* 这是关键！让背景图片固定，内容滚动时产生视差效果 */
+}
+
+/* --- 为首页背景图片添加深色遮罩层以提高文字可读性 --- */
+
+body.home.list::before {
+    content: ''; /* 伪元素必需的属性 */
+    position: fixed; /* 固定在视窗上 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9); /* 半透明的黑色遮罩，0.5代表50%不透明度，你可以调整这个值 */
+    z-index: -1; /* 这是魔法！让遮罩层位于内容之下，背景图片之上 */
+}
