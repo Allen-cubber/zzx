@@ -45,30 +45,32 @@
 
 /* 基础profile样式 - 确保白天和夜间模式大小一致 */
 .profile {
-    margin: 2rem auto;
+    margin: 0.5rem auto; /* 减小上下外边距 */
     max-width: 800px;
+    text-align: center; /* 居中文字 */
 }
 
-/* 白天模式 */
+/* 白天模式 - 与夜间模式保持一致 */
 .home:not(.dark) .profile {
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    padding: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0.5rem 2rem;
+    width: fit-content;
 }
 
 /* 夜间模式 - 去掉白色矩形块 */
 .home.dark .profile {
     background-color: transparent;
     box-shadow: none;
-    padding: 2rem;
+    padding: 0.5rem 2rem; /* 与白天模式相同的内边距 */
+    width: fit-content; /* 与白天模式相同的宽度设置 */
 }
 
 /* 标题和副标题的样式 - 白天模式 */
 .home:not(.dark) .profile h1,
 .home:not(.dark) .profile span {
-    color: #333;
-    text-shadow: 1px 1px 3px rgba(255, 255, 255, 0.8);
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 /* 标题和副标题的样式 - 夜间模式 */
