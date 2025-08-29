@@ -1,11 +1,11 @@
 ---
-title: "秘密通道 ✨"
+title: 彩蛋 ✨
 date: 2024-07-28T20:00:00+08:00
 draft: false
 hidden: true
 _build:
-  render: "always"
-  list: "never"
+  render: always
+  list: never
 ---
 
 恭喜你发现了这个隐藏的彩蛋！
