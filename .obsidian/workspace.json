@@ -11,10 +11,14 @@
             "id": "30ffa8e5af420917",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "content/notes/电磁波与电磁场/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "index"
             }
           }
         ]
@@ -138,12 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "content/notes/电磁波与电磁场/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -166,6 +171,8 @@
   },
   "active": "30ffa8e5af420917",
   "lastOpenFiles": [
+    "技术实现.md",
+    "Pasted.md",
     "static/images/homepage-bg.jpg",
     "content/blog-setup/the-second/index.md",
     "content/blog-setup/hello-hugo/test.png",
@@ -190,14 +197,12 @@
     "public/notes/高频电子线路/pasted-image-20250610214233.png",
     "public/notes/高频电子线路/pasted-image-20250610214102.png",
     "public/notes/高频电子线路/pasted-image-20250601160740.png",
-    "public/notes/高频电子线路/pasted-image-20250610214044.png",
     "Quantumweb.html.md",
     "content/notes/高频电子线路/index.md",
     "content/notes/电磁波与电磁场/index.md",
     "content/notes/微机原理与接口技术/index.md",
     "content/notes/信号与系统/index.md",
     "content/notes/信号与系统/question.md",
-    "Pasted.md",
     "content/notes/微机原理与接口技术/微机系统与接口技术.md",
     "content/notes/高频电子线路/高频电子线路填空题.md",
     "content/notes/微机原理与接口技术/微机与接口填空.md",
