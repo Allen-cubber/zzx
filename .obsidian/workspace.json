@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/blog-setup/the-second/index.md",
+                "file": "content/blog-setup/link/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -157,7 +157,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/blog-setup/the-second/index.md",
+                "file": "content/blog-setup/link/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -186,8 +186,13 @@
   },
   "active": "159210aa4890c0ef",
   "lastOpenFiles": [
-    "content/blog-setup/hello-hugo/index.md",
+    "Pasted image 20250831144232.png",
+    "content/blog-setup/link/Pasted-image-20250831144232.png",
+    "content/blog-setup/link/Pasted image 20250831144232.png",
+    "content/blog-setup/link/index.md",
     "content/blog-setup/course/index.md",
+    "content/blog-setup/link",
+    "content/blog-setup/hello-hugo/index.md",
     "content/blog-setup/the-second/index.md",
     "content/notes/电磁波与电磁场/index.md",
     "content/blog-setup/course",
@@ -205,15 +210,12 @@
     "public/tags/物理/page/1/index.html",
     "public/tags/汇编语言/page/1/index.html",
     "public/tags/微机/page/1/index.html",
-    "public/tags/大二下/page/1/index.html",
     "public/notes/高频电子线路/Pasted-image-20250826004857.png",
     "public/notes/高频电子线路/Pasted-image-20250826001955.png",
     "public/notes/高频电子线路/Pasted-image-20250826001900.png",
     "public/notes/高频电子线路/Pasted-image-20250826001312.png",
     "public/notes/高频电子线路/pasted-image-20250611212211.png",
     "public/notes/高频电子线路/pasted-image-20250610214233.png",
-    "public/notes/高频电子线路/pasted-image-20250610214102.png",
-    "public/notes/高频电子线路/pasted-image-20250601160740.png",
     "Quantumweb.html.md",
     "content/notes/高频电子线路/index.md",
     "content/notes/微机原理与接口技术/index.md",
@@ -229,8 +231,6 @@
     "content/notes/微机原理与接口技术图片/微机与接口填空.md",
     "content/notes/微机原理与接口技术图片/微机系统与接口技术.md",
     "content/notes/高频电子线路图片/高频电子线路填空题.md",
-    "content/notes/微机原理与接口技术图片/单片机例题.md",
-    "content/notes/高频电子线路图片/高频电子线路.md",
-    "content/notes/信号与系统.md"
+    "content/notes/微机原理与接口技术图片/单片机例题.md"
   ]
 }
