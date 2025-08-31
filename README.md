@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 [English](./README.md) | [中文](./README_zh.md)
 =======
 # ZZX Blog 项目说明
