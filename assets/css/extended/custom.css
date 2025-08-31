@@ -211,6 +211,7 @@ body.home.list::before {
     padding: 8px 12px;
     cursor: pointer;
     border-radius: var(--radius);
+    white-space: nowrap; /* <-- 核心！禁止换行 */
 }
 .view-options li:hover {
     background: var(--code-bg);
@@ -251,4 +252,11 @@ body.home.list::before {
     border-top: none;
     padding: 0;
     font-size: 0.8rem;
+}
+/* --- 控制“查看”按钮上的动态图标 --- */
+.view-button .icon {
+    display: none; /* 默认隐藏所有图标 */
+}
+.view-button .icon.active {
+    display: inline-block; /* 只显示带有 active class 的那个图标 */
 }

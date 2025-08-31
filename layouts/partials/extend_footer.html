@@ -36,9 +36,25 @@
         });
 
         // 设置视图的函数
+// layouts/partials/extend_footer.html (脚本部分)
+
         function setView(view) {
+            // 更新列表的 class
             postList.classList.remove('view-grid', 'view-list');
             postList.classList.add('view-' + view);
+
+            // 更新主按钮上的图标
+            const gridIcon = document.querySelector('.view-button .icon-grid');
+            const listIcon = document.querySelector('.view-button .icon-list');
+            if (view === 'grid') {
+                gridIcon.classList.add('active');
+                listIcon.classList.remove('active');
+            } else {
+                gridIcon.classList.remove('active');
+                listIcon.classList.add('active');
+            }
+
+            // 保存用户的选择
             localStorage.setItem('preferred-view', view);
         }
 
