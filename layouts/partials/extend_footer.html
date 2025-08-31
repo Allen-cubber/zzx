@@ -1,3 +1,53 @@
 {{- /* Footer custom content area start */ -}}
 {{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
 {{- /* Footer custom content area end */ -}}
+<!-- 视图切换功能脚本 -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const viewToggleButton = document.getElementById('view-toggle-button');
+        const viewOptions = document.getElementById('view-options');
+        const postList = document.getElementById('post-list');
+
+        if (!viewToggleButton || !viewOptions || !postList) {
+            return;
+        }
+
+        // 切换下拉菜单的显示/隐藏
+        viewToggleButton.addEventListener('click', function(event) {
+            event.stopPropagation();
+            viewOptions.classList.toggle('show');
+        });
+
+        // 点击选项切换视图
+        viewOptions.addEventListener('click', function(event) {
+            const target = event.target.closest('li');
+            if (target && target.dataset.view) {
+                const newView = target.dataset.view;
+                setView(newView);
+                viewOptions.classList.remove('show');
+            }
+        });
+
+        // 点击页面其他地方隐藏菜单
+        document.addEventListener('click', function() {
+            if (viewOptions.classList.contains('show')) {
+                viewOptions.classList.remove('show');
+            }
+        });
+
+        // 设置视图的函数
+        function setView(view) {
+            postList.classList.remove('view-grid', 'view-list');
+            postList.classList.add('view-' + view);
+            localStorage.setItem('preferred-view', view);
+        }
+
+        // 页面加载时，应用保存的视图偏好
+        const savedView = localStorage.getItem('preferred-view');
+        if (savedView) {
+            setView(savedView);
+        } else {
+            setView('grid'); // 默认设置为卡片视图
+        }
+    });
+</script>

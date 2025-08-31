@@ -28,6 +28,11 @@
   </div>
   {{- end }}
 </header>
+
+<!-- ===== 我们添加的视图切换器 开始 ===== -->
+{{ partial "view-switcher.html" . }}
+<!-- ===== 我们添加的视图切换器 结束 ===== -->
+
 {{- end }}
 
 {{- if .Content }}
@@ -51,6 +56,8 @@
 {{- partial "home_info.html" . }}
 {{- end }}
 
+<!-- ===== 我们修改的文章列表容器 开始 ===== -->
+<div id="post-list" class="view-grid">
 {{- $term := .Data.Term }}
 {{- range $index, $page := $paginator.Pages }}
 
@@ -92,6 +99,8 @@
   <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
 </article>
 {{- end }}
+</div>
+<!-- ===== 我们修改的文章列表容器 结束 ===== -->
 
 {{- if gt $paginator.TotalPages 1 }}
 <footer class="page-footer">

@@ -1,36 +1,53 @@
 {{ define "main" }}
 
 <header class="page-header">
-    <h1>{{ .Title }}</h1>
+    <h1 class="page-title">{{ .Title }}</h1>
     {{- if .Content }}
-    <div class="page-content">
+    <div class="page-description">
         {{ .Content }}
     </div>
     {{- end }}
 </header>
+{{ partial "view-switcher.html" . }}
 
-{{- /* 获取所有常规页面，并按 lastmod 降序排列 */}}
-{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections | default site.RegularPages }}
+{{- $pages := where site.RegularPages "Type" "in" (site.Params.mainSections | default (slice "posts")) }}
 {{- $pages := $pages.ByLastmod.Reverse }}
 
-<div class="archive-year">
-    {{- range $pages }}
+<div id="post-list" class="archive-cards view-grid">
+{{- range $pages }}
     {{- if (and .Title (not .Params.hidden)) }}
-    <div class="archive-entry">
-        <h3 class="archive-entry-title">
-            <a href="{{ .Permalink }}">
+    <article class="archive-card">
+        <a href="{{ .Permalink }}" class="card-link" aria-label="post link to {{ .Title | plainify }}"></a>
+        <div class="card-header">
+            {{- with .Params.cover }}
+                {{- $image := (.image) }}
+                {{- if not (urls.Parse $image).IsAbs }}
+                    {{- $image = (resources.Get $image) }}
+                {{- end }}
+                {{- if $image }}
+                    <img src="{{ ($image.Resize "340x").RelPermalink }}" alt="cover image" class="card-cover-image">
+                {{- end }}
+            {{- end }}
+            <h2 class="card-title">
                 {{- .Title -}}
-            </a>
-        </h3>
-        <div class="archive-meta">
-            <span>更新于: {{ .Lastmod.Format (site.Params.defaultDateFormat | default "January 2, 2006") }}</span>
-            &nbsp;&nbsp;·&nbsp;&nbsp;
-            <span>{{ .ReadingTime }} 分钟阅读</span>
+            </h2>
         </div>
-        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
-    </div>
+        <div class="card-content">
+            <p class="card-summary">{{ .Summary }}</p>
+        </div>
+        <div class="card-footer">
+            <span class="card-meta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-calendar-time"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4"></path><path d="M18 18m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path><path d="M15 3v4"></path><path d="M7 3v4"></path><path d="M3 11h16"></path><path d="M18 16.496v1.504l1 1"></path></svg>
+                更新于 {{ .Lastmod.Format (site.Params.defaultDateFormat | default "2006-01-02") }}
+            </span>
+            <span class="card-meta">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-clock"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" /><path d="M12 7v5l3 3" /></svg>
+                {{ .ReadingTime }} 分钟阅读
+            </span>
+        </div>
+    </article>
     {{- end }}
-    {{- end }}
+{{- end }}
 </div>
 
 {{ end }}

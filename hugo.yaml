@@ -47,6 +47,10 @@ params:
   math: true
   
   defaultDateFormat: "2006-01-02" # 设置默认日期格式为 年-月-日
+  mainSections:
+    - notes
+    - blog-setup
+    - musings
 
   # 个人主页模式配置
   profileMode:

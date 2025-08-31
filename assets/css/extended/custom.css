@@ -56,3 +56,199 @@ body.home.list::before {
     background-color: rgba(0, 0, 0, 0.9); /* 半透明的黑色遮罩，0.5代表50%不透明度，你可以调整这个值 */
     z-index: -1; /* 这是魔法！让遮罩层位于内容之下，背景图片之上 */
 }
+
+/* assets/css/extended/custom.css */
+
+/* --- “最近更新”页面的卡片式布局美化 --- */
+
+/* 卡片网格布局 */
+.archive-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* 响应式布局 */
+    gap: 24px; /* 卡片之间的间距 */
+}
+
+/* 单个卡片的样式 */
+.archive-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+/* 鼠标悬停效果 */
+.post-entry:hover,
+.archive-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 整个卡片都可以点击的链接 */
+.card-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 确保链接在最上层 */
+}
+
+/* 卡片头部（用于放封面图和标题） */
+.card-header {
+    position: relative;
+}
+
+/* 封面图样式 */
+.card-cover-image {
+    width: 100%;
+    height: 180px; /* 固定高度 */
+    object-fit: cover; /* 保证图片不变形地填满容器 */
+    border-top-left-radius: var(--radius);
+    border-top-right-radius: var(--radius);
+}
+
+/* 卡片标题 */
+.card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 20px 20px 10px 20px;
+    /* 如果有封面图，标题可以叠加在图片上 */
+    /* position: absolute; bottom: 0; color: white; text-shadow: 1px 1px 3px black; */
+}
+
+/* 卡片内容（摘要） */
+.card-content {
+    padding: 0 20px 20px 20px;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    flex-grow: 1; /* 让内容区域占据多余空间，保证页脚对齐 */
+}
+
+/* 卡片页脚（放元数据） */
+.card-footer {
+    padding: 15px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+/* assets/css/extended/custom.css */
+
+.card-meta {
+    display: inline-flex;  /* 改为 inline-flex，让其表现得像一个行内元素 */
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap; /* 这是关键！禁止在这个元素内部换行 */
+}
+
+.card-meta .icon-tabler {
+    width: 16px;
+    height: 16px;
+}
+
+/* 统一所有列表页卡片的内部间距 */
+.post-entry .entry-header,
+.post-entry .entry-content,
+.post-entry .entry-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.post-entry .entry-header {
+    padding-top: 20px;
+}
+
+.post-entry .entry-footer {
+    padding-bottom: 15px;
+}
+/* --- 视图切换器样式 --- */
+.page-header {
+    position: relative;
+}
+.view-switcher {
+    position: absolute;
+    top: 20px;
+    right: 0;
+    z-index: 10;
+}
+.view-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    cursor: pointer;
+    color: var(--primary);
+}
+.view-options {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    list-style: none;
+    padding: 6px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    display: none; /* 默认隐藏 */
+}
+.view-options.show {
+    display: block; /* JS会添加这个class来显示 */
+}
+.view-options li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: var(--radius);
+}
+.view-options li:hover {
+    background: var(--code-bg);
+}
+
+/* --- 列表视图 (List View) 样式 --- */
+#post-list.view-list {
+    display: block; /* 覆盖 grid 布局 */
+}
+#post-list.view-list .archive-card,
+#post-list.view-list .post-entry {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    margin-bottom: 2px; /* 列表项之间的小间距 */
+    transform: none !important; /* 禁用悬停上浮效果 */
+}
+/* 隐藏列表视图中的摘要和封面图 */
+#post-list.view-list .card-content,
+#post-list.view-list .entry-content,
+#post-list.view-list .card-cover-image {
+    display: none;
+}
+/* 调整列表视图中标题和元数据的布局 */
+#post-list.view-list .card-header,
+#post-list.view-list .entry-header {
+    flex-grow: 1; /* 让标题占据左侧大部分空间 */
+    padding: 0;
+}
+#post-list.view-list .card-title,
+#post-list.view-list .entry-title {
+    font-size: 1rem;
+    margin-bottom: 4px;
+}
+#post-list.view-list .card-footer,
+#post-list.view-list .entry-footer {
+    flex-shrink: 0; /* 防止元数据被压缩换行 */
+    border-top: none;
+    padding: 0;
+    font-size: 0.8rem;
+}
