@@ -2,17 +2,21 @@ baseURL: 'https://www.z2x-blog.top/'
 languageCode: 'zh-cn'
 title: 'Z2X BLOG'
 theme: 'papermod'
+enableGitInfo: true
 
 # 菜单配置
 menu:
   main:
-    - name: Blog Setup
+    - name: 最近更新 # 菜单上显示的文字
+      url: "/updates/" # 链接到我们创建的 updates.md 页面
+      weight: 5 # 给一个很小的权重，让它排在最前面
+    - name: 博客搭建
       url: "/blog-setup/"
       weight: 10
-    - name: Study Notes
+    - name: 学习笔记
       url: "/notes/"
       weight: 20
-    - name: Musings
+    - name: 随笔
       url: "/musings/"
       weight: 30
 
@@ -42,6 +46,8 @@ params:
   # ↓↓↓ 这一行是开启 KaTeX 功能的全局开关 ↓↓↓
   math: true
   
+  defaultDateFormat: "2006-01-02" # 设置默认日期格式为 年-月-日
+
   # 个人主页模式配置
   profileMode:
     enabled: true

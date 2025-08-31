@@ -1,0 +1,36 @@
+{{ define "main" }}
+
+<header class="page-header">
+    <h1>{{ .Title }}</h1>
+    {{- if .Content }}
+    <div class="page-content">
+        {{ .Content }}
+    </div>
+    {{- end }}
+</header>
+
+{{- /* 获取所有常规页面，并按 lastmod 降序排列 */}}
+{{- $pages := where site.RegularPages "Type" "in" site.Params.mainSections | default site.RegularPages }}
+{{- $pages := $pages.ByLastmod.Reverse }}
+
+<div class="archive-year">
+    {{- range $pages }}
+    {{- if (and .Title (not .Params.hidden)) }}
+    <div class="archive-entry">
+        <h3 class="archive-entry-title">
+            <a href="{{ .Permalink }}">
+                {{- .Title -}}
+            </a>
+        </h3>
+        <div class="archive-meta">
+            <span>更新于: {{ .Lastmod.Format (site.Params.defaultDateFormat | default "January 2, 2006") }}</span>
+            &nbsp;&nbsp;·&nbsp;&nbsp;
+            <span>{{ .ReadingTime }} 分钟阅读</span>
+        </div>
+        <a class="entry-link" aria-label="post link to {{ .Title | plainify }}" href="{{ .Permalink }}"></a>
+    </div>
+    {{- end }}
+    {{- end }}
+</div>
+
+{{ end }}
