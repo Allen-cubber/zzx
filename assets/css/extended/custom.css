@@ -260,3 +260,33 @@ body.home.list::before {
 .view-button .icon.active {
     display: inline-block; /* 只显示带有 active class 的那个图标 */
 }
+/* --- 自定义搜索页面样式 --- */
+.search-container {
+    margin: 20px 0;
+}
+#search-input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--entry);
+    color: var(--primary);
+}
+#search-results {
+    margin-top: 20px;
+}
+.search-result-item {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+.search-result-item h3 {
+    margin-top: 0;
+    margin-bottom: 8px;
+}
+.search-result-item p {
+    margin-bottom: 0;
+    color: var(--secondary);
+    font-size: 0.9rem;
+}

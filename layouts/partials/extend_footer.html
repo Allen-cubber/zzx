@@ -67,3 +67,77 @@
         }
     });
 </script>
+<!-- layouts/partials/extend_footer.html -->
+
+<!-- 引入 Fuse.js 库 -->
+<script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js"></script>
+
+<!-- 我们的搜索逻辑脚本 -->
+<script>
+    // 只在搜索页面执行这段脚本
+    if (document.getElementById('search-input')) {
+        
+        console.log("Search script loading...");
+
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+        
+        // 1. 加载 JSON 索引文件
+        fetch('/index.json')
+            .then(response => response.json())
+            .then(data => {
+                console.log("JSON index loaded:", data.length, "pages");
+                
+                const fuseOptions = {
+                    isCaseSensitive: false,
+                    includeScore: true,
+                    shouldSort: true,
+                    threshold: 0.4,
+                    minMatchCharLength: 2,
+                    keys: ['title', 'summary', 'content', 'tags']
+                };
+
+                const fuse = new Fuse(data, fuseOptions);
+
+                // 2. 监听输入框的变化
+                searchInput.addEventListener('input', function (e) {
+                    const query = e.target.value;
+                    if (query.length < 2) {
+                        searchResults.innerHTML = '';
+                        return;
+                    }
+                    const results = fuse.search(query);
+                    displayResults(results);
+                });
+
+            })
+            .catch(error => {
+                console.error("Error loading search index:", error);
+                searchResults.innerHTML = '<p>无法加载搜索索引，请稍后重试。</p>';
+            });
+
+        // 3. 显示结果的函数
+        function displayResults(results) {
+            searchResults.innerHTML = ''; // 清空旧结果
+            
+            if (results.length === 0) {
+                searchResults.innerHTML = '<p>没有找到相关内容。</p>';
+                return;
+            }
+
+            results.slice(0, 20).forEach(result => { // 最多显示前20条结果
+                const item = result.item;
+                const resultItem = document.createElement('article');
+                resultItem.classList.add('search-result-item');
+                
+                let summary = item.summary || item.content.substring(0, 150) + '...';
+
+                resultItem.innerHTML = `
+                    <h3><a href="${item.permalink}">${item.title}</a></h3>
+                    <p>${summary}</p>
+                `;
+                searchResults.appendChild(resultItem);
+            });
+        }
+    }
+</script>

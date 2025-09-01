@@ -1,0 +1,17 @@
+{{- $.Scratch.Add "index" slice -}}
+{{- $mainSections := site.Params.mainSections | default (slice "posts") -}}
+
+{{- range site.RegularPages -}}
+  {{- if and .Title .Permalink (not .Params.hidden) (in $mainSections .Section) -}}
+    {{- $.Scratch.Add "index" (dict 
+        "title" .Title 
+        "permalink" .Permalink 
+        "summary" .Summary 
+        "tags" .Params.tags
+        "content" .Plain 
+        ) 
+    -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $.Scratch.Get "index" | jsonify -}}

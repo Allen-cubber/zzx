@@ -19,6 +19,9 @@ menu:
     - name: 随笔
       url: "/musings/"
       weight: 30
+    - name: 搜索
+      url: "/search/"
+      weight: 40
 
 # Markdown 渲染器配置 (核心)
 markup:
@@ -62,3 +65,15 @@ params:
   labels:
     icon: "📝"
     text: "Z2X Blog"
+
+outputs:
+  home: ["HTML", "RSS", "JSON"] # 告诉 Hugo 为主页也生成 JSON
+
+outputFormats:
+  JSON:
+    mediaType: "application/json"
+    baseName: "index"
+    isPlainText: true
+    notAlternative: true
+
+
