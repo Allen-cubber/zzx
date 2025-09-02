@@ -1,5 +1,6 @@
 baseURL: 'https://www.z2x-blog.top/'
 languageCode: 'zh-cn'
+defaultContentLanguage: 'zh'
 title: 'Z2X BLOG'
 theme: 'papermod'
 enableGitInfo: true

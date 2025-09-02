@@ -3,6 +3,8 @@
 {{- if $has_headers -}}
 <aside id="toc-container" class="toc-container wide">
     <div class="toc">
+         {{- /* 右侧文章内搜索栏 */ -}}
+         {{- partial "content_search.html" . -}}
         <details {{if (.Param "TocOpen") }} open{{ end }}>
             <summary accesskey="c" title="(Alt + C)">
                 <span class="details">{{- i18n "toc" | default "Table of Contents" }}</span>
@@ -189,4 +191,5 @@
     }
     
 </script>
+
 {{- end }}

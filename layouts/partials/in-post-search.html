@@ -1,0 +1,139 @@
+<!-- layouts/partials/extend_footer.html -->
+
+<!-- ===== 视图切换功能脚本 开始 ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const viewToggleButton = document.getElementById('view-toggle-button');
+    const viewOptions = document.getElementById('view-options');
+    const postList = document.getElementById('post-list');
+    if (!viewToggleButton || !viewOptions || !postList) return;
+    // ... (视图切换器的其余 JS 代码保持不变) ...
+    function setView(view) {
+        postList.classList.remove('view-grid', 'view-list');
+        postList.classList.add('view-' + view);
+        const gridIcon = document.querySelector('.view-button .icon-grid');
+        const listIcon = document.querySelector('.view-button .icon-list');
+        if (view === 'grid') {
+            gridIcon.classList.add('active');
+            listIcon.classList.remove('active');
+        } else {
+            gridIcon.classList.remove('active');
+            listIcon.classList.add('active');
+        }
+        localStorage.setItem('preferred-view', view);
+    }
+    const savedView = localStorage.getItem('preferred-view');
+    if (savedView) { setView(savedView); } else { setView('grid'); }
+    viewToggleButton.addEventListener('click', function(e) { e.stopPropagation(); viewOptions.classList.toggle('show'); });
+    viewOptions.addEventListener('click', function(e) { const target = e.target.closest('li'); if (target && target.dataset.view) { setView(target.dataset.view); viewOptions.classList.remove('show'); } });
+    document.addEventListener('click', function() { if (viewOptions.classList.contains('show')) { viewOptions.classList.remove('show'); } });
+});
+</script>
+<!-- ===== 视图切换功能脚本 结束 ===== -->
+
+
+<!-- ===== 文内搜索功能 开始 ===== -->
+{{- /* 只在单篇文章页面加载文内搜索功能 */ -}}
+{{- if and (eq .Kind "page") (not .IsHome) (not .Params.hideInPostSearch) }}
+
+    {{- /* 1. 注入搜索框的 HTML 结构 */ -}}
+    {{- partial "in-post-search.html" . -}}
+
+    {{- /* 2. 注入依赖的 mark.js 库和我们自己的交互脚本 */ -}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYolpDF2TRbC8x/D5yIL/cHDb63GSCdGD3PPAeBGdAhTBMAi3bVvSrLjJiAuFzH3L/4vDxG/bbJnjU+GfrZcw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('in-post-search-input');
+            const resultsDisplay = document.getElementById('in-post-search-results');
+            const prevButton = document.getElementById('search-prev-button');
+            const nextButton = document.getElementById('search-next-button');
+            
+            // ↓↓↓ 使用更健壮的选择器，以防主题更新 ↓↓↓
+            const contentArea = document.querySelector('.post-content') || document.querySelector('main.main');
+
+            if (!searchInput || !contentArea) return;
+
+            const instance = new Mark(contentArea);
+            let currentMatchIndex = 0;
+            let totalMatches = 0;
+
+            function performSearch() {
+                const keyword = searchInput.value;
+                instance.unmark({
+                    done: function() {
+                        if (keyword.length > 1) {
+                            instance.mark(keyword, {
+                                className: 'search-highlight',
+                                separateWordSearch: false,
+                                done: function(counter) {
+                                    totalMatches = counter;
+                                    currentMatchIndex = 0;
+                                    updateResultsDisplay();
+                                    if (totalMatches > 0) {
+                                        jumpToMatch(0);
+                                    }
+                                }
+                            });
+                        } else {
+                            totalMatches = 0;
+                            currentMatchIndex = 0;
+                            updateResultsDisplay();
+                        }
+                    }
+                });
+            }
+
+            function updateResultsDisplay() {
+                if (totalMatches > 0) {
+                    resultsDisplay.textContent = `${currentMatchIndex + 1} / ${totalMatches}`;
+                } else {
+                    resultsDisplay.textContent = "0 / 0";
+                }
+            }
+            
+            function jumpToMatch(index) {
+                const highlights = contentArea.querySelectorAll('.search-highlight');
+                if (highlights.length > 0 && index >= 0 && index < highlights.length) {
+                    const current = contentArea.querySelector('.search-highlight.current');
+                    if (current) current.classList.remove('current');
+                    
+                    const newCurrent = highlights[index];
+                    newCurrent.classList.add('current');
+                    newCurrent.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    currentMatchIndex = index;
+                    updateResultsDisplay();
+                }
+            }
+
+            let searchTimeout;
+            searchInput.addEventListener('input', function() {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(performSearch, 300);
+            });
+            
+            prevButton.addEventListener('click', function() {
+                if (totalMatches > 0) {
+                    jumpToMatch((currentMatchIndex - 1 + totalMatches) % totalMatches);
+                }
+            });
+
+            nextButton.addEventListener('click', function() {
+                if (totalMatches > 0) {
+                    jumpToMatch((currentMatchIndex + 1) % totalMatches);
+                }
+            });
+        });
+    </script>
+{{- end }}
+<!-- ===== 文内搜索功能 结束 ===== -->
+
+
+<!-- ===== Mermaid JS 脚本 开始 (如果需要) ===== -->
+{{ if .Store.Get "hasMermaid" }}
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.js';
+    let theme = document.body.classList.contains('dark') ? 'dark' : 'default';
+    mermaid.initialize({ startOnLoad: true, theme: theme });
+  </script>
+{{ end }}
+<!-- ===== Mermaid JS 脚本 结束 ===== -->
