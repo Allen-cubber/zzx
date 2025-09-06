@@ -290,3 +290,16 @@ body.home.list::before {
     color: var(--secondary);
     font-size: 0.9rem;
 }
+/* --- PDF 下载链接样式 --- */
+.pdf-download a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9em;
+    text-decoration: none !important; /* 强制去除下划线 */
+}
+.pdf-download svg {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+}
