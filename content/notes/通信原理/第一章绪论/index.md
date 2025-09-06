@@ -5,6 +5,7 @@ tags:
   - 大三上
   - 通信原理
 summary: 《通信原理》是电子信息学科中的一门重要的专业基础课。
+pdf_url: https://cdn.jsdelivr.net/gh/allen-cubber/zzx-blog-assets@main/txyl1.pdf
 ---
 ### 🎯 本课程学习内容概览
 

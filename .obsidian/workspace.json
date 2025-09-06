@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/信息论基础/index.md",
+                "file": "content/notes/通信原理/第一章绪论/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/信息论基础/index.md",
+                "file": "content/notes/通信原理/第一章绪论/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,15 @@
   },
   "active": "dbe97756635f7786",
   "lastOpenFiles": [
+    "content/notes/通信原理/第一章绪论/Pastedimage20250906173427.png",
+    "content/notes/信息论与编码/信息论基础/index.md",
+    "content/notes/通信原理/第一章绪论/index.md",
+    "PDF/txyl1.pdf",
+    "PDF/通信原理第一章.pdf",
+    "PDF/通信原理.pdf",
+    "PDF/index.pdf",
+    "PDF",
+    "新建文件夹",
     "public/assets/css/stylesheet.8a59cac7970d9cfce3d22e4340dc85c5b44b5196b5b7dbe746d867aaf707d16a.css",
     "content/notes/信息论与编码/信息论基础/xinxilunjichu.pdf",
     "public/notes/信息论与编码/信息论基础/index.pdf",
@@ -185,15 +194,7 @@
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250607192636.png",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250609144910.png",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250607192704.png",
-    "public/notes/微机原理与单片机/微机原理与接口技术/index.html",
-    "public/notes/微机原理与单片机/微机与接口填空/index.html",
-    "public/notes/微机原理与单片机/单片机例题/index.html",
-    "public/notes/微机原理与单片机/微机原理与接口技术",
-    "public/notes/微机原理与单片机/单片机例题",
-    "public/notes/微机原理与单片机/微机与接口填空",
-    "public/notes/微机原理与单片机",
     "content/notes/数字信号处理/第一章概述/index.md",
-    "content/notes/通信原理/第一章绪论/index.md",
     "content/notes/数字系统设计/第二章EDA开发硬件与软件平台/index.md",
     "content/notes/高频电子线路/高频电子线路/index.md",
     "content/notes/高频电子线路/高频电子线路填空/index.md",
@@ -208,7 +209,6 @@
     "content/notes/微机原理/微机与接口填空/index.md",
     "content/notes/微机原理/单片机例题/index.md",
     "content/notes/微机原理/微机原理与接口技术/index.md",
-    "content/notes/信息论与编码/信息论基础/index.md",
     "content/notes/DSP技术的运用/index.md",
     "content/notes/高频电子线路填空/index.md",
     "content/notes/信号与系统/question.md",
