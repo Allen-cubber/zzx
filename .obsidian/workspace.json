@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/高频电子线路填空/index.md",
+                "file": "content/notes/信息论与编码/信息论基础/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/高频电子线路填空/index.md",
+                "file": "content/notes/DSP技术的运用/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,25 +169,27 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "dbe97756635f7786",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
-    "content/notes/微机与接口填空/index.md",
-    "public/notes/微机与接口填空/index.html",
-    "public/notes/微机与接口填空",
+    "content/notes/信息论与编码/信息论基础/index.md",
+    "content/notes/DSP技术的运用/index.md",
+    "public/notes/dsp技术的运用/index.html",
+    "public/notes/dsp技术的运用",
+    "public/notes/信息论与编码/信息论基础/index.html",
+    "public/notes/信息论与编码/信息论基础",
+    "public/notes/信息论与编码",
+    "public/tags/信息论/page/1/index.html",
+    "public/tags/信息论/page/1",
+    "public/tags/信息论/page",
+    "public/tags/信息论/index.xml",
+    "public/tags/信息论/index.html",
     "content/notes/高频电子线路填空/index.md",
+    "content/notes/微机与接口填空/index.md",
     "content/notes/单片机例题/index.md",
     "content/notes/信号与系统/question.md",
     "content/notes/高频电子线路/高频电子线路填空题.md",
-    "content/notes/微机与接口填空",
-    "public/notes/微机原理填空/index.html",
     "content/notes/微机原理填空/index.md",
-    "public/notes/微机原理填空/微机与接口填空/index.html",
-    "public/notes/微机原理填空/微机与接口填空",
-    "public/notes/微机原理填空",
     "content/notes/微机原理填空/微机与接口填空.md",
-    "content/notes/微机原理填空",
-    "content/notes/新建文件夹",
-    "public/notes/单片机例题/index.html",
     "content/notes/单片机例题/单片机例题.md",
     "content/notes/高频电子线路填空/高频电子线路填空题.md",
     "content/notes/微机原理与接口技术/微机与接口填空.md",
@@ -213,8 +215,6 @@
     "public/notes/高频电子线路/pasted-image-20250611212211.png",
     "Quantumweb.html.md",
     "content/notes/高频电子线路/index.md",
-    "content/notes/微机原理与接口技术/index.md",
-    "content/notes/信号与系统/index.md",
-    "content/notes/微机原理与接口技术/微机系统与接口技术.md"
+    "content/notes/微机原理与接口技术/index.md"
   ]
 }
