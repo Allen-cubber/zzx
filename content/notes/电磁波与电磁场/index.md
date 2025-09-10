@@ -2971,3 +2971,248 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   了解了斜入射到理想导体表面时TE波和TM波的形成。
 
 通过本章的学习，对电磁波在不同媒质中的传播规律有了更深刻的理解，为后续学习天线、波导等内容奠定了坚实的基础。需要注意公式的适用条件以及不同定义下符号的差异。
+
+---
+
+## **《电磁波与电磁场》核心知识点**
+
+### **第一章 矢量与场论基础**
+
+本章是全课程的数学基础，务必掌握梯度、散度、旋度的计算和物理意义。
+
+#### **1. 坐标系与矢量运算**
+*   **三种坐标系**: 必须熟记直角、圆柱、球坐标系的微分元（$d\vec{l}, d\vec{S}, dv$）和度量系数（$h_1, h_2, h_3$）。
+    *   **直角 (x, y, z):** $h_1=1, h_2=1, h_3=1$
+    *   **圆柱 (r, φ, z):** $h_1=1, h_2=r, h_3=1$
+    *   **球 (R, θ, φ):** $h_1=1, h_2=R, h_3=R\sin\theta$
+*   **关键点**: 圆柱和球坐标的单位矢量**不是常矢量**，它们的方向随位置变化。
+
+#### **2. 场论三大算子**
+*   **梯度 (Gradient) `∇V`**:
+    *   **作用对象**: 标量场V。
+    *   **结果**: 矢量。
+    *   **物理意义**: 指向标量场**增长最快**的方向，大小为该方向的变化率。梯度方向**垂直于等值面**。
+    *   **公式**: $\nabla V = \vec{a}\_{u1} \frac{1}{h_1} \frac{\partial V}{\partial u_1} + \vec{a}\_{u2} \frac{1}{h_2} \frac{\partial V}{\partial u_2} + \vec{a}\_{u3} \frac{1}{h_3} \frac{\partial V}{\partial u_3}$
+
+*   **散度 (Divergence) `∇·A`**:
+    *   **作用对象**: 矢量场A。
+    *   **结果**: 标量。
+    *   **物理意义**: 描述矢量场在某一点的**源的强度**（通量源密度）。正散度为源，负散度为汇。
+    *   **公式**: $\nabla \cdot \vec{A} = \frac{1}{h_1 h_2 h_3} \left[ \frac{\partial}{\partial u_1}(h_2 h_3 A_{u1}) + \frac{\partial}{\partial u_2}(h_1 h_3 A_{u2}) + \frac{\partial}{\partial u_3}(h_1 h_2 A_{u3}) \right]$
+
+*   **旋度 (Curl) `∇×A`**:
+    *   **作用对象**: 矢量场A。
+    *   **结果**: 矢量。
+    *   **物理意义**: 描述矢量场在某一点的**环流强度**（旋涡源密度），方向为环流最强平面的法向。
+    *   **公式 (行列式)**: $\nabla \times \vec{A} = \frac{1}{h_1 h_2 h_3} \begin{vmatrix} h_1\vec{a}\_{u1} & h_2\vec{a}\_{u2} & h_3\vec{a}\_{u3} \\\\\\frac{\partial}{\partial u_1} & \frac{\partial}{\partial u_2} & \frac{\partial}{\partial u_3} \\\\ h_1 A\_{u1} & h_2 A\_{u2} & h_3 A\_{u3} \end{vmatrix}$
+
+#### **3. 两大积分定理与亥姆霍兹定理**
+*   **高斯散度定理**: 体积分与闭合面积分转换。
+    $\int_V (\nabla \cdot \vec{A}) dV = \oint_S \vec{A} \cdot d\vec{S}$
+*   **斯托克斯定理**: 面积分与闭合路径积分转换。
+    $\int_S (\nabla \times \vec{A}) \cdot d\vec{S} = \oint_C \vec{A} \cdot d\vec{l}$
+*   **亥姆霍兹定理**: 任何矢量场可唯一分解为**无旋场**（梯度的负）和**无散场**（旋度）之和。场的性质由其**散度**和**旋度**唯一确定。
+
+---
+
+### **第二章 静电场**
+核心是高斯定律和电位。
+
+#### **1. 基本方程**
+| 方程 | 微分形式 | 积分形式 | 物理意义 |
+| :--- | :--- | :--- | :--- |
+| **高斯定律** | $\nabla \cdot \vec{D} = \rho$ | $\oint_S \vec{D} \cdot d\vec{S} = Q_{enc}$ | 电荷是电场的**通量源** |
+| **无旋性** | $\nabla \times \vec{E} = 0$ | $\oint_C \vec{E} \cdot d\vec{l} = 0$ | 静电场是**保守场** |
+
+#### **2. 核心关系与方程**
+*   **电场与电位**: $\vec{E} = -\nabla \phi$
+*   **泊松/拉普拉斯方程**: $\nabla^2 \phi = -\rho/\epsilon$ (有源区)；$\nabla^2 \phi = 0$ (无源区)
+*   **本构关系**: $\vec{D} = \epsilon \vec{E} = \epsilon_0 \epsilon_r \vec{E}$
+*   **极化**: $\vec{D} = \epsilon_0 \vec{E} + \vec{P}$ (P为极化强度)
+
+#### **3. 边界条件** (界面法向由2指向1)
+*   **切向**: $E_{1t} = E_{2t}$
+*   **法向**: $D_{1n} - D_{2n} = \rho_s$ (若无自由面电荷，则 $D_{1n} = D_{2n}$)
+*   **导体表面**: $E_t = 0$, $D_n = \rho_s$
+
+#### **4. 电容与能量**
+*   **电容计算三步法**:
+    1.  假设导体带电 $\pm Q$。
+    2.  用高斯定律求出 $\vec{E}$ (或 $\vec{D}$)。
+    3.  积分求电压 $U = \int \vec{E} \cdot d\vec{l}$。
+    4.  计算 $C=Q/U$。
+*   **静电能量**:
+    *   **源表示**: $W_e = \frac{1}{2} \int \rho \phi dV$
+    *   **场表示**: $W_e = \frac{1}{2} \int \vec{D} \cdot \vec{E} dV$
+    *   **能量密度**: $w_e = \frac{1}{2} \vec{D} \cdot \vec{E} = \frac{1}{2} \epsilon E^2$
+
+---
+
+### **第三章 恒定电场**
+核心是欧姆定律和电流连续性，与静电场高度相似。
+
+#### **1. 基本定律与方程**
+*   **欧姆定律 (点形式)**: $\vec{J} = \sigma \vec{E}$
+*   **焦耳定律 (点形式)**: $p = \vec{E} \cdot \vec{J} = \sigma E^2$
+*   **电流连续性方程**: $\nabla \cdot \vec{J} = -\frac{\partial \rho}{\partial t}$
+*   **恒定电流场**: $\nabla \cdot \vec{J} = 0$
+
+#### **2. 静电场-恒定电流场比拟**
+| 静电场 | 恒定电流场 |
+| :--- | :--- |
+| $\vec{D}$ (电位移) | $\vec{J}$ (电流密度) |
+| $\epsilon$ (介电常数) | $\sigma$ (电导率) |
+| $Q$ (电荷) | $I$ (电流) |
+| $C$ (电容) | $G$ (电导) |
+*   **关系**: 对于同样几何结构，电导 $G = \frac{\sigma}{\epsilon} C$。
+
+---
+
+### **第四章 静磁场**
+核心是安培环路定律和磁矢位。
+
+#### **1. 基本方程**
+| 方程 | 微分形式 | 积分形式 | 物理意义 |
+| :--- | :--- | :--- | :--- |
+| **安培环路定律** | $\nabla \times \vec{H} = \vec{J}$ | $\oint_C \vec{H} \cdot d\vec{l} = I_{enc}$ | 电流是磁场的**旋涡源** |
+| **无散性** | $\nabla \cdot \vec{B} = 0$ | $\oint_S \vec{B} \cdot d\vec{S} = 0$ | 磁场是**无源场** |
+
+#### **2. 核心关系与方程**
+*   **毕奥-萨伐尔定律**: $d\vec{B} = \frac{\mu_0}{4\pi} \frac{I d\vec{l}' \times \vec{R}}{R^3}$ (用于对称性差的情况)
+*   **磁矢位**: $\vec{B} = \nabla \times \vec{A}$
+*   **泊松方程**: $\nabla^2 \vec{A} = -\mu \vec{J}$
+*   **本构关系**: $\vec{B} = \mu \vec{H} = \mu_0 \mu_r \vec{H}$
+*   **磁化**: $\vec{B} = \mu_0(\vec{H} + \vec{M})$ (M为磁化强度)
+
+#### **3. 边界条件**
+*   **切向**: $\vec{n} \times (\vec{H}\_1 \- \vec{H}\_2) = \vec\{J\}\_s$ (若无自由面电流，则 $H_{1t} = H_{2t}$)
+*   **法向**: $B_{1n} = B_{2n}$
+
+#### **4. 电感与能量**
+*   **电感**: $L = \Psi/I$ (自感), $M = \Psi_{12}/I_2$ (互感)
+*   **磁场能量**:
+    *   **源/电路表示**: $W_m = \frac{1}{2} L I^2$
+    *   **场表示**: $W_m = \frac{1}{2} \int \vec{B} \cdot \vec{H} dV$
+    *   **能量密度**: $w_m = \frac{1}{2} \vec{B} \cdot \vec{H} = \frac{1}{2} \mu H^2$
+
+---
+
+### **第五章 静态场边值问题**
+核心是唯一性定理和镜像法。
+
+*   **唯一性定理**: 给定区域内的源和边界条件，则区域内的解是唯一的。
+*   **镜像法**: 用场域外的**虚拟电荷**替代边界上的感应电荷效应。
+    *   **点电荷 vs 接地导体平面**: 镜像电荷在对称位置，等大反号。
+    *   **点电荷 vs 介质平面**: 两个区域需分别设置不同的镜像/等效电荷。
+    *   **点电荷 vs 接地导体球**: 镜像电荷在球内，位置 $b=R^2/d$，电荷量 $q' = -q(R/d)$。
+
+---
+
+### **第六章 时变电磁场**
+本课程的顶峰，统一了电与磁。
+
+#### **1. 麦克斯韦方程组**
+| 方程 | 微分形式 | 积分形式 |
+| :--- | :--- | :--- |
+| **法拉第定律** | $\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$ | $\oint_C \vec{E} \cdot d\vec{l} = -\int_S \frac{\partial \vec{B}}{\partial t} \cdot d\vec{S}$ |
+| **安培-麦克斯韦定律**| $\nabla \times \vec{H} = \vec{J} + \frac{\partial \vec{D}}{\partial t}$ | $\oint_C \vec{H} \cdot d\vec{l} = \int_S (\vec{J} + \frac{\partial \vec{D}}{\partial t}) \cdot d\vec{S}$ |
+| **高斯电通定律** | $\nabla \cdot \vec{D} = \rho$ | $\oint_S \vec{D} \cdot d\vec{S} = Q_{enc}$ |
+| **高斯磁通定律** | $\nabla \cdot \vec{B} = 0$ | $\oint_S \vec{B} \cdot d\vec{S} = 0$ |
+
+#### **2. 波动方程与坡印廷定理**
+*   **波动方程 (无源区)**: $\nabla^2\vec{E} - \mu\varepsilon\frac{\partial^2\vec{E}}{\partial t^2} = 0$
+*   **坡印廷矢量 (能流密度)**: $\vec{S} = \vec{E} \times \vec{H}$
+*   **坡印廷定理 (能量守恒)**: $-\oint_S \vec{S} \cdot d\vec{S} = \frac{\partial W}{\partial t} + P_j$
+
+#### **3. 时谐场 (相量法)**
+*   **核心**: $\frac{\partial}{\partial t} \rightarrow j\omega$
+*   **时谐麦克斯韦方程**:
+    *   $\nabla \times \vec{E} = -j\omega \mu \vec{H}$
+    *   $\nabla \times \vec{H} = (\sigma + j\omega \epsilon) \vec{E}$
+*   **亥姆霍兹方程**: $\nabla^2\vec{E} + k^2\vec{E} = 0$
+*   **平均坡印廷矢量**: $\vec{S}_{av} = \frac{1}{2}\text{Re}[\vec{E} \times \vec{H}^*]$
+
+---
+
+### **第七章 均匀平面波**
+麦克斯韦方程组最简单的应用解。
+
+#### **1. 理想介质中的平面波**
+*   **性质**: 横电磁波 (TEM)，$\vec{E} \perp \vec{H} \perp \vec{k}$。
+*   **传播参数**:
+    *   **相速**: $v_p = 1/\sqrt{\mu\epsilon}$
+    *   **波数/相位常数**: $k = \beta = \omega\sqrt{\mu\epsilon}$
+    *   **波长**: $\lambda = 2\pi/\beta$
+    *   **本征波阻抗**: $\eta = \sqrt{\mu/\epsilon}$ (实数)
+*   **关系**: $E/H = \eta$
+
+#### **2. 导电媒质中的平面波**
+*   **传播常数**: $\gamma = \alpha + j\beta$
+*   **衰减常数 $\alpha$**: 描述振幅衰减。
+*   **本征波阻抗**: $\eta_c = \sqrt{\frac{j\omega\mu}{\sigma+j\omega\epsilon}}$ (复数)
+*   **趋肤深度/穿透深度**: $\delta = 1/\alpha$
+*   **良导体近似 ($\sigma \gg \omega\epsilon$)**:
+    *   $\alpha \approx \beta \approx \sqrt{\pi f \mu \sigma}$
+    *   $\eta_c \approx (1+j)\sqrt{\frac{\pi f \mu}{\sigma}}$
+    *   $\delta \approx 1/\sqrt{\pi f \mu \sigma}$
+
+#### **3. 平面波的垂直入射**
+*   **反射系数 R**: $R = \frac{\eta_2 - \eta_1}{\eta_2 + \eta_1}$
+*   **透射系数 T**: $T = \frac{2\eta_2}{\eta_2 + \eta_1} = 1+R$
+*   **驻波比 SWR**: $\rho = \frac{1+|R|}{1-|R|}$
+
+#### **4. 平面波的斜入射**
+*   **反射/折射定律 (斯涅尔定律)**:
+    *   $\theta_i = \theta_r$
+    *   $n_1 \sin\theta_i = n_2 \sin\theta_t$ (其中 $n=\sqrt{\mu_r\epsilon_r}$)
+*   **布儒斯特角 (全透射角, 仅平行极化)**: $\tan\theta_B = \sqrt{\epsilon_2/\epsilon_1}$
+*   **全反射临界角 (从光密到光疏)**: $\sin\theta_c = \sqrt{\epsilon_2/\epsilon_1}$
+
+---
+
+## **核心公式速查表 (Cheat Sheet)**
+
+### **I. 场论算子 (直角坐标)**
+*   **梯度**: $\nabla V = \vec{a}\_{x} \frac{\partial V}{\partial x} + \vec{a}\_{y} \frac{\partial V}{\partial y} + \vec{a}\_{z} \frac{\partial V}{\partial z}$
+*   **散度**: $\nabla \cdot \vec{A} = \frac{\partial A_x}{\partial x} + \frac{\partial A_y}{\partial y} + \frac{\partial A_z}{\partial z}$
+*   **旋度**: $\nabla \times \vec{A} = \begin{vmatrix} \vec{a}_x & \vec{a}_y & \vec{a}_z \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ A_x & A_y & A_z \end{vmatrix}$
+*   **拉普拉斯**: $\nabla^2 V = \frac{\partial^2 V}{\partial x^2} + \frac{\partial^2 V}{\partial y^2} + \frac{\partial^2 V}{\partial z^2}$
+
+### **II. 积分定理与恒等式**
+*   **高斯散度定理**: $\int_V (\nabla \cdot \vec{A}) dV = \oint_S \vec{A} \cdot d\vec{S}$
+*   **斯托克斯定理**: $\int_S (\nabla \times \vec{A}) \cdot d\vec{S} = \oint_C \vec{A} \cdot d\vec{l}$
+*   **恒等式**: $\nabla \times (\nabla V) = 0$, $\nabla \cdot (\nabla \times \vec{A}) = 0$
+
+### **III. 静态场**
+| | 静电场 | 静磁场 |
+| :-- | :--- | :--- |
+| **散度** | $\nabla \cdot \vec{D} = \rho$ | $\nabla \cdot \vec{B} = 0$ |
+| **旋度** | $\nabla \times \vec{E} = 0$ | $\nabla \times \vec{H} = \vec{J}$ |
+| **位函数**| $\vec{E} = -\nabla \phi$ | $\vec{B} = \nabla \times \vec{A}$ |
+| **本构** | $\vec{D} = \epsilon \vec{E}$ | $\vec{B} = \mu \vec{H}$ |
+| **边界(切)**| $E_{1t} = E_{2t}$ | $H_{1t} - H_{2t} = J_s$ |
+| **边界(法)**| $D_{1n} - D_{2n} = \rho_s$ | $B_{1n} = B_{2n}$ |
+| **能量密度**| $w_e = \frac{1}{2} \vec{D} \cdot \vec{E}$ | $w_m = \frac{1}{2} \vec{B} \cdot \vec{H}$ |
+
+### **IV. 麦克斯韦方程组 (微分形式)**
+*   **时域**:
+    *   $\nabla \times \vec{E} = -\frac{\partial \vec{B}}{\partial t}$
+    *   $\nabla \times \vec{H} = \vec{J} + \frac{\partial \vec{D}}{\partial t}$
+    *   $\nabla \cdot \vec{D} = \rho$
+    *   $\nabla \cdot \vec{B} = 0$
+*   **频域 (时谐)**:
+    *   $\nabla \times \vec{E} = -j\omega\vec{B}$
+    *   $\nabla \times \vec{H} = \vec{J} + j\omega\vec{D}$
+    *   $\nabla \cdot \vec{D} = \rho$
+    *   $\nabla \cdot \vec{B} = 0$
+
+### **V. 平面波**
+*   **亥姆霍兹方程**: $\nabla^2\vec{E} + k^2\vec{E} = 0$
+*   **波数**: $k = \omega\sqrt{\mu\epsilon}$ (理想介质)
+*   **本征波阻抗**: $\eta = \sqrt{\mu/\epsilon}$ (理想介质)
+*   **传播常数**: $\gamma = \alpha + j\beta = j\omega\sqrt{\mu\epsilon_c}$
+*   **趋肤深度**: $\delta = 1/\alpha$
+*   **反射系数**: $R = (\eta_2 - \eta_1)/(\eta_2 + \eta_1)$
+*   **驻波比**: $\rho = (1+|R|)/(1-|R|)$
+*   **斯涅尔定律**: $n_1 \sin\theta_i = n_2 \sin\theta_t$
+*   **布儒斯特角 (TM)**: $\tan\theta_B = n_2/n_1$
