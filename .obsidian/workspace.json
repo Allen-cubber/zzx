@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/电磁波与电磁场/index.md",
-                "mode": "source",
+                "file": "content/notes/信息论与编码/信息论基础/index.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/电磁波与电磁场/index.md",
+                "file": "content/notes/信息论与编码/信息论基础/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,24 +171,25 @@
   },
   "active": "dbe97756635f7786",
   "lastOpenFiles": [
+    "content/notes/通信原理/第一章绪论/index.md",
+    "content/notes/通信原理/第三章模拟信号的数字编码/index.md",
+    "content/notes/通信原理/第二章信号分析基础/index.md",
+    "content/notes/数字信号处理/第一章概述/index.md",
+    "content/notes/数字信号处理/第二章离散时间信号的时域分析/index.md",
+    "content/notes/数字信号处理/第三章离散时间系统的时域分析/index.md",
+    "public/notes/数字信号处理/第三章离散时间系统的时域分析/index.html",
+    "public/notes/数字信号处理/第三章离散时间系统的时域分析/未命名/index.html",
+    "public/notes/数字信号处理/第三章离散时间系统的时域分析/未命名",
+    "public/notes/数字信号处理/第三章离散时间系统的时域分析",
+    "content/notes/数字信号处理/第三章离散时间系统的时域分析",
+    "content/notes/电磁波与电磁场/index.md",
     "public/assets/css/stylesheet.376b05fb6ba16e3cfd34242daaceaf128abf5780ce3d3daaddc99c5f84e90821.css",
     "assets/css/extended/post_tags_style.css",
     "public/notes/通信原理/第三章模拟信号的数字编码/index.html",
     "public/notes/通信原理/第三章模拟信号的数字编码",
-    "content/notes/通信原理/第三章模拟信号的数字编码/index.md",
-    "content/notes/数字信号处理/第二章离散时间信号的时域分析/index.md",
-    "content/notes/通信原理/第二章信号分析基础/index.md",
     "public/notes/通信原理/第二章信号分析基础/index.html",
-    "public/notes/通信原理/第二章信号分析基础",
-    "public/notes/数字信号处理/第二章离散时间信号的时域分析/index.html",
-    "public/notes/数字信号处理/第二章离散时间信号的时域分析",
-    "content/notes/数字信号处理/第一章概述/index.md",
-    "content/notes/数字信号处理/第二章离散时间信号的时域分析",
-    "content/notes/通信原理/第一章绪论/index.md",
-    "content/notes/通信原理/第二章信号分析基础",
     "content/notes/通信原理/第一章绪论/Pastedimage20250906173427.png",
     "content/notes/信息论与编码/信息论基础/index.md",
-    "PDF/txyl1.pdf",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250605194731.png",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250609153615.png",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250609151757.png",
@@ -214,8 +215,6 @@
     "content/notes/微机原理/微机原理与接口技术/index.md",
     "content/notes/DSP技术的运用/index.md",
     "content/notes/高频电子线路填空/index.md",
-    "content/notes/信号与系统/question.md",
-    "content/notes/高频电子线路/高频电子线路填空题.md",
-    "content/notes/微机原理填空/index.md"
+    "content/notes/信号与系统/question.md"
   ]
 }

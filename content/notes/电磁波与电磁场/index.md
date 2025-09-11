@@ -58,8 +58,8 @@ math: true
 ##### 2.2 点乘
 
 *   **定义**:
-    $\boxed{\vec{A} \cdot \vec{B} = |\vec{A}||\vec{B}| \cos \theta_{AB} = AB \cos \theta_{AB}}$
-    其中 $\theta_{AB}$ 是 $\vec{A}$ 和 $\vec{B}$ 之间的夹角。
+    $\boxed{\vec{A} \cdot \vec{B} = |\vec{A}||\vec{B}| \cos \theta\_{AB} = AB \cos \theta_{AB}}$
+    其中 $\theta\_{AB}$ 是 $\vec{A}$ 和 $\vec{B}$ 之间的夹角。
 *   **结果**: 一个<font color='orange'>标量</font>。
 *   **运算律**:
     *   交换律 (Commutative): $\vec{A} \cdot \vec{B} = \vec{B} \cdot \vec{A}$
@@ -71,14 +71,13 @@ math: true
 
 ##### 2.3 叉乘  ✖️
 
-*   **定义 (大小和方向)**:
-    $\boxed{\vec{A} \times \vec{B} = \vec{a}_n |\vec{A}||\vec{B}| \sin \theta_{AB}}$
-    其中 $\theta_{AB}$ 是 $\vec{A}$ 和 $\vec{B}$ 之间的夹角 ($0 \le \theta_{AB} \le \pi$)。
+*   **定义 (大小和方向)**:${\vec{A} × \vec{B} = \vec{a}_n |\vec{A}||\vec{B}\| \sin \theta_{AB}}$
+    其中 $\theta\_{AB}$ 是 $\vec{A}$ 和 $\vec{B}$ 之间的夹角 ($0 \le \theta\_{AB} \le \pi$)。
     *   **大小**: $|\vec{A} \times \vec{B}| = AB |\sin \theta_{AB}|$，等于以 $\vec{A}$ 和 $\vec{B}$ 为邻边的<font color='orange'>平行四边形</font>的面积。
     *   **方向**: $\vec{a}_n$ 是垂直于 $\vec{A}$ 和 $\vec{B}$ 构成的平面的单位矢量，其指向由<font color='orange'>右手螺旋规则</font> (Right-hand rule) 确定 (从 $\vec{A}$ 转向 $\vec{B}$)。
 *   **结果**: 一个<font color='orange'>矢量</font>。
 *   **直角坐标系行列式表示**:
-    $\vec{A} \times \vec{B} = \begin{vmatrix} \vec{a}_x & \vec{a}_y & \vec{a}_z \\ A_x & A_y & A_z \\ B_x & B_y & B_z \end{vmatrix} = \vec{a}_x (A_y B_z - A_z B_y) + \vec{a}_y (A_z B_x - A_x B_z) + \vec{a}_z (A_x B_y - A_y B_x)$
+    $\vec{A} \times \vec{B} = \begin{vmatrix} \vec{a}_x & \vec{a}_y & \vec{a}_z \\\\ A_x & A_y & A_z \\\\ B_x & B_y & B_z \end{vmatrix} = \vec{a}_x (A_y B_z - A_z B_y) + \vec{a}_y (A_z B_x - A_x B_z) + \vec{a}_z (A_x B_y - A_y B_x)$
 *   **运算律**:
     *   <font color='orange'>反</font>交换律 (Anti-commutative): $\vec{A} \times \vec{B} = -\vec{B} \times \vec{A}$
     *   分配律 (Distributive): $\vec{A} \times (\vec{B}+\vec{C}) = \vec{A} \times \vec{B} + \vec{A} \times \vec{C}$
