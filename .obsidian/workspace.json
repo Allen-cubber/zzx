@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/20250905.md",
+                "file": "content/notes/数字系统设计/第四章组合逻辑电路/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "20250905"
+              "title": "index"
             }
           }
         ]
@@ -172,6 +172,7 @@
   },
   "active": "2f0d793b035d0bd7",
   "lastOpenFiles": [
+    "content/musings/20250905.md",
     "content/notes/数字系统设计/第四章组合逻辑电路/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/Pastedimage20250922210808.png",
@@ -208,7 +209,6 @@
     "content/notes/信息论与编码/信息论基础/index.md",
     "content/notes/信息论与编码/连续信源",
     "content/notes/通信原理/第二章信号分析基础/index.md",
-    "content/musings/20250905.md",
     "content/notes/数字系统设计/第二章EDA开发硬件与软件平台/index.md",
     "content/musings/工作簿.md",
     "content/notes/通信原理/第一章绪论/index.md",

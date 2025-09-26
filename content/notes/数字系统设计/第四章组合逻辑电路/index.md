@@ -285,31 +285,181 @@ END a;
 ```
 
 ### 5.4 多位加法器
-#### 1. 四位串行进位加法器 (Ripple-Carry Adder)
-将多个全加器**级联**而成，低位的进位输出 `Co` 连接到高一位的进位输入 `Ci`。
-*   **优点**：结构简单。
-*   **缺点**：速度慢。因为每一位的计算都必须等待其低一位的进位信号，存在**进位传播延迟**。
 
-可以通过**模块化设计**（元件例化）的方式实现。
-1.  将全加器定义为一个 `component`。
-2.  在顶层文件中，通过 `port map` 语句四次例化（调用）这个全加器元件。
+#### 1. 串行进位加法器 (Ripple-Carry Adder) 🚶‍♂️➡️➡️➡️
 
-#### 2. 四位并行进位加法器 (Carry-Lookahead Adder)
-为了克服串行进位的速度瓶颈，提出了并行进位的思想。
-*   **核心思想**：各级的进位信号**同时产生**，而不是逐级传递。
-*   **逻辑表达式**：每一位的进位 $C_i$ 都可以直接由输入 $A_i, B_i$ 和初始进位 $C_0$ 表示出来。
-    $$
-    \boxed{C_1 = G_1 + P_1C_0}
-    $$
-    $$
-    C_2 = G_2 + P_2G_1 + P_2P_1C_0
-    $$
-    （其中 $G_i = A_i \cdot B_i$ 为进位产生项，$P_i = A_i \oplus B_i$ 为进位传递项）
-*   **优点**：速度快，大大减少了进位延迟。
-*   **缺点**：随着位数的增加，逻辑电路会变得非常复杂，资源消耗大。
+这种加法器通过将多个**1位全加器 (Full Adder)** 级联起来实现。它的结构简单直观，就像一排多米诺骨牌，低位的进位 (`cout`) 会“串行”地传递给高一位的进位输入 (`cin`)。
 
-#### 性能比较
-实践表明，4位并行加法器和4位串行加法器占用的资源相近。因此，在构建更高位数的加法器（如8位、16位）时，通常采用**将多个4位并行进位加法器进行级联**的方式，以在速度和资源之间取得平衡。
+##### 实现步骤：
+1.  首先，我们需要一个1位全加器的基本模块。
+2.  然后，在顶层模块中，我们像搭积木一样，将4个1位全加器连接起来。
+
+##### VHDL 代码实现
+
+**模块一：1位全加器 (full_adder.vhd)**
+```vhdl
+-- 引入IEEE标准库
+library ieee;
+use ieee.std_logic_1164.all;
+
+-- 定义1位全加器的实体
+entity full_adder is
+    port (
+        a   : in  std_logic; -- 输入a
+        b   : in  std_logic; -- 输入b
+        cin : in  std_logic; -- 低位进位输入
+        s   : out std_logic; -- 本位和输出
+        cout: out std_logic  -- 向高位的进位输出
+    );
+end entity full_adder;
+
+-- 定义1位全加器的行为结构体
+architecture behavioral of full_adder is
+begin
+    -- 计算本位和
+    s <= a xor b xor cin;
+    -- 计算向高位的进位
+    cout <= (a and b) or (a and cin) or (b and cin);
+end architecture behavioral;
+```
+
+**模块二：4位串行进位加法器 (ripple_carry_adder_4bit.vhd)**
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+-- 定义4位串行进位加法器的实体
+entity ripple_carry_adder_4bit is
+    port (
+        a   : in  std_logic_vector(3 downto 0); -- 4位输入a
+        b   : in  std_logic_vector(3 downto 0); -- 4位输入b
+        cin : in  std_logic;                      -- 初始进位输入
+        sum : out std_logic_vector(3 downto 0); -- 4位和输出
+        cout: out std_logic                       -- 最终进位输出
+    );
+end entity ripple_carry_adder_4bit;
+
+-- 定义结构化描述的结构体
+architecture structural of ripple_carry_adder_4bit is
+
+    -- 1. 将1位全加器声明为一个元件(Component)
+    component full_adder is
+        port (
+            a   : in  std_logic;
+            b   : in  std_logic;
+            cin : in  std_logic;
+            s   : out std_logic;
+            cout: out std_logic
+        );
+    end component full_adder;
+
+    -- 2. 定义一个内部信号，用于连接各个全加器之间的进位
+    signal c_ripple : std_logic_vector(4 downto 0);
+
+begin
+
+    -- 3. 将外部的初始进位连接到内部进位信号的最低位
+    c_ripple(0) <= cin;
+
+    -- 4. 使用 for...generate 语句例化4个全加器
+    --    这是一种优雅的结构化描述方式
+    GEN_FULL_ADDERS: for i in 0 to 3 generate
+        -- 例化一个名为 U_FA 的 full_adder 元件
+        U_FA: entity work.full_adder(behavioral)
+            port map (
+                a    => a(i),                -- 当前位的 a
+                b    => b(i),                -- 当前位的 b
+                cin  => c_ripple(i),         -- 来自上一级的进位
+                s    => sum(i),              -- 当前位的和
+                cout => c_ripple(i + 1)      -- 向下一级的进位
+            );
+    end generate GEN_FULL_ADDERS;
+
+    -- 5. 将内部进位信号的最高位连接到最终的进位输出
+    cout <= c_ripple(4);
+
+end architecture structural;
+```
+
+#### ✨ 代码解析
+*   <font color="orange">**结构化描述**</font>：这种方法清晰地展示了电路的物理结构，即由4个 `full_adder` 串联而成。
+*   `component`：用于在当前设计中声明一个即将被例化（使用）的、已存在的设计实体。
+*   `for...generate`：这是一个强大的语句，可以在编译时自动生成重复的硬件结构。这里它为我们生成了4个全加器的实例，并自动处理了索引 `i`，将它们正确地连接起来。
+*   `c_ripple` 信号：这是关键的“链条”，它将第 `i` 位的 `cout` 连接到第 `i+1` 位的 `cin`，实现了进位的串行传递。
+
+---
+
+#### 2. 并行进位加法器 (Carry-Lookahead Adder) 🚀
+
+为了克服串行进位的速度瓶颈，并行进位加法器采用了一种“预判”机制。它不等待低位进位，而是通过专门的**<font color="orange">先行进位逻辑</font>**，根据所有输入位 (`a` 和 `b`) 和初始进位 `cin`，**同时**计算出每一位的进位。
+
+##### 核心逻辑：
+1.  **进位产生项 (Generate)**: $G_i = a_i \cdot b_i$。当 $a_i$ 和 $b_i$ 都为1时，本位**必定**产生一个进位。
+2.  **进位传递项 (Propagate)**: $P_i = a_i \oplus b_i$。当 $a_i$ 和 $b_i$ 中只有一个为1时，本位是否产生进位，**取决于**低位的进位 $C_{i-1}$ 是否能传递过来。
+3.  **进位逻辑表达式**:
+    $C_1 = G_0 + P_0C_0$
+    $C_2 = G_1 + P_1G_0 + P_1P_0C_0$
+    ...
+    每一位的进位都可以直接由输入和 $C_0$ 算出。
+
+##### VHDL 代码实现
+这里我们使用**数据流/行为描述**的方式，直接实现其逻辑方程。
+```vhdl
+library ieee;
+use ieee.std_logic_1164.all;
+
+-- 实体定义与串行加法器相同
+entity carry_lookahead_adder_4bit is
+    port (
+        a   : in  std_logic_vector(3 downto 0);
+        b   : in  std_logic_vector(3 downto 0);
+        cin : in  std_logic;
+        sum : out std_logic_vector(3 downto 0);
+        cout: out std_logic
+    );
+end entity carry_lookahead_adder_4bit;
+
+architecture behavioral of carry_lookahead_adder_4bit is
+    -- 定义进位产生项(G)和进位传递项(P)的内部信号
+    signal g, p: std_logic_vector(3 downto 0);
+    -- 定义内部的进位信号
+    signal c   : std_logic_vector(4 downto 0);
+begin
+    -- 1. 并行计算所有位的 G 和 P 项
+    g <= a and b; -- g(i) <= a(i) and b(i)
+    p <= a xor b; -- p(i) <= a(i) xor b(i)
+
+    -- 2. 将初始进位赋给 c(0)
+    c(0) <= cin;
+
+    -- 3. 并行计算每一位的进位 (核心先行进位逻辑)
+    c(1) <= g(0) or (p(0) and c(0));
+    c(2) <= g(1) or (p(1) and g(0)) or (p(1) and p(0) and c(0));
+    c(3) <= g(2) or (p(2) and g(1)) or (p(2) and p(1) and g(0)) or (p(2) and p(1) and p(0) and c(0));
+    c(4) <= g(3) or (p(3) and g(2)) or (p(3) and p(2) and g(1)) or (p(3) and p(2) and p(1) and g(0)) or (p(3) and p(2) and p(1) and p(0) and c(0));
+
+    -- 4. 并行计算每一位的和
+    sum <= p xor c(3 downto 0); -- sum(i) = p(i) xor c(i)
+
+    -- 5. 输出最终的进位
+    cout <= c(4);
+
+end architecture behavioral;
+```
+
+#### ✨ 代码解析
+*   <font color="orange">**行为/数据流描述**</font>：代码直接描述了信号之间的数学和逻辑关系，而不是电路的物理连接结构。
+*   **并行性**：VHDL中的所有信号赋值语句都是**并行执行**的。这意味着 `g`, `p` 和所有 `c(i)` 的计算是同时开始的。综合器会根据这些方程生成一个复杂的组合逻辑电路，这个电路没有串行依赖，因此速度非常快。
+*   **速度优势**：计算延迟主要取决于最复杂的进位表达式 `c(4)` 的逻辑门延迟，而不是4个全加器的延迟之和。
+
+### 总结对比
+| 特性 | 串行进位加法器 (Ripple-Carry) | 并行进位加法器 (Carry-Lookahead) |
+| :--- | :--- | :--- |
+| **结 构** | 简单，规则，易于扩展 | 复杂，不规则，位数增加时逻辑急剧复杂化 |
+| **速 度** | 慢，延迟与位数 N 成正比 | 快，延迟与位数 N 的对数成正比 |
+| **资源消耗**| 较少，仅为 N 个全加器 | 较多，需要额外的先行进位逻辑电路 |
+| **设计方式** | 常用<font color="orange">结构化描述</font>（例化元件） | 常用<font color="orange">行为/数据流描述</font>（逻辑方程） |
+
 
 ---
 
