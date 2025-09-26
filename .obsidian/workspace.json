@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/5.有限长离散变换/index.md",
+                "file": "content/musings/20250905.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "20250905"
             }
           }
         ]
@@ -170,12 +170,13 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "2f0d793b035d0bd7",
   "lastOpenFiles": [
+    "content/notes/数字系统设计/第四章组合逻辑电路/index.md",
+    "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/Pastedimage20250922210808.png",
     "Pastedimage20250922210808.png",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
-    "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "content/notes/通信原理/第三章模拟信号的数字编码/index.md",
     "content/notes/数字信号处理/5.有限长离散变换",
     "content/notes/数字信号处理/4.离散时间系统的时域分析",
@@ -204,7 +205,6 @@
     "content/notes/信息论与编码/连续信源/Pastedimage20250920120034.png",
     "content/notes/信息论与编码/连续信源/Pastedimage20250920115955.png",
     "content/notes/信息论与编码/连续信源/Pastedimage20250920120054.png",
-    "Pastedimage20250920120054.png",
     "content/notes/信息论与编码/信息论基础/index.md",
     "content/notes/信息论与编码/连续信源",
     "content/notes/通信原理/第二章信号分析基础/index.md",
