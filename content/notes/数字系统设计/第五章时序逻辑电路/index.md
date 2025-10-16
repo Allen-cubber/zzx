@@ -343,120 +343,122 @@ count <= temp_count; -- 输出
 *   **过程**：逐位检查乘数的每一位。如果当前位为 `1`，则将被乘数加到部分积累加器上。然后，被乘数左移一位（或累加器右移一位），乘数右移一位。循环此过程直到乘数的所有位都被检查完毕。
 *   **硬件结构**：通常由一个加法器、一个存放部分积的累加寄存器和一个存放乘数的移位寄存器组成。
 ```vhdl
--- 引入标准库和数值库
 library ieee;
 use ieee.std_logic_1164.all;
-use ieee.numeric_std.all; -- 使用此库进行算术运算，是VHDL-2008标准推荐的
+use ieee.numeric_std.all;
 
---================================================================
--- 实体（Entity）定义了模块的接口
---================================================================
 entity unsigned_multiplier is
     generic (
-        N : integer := 8 -- 定义数据位宽为8位，可以轻松修改
+        R : integer := 8  -- 定义操作数位宽 (r)
     );
     port (
         -- 控制信号
-        clk             : in  std_logic; -- 时钟信号
-        reset           : in  std_logic; -- 异步复位信号，高电平有效
-        start           : in  std_logic; -- 开始信号，启动一次乘法运算
-
+        clk             : in  std_logic;
+        rst             : in  std_logic;
+        start           : in  std_logic; -- 开始信号，高电平脉冲
+        
         -- 数据输入
-        multiplicand_in : in  std_logic_vector(N - 1 downto 0); -- 被乘数 A
-        multiplier_in   : in  std_logic_vector(N - 1 downto 0); -- 乘数 B
-
+        multiplicand_i  : in  std_logic_vector(R-1 downto 0); -- 被乘数 (M)
+        multiplier_i    : in  std_logic_vector(R-1 downto 0); -- 乘数 (Q)
+        
         -- 数据输出
-        product_out     : out std_logic_vector(2 * N - 1 downto 0); -- 乘积结果 (2N位)
-        done_out        : out std_logic -- 运算完成标志
+        product_o       : out std_logic_vector(2*R-1 downto 0); -- 乘积 (P)
+        done_o          : out std_logic
     );
 end entity unsigned_multiplier;
 
---================================================================
--- 结构体（Architecture）定义了模块的内部逻辑
---================================================================
-architecture fsm_arch of unsigned_multiplier is
+architecture behavioral of unsigned_multiplier is
 
-    -- 1. 定义状态机的状态
-    type state_type is (IDLE, CALCULATING, DONE);
+    -- 定义状态机状态
+    type state_t is (S_IDLE, S_MULTIPLY, S_DONE);
+    signal state_reg, state_next : state_t;
 
-    -- 2. 定义内部信号（寄存器）
-    signal fsm_state        : state_type;                                   -- FSM 当前状态寄存器
-    signal cycle_counter    : integer range 0 to N;                         -- 循环计数器
-    signal multiplicand_reg : unsigned(N - 1 downto 0);                     -- 锁存被乘数A
-    signal acc_mult_reg     : unsigned(2 * N - 1 downto 0);                 -- 2N位的累加器+乘数联合寄存器
+    -- 内部寄存器
+    signal p_reg        : unsigned(2*R-1 downto 0);
+    signal m_reg        : unsigned(R-1 downto 0); 
+    signal counter_reg  : integer range 0 to R;
 
 begin
 
-    -- 3. 主进程：实现状态机的时序逻辑
-    main_process: process(clk, reset)
+    -- ===================================================================
+    --  同步进程: 更新所有寄存器状态
+    -- ===================================================================
+    process (clk, rst)
+        -- ================================================================
+        --  修正点：将变量声明移至 process 的声明区 (begin 之前)
+        -- ================================================================
+        variable a_part      : unsigned(R-1 downto 0);
+        variable sum_result  : unsigned(R downto 0);
     begin
-        -- 异步复位逻辑
-        if reset = '1' then
-            fsm_state        <= IDLE;
-            cycle_counter    <= 0;
-            multiplicand_reg <= (others => '0');
-            acc_mult_reg     <= (others => '0');
-            done_out         <= '0';
-
-        -- 时钟上升沿触发的逻辑
+        if rst = '1' then
+            state_reg   <= S_IDLE;
+            p_reg       <= (others => '0');
+            m_reg       <= (others => '0');
+            counter_reg <= 0;
         elsif rising_edge(clk) then
-            case fsm_state is
+            state_reg   <= state_next;
+            
+            if state_reg = S_IDLE and start = '1' then
+                p_reg(2*R-1 downto R) <= (others => '0');
+                p_reg(R-1 downto 0)   <= unsigned(multiplier_i);
+                m_reg                 <= unsigned(multiplicand_i);
+                counter_reg           <= R;
+            elsif state_reg = S_MULTIPLY then
                 
-                --=============== IDLE 状态 ===============--
-                -- 等待开始信号，准备下一次运算
-                when IDLE =>
-                    done_out <= '0'; -- 拉低完成标志
-                    if start = '1' then
-                        -- 锁存输入数据
-                        multiplicand_reg <= unsigned(multiplicand_in);
-                        
-                        -- 初始化联合寄存器：高位(累加器)清零，低位装载乘数
-                        acc_mult_reg <= resize(unsigned(multiplier_in), 2 * N);
-                        
-                        -- 初始化计数器
-                        cycle_counter <= 0;
-                        
-                        -- 跳转到计算状态
-                        fsm_state <= CALCULATING;
-                    end if;
-
-                --=============== CALCULATING 状态 ===============--
-                -- 执行N次移位相加
-                when CALCULATING =>
-                    -- 检查乘数最低位 acc_mult_reg(0)
-                    if acc_mult_reg(0) = '1' then
-                        -- 如果是 '1', 则执行加法: P <= P + A
-                        -- P 是 acc_mult_reg 的高N位
-                        acc_mult_reg(2 * N - 1 downto N) <= acc_mult_reg(2 * N - 1 downto N) + multiplicand_reg;
-                    end if;
-                    acc_mult_reg <= '0' & acc_mult_reg(2 * N - 1 downto 1);
-                    
-                    -- 计数器递增
-                    cycle_counter <= cycle_counter + 1;
-
-                    -- 检查是否完成了N次循环
-                    if cycle_counter = N - 1 then
-                        fsm_state <= DONE; -- 跳转到完成状态
-                    end if;
-
-                --=============== DONE 状态 ===============--
-                -- 输出结果，置位完成标志
-                when DONE =>
-                    done_out  <= '1'; -- 置位完成标志
-                    fsm_state <= IDLE;  -- 直接返回IDLE，准备下一次
-                    -- 或者可以等待start信号变低再返回IDLE
-                    -- if start = '0' then
-                    --     fsm_state <= IDLE;
-                    -- end if;
-            end case;
+                -- 从 p_reg 中提取 A 部分
+                a_part := p_reg(2*R-1 downto R);
+                
+                -- 检查 P 的最低位
+                if p_reg(0) = '1' then
+                    -- 执行 A = A + M
+                    sum_result := ('0' & a_part) + m_reg;
+                else
+                    -- A 不变
+                    sum_result := ('0' & a_part);
+                end if;
+                
+                -- 执行算术右移
+                p_reg <= sum_result & p_reg(R-1 downto 1);
+                
+                -- 计数器减一
+                counter_reg <= counter_reg - 1;
+            end if;
         end if;
-    end process main_process;
+    end process;
+    
+    -- ===================================================================
+    --  组合逻辑进程: 控制状态转换和输出
+    -- ===================================================================
+    process (state_reg, start, counter_reg)
+    begin
+        -- 默认输出
+        done_o <= '0';
+        state_next <= state_reg;
 
-    -- 4. 输出逻辑（组合逻辑）
-    -- 将最终的计算结果持续地输出到端口
-    product_out <= std_logic_vector(acc_mult_reg);
+        case state_reg is
+            when S_IDLE =>
+                if start = '1' then
+                    state_next <= S_MULTIPLY;
+                end if;
+                
+            when S_MULTIPLY =>
+                if counter_reg = 1 then
+                    state_next <= S_DONE;
+                end if;
+                
+            when S_DONE =>
+                done_o <= '1';
+                if start = '0' then
+                    state_next <= S_IDLE;
+                end if;
+                
+        end case;
+    end process;
 
-end architecture fsm_arch;
+    -- 将最终结果 p_reg 赋值给输出端口
+    product_o <= std_logic_vector(p_reg);
+
+end architecture behavioral;
 ```
 ---
 

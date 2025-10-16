@@ -244,14 +244,14 @@ summary: 本章讲述了如何将现实世界中的模拟信号转化为数字�
 ### 3.3.2 均匀量化详解
 
 *   **量化噪声功率**：当 M 足够大时，可以认为量化误差 $e$ 在 $(-\Delta/2, \Delta/2)$ 区间内均匀分布。
-    $\boxed{\sigma_q^2 \approx \frac{\Delta^2}{12}}$
+    $\boxed{N = \sigma_q^2 \approx \frac{\Delta^2}{12}}$
     其中 $\Delta = (x_{max} - x_{min})/M = 2V_p / 2^N$。
 *   **信噪比分析** (假设信号在 $[-V_p, +V_p]$ 内均匀分布)
     *   信号功率: $S_x = \frac{(2V_p)^2}{12}$
     *   量化信噪比: $\text{SNR}_q = \frac{S_x}{\sigma_q^2} = 2^{2N}$
     *   **dB值**:
         $\text{SNR}\_{q,dB} = 10\log\_{10}(2^{2N}) = 20N \log\_{10}2 \approx 6.02N \text{ (dB)}$
-*   ⭐ **重要结论**：<font color="orange">每增加一位量化精度 (N增加1)，量化信噪比提升约6dB</font>。
+*   ⭐ **重要结论**：对于均匀分布信号，<font color="orange">每增加一位量化精度 (N增加1)，量化信噪比提升约6dB</font>。
 
 *   **均匀量化的优缺点**
     *   **优点**：简单，易实现。
@@ -562,7 +562,8 @@ $$
     *   **特点**：关于零电平对称。适合小信号概率大的情况。A率PCM就采用折叠码。
 
 #### A率PCM编码
-
+![](c9a4052feedc36f36271237febb29f68.png)
+![](c9b4aa002b9e765a2fd7e48651d7d22c.png)
 *   **结构**：采用8位二进制编码。
     `M1 M2 M3 M4 M5 M6 M7 M8`
     *   **M1**：<font color="orange">极性码</font> (1位)
