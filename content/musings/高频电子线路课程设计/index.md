@@ -153,7 +153,7 @@ L2、C6并联谐振回路的频率为f=1/( )。
 
 $$
 \begin{align*}
-f &= \frac{1}{2\pi\sqrt{C_6 \cdot L_2}} = \frac{1}{2\pi\sqrt{C_{42} \cdot L_7}} \\
+f &= \frac{1}{2\pi\sqrt{C_6 \cdot L_2}} = \frac{1}{2\pi\sqrt{C_{42} \cdot L_7}} \\\\
   &= \frac{1}{2\pi\sqrt{51 \times 390 \times 10^{-21}}} = 35.686 \, \text{MHz}
 \end{align*}
 $$
@@ -162,9 +162,9 @@ $$
 
 $$
 \begin{align*}
-F &= \frac{1}{2\pi\sqrt{(C_3 + C_1 + C_4 + C_7//C_5//C_2) \cdot L_1}} \quad (\text{交流等效电路}) \\
-  &= \frac{1}{2\pi\sqrt{(CR_1 + CR_2 + CR_3 + C_3//C_{11}//C_7) \cdot L_2}} \quad (\text{原电路}) \\
-  &= \frac{1}{2\pi\sqrt{\left(25 + 25 + (6.3 \sim 30) + 300//300//680\right)\text{pf} \cdot 100\text{nH}}} \\
+F &= \frac{1}{2\pi\sqrt{(C_3 + C_1 + C_4 + C_7//C_5//C_2) \cdot L_1}} \quad (\text{交流等效电路}) \\\\
+  &= \frac{1}{2\pi\sqrt{(CR_1 + CR_2 + CR_3 + C_3//C_{11}//C_7) \cdot L_2}} \quad (\text{原电路}) \\\\
+  &= \frac{1}{2\pi\sqrt{\left(25 + 25 + (6.3 \sim 30) + 300//300//680\right)\text{pf} \cdot 100\text{nH}}} \\\\
   &= 35.333 \sim 37.597 \, \text{MHz} \quad \text{符合指标要求}
 \end{align*}
 $$
@@ -299,7 +299,7 @@ L10=390nH、C55=51pF、L6=100nH、C30=680pF、C32=300pF、C28=100pF
 并联谐振回路的频率
 $$
 \begin{align*}
-f &= \frac{1}{2\pi\sqrt{C_{55} \cdot L_{10}}} \\
+f &= \frac{1}{2\pi\sqrt{C_{55} \cdot L_{10}}} \\\\
   &= \frac{1}{2\pi\sqrt{51 \times 390 \times 10^{-21}}} = 35.686\,\text{MHz}
 \end{align*}
 $$
@@ -307,8 +307,8 @@ $$
 压控振荡器中心频率：
 $$
 \begin{align*}
-F &= \frac{1}{2\pi\sqrt{(CR_1 + CR_2 + C_{28}//C_{30}//C_{32}) \cdot L_6}} \\
-  &= \frac{1}{2\pi\sqrt{\left(25 + (6.3 \sim 30) + 100//680//300\right)\text{pf} \cdot 390\text{nH}}} \\
+F &= \frac{1}{2\pi\sqrt{(CR_1 + CR_2 + C_{28}//C_{30}//C_{32}) \cdot L_6}} \\\\
+  &= \frac{1}{2\pi\sqrt{\left(25 + (6.3 \sim 30) + 100//680//300\right)\text{pf} \cdot 390\text{nH}}} \\\\
   &= 35.077 \sim 38.558\,\text{MHz} \quad \text{符合指标要求}
 \end{align*}
 $$
