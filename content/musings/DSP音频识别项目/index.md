@@ -3,8 +3,7 @@ title: 基于声学指纹的音频识别
 date: 2025-10-16T08:00:00+08:00
 tags:
   - 数字信号处理
-  - Python
-  - 音频指纹
+  - 课程设计
 summary: 本文详细阐述了一个基于声学指纹的音频识别系统的设计与实现。该系统模拟了 Shazam 等商业应用的核心技术逻辑，旨在解决在真实环境中（如存在噪声、失真等）对音频片段进行快速、准确识别的挑战。
 ---
 可执行文件下载[Release SongRecognPro · Allen-cubber/zzx](https://github.com/Allen-cubber/zzx/releases/tag/v1.1)

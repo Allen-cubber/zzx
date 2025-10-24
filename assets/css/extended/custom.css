@@ -303,3 +303,169 @@ body.home.list::before {
     height: 16px;
     stroke-width: 2;
 }
+
+/* ==========================================================================
+   通用样式 (适用于两个页面)
+   ========================================================================== */
+
+/* 定义一些颜色变量，方便全局修改 */
+:root {
+  --primary-color: #3498db; /* 主题色 (一种清爽的蓝色) */
+  --primary-color-dark: #2980b9;
+  --text-color: #34495e; /* 主要文字颜色 */
+  --text-color-light: #7f8c8d; /* 次要文字颜色 */
+  --bg-color: #f8f9fa; /* 页面背景色 */
+  --card-bg-color: #ffffff; /* 卡片背景色 */
+  --border-color: #e9ecef; /* 边框颜色 */
+  --shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+.main-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 0 15px;
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.page-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-color);
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+}
+
+/* 给标题添加一个漂亮的下划线动效 */
+.page-header h1::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--primary-color);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.page-header h1:hover::after {
+  width: 100%;
+}
+
+
+/* ==========================================================================
+   所有标签页面 (Tags Cloud) /tags/
+   ========================================================================== */
+
+.tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  padding: 0;
+  margin-top: 2rem;
+}
+
+.tag-item {
+  display: flex;
+  align-items: center;
+  background-color: var(--card-bg-color);
+  border-radius: 50px; /* 胶囊形状 */
+  padding: 10px 20px;
+  text-decoration: none;
+  color: var(--text-color);
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 1px solid var(--border-color);
+}
+
+.tag-item:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-color);
+  color: #fff;
+  border-color: var(--primary-color);
+}
+
+.tag-name {
+  font-weight: 500;
+  font-size: 1rem;
+  margin-right: 8px;
+}
+
+.tag-count {
+  background-color: var(--bg-color);
+  color: var(--primary-color);
+  font-size: 0.8rem;
+  font-weight: bold;
+  padding: 3px 8px;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.tag-item:hover .tag-count {
+  background-color: #fff;
+  color: var(--primary-color-dark);
+}
+
+
+/* ==========================================================================
+   单个标签文章列表 /tags/your-tag/
+   ========================================================================== */
+
+.post-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.post-item {
+  background-color: var(--card-bg-color);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-left: 5px solid transparent; /* 左侧边框，用于悬停效果 */
+}
+
+.post-item:hover {
+  transform: translateX(10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+  border-left-color: var(--primary-color);
+}
+
+.post-title {
+  text-decoration: none;
+  color: var(--text-color);
+  font-size: 1.25rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.post-item:hover .post-title {
+  color: var(--primary-color);
+}
+
+.post-date {
+  color: var(--text-color-light);
+  font-size: 0.9em;
+  white-space: nowrap;
+  margin-left: 20px;
+  font-family: 'Courier New', Courier, monospace;
+}

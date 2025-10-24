@@ -1,0 +1,23 @@
+{{ define "main" }}
+<div class="main-container">
+  <header class="page-header">
+    <h1>所有标签</h1>
+  </header>
+  
+  {{ $tags := .Site.Taxonomies.tags.ByCount }}
+  {{ if $tags }}
+    <div class="tags-list">
+      {{ range $tags }}
+        <a href="{{ .Page.Permalink }}" class="tag-item">
+          <span class="tag-name">{{ .Page.Title }}</span>
+          <span class="tag-count">{{ .Count }}</span>
+        </a>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p>目前还没有任何标签。</p>
+  {{ end }}
+
+</div>
+
+{{ end }}
