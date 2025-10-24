@@ -179,7 +179,7 @@ $$ \boxed{ P_s(f) = \frac{1}{T}|G_T(f)|^2 \sum_{m=-\infty}^{\infty} R_a(m) e^{-j
 -   **现象**：前一个码元的拖尾会延伸到当前码元的抽样时刻，对当前码元的判决造成干扰。这种由前后码元引起的干扰称为<font color="orange">**码间串扰**</font> (Intersymbol Interference, ISI)。
 
 接收端在 $t=kT$ 时刻的抽样值为：
-$y(kT) = \underbrace{a_k h(0)}_{\text{期望信号}} + \underbrace{\sum_{n \neq k} a_n h((k-n)T)}_{\text{码间串扰}}$
+$y(kT) = \underbrace{a_k h(0)}\_{\text{期望信号}} + \underbrace{\sum_{n \neq k} a_n h((k-n)T)}\_{\text{码间串扰}}$
 其中 $h(t)$ 是整个系统的冲激响应。
 
 ### 2. 奈奎斯特第一准则 (无码间串扰准则)
@@ -192,7 +192,7 @@ $y(kT) = \underbrace{a_k h(0)}_{\text{期望信号}} + \underbrace{\sum_{n \neq 
 
 -   **频域条件**：
     将 $h(t)$ 的频谱 $H(f)$ 按码元速率的倒数 $1/T$ 进行周期延拓并叠加，结果应为一个常数。
-    $$ \boxed{ \sum_{i=-\infty}^{\infty} H(f - \frac{i}{T}) = T \quad (\text{常数}) } $$
+    $$ \boxed{ \sum_{i=-\infty}^{\infty} H(f - \frac{i}{T}) = T \quad (\text{常数})\ \ \ \ \ } $$
 
 #### (1) 理想低通系统（最窄带宽）
 
@@ -231,7 +231,7 @@ $y(kT) = \underbrace{a_k h(0)}_{\text{期望信号}} + \underbrace{\sum_{n \neq 
 -   引入的码间串扰是：当前码元的抽样值仅受前一个码元的干扰。
 -   在抽样时刻 $t=nT$，接收到的值为：$c_n = d_n + d_{n-1}$
     其中 $\{d_n\}$ 是发送的符号序列。
--   解码时，可以通过减法来恢复原码：$\hat{d}_n = c_n - \hat{d}_{n-1}$。
+-   解码时，可以通过减法来恢复原码：$\hat{d}_n = c_n - \hat{d}\_{n-1}$。
 
 ### 3. 误码扩散与预编码
 
