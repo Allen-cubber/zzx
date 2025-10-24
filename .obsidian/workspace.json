@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/DSP音频识别项目/index.md",
+                "file": "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:项目",
+                "query": "tag:数字通信原理",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/DSP音频识别项目/index.md",
+                "file": "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,11 +171,16 @@
   },
   "active": "a4568665495340a0",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/第一章绪论/index.md",
+    "content/notes/数字通信原理/第二章信号分析基础/index.md",
+    "content/notes/数字通信原理/第三章模拟信号的数字编码/index.md",
+    "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
+    "content/musings/DSP音频识别项目/index.md",
+    "content/notes/数字通信原理/第五章数字基带信号传输",
     "content/musings/高频电子线路课程设计/index.md",
     "public/tags/课程设计/index.xml",
     "public/tags/课程设计/index.html",
     "public/tags/课程设计",
-    "content/musings/DSP音频识别项目/index.md",
     "content/musings/Cvalue/index.md",
     "content/blog-setup/hello-hugo/index.md",
     "content/blog-setup/course/index.md",
@@ -200,7 +205,6 @@
     "content/notes/数字系统设计/第六章状态机/Pastedimage20251022114712.png",
     "content/notes/数字系统设计/第六章状态机/Pastedimage20251022114618.png",
     "content/notes/数字系统设计/第六章状态机/Pastedimage20251022114610.png",
-    "public/notes/数字系统设计/第六章状态机/-/index.html",
     "content/notes/信息论与编码/信源编码的基本方法/index.md",
     "content/notes/信息论与编码/连续信源/index.md",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
@@ -209,12 +213,9 @@
     "content/blog-setup/link/index.md",
     "Pasted image 20251016101905.png.md",
     "content/notes/信号与系统/index.md",
-    "content/notes/通信原理/第三章模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/4.26.md",
     "content/musings/20250905/index.md",
     "content/notes/数字系统设计/第五章时序逻辑电路/index.md",
-    "Pasted.md",
-    "content/musings/VHDL语言环境搭建/index.md",
-    "content/musings/20250905.md"
+    "Pasted.md"
   ]
 }

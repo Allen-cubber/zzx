@@ -3,7 +3,7 @@ title: 第一章 绪论
 date: 2025-09-06T14:00:00+08:00
 tags:
   - 大三上
-  - 通信原理
+  - 数字通信原理
 summary: 《通信原理》是电子信息学科中的一门重要的专业基础课。
 pdf_url: https://cdn.jsdelivr.net/gh/allen-cubber/zzx-blog-assets@main/txyl1.pdf
 ---
@@ -75,7 +75,7 @@ pdf_url: https://cdn.jsdelivr.net/gh/allen-cubber/zzx-blog-assets@main/txyl1.pdf
 3.  **接收机** 📥: 从信道中接收信号，并将其还原成原始电信号，核心技术是**解调**。
 
 #### 🧱 数字通信系统详细组成模型
-![](Pastedimage20250906173427.png)
+![](content/notes/数字通信原理/第一章绪论/Pastedimage20250906173427.png)
 -   **信源**: 产生待传输的消息。
 -   **信源编码器**: 完成模拟信号到数字信号的转化，并进行数据压缩以提高效率。
 -   **信道编码器**: 对数字信号进行差错控制编码，以抵抗信道噪声的干扰。
