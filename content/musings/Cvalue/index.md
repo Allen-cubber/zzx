@@ -1,6 +1,7 @@
 ---
 title: 个人学习成绩积分 C 值计算器
 date: 2025-10-02T10:00:00+08:00
+draft: true
 ---
 <div id="c-calculator-app">
 <div class="app-container">
