@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,18 +171,24 @@
   },
   "active": "a4568665495340a0",
   "lastOpenFiles": [
-    "Pasted image 20251025151518.png",
-    "public/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151224.png",
-    "public/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151116.png",
-    "public/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151033.png",
-    "public/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025150936.png",
-    "content/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151224.png",
-    "content/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151116.png",
-    "content/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025151033.png",
-    "content/notes/数字通信原理/第五章数字基带信号传输/Pastedimage20251025150936.png",
-    "Pastedimage20251025151224.png",
-    "Pastedimage20251025151116.png",
+    "去除空格.txt",
+    "新建 文本文档.txt",
+    "public/notes/数字通信原理/实验一-模拟信号的数字编码/Pastedimage20251025155527.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155828.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155823.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155817.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155808.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155800.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155754.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155746.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155712.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155651.png",
+    "public/notes/数字通信原理/实验一-模拟信号的数字编码/index.html",
+    "public/notes/数字通信原理/实验一-模拟信号的数字编码",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码",
+    "content/notes/数字通信原理/未命名.md",
     "content/notes/数字通信原理/第三章模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/率失真理论/index.md",
     "public/notes/信息论与编码/率失真理论/index.html",
@@ -197,10 +202,6 @@
     "content/notes/信息论与编码/连续信源/index.md",
     "content/notes/信息论与编码/信息论基础/index.md",
     "content/musings/Cvalue/index.md",
-    "public/tags/数字通信原理/index.xml",
-    "public/tags/数字通信原理/index.html",
-    "public/tags/数字通信原理",
-    "public/notes/数字通信原理/第三章模拟信号的数字编码/index.html",
     "content/notes/数字通信原理/第一章绪论/index.md",
     "content/notes/数字通信原理/第二章信号分析基础/index.md",
     "content/musings/DSP音频识别项目/index.md",
@@ -215,8 +216,6 @@
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
     "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md",
     "content/blog-setup/the-second/index.md",
-    "content/blog-setup/link/index.md",
-    "Pasted image 20251016101905.png.md",
-    "content/notes/信息论与编码/4.26.md"
+    "content/blog-setup/link/index.md"
   ]
 }
