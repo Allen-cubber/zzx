@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+                "file": "content/blog-setup/link/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+                "file": "content/blog-setup/link/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,7 @@
   },
   "active": "a4568665495340a0",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "去除空格.txt",
     "新建 文本文档.txt",
     "public/notes/数字通信原理/实验一-模拟信号的数字编码/Pastedimage20251025155527.png",
@@ -185,7 +186,6 @@
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155651.png",
     "public/notes/数字通信原理/实验一-模拟信号的数字编码/index.html",
     "public/notes/数字通信原理/实验一-模拟信号的数字编码",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码",
     "content/notes/数字通信原理/未命名.md",
@@ -198,7 +198,6 @@
     "public/tags/信号与系统",
     "content/notes/信号与系统/index.md",
     "content/notes/信息论与编码/信源编码的基本方法/index.md",
-    "content/notes/信息论与编码/率失真理论",
     "content/notes/信息论与编码/连续信源/index.md",
     "content/notes/信息论与编码/信息论基础/index.md",
     "content/musings/Cvalue/index.md",
