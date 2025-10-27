@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/blog-setup/link/index.md",
+                "file": "content/notes/数字信号处理/实验一/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/blog-setup/link/index.md",
+                "file": "content/notes/数字信号处理/实验一/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,33 +169,38 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "a4568665495340a0",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "public/notes/数字信号处理/实验一/Pastedimage20251027195955.png",
+    "public/notes/数字信号处理/实验一/Pastedimage20251027195921.png",
+    "public/notes/数字信号处理/实验一/Pastedimage20251027195841.png",
+    "public/notes/数字信号处理/实验一/Pastedimage20251027195651.png",
+    "public/notes/数字信号处理/实验一/Pastedimage20251027195636.png",
+    "content/notes/数字信号处理/实验一/Pastedimage20251027195955.png",
+    "content/notes/数字信号处理/实验一/Pastedimage20251027195921.png",
+    "content/notes/数字信号处理/实验一/Pastedimage20251027195841.png",
+    "content/notes/数字信号处理/实验一/Pastedimage20251027195651.png",
+    "content/notes/数字信号处理/实验一/Pastedimage20251027195636.png",
+    "public/notes/数字信号处理/实验一/Pasted image 20251027195955.png",
+    "public/musings/20251027/index.html",
+    "public/musings/20251027",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+    "content/notes/数字信号处理/实验一/index.md",
+    "public/notes/数字信号处理/实验一/index.html",
+    "public/notes/数字信号处理/实验一",
+    "public/tags/随笔/index.xml",
+    "public/tags/随笔/index.html",
+    "public/tags/随笔",
+    "content/musings/20251027/index.md",
+    "content/musings/20250905/index.md",
+    "content/musings/20251027",
+    "content/blog-setup/link/index.md",
+    "content/notes/数字信号处理/实验一",
     "去除空格.txt",
-    "新建 文本文档.txt",
-    "public/notes/数字通信原理/实验一-模拟信号的数字编码/Pastedimage20251025155527.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155828.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155823.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155817.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155808.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155800.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155754.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155746.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155712.png",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/Pastedimage20251025155651.png",
-    "public/notes/数字通信原理/实验一-模拟信号的数字编码/index.html",
-    "public/notes/数字通信原理/实验一-模拟信号的数字编码",
     "content/notes/数字通信原理/第五章数字基带信号传输/index.md",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码",
     "content/notes/数字通信原理/未命名.md",
     "content/notes/数字通信原理/第三章模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/率失真理论/index.md",
-    "public/notes/信息论与编码/率失真理论/index.html",
-    "public/notes/信息论与编码/率失真理论",
-    "public/tags/信号与系统/index.xml",
-    "public/tags/信号与系统/index.html",
-    "public/tags/信号与系统",
     "content/notes/信号与系统/index.md",
     "content/notes/信息论与编码/信源编码的基本方法/index.md",
     "content/notes/信息论与编码/连续信源/index.md",
@@ -211,10 +216,6 @@
     "content/notes/数字系统设计/第三章语法基础/index.md",
     "content/notes/数字系统设计/第二章EDA开发硬件与软件平台/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
-    "content/notes/数字信号处理/6.Z变换/index.md",
-    "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
-    "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md",
-    "content/blog-setup/the-second/index.md",
-    "content/blog-setup/link/index.md"
+    "content/notes/数字信号处理/6.Z变换/index.md"
   ]
 }
