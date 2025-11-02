@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,8 +171,9 @@
   },
   "active": "8070e5b570e9d895",
   "lastOpenFiles": [
-    "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
+    "Pasted image 20251102143200.png",
     "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+    "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
     "content/notes/信息论与编码/7.线性分组码及其基本性质",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/6.简单差错控制码和数学基础",
@@ -215,7 +216,6 @@
     "content/notes/信号与系统/index.md",
     "content/musings/Cvalue/index.md",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
-    "content/musings/DSP音频识别项目/index.md",
-    "content/musings/高频电子线路课程设计/index.md"
+    "content/musings/DSP音频识别项目/index.md"
   ]
 }
