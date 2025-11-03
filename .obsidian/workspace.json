@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,11 @@
   },
   "active": "8070e5b570e9d895",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/6.Z变换/index.md",
+    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+    "content/notes/数字信号处理/7.LTI系统的变换域分析",
+    "Pastedimage20250922210808.md",
     "Pasted image 20251102143200.png",
     "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
     "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
@@ -184,8 +189,6 @@
     "content/notes/信息论与编码/4.率失真理论/index.md",
     "content/notes/信息论与编码/4.26.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
-    "content/notes/数字信号处理/6.Z变换/index.md",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/1.第一章绪论/index.md",
     "content/musings/光纤通信技术论文汇报/index.md",
     "Pasted image 20251029201004.png",
@@ -194,20 +197,17 @@
     "Pasted image 20251029200922.png",
     "Pasted image 20251029200902.png",
     "content/musings/光纤通信技术论文汇报",
-    "Pastedimage20250922210808.md",
     "content/notes/数字信号处理/5.有限长离散变换/Pastedimage20250922210808.png",
     "content/notes/数字信号处理/实验一/index.md",
     "public/notes/数字信号处理/实验一/Pastedimage20251027195955.png",
     "public/notes/数字信号处理/实验一/Pastedimage20251027195921.png",
     "public/notes/数字信号处理/实验一/Pastedimage20251027195841.png",
-    "public/notes/数字信号处理/实验一/Pastedimage20251027195651.png",
     "public/musings/20251027/index.html",
     "public/musings/20251027",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "public/notes/数字信号处理/实验一/index.html",
     "public/notes/数字信号处理/实验一",
     "public/tags/随笔/index.xml",
-    "public/tags/随笔/index.html",
     "content/musings/20251027/index.md",
     "content/musings/20250905/index.md",
     "content/blog-setup/link/index.md",
