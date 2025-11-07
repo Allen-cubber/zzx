@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+                "file": "content/notes/信息论与编码/8.循环码/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+                "file": "content/notes/信息论与编码/8.循环码/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,12 @@
   },
   "active": "8070e5b570e9d895",
   "lastOpenFiles": [
+    "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
+    "content/notes/信息论与编码/8.循环码/index.md",
+    "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
+    "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+    "content/notes/信息论与编码/8.循环码",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "public/notes/page/4/index.html",
     "public/notes/page/4",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/index.html",
@@ -190,15 +196,9 @@
     "public/notes/数字系统设计/5.第六章状态机",
     "public/notes/数字系统设计/4.第五章时序逻辑电路/index.html",
     "public/notes/数字系统设计/4.第五章时序逻辑电路",
-    "public/notes/数字系统设计/3.第四章组合逻辑电路/index.html",
-    "public/notes/数字系统设计/3.第四章组合逻辑电路",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字信号处理/6.Z变换/index.md",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "Pastedimage20250922210808.md",
-    "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
-    "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
-    "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/2。连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
