@@ -59,8 +59,17 @@ params:
   # 个人主页模式配置
   profileMode:
     enabled: true
-    title: "欢迎来到 Z2X BLOG"
-    subtitle: "探索技术、分享知识、记录生活"
+    title: "Welcome To Z2X BLOG"
+    subtitle: "探索技术 | 分享知识 | 记录生活"
+    imageUrl: "/images/avatar.jpg"
+    imageWidth: 150
+    imageHeight: 150
+    imageTitle: "在无限的爱与光明里重逢"
+    buttons:
+      - name: "博客搭建"
+        url: "/blog-setup/"
+      - name: "匿名留言板"
+        url: "/guestbook/"
   
   # 网站标签配置
   labels:

@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/8.循环码/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -53,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "tag:数字通信原理",
+                "query": "tag:单片机",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -142,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/8.循环码/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +157,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,51 +172,51 @@
   },
   "active": "8070e5b570e9d895",
   "lastOpenFiles": [
+    "layouts/_default/guestbook.html",
+    "layouts/_default/single - 副本.html",
+    "public/guestbook/index.html",
+    "public/guestbook",
+    "layouts/partials/cusdis.html",
+    "layouts/partials/新建 文本文档.txt",
+    "layouts/partials/board.html",
+    "content/guestbook.md",
+    "content/新建 文本文档.txt",
+    "public/images/avatar1.jpg",
+    "static/images/avatar1.jpg",
+    "public/images/avatar.jpg",
+    "static/images/avatar.jpg",
+    "public/tags/微机原理与接口技术/index.xml",
+    "public/tags/微机原理与接口技术/index.html",
+    "public/tags/微机原理与接口技术",
+    "content/search.md",
+    "content/updates.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/notes/exe.md",
+    "content/notes/信息论与编码/4.26.md",
+    "content/notes/微机原理与单片机/微机与接口填空/index.md",
+    "content/notes/微机原理与单片机/单片机例题/index.md",
+    "content/musings/光纤通信技术论文汇报/index.md",
+    "content/notes/电磁波与电磁场/index.md",
+    "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
     "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/4.率失真理论/index.md",
-    "content/notes/信息论与编码/8.循环码/index.md",
-    "content/notes/信息论与编码/8.循环码",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
-    "public/notes/page/4/index.html",
-    "public/notes/page/4",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/index.html",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/c9b4aa002b9e765a2fd7e48651d7d22c.png",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/c9a4052feedc36f36271237febb29f68.png",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250928201930.png",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250921141247.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/index.html",
     "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250917214329.png",
     "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251102143200.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151116.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151224.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151033.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025150936.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码",
-    "public/notes/数字系统设计/5.第六章状态机",
-    "public/notes/数字系统设计/4.第五章时序逻辑电路/index.html",
-    "public/notes/数字系统设计/4.第五章时序逻辑电路",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字信号处理/6.Z变换/index.md",
     "Pastedimage20250922210808.md",
     "content/notes/信息论与编码/2。连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
-    "content/notes/信息论与编码/4.26.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "content/notes/数字通信原理/1.第一章绪论/index.md",
-    "content/musings/光纤通信技术论文汇报/index.md",
-    "content/notes/数字信号处理/实验一/index.md",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
-    "content/musings/20251027/index.md",
-    "content/musings/20250905/index.md",
-    "content/blog-setup/link/index.md",
-    "content/notes/数字通信原理/未命名.md",
-    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
-    "content/notes/信号与系统/index.md",
-    "content/musings/Cvalue/index.md",
-    "content/notes/数字通信原理/2.第二章信号分析基础/index.md"
+    "content/notes/数字信号处理/实验一/index.md"
   ]
 }

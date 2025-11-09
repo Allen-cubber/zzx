@@ -1,0 +1,14 @@
+{{- /* layouts/partials/cusdis.html */ -}}
+{{- /* 这是专门给留言板页面使用的 Cusdis 评论系统 */ -}}
+
+<div class="cusdis-container" style="margin-top: 2rem;">
+  <h3>留言区</h3>
+  <div id="cusdis_thread"
+    data-host="https://cusdis.com"
+    data-app-id="f7da2021-118a-4737-8378-af7bf3097af3" 
+    data-page-id="guestbook-z2x-blog"               
+    data-page-url="{{ .Permalink }}"                
+    data-page-title="{{ .Title }}"                   
+  ></div>
+  <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+</div>
