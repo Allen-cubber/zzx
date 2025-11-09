@@ -2,7 +2,6 @@
 {{- /* 这是专门给留言板页面使用的 Cusdis 评论系统 */ -}}
 
 <div class="cusdis-container" style="margin-top: 2rem;">
-  <h3>留言区</h3>
   <div id="cusdis_thread"
     data-host="https://cusdis.com"
     data-app-id="f7da2021-118a-4737-8378-af7bf3097af3" 
@@ -12,3 +11,31 @@
   ></div>
   <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
 </div>
+
+<!-- ========== 开始：强行修改 Cusdis 高度的 JavaScript ========== -->
+<script>
+  // 定义一个函数，用来寻找并修改 iframe 的高度
+  function resizeCusdisFrame() {
+    // 寻找 id 为 cusdis_thread 的 div 里面的 iframe 元素
+    const cusdisFrame = document.querySelector('#cusdis_thread iframe');
+
+    // 如果找到了 iframe
+    if (cusdisFrame) {
+      // 强行把它的高度设置为 350px (您可以改成任何您想要的高度)
+      cusdisFrame.style.height = '400px';
+      
+      // 任务完成，停止计时器，不再继续寻找
+      clearInterval(findCusdisInterval);
+    }
+  }
+
+  // 创建一个计时器，每 200 毫秒（0.2秒）就运行一次上面的函数
+  // 因为 iframe 是动态加载的，我们需要不断检查它是否已经出现
+  const findCusdisInterval = setInterval(resizeCusdisFrame, 200);
+
+  // 安全措施：如果 10 秒后还没找到，就自动停止，避免无限运行
+  setTimeout(() => {
+    clearInterval(findCusdisInterval);
+  }, 10000);
+</script>
+<!-- ========== 结束：强行修改 Cusdis 高度的 JavaScript ========== -->
