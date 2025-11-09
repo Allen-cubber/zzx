@@ -4,5 +4,3 @@ title: "匿名留言板"
 layout: "guestbook"
 draft: false
 ---
-
-随便说些什么吧……
