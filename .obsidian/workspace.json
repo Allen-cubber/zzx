@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "c677f9ace4e5f454",
+        "id": "06060d0ae4eef31e",
         "type": "tabs",
         "children": [
           {
-            "id": "8070e5b570e9d895",
+            "id": "68e2300e9197488c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/数字信号处理/实验二/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -143,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/数字信号处理/实验二/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -170,8 +169,26 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "8070e5b570e9d895",
+  "active": "68e2300e9197488c",
   "lastOpenFiles": [
+    "public/notes/数字信号处理/实验二/index.html",
+    "public/notes/数字信号处理/实验二/2_3_3.jpg",
+    "public/notes/数字信号处理/实验二/2_3_2.jpg",
+    "public/notes/数字信号处理/实验二/2_3_1.jpg",
+    "public/notes/数字信号处理/实验二/2_2_2.jpg",
+    "public/notes/数字信号处理/实验二/2_2_1.jpg",
+    "public/notes/数字信号处理/实验二",
+    "content/notes/数字信号处理/实验二/Pasted image 20251111230917.png",
+    "Pasted.md",
+    "content/notes/数字信号处理/实验二/index.md",
+    "content/notes/数字信号处理/实验二/2_3_3.jpg",
+    "content/notes/数字信号处理/实验二/2_3_2.jpg",
+    "content/notes/数字信号处理/实验二/2_3_1.jpg",
+    "content/notes/数字信号处理/实验二/2_2_2.jpg",
+    "content/notes/数字信号处理/实验一/index.md",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+    "content/notes/数字信号处理/实验二",
+    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "layouts/_default/guestbook.html",
     "layouts/_default/single - 副本.html",
     "public/guestbook/index.html",
@@ -181,13 +198,6 @@
     "layouts/partials/board.html",
     "content/guestbook.md",
     "content/新建 文本文档.txt",
-    "public/images/avatar1.jpg",
-    "static/images/avatar1.jpg",
-    "public/images/avatar.jpg",
-    "static/images/avatar.jpg",
-    "public/tags/微机原理与接口技术/index.xml",
-    "public/tags/微机原理与接口技术/index.html",
-    "public/tags/微机原理与接口技术",
     "content/search.md",
     "content/updates.md",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
@@ -202,21 +212,10 @@
     "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/4.率失真理论/index.md",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/c9b4aa002b9e765a2fd7e48651d7d22c.png",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/c9a4052feedc36f36271237febb29f68.png",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250928201930.png",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250921141247.png",
-    "public/notes/数字通信原理/3.第三章模拟信号的数字编码/Pastedimage20250917214329.png",
-    "public/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251102143200.png",
-    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字信号处理/6.Z变换/index.md",
     "Pastedimage20250922210808.md",
     "content/notes/信息论与编码/2。连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
-    "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
-    "content/notes/数字信号处理/5.有限长离散变换/index.md",
-    "content/notes/数字通信原理/1.第一章绪论/index.md",
-    "content/notes/数字信号处理/实验一/index.md"
+    "content/notes/信息论与编码/3.信源编码的基本方法/index.md"
   ]
 }
