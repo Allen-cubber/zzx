@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,32 +171,33 @@
   },
   "active": "68e2300e9197488c",
   "lastOpenFiles": [
+    "content/notes/数字系统设计/6.第七章仿真/Pastedimage20251112205149.png",
+    "content/notes/数字系统设计/7.第八章综合/index.md",
+    "content/notes/数字系统设计/6.第七章仿真/Pastedimage20251112210047.png",
+    "content/notes/数字系统设计/7.第八章综合/Pastedimage20251112212521.png",
+    "content/notes/数字系统设计/7.第八章综合/Pasted image 20251112212521.png",
+    "content/notes/数字系统设计/6.第七章仿真/Pasted image 20251112210047.png",
+    "content/notes/数字系统设计/6.第七章仿真/Pasted image 20251112205149.png",
+    "Pasted image 20251112212521.png",
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
+    "content/notes/数字系统设计/7.第八章综合",
+    "Pasted image 20251112210047.png",
+    "Pasted image 20251112205149.png",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+    "content/notes/数字系统设计/6.第七章仿真",
     "git_push.bat",
     "新建 文本文档.txt",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251112192627.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251112192035.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251112104314.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251112104303.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pasted image 20251112192035.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pasted image 20251112104314.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pasted image 20251112104303.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pasted image 20251112192627.png",
-    "Pasted image 20251112192627.png",
-    "Pasted image 20251112192035.png",
     "content/notes/数字信号处理/实验二/index.md",
     "public/notes/数字信号处理/实验二/index.html",
     "public/notes/数字信号处理/实验二",
     "Pasted.md",
     "content/notes/数字信号处理/实验一/index.md",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字信号处理/实验二",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "layouts/_default/guestbook.html",
     "layouts/_default/single - 副本.html",
     "public/guestbook/index.html",
-    "public/guestbook",
-    "layouts/partials/cusdis.html",
-    "layouts/partials/新建 文本文档.txt",
     "content/guestbook.md",
     "content/search.md",
     "content/updates.md",
@@ -214,8 +215,6 @@
     "content/notes/信息论与编码/4.率失真理论/index.md",
     "content/notes/数字信号处理/6.Z变换/index.md",
     "Pastedimage20250922210808.md",
-    "content/notes/信息论与编码/2。连续信源/index.md",
-    "content/notes/信息论与编码/1.信息论基础/index.md",
-    "content/notes/信息论与编码/3.信源编码的基本方法/index.md"
+    "content/notes/信息论与编码/2。连续信源/index.md"
   ]
 }
