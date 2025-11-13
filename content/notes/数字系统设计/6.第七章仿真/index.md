@@ -297,7 +297,7 @@ END TB_BEHAVIOR;
 
 - after **安排**一个未来的信号赋值事件，然后代码**立即继续**执行下一行（它是<font color="orange">非阻塞式</font>的）。
     
-- wait for **暂停**整个进程的执行，代码**停止**在这一行，直到指定的时间过去（它是<font color="orange">阻塞式</d>的）。
+- wait for **暂停**整个进程的执行，代码**停止**在这一行，直到指定的时间过去（它是<font color="orange">阻塞式</font>的）。
 	
 * 一个 PROCESS **要么**有一个**敏感列表 (sensitivity list)**，**要么**有 wait 语句，但**绝对不能两者都有**。
 ---
