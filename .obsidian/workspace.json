@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
+                "file": "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
+                "file": "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,7 @@
   },
   "active": "68e2300e9197488c",
   "lastOpenFiles": [
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "content/notes/数字信号处理/8.数字滤波器的结构/index.md",
     "public/notes/数字系统设计/6.第七章仿真/Pastedimage20251112205149.png",
     "public/notes/数字系统设计/6.第七章仿真",
@@ -189,7 +190,6 @@
     "content/notes/数字信号处理/8.数字滤波器的结构",
     "content/blog-setup/course/index.md",
     "content/blog-setup/hello-hugo/index.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
     "content/notes/数字系统设计/7.第八章综合",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
