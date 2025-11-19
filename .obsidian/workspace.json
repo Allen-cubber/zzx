@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/9.卷积码/index.md",
-                "mode": "source",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/9.卷积码/index.md",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,8 +171,14 @@
   },
   "active": "0ffad235e67c7782",
   "lastOpenFiles": [
-    "content/notes/数字信号处理/index.md",
-    "content/notes/数字信号处理/9.数字滤波器设计/index.md",
+    "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码.zip",
+    "content/notes/数字系统设计/7.第八章综合/index.md",
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
+    "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
+    "content/notes/数字信号处理/数字信号处理笔记合集",
+    "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/数字信号处理/8.数字滤波器的结构/index.md",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字信号处理/6.Z变换/index.md",
@@ -183,13 +189,12 @@
     "content/notes/数字信号处理/3.频域中的离散时间信号",
     "content/notes/数字信号处理/1.概述/index.md",
     "content/notes/信息论与编码/10.习题答案/index.md",
-    "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/信息论与编码/10.习题答案",
     "Pasted image 20251116114449.png",
     "Pasted image 20251116114435.png",
     "Pasted image 20251116114413.png",
-    "content/notes/数字信号处理/9.数字滤波器设计/Pastedimage20251115104146.png",
-    "content/notes/数字信号处理/9.数字滤波器设计/Pastedimage20251115105148.png",
+    "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251115104146.png",
+    "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251115105148.png",
     "content/notes/数字信号处理/9.数字滤波器设计/Pasted image 20251115104146.png",
     "content/notes/数字信号处理/9.数字滤波器设计/Pasted image 20251115105148.png",
     "Pasted image 20251115104146.png",
@@ -198,10 +203,9 @@
     "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/信息论与编码/9.卷积码",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
-    "content/notes/数字信号处理/9.数字滤波器设计",
+    "content/notes/数字信号处理/9.IIR数字滤波器设计",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
     "content/notes/22 25.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "public/notes/数字系统设计/6.第七章仿真",
     "public/notes/数字信号处理/8.数字滤波器的结构/index.html",
     "public/notes/数字信号处理/8.数字滤波器的结构",
@@ -209,13 +213,9 @@
     "content/notes/数字信号处理/8.数字滤波器的结构",
     "content/blog-setup/course/index.md",
     "content/blog-setup/hello-hugo/index.md",
-    "content/notes/数字系统设计/7.第八章综合/index.md",
-    "content/notes/数字系统设计/7.第八章综合",
-    "content/notes/数字系统设计/6.第七章仿真",
     "content/notes/数字信号处理/实验二/index.md",
     "Pasted.md",
     "content/notes/数字信号处理/实验一/index.md",
-    "content/guestbook.md",
-    "content/search.md"
+    "content/guestbook.md"
   ]
 }
