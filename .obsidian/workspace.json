@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
+                "file": "content/notes/信息论与编码/9.卷积码/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
+                "file": "content/notes/信息论与编码/9.卷积码/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,7 +171,10 @@
   },
   "active": "0ffad235e67c7782",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字通信原理/第六章数字载波调制传输系统/index.md",
+    "content/notes/数字信号处理/实验三",
+    "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
     "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/未命名.md",
     "content/guestbook.md",
@@ -181,7 +183,6 @@
     "content/musings/a从杨朱思想到对“公平”的思考/index.md",
     "public/assets/index-B7DlGNs9.js",
     "static/assets/index-B7DlGNs9.js",
-    "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
     "content/musings/a从杨朱思想到对“公平”的思考",
     "content/musings/a永远在移动的终点线/Pastedimage20251002160311.png",
     "content/musings/a永远在移动的终点线/index.md",
@@ -194,7 +195,6 @@
     "content/musings/1从杨朱思想到对“公平”的思考/index.md",
     "content/musings/1从杨朱思想到对“公平”的思考",
     "public/assets/index-7zYBPpdN.js",
-    "static/assets/index-7zYBPpdN.js",
     "content/musings/从杨朱思想到对“公平”的思考/index.md",
     "content/musings/永远在移动的终点线：我们如此奔跑，究竟是为了什么？/index.md",
     "content/musings/永远在移动的终点线/Pastedimage20251002160311.png",
@@ -216,7 +216,6 @@
     "content/notes/数字信号处理/6.Z变换/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
-    "content/notes/数字信号处理/3.频域中的离散时间信号/index.md",
-    "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md"
+    "content/notes/数字信号处理/3.频域中的离散时间信号/index.md"
   ]
 }
