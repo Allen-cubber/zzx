@@ -274,3 +274,202 @@ summary: 本章将深入探讨数字电路设计流程中的核心环节——�
 *   所有的连接关系（MUX、连线）都会被正确地描述出来。
 
 最终生成的RTL代码是结构化的、可读的，并且可以被任何标准的RTL综合工具（如Vivado Synthesis, Synopsys DC）进一步综合、布局布线，最终生成在芯片上运行的比特流。
+
+#### （2）触发器和锁存器生成规则
+
+##### 一、 触发器 (Flip-Flop)
+触发器是**边沿敏感**（Edge-Triggered）的存储单元。只要代码逻辑中检测了时钟的跳变沿（上升沿或下降沿），综合工具就会推导出触发器。
+
+###### 1. 标准写法 (推荐)
+使用 `rising_edge(clk)` 或 `falling_edge(clk)` 函数。这是IEEE 1076标准推荐的写法。
+
+```vhdl
+process(clk)
+begin
+    -- 检测上升沿
+    if rising_edge(clk) then
+        q <= d;
+    end if;
+end process;
+```
+
+###### 2. 传统写法 (老式代码常见)
+通过检测时钟信号的属性 `'event`（发生变化）和当前电平来判断。
+
+```vhdl
+process(clk)
+begin
+    -- 此时钟发生了变化 AND 变化后为'1' = 上升沿
+    if clk'event and clk = '1' then 
+        q <= d;
+    end if;
+end process;
+```
+
+###### 3. 带有异步复位的触发器 (最常用)
+如果复位信号不依赖时钟，必须放在检测时钟沿的语句**之前**。
+
+```vhdl
+process(clk, rst_n) -- 敏感列表必须包含时钟和异步复位
+begin
+    if rst_n = '0' then
+        q <= '0';            -- 异步复位
+    elsif rising_edge(clk) then
+        q <= d;              -- 同步数据更新
+    end if;
+end process;
+```
+
+###### 4. 使用 `wait until` (较少见，但有效)
+这也是生成触发器的一种方式，不需要敏感列表（隐含了），通常用于Testbench或特定的综合风格。
+```vhdl
+process -- 没有敏感列表
+begin
+    wait until clk = '1'; -- 等待直到clk变成1
+    q <= d;
+end process;
+```
+
+---
+
+##### 二、 锁存器 (Latch)
+锁存器是**电平敏感**（Level-Sensitive）的存储单元。
+**产生原因**：在**组合逻辑进程**（即没有时钟沿检测的process）中，某些信号在特定的条件分支下**没有被赋值**。
+**结果**：为了保持信号原有的值，综合工具被迫生成锁存器。
+
+> **注意**：在FPGA设计中，除非故意设计（如接口去抖动或极低功耗设计），通常应**避免生成锁存器**，因为它们会导致时序分析困难。
+
+###### 1. `if` 语句不完整 (最常见的无意生成)
+如果写了 `if` 但没有写 `else`，或者 `elsif` 没有覆盖所有情况，且该进程不是时钟触发的。
+
+```vhdl
+-- 这是一个组合逻辑进程（敏感列表没有clk，是en和d）
+process(en, d)
+begin
+    if en = '1' then
+        q <= d;
+    end if;
+    -- 缺少 else！
+    -- 当 en = '0' 时，q 保持原值 -> 生成锁存器
+end process;
+```
+
+###### 2. `case` 语句不完整
+如果 `case` 语句没有覆盖所有可能的取值，且没有加 `when others`。
+
+```vhdl
+process(sel, a, b)
+begin
+    case sel is
+        when "00" => q <= a;
+        when "01" => q <= b;
+        -- 缺少 "10", "11" 且没有 when others
+        -- 未覆盖的情况下 q 保持原值 -> 生成锁存器
+    end case;
+end process;
+```
+
+###### 3. 变量赋值不完整 (特殊情况)
+虽然变量通常被综合为连线，但如果变量在组合逻辑进程中被读取前没有被**无条件地**重新赋值（即利用了上一轮的值），也可能推导出锁存器。
+
+---
+
+##### 三、 总结对比表
+
+| 特征 | 触发器 (Flip-Flop) | 锁存器 (Latch) |
+| :--- | :--- | :--- |
+| **触发方式** | **边沿触发** (时钟沿) | **电平触发** (使能信号电平) |
+| **代码关键点** | `if rising_edge(clk)` | 组合逻辑进程中**赋值语句不完整** (缺少else/others) |
+| **敏感列表** | 必须包含 `clk` (和异步复位) | 包含所有输入信号 (`all` 或具体信号名) |
+| **应用场景** | 时序逻辑设计，状态机，流水线 | 极少使用，通常是**设计失误** |
+| **记忆口诀** | “沿来了才变” | “条件不够，保持原旧” |
+
+##### 四、 如何防止生成不需要的锁存器？
+
+如果你写的是组合逻辑电路，请遵循以下两个原则之一：
+
+1.  **补全所有分支**：确保每个 `if` 都有 `else`，每个 `case` 都有 `when others`。
+    ```vhdl
+    if en = '1' then
+        q <= d;
+    else
+        q <= '0'; -- 明确指定 else 的值，避免保持
+    end if;
+    ```
+
+2.  **设置默认值**：在进程开始时给信号赋一个默认值。
+    ```vhdl
+    process(en, d)
+    begin
+        q <= '0'; -- 1. 先赋默认值
+        
+        if en = '1' then
+            q <= d; -- 2. 满足条件再覆盖
+        end if;
+        -- 即使没有 else，也不会生成锁存器，因为已经有默认值了
+    end process;
+    ```
+
+#### （3）检测外部信号边沿
+设计一个脉冲计数器,在脉冲**上升沿**触发计数,上位机MCU在片选的**下降沿**到来时读取一个计数值:
+```vhdl
+	library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL; 
+
+entity PulseCounter is
+    Port ( 
+        CLK    : in  STD_LOGIC;                     -- 系统主时钟
+        RST_N  : in  STD_LOGIC;                     -- 异步复位，低电平有效
+        Pulse  : in  STD_LOGIC;                     -- 待计数的脉冲信号
+        CS_N   : in  STD_LOGIC;                     -- 片选信号，低电平有效
+        Dout   : out STD_LOGIC_VECTOR (15 downto 0) -- 输出给MCU的计数值
+    );
+end PulseCounter;
+
+architecture Behavioral of PulseCounter is
+
+    -- 定义内部信号
+    signal cnt_reg     : STD_LOGIC_VECTOR(15 downto 0) := (others => '0'); -- 内部计数寄存器
+    
+    signal pulse_d0    : STD_LOGIC := '0';
+    signal pulse_d1    : STD_LOGIC := '0';
+    signal cs_d0       : STD_LOGIC := '1';
+    signal cs_d1       : STD_LOGIC := '1';
+
+begin
+
+    process(CLK, RST_N)
+    begin
+        if RST_N = '0' then
+            cnt_reg     <= (others => '0');
+            Dout        <= (others => '0');
+            pulse_d0    <= '0';
+            pulse_d1    <= '0';
+            cs_d0       <= '1';
+            cs_d1       <= '1';
+            
+        elsif rising_edge(CLK) then
+            pulse_d0 <= Pulse;
+            pulse_d1 <= pulse_d0;
+            
+            cs_d0    <= CS_N;
+            cs_d1    <= cs_d0;
+            if (pulse_d0 = '1' and pulse_d1 = '0') then --上升沿
+                cnt_reg <= cnt_reg + 1;
+            end if;
+            if (cs_d0 = '0' and cs_d1 = '1') then --下降沿
+                Dout <= cnt_reg;
+            end if;
+            
+        end if;
+    end process;
+
+end Behavioral;
+```
+在FPGA面试或实际工作中，凡是遇到“**检测外部信号边沿**”的题目，要先把信号打两拍（d0, d1），这是标准动作。
+- **亚稳态是什么？**  
+    如果 Pulse 跳变的瞬间，刚好撞上了 CLK 的上升沿，触发器可能会“懵圈”，它不知道该存 0 还是存 1，输出可能会在一个非 0 非 1 的中间电压震荡。这种震荡如果传导到后面的计数器，会导致系统崩溃或计数错误。
+* **d0/d1 是如何保护电路的？**
+	**pulse_d0**：它是第一道防线。如果发生碰撞，pulse_d0 可能会进入亚稳态（短暂的不稳定）。
+	**pulse_d1**：它是第二道防线。因为它采集的是 pulse_d0 的值。经过一个时钟周期的等待，pulse_d0 通常已经从亚稳态稳定下来变成了 0 或 1。
