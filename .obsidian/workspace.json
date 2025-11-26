@@ -13,8 +13,8 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/线上评分系统/index.md",
-                "mode": "source",
+                "file": "content/musings/光纤通信技术论文汇报/index.md",
+                "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/线上评分系统/index.md",
+                "file": "content/musings/光纤通信技术论文汇报/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,9 +171,11 @@
   },
   "active": "0ffad235e67c7782",
   "lastOpenFiles": [
+    "content/musings/光纤通信技术论文汇报/02-09.pdf",
+    "content/musings/光纤通信技术论文汇报/index.md",
+    "2-9.pdf",
     "content/musings/线上评分系统/index.md",
     "content/musings/VHDL语言环境搭建/index.md",
-    "content/musings/光纤通信技术论文汇报/index.md",
     "content/musings/线上评分系统",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
@@ -195,10 +197,8 @@
     "content/musings/永远在移动的终点线/index.md",
     "content/musings/永远在移动的终点线",
     "public/assets/index-RyPH2oXX.js",
-    "static/assets/index-RyPH2oXX.js",
     "content/musings/1永远在移动的终点线/Pastedimage20251002160311.png",
     "content/musings/1永远在移动的终点线/index.md",
-    "content/musings/1永远在移动的终点线",
     "content/musings/1从杨朱思想到对“公平”的思考/index.md",
     "content/musings/从杨朱思想到对“公平”的思考/index.md",
     "content/musings/永远在移动的终点线：我们如此奔跑，究竟是为了什么？/index.md",
@@ -215,7 +215,6 @@
     "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字系统设计/6.第七章仿真/index.md",
-    "content/notes/数字信号处理/8.数字滤波器的结构/index.md",
-    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md"
+    "content/notes/数字信号处理/8.数字滤波器的结构/index.md"
   ]
 }
