@@ -108,7 +108,7 @@ summary: 本章我们从工程应用的角度，深入探讨了差错控制编�
 一个非空集合 $G$ 和一个二元运算 $*$ 构成一个群，需满足以下条件：
 1.  **封闭性**: $\forall g_1, g_2 \in G, \ g_1 * g_2 \in G$
 2.  **结合率**: $(g_1 * g_2) * g_3 = g_1 * (g_2 * g_3)$
-3.  **存在恒等元素 (单位元)**: $\exists e \in G, \forall g \in G, \ g*e = e*g = g$
+3.  **存在恒等元素 (单位元)**: $\exists e \in G\, \forall g \in G\, \ g*e \= e\*g \= g$
 4.  **存在逆元素**: $\forall g \in G, \exists g^{-1} \in G, \ g*g^{-1} = g^{-1}*g = e$
 
 -   若还满足**交换率** ($g_1 * g_2 = g_2 * g_1$)，则称为<font color="orange">交换群</font>（或阿贝尔群）。

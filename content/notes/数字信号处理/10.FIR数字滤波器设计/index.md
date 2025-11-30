@@ -103,7 +103,8 @@ $$
 | **汉宁窗 (Hanning)**     | **3.11** |
 | **汉明窗 (Hamming)**     | **3.32** |
 | **布莱克曼窗 (Blackman)**  | **5.56** |
-	滤波器长度 $N = 2M + 1$（通常取奇数以保证I型线性相位）。
+
+滤波器长度 $N = 2M + 1$（通常取奇数以保证I型线性相位）。
 4.  **计算理想冲击响应 $h_d[n]$**：
     截止频率取通带和阻带的中心：
     $$\boxed{\omega_c = \frac{\omega_p + \omega_s}{2}}$$
@@ -135,7 +136,7 @@ $$
     $$
     即：
     $$
-    h_{HP}[n] = \begin{cases} 1 - \frac{\omega_c}{\pi}, & n=0 \\ -\frac{\sin(\omega_c n)}{\pi n}, & n \ne 0 \end{cases}
+    h_{HP}[n] = \begin{cases} 1 - \frac{\omega_c}{\pi}, & n=0 \\\\ -\frac{\sin(\omega_c n)}{\pi n}, & n \ne 0 \end{cases}
     $$
 
 3.  **理想带通 (Band Pass)** (截止频率 $\omega_{c1}, \omega_{c2}$):
