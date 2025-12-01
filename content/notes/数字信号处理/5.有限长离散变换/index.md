@@ -46,7 +46,20 @@ $W_N = e^{-j\frac{2\pi}{N}}$
 
 DFT 变换可以表示为矩阵乘法的形式：$\mathbf{X} = \mathbf{D}_N \mathbf{x}$。
 其中 $\mathbf{x}$ 和 $\mathbf{X}$ 是序列的列向量，$\mathbf{D}_N$ 是一个 $N \times N$ 的 DFT 矩阵，其元素为 $[\mathbf{D}_N]_{kn} = W_N^{kn}$。
-
+*   **$\mathbf{x}$ (小写 x)**：表示**时域**信号的列向量。
+    *   即输入信号：$\mathbf{x} = [x[0], x[1], \dots, x[N-1]]^T$。
+*   **$\mathbf{X}$ (大写 X)**：表示**频域**信号的列向量。
+    *   即变换后的结果：$\mathbf{X} = [X[0], X[1], \dots, X[N-1]]^T$。
+$$
+\mathbf{D}_N =
+\begin{bmatrix}
+1 & 1 & 1 & \dots & 1 \\\\
+1 & W_N^1 & W_N^2 & \dots & W_N^{N-1} \\\\
+1 & W_N^2 & W_N^4 & \dots & W_N^{2(N-1)} \\\\
+\vdots & \vdots & \vdots & \ddots & \vdots \\\\
+1 & W_N^{N-1} & W_N^{2(N-1)} & \dots & W_N^{(N-1)(N-1)}
+\end{bmatrix}
+$$
 这种表示方法直观，但也揭示了其计算复杂度为 $O(N^2)$。
 
 #### 1.3 DTFT 与 DFT 的关系

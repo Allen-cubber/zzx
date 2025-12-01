@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
+                "file": "content/notes/数字信号处理/5.有限长离散变换/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
+                "file": "content/notes/数字信号处理/5.有限长离散变换/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,7 @@
   },
   "active": "0ffad235e67c7782",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字信号处理/3.频域中的离散时间信号/index.md",
@@ -215,7 +216,6 @@
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251120091736.png",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pasted image 20251120091732.png",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pasted image 20251120091645.png",
-    "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md"
+    "content/notes/数字信号处理/数字信号处理笔记合集/index.md"
   ]
 }
