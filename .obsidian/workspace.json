@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/blog-setup/course/index.md",
+                "file": "content/blog-setup/the-second/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/blog-setup/course/index.md",
+                "file": "content/blog-setup/the-second/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,9 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/blog-setup/link/index.md",
+    "content/blog-setup/hello-hugo/index.md",
+    "content/blog-setup/course/index.md",
     "content/musings/光纤通信技术论文汇报/index.md",
     "content/musings/光纤通信技术论文汇报/Pastedimage20251201215326.png",
     "content/musings/光纤通信技术论文汇报/Pasted image 20251201215557.png",
@@ -213,8 +216,6 @@
     "content/musings/从杨朱思想到对“公平”的思考/index.md",
     "public/assets/index-B7DlGNs9.js",
     "content/musings/永远在移动的终点线/index.md",
-    "content/musings/1永远在移动的终点线/index.md",
-    "content/musings/1从杨朱思想到对“公平”的思考/index.md",
-    "content/musings/从杨朱思想到对“公平”的思考/index.md"
+    "content/musings/1永远在移动的终点线/index.md"
   ]
 }
