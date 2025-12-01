@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/光纤通信技术论文汇报/index.md",
+                "file": "content/blog-setup/course/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/光纤通信技术论文汇报/index.md",
+                "file": "content/blog-setup/course/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""

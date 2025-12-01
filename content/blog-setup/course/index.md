@@ -4,6 +4,7 @@ date: 2025-08-30T11:00:00+08:00
 summary: 本文档记录了使用 Hugo 静态网站生成器、PaperMod 主题，并结合 Vercel 和 Cloudflare 服务，从零开始搭建一个功能强大、样式精美、全球高速访问的个人博客的完整流程。
 tags:
   - 博客搭建
+  - 网页开发
 ---
 ## 博客搭建指南：从 Hugo + PaperMod 到 Vercel + Cloudflare
 
