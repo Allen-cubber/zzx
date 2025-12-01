@@ -115,8 +115,8 @@ summary: 参考课本第三章 (3.1-3.6) 和第四章 (4.8)，以及课本第三
 #### 4. 能量密度谱
 
 *   **Parseval定理**：信号在时域的总能量等于其在频域的总能量。
-    *   **连续信号**: $\mathcal{E}_x = \int_{-\infty}^{\infty} |x_a(t)|^2 dt = \frac{1}{2\pi} \int_{-\infty}^{\infty} |X_a(j\Omega)|^2 d\Omega$
-    *   **离散序列**: $\mathcal{E}_g = \sum_{n=-\infty}^{\infty} |g[n]|^2 = \frac{1}{2\pi} \int_{-\pi}^{\pi} |G(e^{j\omega})|^2 d\omega$
+    *   **连续信号**: $\mathcal{E}_x = \int\_{-\infty}^{\infty} |x_a(t)|^2 dt = \frac{1}{2\pi} \int\_{-\infty}^{\infty} |X_a(j\Omega)|^2 d\Omega$
+    *   **离散序列**: $\mathcal{E}_g = \sum\_{n=-\infty}^{\infty} |g[n]|^2 = \frac{1}{2\pi} \int\_{-\pi}^{\pi} |G(e^{j\omega})|^2 d\omega$
 *   **能量密度谱**：单位频率的能量，定义为 $|X(\cdot)|^2$。
 *   **维纳-辛欣定理**：信号的<font color="orange">自相关函数</font>的傅里叶变换是其**能量密度谱**。
 
