@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "06060d0ae4eef31e",
+        "id": "e4e7bb73c78ef2d3",
         "type": "tabs",
         "children": [
           {
-            "id": "0ffad235e67c7782",
+            "id": "26601848a4eb6a67",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -169,8 +169,11 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "0ffad235e67c7782",
+  "active": "26601848a4eb6a67",
   "lastOpenFiles": [
+    "Pasted.md",
+    "content/notes/数字信号处理/5.有限长离散变换/index.md",
+    "Pastedimage20250922210808.md",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字信号处理/实验三/index.md",
@@ -209,13 +212,10 @@
     "content/musings/永远在移动的终点线：我们如此奔跑，究竟是为了什么？/index.md",
     "content/musings/永远在移动的终点线/Pastedimage20251002160311.png",
     "content/musings/永远在移动的终点线/index.md",
-    "content/musings/DSP音频识别项目/index.md",
-    "content/easter-egg/index.md",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251120091732.png",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251120091645.png",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pastedimage20251120091736.png",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/Pasted image 20251120091732.png",
-    "content/notes/数字信号处理/9.IIR数字滤波器设计/Pasted image 20251120091645.png",
-    "content/notes/数字信号处理/数字信号处理笔记合集/index.md"
+    "content/notes/数字信号处理/9.IIR数字滤波器设计/Pasted image 20251120091645.png"
   ]
 }

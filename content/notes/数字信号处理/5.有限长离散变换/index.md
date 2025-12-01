@@ -45,7 +45,7 @@ $W_N = e^{-j\frac{2\pi}{N}}$
 #### 1.2 DFT 的矩阵表示
 
 DFT 变换可以表示为矩阵乘法的形式：$\mathbf{X} = \mathbf{D}_N \mathbf{x}$。
-其中 $\mathbf{x}$ 和 $\mathbf{X}$ 是序列的列向量，$\mathbf{D}_N$ 是一个 $N \times N$ 的 DFT 矩阵，其元素为 $[\mathbf{D}_N]_{kn} = W_N^{kn}$。
+其中 $\mathbf{x}$ 和 $\mathbf{X}$ 是序列的列向量，$\mathbf{D}_N$ 是一个 $N \times N$ 的 DFT 矩阵，其元素为 $[\mathbf{D}_N]\_{kn} = W_N^{kn}$。
 *   **$\mathbf{x}$ (小写 x)**：表示**时域**信号的列向量。
     *   即输入信号：$\mathbf{x} = [x[0], x[1], \dots, x[N-1]]^T$。
 *   **$\mathbf{X}$ (大写 X)**：表示**频域**信号的列向量。
@@ -87,7 +87,7 @@ $$
 ### 2. 有限长序列的运算及分类
 
 #### 2.1 圆周移位 (Circular Shift)
-![](Pastedimage20250922210808)
+![](Pastedimage20250922210808.png)
 由于 DFT 的周期性，对序列的移位操作也是<font color="orange">循环</font>的。一个 N 点序列 $x[n]$ 移位 $n_0$ 位后的序列 $x_s[n]$ 定义为：
 
 $x_s[n] = x((n-n_0)_N) = x((n-n_0) \mod N)$
