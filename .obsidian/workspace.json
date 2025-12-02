@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/实验二基带编码实验/index.md",
+                "file": "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/实验二基带编码实验/index.md",
+                "file": "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,21 +169,21 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
-    "content/notes/数字通信原理/实验二基带编码实验/1a393a540aaa4f9d4fb77a70ed8f8763.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/0bcaa157950e415f51affa6cef46cd98.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/ff1a25c0b5b0ba60eec4b2f7ed8e5739.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/dd1782919b0508d5501ed4137304e796.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/d08149f0b1ef34b6a8d1f4d53f5b5630.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/d6aa941f8a318b04ae8f117dabc1630c.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/abf67d0213209762d3405f82577e06bd.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/a1df618e801b2390ebee1e410bc5c866.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/70949527714c2db232352693205b3827.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/73789cd4f19967b118e259da83ebd0c5.jpg",
-    "content/notes/数字通信原理/实验二基带编码实验/598a8bfc505664ced49a60f9eaf6a1ab.jpg",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212501.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212340.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212224.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212142.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212055.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212012.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211951.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211820.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211739.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211715.png",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211639.png",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/数字通信原理/实验二基带编码实验",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
