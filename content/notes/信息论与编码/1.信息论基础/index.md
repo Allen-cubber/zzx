@@ -204,7 +204,7 @@ $[p(Y/X)] = \begin{bmatrix} 0.99 & 0.01 \\\\ 0.01 & 0.99 \end{bmatrix}$
 *  $ H(X/Y) \le H(X) $ (知道Y后，X的不确定性减小)
 *  $ H(Y/X) \le H(Y) $ (知道X后，Y的不确定性减小)
 * $ H(XY) \le H(X) + H(Y) $ (联合熵小于等于熵之和)
-![](content/notes/信息论与编码/1.信息论基础/Pastedimage20250913150043.png)
+![](Pastedimage20250913150043.png)
 ##### **两种极端情况**
 
 **1. 当信源X与Y统计独立时**
