@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/2.连续信源/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/2.连续信源/index.md",
+                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,10 +171,12 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "static/favicon.ico",
+    "static/favicon (2).ico",
+    "content/notes/信息论与编码/2.连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "static/images/favicon(2).ico",
-    "static/favicon.ico",
     "static/favicon(2).ico",
     "static/favicon (1).ico",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212501.png",
@@ -192,7 +194,6 @@
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/数字通信原理/实验二基带编码实验",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
-    "content/notes/信息论与编码/2.连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/xinxilunjichu.pdf",
     "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/信息论与编码/9.卷积码/index.md",
@@ -213,7 +214,6 @@
     "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字信号处理/3.频域中的离散时间信号/index.md",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
-    "content/notes/信息论与编码/6.简单差错控制码和数学基础/index.md",
     "public/tags/网页开发/index.xml",
     "public/tags/网页开发/index.html",
     "public/tags/网页开发"

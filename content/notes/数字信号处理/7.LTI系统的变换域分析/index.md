@@ -62,7 +62,7 @@ $$
 
 #### 2.3 有界实传输函数 (BR)
 
-一个因果稳定的LTI传输函数如果满足以下条件，则称为<font color="orange">有界实函数</font>：
+一个因果稳定的实系数LTI传输函数如果满足以下条件，则称为<font color="orange">有界实函数</font>：
 $$
 |H(e^{j\omega})| \leq 1
 $$
