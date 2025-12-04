@@ -116,7 +116,7 @@ $I(X;Y) = h(X) - h(X/Y)$
 
 2.  **均值受限**：当信号均值固定时，<font color="orange">指数分布</font>使相对熵最大。
     *   $p(x) = \frac{1}{a} e^{-x/a}, \quad x > 0$
-    *   $h_{max}(X) = \log a$
+    *   $h_{max}(X) = \log a + \frac{1}{\ln(2)}\ (bits)$
 
 3.  **平均功率受限**：当信号平均功率（方差）$\sigma^2$ 固定时，<font color="orange">高斯分布</font>使相对熵最大。
     *   $p(x) = \frac{1}{\sqrt{2\pi}\sigma} e^{-\frac{(x-m)^2}{2\sigma^2}}$

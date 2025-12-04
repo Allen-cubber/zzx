@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/1.信息论基础/index.md",
+                "file": "content/notes/信息论与编码/2.连续信源/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/1.信息论基础/index.md",
+                "file": "content/notes/信息论与编码/2.连续信源/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,7 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "static/images/favicon(2).ico",
     "static/favicon.ico",
@@ -193,7 +194,6 @@
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
     "content/notes/信息论与编码/2.连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/xinxilunjichu.pdf",
-    "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
