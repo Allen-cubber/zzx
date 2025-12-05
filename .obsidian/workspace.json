@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/9.卷积码/index.md",
+                "file": "content/notes/数字通信原理/6.第七章传输信道/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/信息论与编码/9.卷积码/index.md",
+                "file": "content/notes/数字通信原理/6.第七章传输信道/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,8 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
+    "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/Pastedimage20251205143555.png",
     "content/notes/数字通信原理/6.第七章传输信道/Pastedimage20251205143526.png",
@@ -204,7 +206,6 @@
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
     "content/notes/信息论与编码/8.循环码/index.md",
-    "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
