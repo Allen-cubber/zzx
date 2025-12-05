@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/数字信号处理/实验三/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/数字信号处理/实验三/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,8 +169,23 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "682728a7cbdf0d94",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/实验三/Pastedimage20251205125047.png",
+    "content/notes/数字信号处理/实验三/Pastedimage20251205125203.png",
+    "content/notes/数字信号处理/实验三/Pastedimage20251205125150.png",
+    "content/notes/数字信号处理/实验三/Pastedimage20251205125107.png",
+    "content/notes/数字信号处理/实验三/Pastedimage20251205125051.png",
+    "content/notes/数字信号处理/实验三/Pasted image 20251205125047.png",
+    "content/notes/数字信号处理/实验三/Pasted image 20251205125203.png",
+    "content/notes/数字信号处理/实验三/Pasted image 20251205125150.png",
+    "content/notes/数字信号处理/实验三/Pasted image 20251205125107.png",
+    "content/notes/数字信号处理/实验三/Pasted image 20251205125051.png",
+    "Pasted image 20251205125203.png",
+    "content/notes/数字信号处理/实验二/index.md",
+    "content/notes/数字信号处理/实验一/index.md",
+    "content/notes/数字信号处理/实验三/index.md",
+    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "static/favicon.ico",
     "static/favicon (2).ico",
     "content/notes/信息论与编码/2.连续信源/index.md",
@@ -179,16 +194,6 @@
     "static/images/favicon(2).ico",
     "static/favicon(2).ico",
     "static/favicon (1).ico",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212501.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212340.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212224.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212142.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212055.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202212012.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211951.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211820.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211739.png",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/Pastedimage20251202211715.png",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
@@ -210,12 +215,7 @@
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
     "Pasted.md",
-    "Pastedimage20250922210808.md",
-    "content/notes/数字信号处理/实验三/index.md",
-    "content/notes/数字信号处理/3.频域中的离散时间信号/index.md",
-    "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
     "public/tags/网页开发/index.xml",
-    "public/tags/网页开发/index.html",
-    "public/tags/网页开发"
+    "public/tags/网页开发/index.html"
   ]
 }
