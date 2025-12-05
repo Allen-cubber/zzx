@@ -15,7 +15,7 @@ summary: 📡内容涵盖了信道的定义、损耗与衰落特性、统计多�
     *   调制信道（包含调制器、解调器）
     *   编码信道（包含编码器、解码器）
     *   信源编码信道等。
-![[Pasted image 20251205142051.png]]
+![](Pastedimage20251205142051.png)
 ### 2. 信道的分类
 根据信道参数特性划分：
 *   **<font color="orange">恒参信道</font>**：
@@ -75,14 +75,14 @@ $$ L_p = K \left( \frac{d_0}{d} \right)^{-\gamma} $$
 ### 4. 综合模型
 总损耗 = 路径损耗（确定性） + 阴影衰落（随机变量）：
 $$ L_{PS dB} = 10\lg K - 10\gamma \lg \frac{d_0}{d} + SL_{P dB} $$
-![[Pasted image 20251205143526.png]]
+![](Pastedimage20251205143526.png)
 
 ---
 
 ## 7.3 信道的统计多径模型
 
 ### 1. 多普勒频移 (Doppler Shift)
-![[Pasted image 20251205143555.png]]
+![](Pastedimage20251205143555.png)
 当收发端存在相对运动时，接收信号频率发生变化。
 *   **频移公式**：
     $$ \boxed{ f_D = \frac{v}{\lambda} \cos \theta } $$
@@ -115,8 +115,8 @@ $$ L_{PS dB} = 10\lg K - 10\gamma \lg \frac{d_0}{d} + SL_{P dB} $$
 | **频域 (多普勒)** | 多普勒扩展 $B_D$            | **<font color="orange">相干时间 $T_c$</font>** | $\Delta t \le T_c$：慢衰落<br>$\Delta t > T_c$：快衰落      |
 
 > 💡 **关系**：
-> *   $B_c \approx 1/\sigma_{T_m}$ (时延越大，相干带宽越窄)
-> *   $T_c \approx 1/f_{D}$ (运动越快，相干时间越短)
+> *   $B_c \approx 1/\sigma_{T_m}$ (与多径时延扩展成反比，时延越大，相干带宽越窄)
+> *   $T_c \approx 1/f_{D}$ (相干时间与最大多普勒频移成反比，运动越快，相干时间越短)
 
 ---
 
@@ -176,7 +176,7 @@ $$ \boxed{ C = W \log_2 \left( 1 + \frac{S}{N} \right) = W \log_2 (1 + \gamma) }
 
 ---
 
-# 📝 本章学习总结
+## 本章学习总结
 
 1.  **信道模型是基础**：理解路径损耗（大尺度）、阴影衰落（中尺度）和多径衰落（小尺度）的区别。
 2.  **多径效应是核心**：掌握时延扩展导致的频率选择性衰落（相干带宽），以及多普勒扩展导致的时间选择性衰落（相干时间）。
@@ -187,3 +187,92 @@ $$ \boxed{ C = W \log_2 \left( 1 + \frac{S}{N} \right) = W \log_2 (1 + \gamma) }
 > *   计算自由空间损耗时，注意频率和距离的单位（特别是使用经验公式时）。
 > *   区分“瑞利衰落”（无直射径）和“莱斯衰落”（有直射径）。
 > *   迫零均衡虽然能消除 ISI，但在信道深衰落点会极大地放大噪声，导致性能恶化。
+
+## 考点解析
+### 一、 自由空间传播与路径损耗
+
+**1. 信号波长与频率关系**
+$$ \lambda = \frac{c}{f} $$
+*   <font color="orange">注意</font>：$c \approx 3 \times 10^8$ m/s。计算时 $f$ 必须换算成 **Hz** (1 MHz = $10^6$ Hz)。
+
+**2. 弗里斯 (Friis) 传输公式 (接收功率计算)**
+$$ \boxed{ P_r = P_t G_t G_r \left( \frac{\lambda}{4\pi d} \right)^2 } $$
+*   **参数含义**：
+    *   $P_r$：接收功率 (W)
+    *   $P_t$：发射功率 (W)
+    *   $G_t, G_r$：发射、接收天线增益 (线性值，非dB)
+    *   $d$：传输距离 (m)
+*   <font color="orange">易错点</font>：如果题目给的是 dB/dBm，必须先转回线性值计算，或者使用下面的dB形式公式。
+
+**3. 路径损耗 (Path Loss)**
+*   **线性定义**：
+    $$ L_p = \frac{P_t}{P_r} = \frac{1}{G_t G_r} \left( \frac{4\pi d}{\lambda} \right)^2 $$
+*   **对数形式 (dB)** (常用)：
+    $$ [L_{fs}](dB) = 32.44 + 20\lg d(km) + 20\lg f(MHz) $$
+    或者手动推导：
+    $$ L_p(dB) = 10\lg P_t - 10\lg P_r $$
+
+---
+
+### 二、 多普勒频移
+
+**1. 多普勒频移公式**
+$$ \boxed{ f_d = \frac{v}{\lambda} \cos \theta = \frac{v \cdot f_c}{c} \cos \theta } $$
+*   **参数含义**：
+    *   $v$：移动台速度 (<font color="orange">必须换算为 m/s</font>)
+    *   $\theta$：运动方向与电波入射方向的夹角
+    *   $f_c$：载波频率
+
+**2. 接收频率**
+$$ f_{rx} = f_c + f_d $$
+*   <font color="orange">三种特殊情况</font>：
+    *   **迎面开** ($\theta = 0^\circ$): $\cos 0^\circ = 1 \Rightarrow f_d = +f_m$ (最大正频移)
+    *   **背离并** ($\theta = 180^\circ$): $\cos 180^\circ = -1 \Rightarrow f_d = -f_m$ (最大负频移)
+    *   **垂直开** ($\theta = 90^\circ$): $\cos 90^\circ = 0 \Rightarrow f_d = 0$
+
+---
+
+### 三、 衰落特性判决
+
+**1. 频率选择性衰落判决 (是否产生ISI)**
+*   **判据 1 (时域)**：
+    *   若 **$T_s \gg \sigma_\tau$** (码元周期 $\gg$ 多径时延扩展) $\rightarrow$ **平坦衰落** (无ISI，无需均衡)。
+    *   若 **$T_s \approx \sigma_\tau$ 或 $T_s < \sigma_\tau$** $\rightarrow$ **频率选择性衰落** (有ISI，需均衡)。
+*   **判据 2 (频域)**：
+    *   若 **$B_s \ll B_c$** (信号带宽 $\ll$ 相干带宽) $\rightarrow$ **平坦衰落**。
+    *   若 **$B_s \ge B_c$** $\rightarrow$ **频率选择性衰落**。
+    *   注：$B_c \approx 1/\sigma_\tau$。
+
+**2. 快/慢衰落判决**
+*   若 **$T_s \ll T_c$** (码元周期 $\ll$ 相干时间) $\rightarrow$ **慢衰落**。
+*   若 **$T_s \ge T_c$** $\rightarrow$ **快衰落**。
+*   注：$T_c \approx \frac{1}{f_m} = \frac{\lambda}{v}$。
+
+---
+
+### 四、 信道容量
+
+$$ \boxed{ C = W \log_2 (1 + \frac{S}{N}) } $$
+*   常用于结合路径损耗计算出的 $P_r$ (即 $S$) 来求极限传输速率。
+*   如果给出 $S/N$ 是 dB 值，务必用 $10^{(dB/10)}$ 转为线性比值。
+
+---
+
+### 五、 时域均衡器
+
+**1. 迫零 (Zero-Forcing) 均衡器设计**
+目标是解线性方程组：$\mathbf{X} \cdot \mathbf{c} = \mathbf{q}$
+对于3抽头均衡器 ($c_{-1}, c_0, c_1$)，方程组通常为：
+$$
+\begin{cases}
+x_0 c_{-1} + x_{-1} c_0 + x_{-2} c_1 = 0 \\
+x_1 c_{-1} + x_0 c_0 + x_{-1} c_1 = 1 \quad (\text{对应中心时刻}) \\
+x_2 c_{-1} + x_1 c_0 + x_0 c_1 = 0
+\end{cases}
+$$
+*   <font color="orange">技巧</font>：列方程时，本质是**卷积**运算。输出 $y(k) = \sum_{n=-N}^{N} c_n x(k-n)$。
+
+**2. 峰值畸变计算 (Peak Distortion)**
+$$ \boxed{ D = \frac{1}{|y(0)|} \sum_{k \neq 0} |y(k)| } $$
+*   **均衡前**：把 $x(k)$ 代入公式，分母是主瓣 $x(0)$，分子是所有旁瓣绝对值之和。
+*   **均衡后**：先算出均衡器输出序列 $y(k)$，再用同样方法计算。对于迫零均衡器，紧邻主瓣的 $y(k)$ 也是0，但更远处的 $y(k)$ 可能不为0（残余畸变）。
