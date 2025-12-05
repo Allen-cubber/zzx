@@ -220,7 +220,7 @@ $$ \boxed{ P_r = P_t G_t G_r \left( \frac{\lambda}{4\pi d} \right)^2 } $$
 $$ \boxed{ f_d = \frac{v}{\lambda} \cos \theta = \frac{v \cdot f_c}{c} \cos \theta } $$
 *   **参数含义**：
     *   $v$：移动台速度 (<font color="orange">必须换算为 m/s</font>)
-    *   $\theta$：运动方向与电波入射方向的夹角
+    *   $\theta$：运动方向与电波入射方向(**波的到达方向**)的夹角
     *   $f_c$：载波频率
 
 **2. 接收频率**
