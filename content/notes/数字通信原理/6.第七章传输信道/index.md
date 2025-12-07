@@ -49,7 +49,7 @@ $$ = \text{Re}\left( y(t)e^{j\omega_c t} \right) + n(t) $$
 **其中**
 $$ y(t) = y_I(t) + jy_Q(t) $$
 **$n(t)$ 为接收过程中的噪声干扰**
-### 2. 路径损耗 (Path Loss)
+### 2. 路径损耗
 在不考虑噪声干扰下，路径损耗 $L_P$ 定义为发送功率 $P_t$ 与接收功率 $P_r$ 之比：
 $$ L_{p}dB = 10\lg \frac{P_t}{P_r} $$
 
@@ -68,7 +68,7 @@ $$ L_{p}dB = 10\lg \frac{P_t}{P_r} $$
 $$ L_p = K \left( \frac{d_0}{d} \right)^{-\gamma} $$
 *   $\gamma$：路径损耗指数（环境越复杂，$\gamma$ 越大，如市区 $\gamma \approx 3.7 \sim 6.5$）。
 
-### 3. 阴影衰落 (Shadowing)
+### 3. 阴影衰落
 *   **定义**：电波遇到地形、建筑物阻挡产生的缓慢起伏变化（又称<font color="orange">中等尺度衰落</font>）。
 *   **分布**：功率损耗值服从**对数正态分布**（即 dB 值服从正态分布）。
 
@@ -81,7 +81,7 @@ $$ L_{PS dB} = 10\lg K - 10\gamma \lg \frac{d_0}{d} + SL_{P dB} $$
 
 ## 7.3 信道的统计多径模型
 
-### 1. 多普勒频移 (Doppler Shift)
+### 1. 多普勒频移
 ![](Pastedimage20251205143555.png)
 当收发端存在相对运动时，接收信号频率发生变化。
 *   **频移公式**：
@@ -133,7 +133,7 @@ $$ \boxed{ C = W \log_2 \left( 1 + \frac{S}{N} \right) = W \log_2 (1 + \gamma) }
     *   采用 **<font color="orange">注水法 (Water Filling)</font>** 分配功率。
     *   **策略**：信道好时（$\gamma$ 大）多发功率，信道差时少发或不发。
     *   最佳功率分配：
-        $$ \frac{P(\gamma)}{\overline{P}} = \begin{cases} \frac{1}{\gamma_0} - \frac{1}{\gamma}, & \gamma \ge \gamma_0 \\ 0, & \gamma < \gamma_0 \end{cases} $$
+        $$ \frac{P(\gamma)}{\overline{P}} = \begin{cases} \frac{1}{\gamma_0} - \frac{1}{\gamma}, & \gamma \ge \gamma_0 \\\\ 0, & \gamma < \gamma_0 \end{cases} $$
 
 ### 3. 频率选择性衰落信道容量
 *   模型：可看作多个并行的窄带子信道。
