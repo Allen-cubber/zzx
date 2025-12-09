@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/7.第九章同步技术/index.md",
+                "file": "content/notes/信息论与编码/复习重点/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/7.第九章同步技术/index.md",
+                "file": "content/notes/信息论与编码/复习重点/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,19 +171,25 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202903.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202722.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202710.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202226.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202140.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201848.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201835.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201812.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207195512.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pasted image 20251207202903.png",
-    "content/notes/数字通信原理/7.第九章同步技术/Pasted image 20251207202722.png",
+    "content/notes/数字通信原理/系统框图/Pasted image 20251209203043.png",
+    "content/notes/数字通信原理/系统框图/Pasted image 20251209202219.png",
+    "content/notes/数字通信原理/系统框图/Pasted image 20251209202134.png",
     "content/notes/信息论与编码/2022A.md",
+    "content/notes/信息论与编码/复习重点/index.md",
+    "content/notes/数字通信原理/系统框图/index.md",
+    "content/notes/数字通信原理/复习重点/index.md",
+    "content/notes/信息论与编码/复习重点",
+    "content/notes/数字通信原理/复习重点",
+    "Pasted image 20251209203043.png",
+    "Pasted image 20251209203024.png",
+    "Pasted image 20251209202926.png",
+    "Pasted image 20251209202908.png",
+    "Pasted image 20251209202727.png",
+    "Pasted image 20251209202546.png",
+    "Pasted image 20251209202511.png",
+    "Pasted image 20251209202503.png",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
+    "content/notes/数字通信原理/系统框图",
     "content/notes/数字通信原理/7.第九章同步技术",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
@@ -196,9 +202,6 @@
     "public/particle-demo/assets",
     "public/particle-demo",
     "public/assets/index-lZt7xhSH.js",
-    "static/assets/index-lZt7xhSH.js",
-    "static/particle-demo/index.html",
-    "static/particle-demo/assets/index-B0zpdikJ.js",
     "content/notes/数字信号处理/实验二/index.md",
     "content/notes/数字信号处理/实验一/index.md",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
@@ -213,9 +216,6 @@
     "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
     "content/blog-setup/the-second/index.md",
-    "content/blog-setup/link/index.md",
-    "content/blog-setup/hello-hugo/index.md",
-    "content/blog-setup/course/index.md",
-    "content/musings/光纤通信技术论文汇报/index.md"
+    "content/blog-setup/link/index.md"
   ]
 }
