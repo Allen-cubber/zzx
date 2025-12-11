@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+                "file": "content/notes/数字通信原理/7.第九章同步技术/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,7 +156,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,11 +172,15 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/信息论与编码/复习重点/index.md",
+    "content/notes/数字通信原理/7.第九章同步技术/index.md",
+    "content/notes/数字通信原理/8.第十章扩频技术/index.md",
+    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
+    "content/notes/数字通信原理/8.第十章扩频技术",
     "static/images/lulu.ico",
     "static/favicon.ico",
     "static/images/favicon.ico",
     "static/Gemini_Generated_Image_6fwixz6fwixz6fwi.ico",
-    "content/notes/信息论与编码/复习重点/index.md",
     "content/notes/数字通信原理/系统框图/Pasted image 20251209203043.png",
     "content/notes/数字通信原理/系统框图/Pasted image 20251209202219.png",
     "content/notes/数字通信原理/系统框图/Pasted image 20251209202134.png",
@@ -191,7 +196,6 @@
     "Pasted image 20251209202727.png",
     "Pasted image 20251209202546.png",
     "Pasted image 20251209202511.png",
-    "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/notes/数字通信原理/系统框图",
     "content/notes/数字通信原理/7.第九章同步技术",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
@@ -200,11 +204,8 @@
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字通信原理/6.第七章传输信道",
-    "public/particle-demo/assets/index-B0zpdikJ.js",
-    "public/particle-demo/index.html",
     "content/notes/数字信号处理/实验二/index.md",
     "content/notes/数字信号处理/实验一/index.md",
-    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/信息论与编码/2.连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
