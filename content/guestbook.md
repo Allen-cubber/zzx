@@ -1,5 +1,5 @@
 ---
-title: 匿名留言板（也可以报错）
+title: 匿名留言板（也可以反馈错误）
 layout: guestbook
 draft: false
 ---
