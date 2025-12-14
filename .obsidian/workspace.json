@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
+                "file": "content/guestbook.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "guestbook"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/7.第九章同步技术/index.md",
+                "file": "content/guestbook.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "guestbook 的大纲"
             }
           }
         ],
@@ -172,6 +172,26 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202722.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202903.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202710.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201812.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202226.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202140.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201848.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201835.png",
+    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207195512.png",
+    "public/notes/数字通信原理/7.第九章同步技术/index.html",
+    "public/notes/数字通信原理/7.第九章同步技术",
+    "public/notes/数字通信原理/6.第七章传输信道/Pastedimage20251205143555.png",
+    "public/notes/数字通信原理/6.第七章传输信道/index.html",
+    "public/notes/数字通信原理/6.第七章传输信道",
+    "public/notes/信息论与编码/复习重点/index.html",
+    "public/notes/信息论与编码/复习重点",
+    "public/images/lulu.ico",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+    "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/复习重点/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/notes/数字通信原理/8.第十章扩频技术/index.md",
@@ -179,44 +199,23 @@
     "content/notes/数字通信原理/8.第十章扩频技术",
     "static/images/lulu.ico",
     "static/favicon.ico",
-    "static/images/favicon.ico",
-    "static/Gemini_Generated_Image_6fwixz6fwixz6fwi.ico",
-    "content/notes/数字通信原理/系统框图/Pasted image 20251209203043.png",
-    "content/notes/数字通信原理/系统框图/Pasted image 20251209202219.png",
-    "content/notes/数字通信原理/系统框图/Pasted image 20251209202134.png",
     "content/notes/信息论与编码/2022A.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/复习重点/index.md",
-    "content/notes/信息论与编码/复习重点",
-    "content/notes/数字通信原理/复习重点",
-    "Pasted image 20251209203043.png",
-    "Pasted image 20251209203024.png",
-    "Pasted image 20251209202926.png",
-    "Pasted image 20251209202908.png",
-    "Pasted image 20251209202727.png",
-    "Pasted image 20251209202546.png",
-    "Pasted image 20251209202511.png",
-    "content/notes/数字通信原理/系统框图",
-    "content/notes/数字通信原理/7.第九章同步技术",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
     "content/notes/信息论与编码/9.卷积码/index.md",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/notes/数字信号处理/实验三/index.md",
-    "content/notes/数字通信原理/6.第七章传输信道",
     "content/notes/数字信号处理/实验二/index.md",
     "content/notes/数字信号处理/实验一/index.md",
     "content/notes/信息论与编码/2.连续信源/index.md",
     "content/notes/信息论与编码/1.信息论基础/index.md",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
-    "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
     "content/notes/信息论与编码/8.循环码/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
-    "content/notes/数字系统设计/7.第八章综合/index.md",
-    "content/blog-setup/the-second/index.md",
-    "content/blog-setup/link/index.md"
+    "content/notes/数字系统设计/7.第八章综合/index.md"
   ]
 }
