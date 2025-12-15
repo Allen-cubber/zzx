@@ -7,7 +7,7 @@
 
 {{- if (.Param "ShowReadingTime") -}}
 {{- /* 修改2：直接设定中文格式为 "预计阅读 X 分钟" */ -}}
-{{- $scratch.Add "meta" (slice (printf "预计阅读 %d 分钟" .ReadingTime)) }}
+{{- $scratch.Add "meta" (slice (printf "预计阅读 %d 分钟" (mul .ReadingTime 5))) }}
 {{- end }}
 
 {{- if (.Param "ShowWordCount") -}}
