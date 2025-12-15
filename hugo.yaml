@@ -44,7 +44,7 @@ params:
   
   # ↓↓↓ 下面这两个是开启目录功能的全局开关 ↓↓↓
   ShowToc: true
-  TocOpen: true
+  TocOpen: false
   comments: true
 
   # ↓↓↓ 这一行是开启 KaTeX 功能的全局开关 ↓↓↓
