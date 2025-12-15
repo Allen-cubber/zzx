@@ -1,16 +1,114 @@
 {{- $headers := findRE "<h[1-6].*?>(.|\n])+?</h[1-6]>" .Content -}}
 {{- $has_headers := ge (len $headers) 1 -}}
 {{- if $has_headers -}}
-<aside id="toc-container" class="toc-container wide">
+
+{{- /* --- CSS 样式部分 --- */ -}}
+<style>
+    /* 1. 悬浮按钮 (默认显示，但在宽屏下会被隐藏) */
+    #toc-floating-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--secondary);
+        border-radius: 50%;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: transform 0.3s;
+        border: none;
+        outline: none;
+    }
+    #toc-floating-btn:hover {
+        transform: scale(1.1);
+    }
+    #toc-floating-btn svg {
+        width: 24px;
+        height: 24px;
+        fill: var(--primary); /* 图标颜色跟随主题 */
+    }
+
+    /* 2. 遮罩层 (点击关闭目录) */
+    #toc-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        display: none; /* 默认隐藏 */
+        backdrop-filter: blur(2px);
+    }
+    #toc-overlay.show {
+        display: block;
+    }
+
+    /* 3. 目录容器的基础样式 */
+    .toc-container {
+        /* 移动端/窄屏模式的默认样式：隐藏在左侧屏幕外 */
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 280px; /* 抽屉宽度 */
+        background: var(--entry); /* 跟随主题背景色 */
+        z-index: 999;
+        padding: 20px;
+        overflow-y: auto;
+        box-shadow: 4px 0 10px rgba(0,0,0,0.1);
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        transform: translateX(-100%); /* 默认移出屏幕 */
+    }
+
+    /* 窄屏模式下，添加 .open 类时滑出来 */
+    .toc-container.open {
+        transform: translateX(0);
+    }
+
+    /* 4. 宽屏模式 (.wide) - 覆盖上面的样式，恢复为固定侧边栏 */
+    .toc-container.wide {
+        transform: none !important; /* 取消位移 */
+        position: fixed !important; /* 保持固定 */
+        /* 位置由 JS 的 checkTocPosition 动态计算，或者依赖 PaperMod 原生布局 */
+        top: var(--header-height, 60px); 
+        left: calc((100vw - var(--main-width)) / 2 - var(--toc-width) - var(--gap));
+        height: auto;
+        bottom: auto;
+        background: none;
+        box-shadow: none;
+        padding: 0;
+        width: var(--toc-width);
+    }
+
+    /* 宽屏时隐藏悬浮按钮 */
+    .toc-container.wide + #toc-floating-btn {
+        display: none;
+    }
+    
+    /* 宽屏时隐藏遮罩 */
+    .toc-container.wide ~ #toc-overlay {
+        display: none !important;
+    }
+</style>
+
+{{- /* --- HTML 结构部分 --- */ -}}
+
+<div id="toc-overlay" onclick="toggleTocMobile()"></div>
+
+<aside id="toc-container" class="toc-container">
     <div class="toc">
-         {{- /* 右侧文章内搜索栏 */ -}}
-         {{- partial "content_search.html" . -}}
         <details {{if (.Param "TocOpen") }} open{{ end }}>
             <summary accesskey="c" title="(Alt + C)">
-                <span class="details">{{- i18n "toc" | default "Table of Contents" }}</span>
+                <span class="details">{{- i18n "toc" | default "目录" }}</span>
             </summary>
 
             <div class="inner">
+                {{- /* 目录生成逻辑开始 (保持原样) */ -}}
                 {{- $largest := 6 -}}
                 {{- range $headers -}}
                 {{- $headerLevel := index (findRE "[1-6]" . 1) 0 -}}
@@ -19,9 +117,7 @@
                 {{- $largest = $headerLevel -}}
                 {{- end -}}
                 {{- end -}}
-
                 {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}}
-
                 {{- $.Scratch.Set "bareul" slice -}}
                 <ul>
                     {{- range seq (sub $firstHeaderLevel $largest) -}}
@@ -31,21 +127,15 @@
                         {{- range $i, $header := $headers -}}
                         {{- $headerLevel := index (findRE "[1-6]" . 1) 0 -}}
                         {{- $headerLevel := len (seq $headerLevel) -}}
-
-                        {{/* get id="xyz" */}}
                         {{- $id := index (findRE "(id=\"(.*?)\")" $header 9) 0 }}
-
-                        {{- /* strip id="" to leave xyz, no way to get regex capturing groups in hugo */ -}}
                         {{- $cleanedID := replace (replace $id "id=\"" "") "\"" "" }}
                         {{- $header := replaceRE "<h[1-6].*?>((.|\n])+?)</h[1-6]>" "$1" $header -}}
-
                         {{- if ne $i 0 -}}
                         {{- $prevHeaderLevel := index (findRE "[1-6]" (index $headers (sub $i 1)) 1) 0 -}}
                         {{- $prevHeaderLevel := len (seq $prevHeaderLevel) -}}
                         {{- if gt $headerLevel $prevHeaderLevel -}}
                         {{- range seq $prevHeaderLevel (sub $headerLevel 1) -}}
                         <ul>
-                            {{/* the first should not be recorded */}}
                             {{- if ne $prevHeaderLevel . -}}
                             {{- $.Scratch.Add "bareul" . -}}
                             {{- end -}}
@@ -56,7 +146,6 @@
                             {{- range seq (sub $prevHeaderLevel 1) -1 $headerLevel -}}
                             {{- if in ($.Scratch.Get "bareul") . -}}
                         </ul>
-                        {{/* manually do pop item */}}
                         {{- $tmp := $.Scratch.Get "bareul" -}}
                         {{- $.Scratch.Delete "bareul" -}}
                         {{- $.Scratch.Set "bareul" slice}}
@@ -77,7 +166,6 @@
                         <a href="#{{- $cleanedID -}}" aria-label="{{- $header | plainify -}}">{{- $header | safeHTML -}}</a>
                         {{- end -}}
                         {{- end -}}
-                        <!-- {{- $firstHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers 0) 1) 0)) -}} -->
                         {{- $firstHeaderLevel := $largest }}
                         {{- $lastHeaderLevel := len (seq (index (findRE "[1-6]" (index $headers (sub (len $headers) 1)) 1) 0)) }}
                     </li>
@@ -90,18 +178,49 @@
                 {{- end -}}
                 {{- end }}
                 </ul>
+                {{- /* 目录生成逻辑结束 */ -}}
             </div>
         </details>
-        {{- /* 插入报错按钮开始 */ -}}
-        <hr style="margin: 1rem 0; opacity: 0.2;"> <div style="text-align: center; margin-bottom: 10px;">
-            <a href="/guestbook/" target="_blank" rel="noopener noreferrer" style="font-size: 14px; text-decoration: none; color: var(--secondary);">
-                内容有误？点这里反馈!
+
+        {{- /* --- 整合进来的报错按钮 (现在直接包含在 toc.html 里) --- */ -}}
+        <hr style="margin: 1rem 0; opacity: 0.2;">
+        <div style="text-align: center; margin-bottom: 20px;">
+            <a href="/guestbook/?from={{ .Permalink }}" target="_blank" rel="noopener noreferrer" style="font-size: 14px; text-decoration: none; color: var(--secondary); display: block; padding: 5px;">
+                内容有误？点这里
             </a>
         </div>
-        {{- /* 插入报错按钮结束 */ -}}
     </div>
 </aside>
+
+<button id="toc-floating-btn" onclick="toggleTocMobile()" title="打开目录">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
+
+{{- /* --- JavaScript 逻辑部分 --- */ -}}
 <script>
+    // 切换移动端目录显示
+    function toggleTocMobile() {
+        const toc = document.getElementById('toc-container');
+        const overlay = document.getElementById('toc-overlay');
+        toc.classList.toggle('open');
+        overlay.classList.toggle('show');
+    }
+
+    // 点击目录链接后自动收起 (提升移动端体验)
+    document.querySelectorAll('.toc a').forEach(anchor => {
+        anchor.addEventListener('click', function() {
+            // 只有在没宽屏class的时候才收起
+            if (!document.getElementById('toc-container').classList.contains('wide')) {
+                toggleTocMobile();
+            }
+        });
+    });
+
+    // 原有的高亮和位置检测逻辑
     let activeElement;
     let elements;
     
@@ -110,22 +229,9 @@
     
         elements = document.querySelectorAll('h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]');
         if (elements.length > 0) {
-            // Make the first header active
             activeElement = elements[0];
             const id = encodeURI(activeElement.getAttribute('id')).toLowerCase();
             document.querySelector(`.inner ul li a[href="#${id}"]`).classList.add('active');
-        }
-    
-        // Add event listener for the "back to top" link
-        const topLink = document.getElementById('top-link');
-        if (topLink) {
-            topLink.addEventListener('click', (event) => {
-                // Prevent the default action
-                event.preventDefault();
-    
-                // Smooth scroll to the top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
         }
     }, false);
     
@@ -134,17 +240,10 @@
     }, false);
     
     window.addEventListener('scroll', () => {
-        // Get the current scroll position
         const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+        if (scrollPosition === 0) return;
     
-        // Check if the scroll position is at the top of the page
-        if (scrollPosition === 0) {
-            return;
-        }
-    
-        // Ensure elements is a valid NodeList
         if (elements && elements.length > 0) {
-            // Check if there is an object in the top half of the screen or keep the last item active
             activeElement = Array.from(elements).find((element) => {
                 if ((getOffsetTop(element) - scrollPosition) > 0 && 
                     (getOffsetTop(element) - scrollPosition) < window.innerHeight / 2) {
@@ -157,16 +256,15 @@
                 const tocLink = document.querySelector(`.inner ul li a[href="#${id}"]`);
                 if (element === activeElement){
                     tocLink.classList.add('active');
-    
-                    // Ensure the active element is in view within the .inner container
+                    // 自动滚动目录
                     const tocContainer = document.querySelector('.toc .inner');
-                    const linkOffsetTop = tocLink.offsetTop;
-                    const containerHeight = tocContainer.clientHeight;
-                    const linkHeight = tocLink.clientHeight;
-    
-                    // Calculate the scroll position to center the active link
-                    const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
-                    tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                    if(tocContainer) { // 增加判空防止报错
+                        const linkOffsetTop = tocLink.offsetTop;
+                        const containerHeight = tocContainer.clientHeight;
+                        const linkHeight = tocLink.clientHeight;
+                        const scrollPosition = linkOffsetTop - (containerHeight / 2) + (linkHeight / 2);
+                        tocContainer.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+                    }
                 } else {
                     tocLink.classList.remove('active');
                 }
@@ -174,17 +272,25 @@
         }
     }, false);
     
+    // 获取CSS变量
     const main = parseInt(getComputedStyle(document.body).getPropertyValue('--article-width'), 10);
     const toc = parseInt(getComputedStyle(document.body).getPropertyValue('--toc-width'), 10);
     const gap = parseInt(getComputedStyle(document.body).getPropertyValue('--gap'), 10);
     
+    // 核心位置检测逻辑
     function checkTocPosition() {
         const width = document.body.scrollWidth;
-    
+        const tocContainer = document.getElementById("toc-container");
+
+        // 逻辑：如果 屏幕宽度 - 文章宽 - (2个目录宽) - (4个间隙) > 0
+        // 说明空间足够大，添加 wide 类 -> 变成固定侧边栏
         if (width - main - (toc * 2) - (gap * 4) > 0) {
-            document.getElementById("toc-container").classList.add("wide");
+            tocContainer.classList.add("wide");
+            // 宽屏时强制移除 open 状态，防止切回窄屏时错乱
+            tocContainer.classList.remove("open"); 
+            document.getElementById('toc-overlay').classList.remove('show');
         } else {
-            document.getElementById("toc-container").classList.remove("wide");
+            tocContainer.classList.remove("wide");
         }
     }
     
@@ -196,7 +302,5 @@
         let win = element.ownerDocument.defaultView;
         return rect.top + win.pageYOffset;   
     }
-    
 </script>
-
 {{- end }}
