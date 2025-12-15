@@ -64,7 +64,6 @@ params:
     imageUrl: "/images/avatar.jpg"
     imageWidth: 150
     imageHeight: 150
-    imageTitle: "在无限的爱与光明里重逢"
     buttons:
       - name: "博客搭建"
         url: "/blog-setup/"
