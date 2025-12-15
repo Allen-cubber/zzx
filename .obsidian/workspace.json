@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/guestbook.md",
+                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "guestbook"
+              "title": "index"
             }
           }
         ]
@@ -172,6 +172,9 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
+    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
+    "content/guestbook.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202722.png",
     "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202903.png",
@@ -214,8 +217,6 @@
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
     "content/notes/信息论与编码/8.循环码/index.md",
-    "content/notes/数字系统设计/2.第三章语法基础/index.md",
-    "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
-    "content/notes/数字系统设计/7.第八章综合/index.md"
+    "content/notes/数字系统设计/2.第三章语法基础/index.md"
   ]
 }

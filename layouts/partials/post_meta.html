@@ -1,11 +1,13 @@
 {{- $scratch := newScratch }}
 
 {{- if not .Date.IsZero -}}
-{{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format (default "January 2, 2006" site.Params.DateFormat)))) }}
+{{- /* 修改1：将日期格式改为 2006-01-02 (即 YYYY-MM-DD) */ -}}
+{{- $scratch.Add "meta" (slice (printf "<span title='%s'>%s</span>" (.Date) (.Date | time.Format "2006-01-02"))) }}
 {{- end }}
 
 {{- if (.Param "ShowReadingTime") -}}
-{{- $scratch.Add "meta" (slice (i18n "read_time" .ReadingTime | default (printf "%d min" .ReadingTime))) }}
+{{- /* 修改2：直接设定中文格式为 "预计阅读 X 分钟" */ -}}
+{{- $scratch.Add "meta" (slice (printf "预计阅读 %d 分钟" .ReadingTime)) }}
 {{- end }}
 
 {{- if (.Param "ShowWordCount") -}}
