@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/5.第六章状态机/index.md",
+                "file": "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/guestbook.md",
+                "file": "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "guestbook 的大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -172,24 +172,29 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pastedimage20251216224331.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224457.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224442.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224431.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224417.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224404.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224346.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224331.png",
+    "Pasted image 20251216224733.png",
+    "Pasted image 20251216224717.png",
+    "Pasted image 20251216224705.png",
+    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
+    "content/notes/数字系统设计/5.第六章状态机/index.md",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "content/guestbook.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202722.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202903.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202710.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201812.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202226.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207202140.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201848.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207201835.png",
-    "public/notes/数字通信原理/7.第九章同步技术/Pastedimage20251207195512.png",
     "public/notes/数字通信原理/7.第九章同步技术/index.html",
     "public/notes/数字通信原理/7.第九章同步技术",
-    "public/notes/数字通信原理/6.第七章传输信道/Pastedimage20251205143555.png",
     "public/notes/数字通信原理/6.第七章传输信道/index.html",
     "public/notes/数字通信原理/6.第七章传输信道",
     "public/notes/信息论与编码/复习重点/index.html",
@@ -202,7 +207,6 @@
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字通信原理/8.第十章扩频技术",
     "static/images/lulu.ico",
-    "static/favicon.ico",
     "content/notes/信息论与编码/2022A.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/复习重点/index.md",
@@ -213,10 +217,6 @@
     "content/notes/数字信号处理/实验二/index.md",
     "content/notes/数字信号处理/实验一/index.md",
     "content/notes/信息论与编码/2.连续信源/index.md",
-    "content/notes/信息论与编码/1.信息论基础/index.md",
-    "content/notes/数字通信原理/实验二基带编码实验/index.md",
-    "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
-    "content/notes/信息论与编码/3.信源编码的基本方法/index.md",
-    "content/notes/信息论与编码/8.循环码/index.md"
+    "content/notes/信息论与编码/1.信息论基础/index.md"
   ]
 }
