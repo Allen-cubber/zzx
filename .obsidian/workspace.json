@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
+                "file": "content/musings/微信聊天记录生成器/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -170,20 +170,22 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "682728a7cbdf0d94",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/musings/微信聊天记录生成器/Pastedimage20251216230816.png",
+    "Pastedimage20251216230816.png",
+    "Pasted image 20251216230816.png",
+    "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
+    "content/musings/微信聊天记录生成器/index.md",
+    "content/musings/微信聊天记录生成器",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pastedimage20251216224331.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224457.png",
-    "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224442.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224431.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224417.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224404.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224346.png",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/Pasted image 20251216224331.png",
-    "Pasted image 20251216224733.png",
-    "Pasted image 20251216224717.png",
-    "Pasted image 20251216224705.png",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字系统设计/5.第六章状态机/index.md",
     "content/notes/数字通信原理/实验三数字载波调制传输系统",
@@ -206,7 +208,6 @@
     "content/notes/数字通信原理/8.第十章扩频技术/index.md",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字通信原理/8.第十章扩频技术",
-    "static/images/lulu.ico",
     "content/notes/信息论与编码/2022A.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/复习重点/index.md",
@@ -216,7 +217,6 @@
     "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字信号处理/实验二/index.md",
     "content/notes/数字信号处理/实验一/index.md",
-    "content/notes/信息论与编码/2.连续信源/index.md",
-    "content/notes/信息论与编码/1.信息论基础/index.md"
+    "content/notes/信息论与编码/2.连续信源/index.md"
   ]
 }
