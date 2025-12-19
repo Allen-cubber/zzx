@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/8.第十章扩频技术/index.md",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,6 +171,9 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
+    "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
+    "content/notes/数字通信原理/8.第十章扩频技术/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/musings/微信聊天记录生成器/index.md",
@@ -205,7 +207,6 @@
     "public/images/lulu.ico",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/复习重点/index.md",
-    "content/notes/数字通信原理/8.第十章扩频技术/index.md",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
     "content/notes/数字通信原理/8.第十章扩频技术",
     "content/notes/信息论与编码/2022A.md",
@@ -215,7 +216,6 @@
     "content/notes/信息论与编码/9.卷积码/index.md",
     "content/notes/数字信号处理/实验三/index.md",
     "content/notes/数字信号处理/实验二/index.md",
-    "content/notes/数字信号处理/实验一/index.md",
-    "content/notes/信息论与编码/2.连续信源/index.md"
+    "content/notes/数字信号处理/实验一/index.md"
   ]
 }
