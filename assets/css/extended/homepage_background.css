@@ -1,0 +1,81 @@
+/* 首页背景图片样式 */
+.home .main {
+    position: relative;
+}
+
+/* 首页导航栏固定为白色 */
+.home nav {
+    color: white !important;
+}
+
+.home .nav a {
+    color: white !important;
+}
+
+.home .logo a {
+    color: white !important;
+}
+
+.home .logo-switches button {
+    color: white !important;
+}
+
+.home .logo-switches button svg {
+    color: white !important;
+}
+
+.home #menu a {
+    color: white !important;
+}
+
+.home .main::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('/images/homepage-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    z-index: -1;
+}
+
+/* 基础profile样式 - 确保白天和夜间模式大小一致 */
+.profile {
+    margin: 0.5rem auto; /* 减小上下外边距 */
+    max-width: 800px;
+    text-align: center; /* 居中文字 */
+}
+
+/* 白天模式 - 与夜间模式保持一致 */
+.home:not(.dark) .profile {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0.5rem 2rem;
+    width: fit-content;
+}
+
+/* 夜间模式 - 去掉白色矩形块 */
+.home.dark .profile {
+    background-color: transparent;
+    box-shadow: none;
+    padding: 0.5rem 2rem; /* 与白天模式相同的内边距 */
+    width: fit-content; /* 与白天模式相同的宽度设置 */
+}
+
+/* 标题和副标题的样式 - 白天模式 */
+.home:not(.dark) .profile h1,
+.home:not(.dark) .profile span {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* 标题和副标题的样式 - 夜间模式 */
+.home.dark .profile h1,
+.home.dark .profile span {
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+}

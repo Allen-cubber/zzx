@@ -1,0 +1,54 @@
+/* 文章标签样式 */
+
+/* 新位置的标签容器 */
+.post-tags-container {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+/* 标签列表样式 */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* 单个标签样式 */
+.post-tags li {
+    margin: 0;
+}
+
+.post-tags a {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    background-color: var(--code-bg);
+    color: var(--secondary);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+    border: 1px solid var(--border);
+}
+
+/* 标签悬停效果 */
+.post-tags a:hover {
+    background-color: var(--entry);
+    color: var(--primary);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .post-tags {
+        gap: 0.35rem;
+    }
+    
+    .post-tags a {
+        padding: 0.2rem 0.6rem;
+        font-size: 0.8rem;
+    }
+}
