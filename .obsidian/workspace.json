@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/11.FFT/index.md",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/11.FFT/index.md",
+                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,7 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/11.FFT/index.md",
     "content/notes/数字信号处理/11.FFT/Pastedimage20251219194439.png",
     "content/notes/数字信号处理/11.FFT/Pastedimage20251219194246.png",
     "content/notes/数字信号处理/11.FFT/Pastedimage20251219193904.png",
@@ -181,9 +182,7 @@
     "content/notes/数字信号处理/11.FFT/Gemini_Generated_Image_nhyplqnhyplqnhyp 1.png",
     "content/notes/数字信号处理/11.FFT/Gemini_Generated_Image_gp8nsvgp8nsvgp8n.png",
     "Gemini_Generated_Image_gp8nsvgp8nsvgp8n.png",
-    "Gemini_Generated_Image_nhyplqnhyplqnhyp 1.png",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
-    "content/notes/数字信号处理/11.FFT/index.md",
     "content/notes/数字信号处理/11.FFT",
     "content/notes/信号与系统/index.md",
     "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
