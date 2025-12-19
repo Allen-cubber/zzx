@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
+                "file": "content/notes/数字信号处理/11.FFT/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
+                "file": "content/notes/数字信号处理/11.FFT/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,11 @@
   },
   "active": "682728a7cbdf0d94",
   "lastOpenFiles": [
+    "content/notes/数字信号处理/5.有限长离散变换/index.md",
+    "content/notes/数字信号处理/11.FFT/index.md",
+    "content/notes/数字信号处理/11.FFT",
+    "content/notes/信号与系统/index.md",
+    "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
     "content/notes/数字通信原理/8.第十章扩频技术/index.md",
@@ -208,14 +213,9 @@
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/复习重点/index.md",
     "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
-    "content/notes/数字通信原理/8.第十章扩频技术",
     "content/notes/信息论与编码/2022A.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/复习重点/index.md",
-    "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md",
-    "content/notes/信息论与编码/9.卷积码/index.md",
-    "content/notes/数字信号处理/实验三/index.md",
-    "content/notes/数字信号处理/实验二/index.md",
-    "content/notes/数字信号处理/实验一/index.md"
+    "content/notes/信息论与编码/7.线性分组码及其基本性质/index.md"
   ]
 }

@@ -241,10 +241,10 @@ math: true
 #### (一) 离散时间 (DT)
 
 1.  **<font color="orange">单位脉冲序列</font> (Unit Impulse Sequence)** $\delta[n]$
-    *   定义: $\boxed{\delta[n] = \begin{cases} 1, & n=0 \\ 0, & n \neq 0 \end{cases}}$
+    *   定义: $\boxed{\delta[n] = \begin{cases} 1, & n=0 \\\\ 0, & n \neq 0 \end{cases}}$
     *   图像: 在 $n=0$ 处值为1，其余点为0。
 2.  **<font color="orange">单位阶跃序列</font> (Unit Step Sequence)** $u[n]$
-    *   定义: $\boxed{u[n] = \begin{cases} 1, & n \ge 0 \\ 0, & n < 0 \end{cases}}$
+    *   定义: $\boxed{u[n] = \begin{cases} 1, & n \ge 0 \\\\ 0, & n < 0 \end{cases}}$
     *   图像: $n<0$ 时为0，$n \ge 0$ 时为1。
 3.  **关系**
     *   单位脉冲是单位阶跃的<font color="orange">一次差分</font>: $\boxed{\delta[n] = u[n] - u[n-1]}$
@@ -256,7 +256,7 @@ math: true
 #### (二) 连续时间 (CT)
 
 1.  **<font color="orange">单位阶跃函数</font> (Unit Step Function)** $u(t)$
-    *   定义: $\boxed{u(t) = \begin{cases} 1, & t > 0 \\ 0, & t < 0 \end{cases}}$
+    *   定义: $\boxed{u(t) = \begin{cases} 1, & t > 0 \\\\ 0, & t < 0 \end{cases}}$
     *   $t=0$ 处的值通常不关心，或定义为 0.5。
 2.  **<font color="orange">单位冲激函数</font> (Unit Impulse Function)** $\delta(t)$ (也称狄拉克函数)
     *   定义 (基于阶跃): $\boxed{\delta(t) = \frac{du(t)}{dt}}$
@@ -832,7 +832,7 @@ math: true
 3.  **<font color="orange">差分</font>**: $x[n]-x[n-n_0] \stackrel{DFS}{\longleftrightarrow} (1-e^{-j k(2\pi/N)n_0})a_k$
 4.  **<font color="orange">时域内插</font>**: 若 $x_m[n] = x[n/m]$ (n=rm) 且 $x_m[n]=0$ (n≠rm)，周期为 $mN$。则 $x_m[n] \stackrel{DFS}{\longleftrightarrow} h_k = \frac{1}{m} a_k$ (频谱被 "稀释" m 倍)。
 5.  **<font color="orange">Parseval 定理</font>**:
-    $$\\boxed{\\frac{1}{N} \\sum\_{n=\<N\>} |x[n]|^2 = \\sum\_{k=\<N\>} |a\_k|^2}$$
+    $$\\\\boxed{\\\\frac{1}{N} \\\\sum\_{n=\<N\>} |x[n]|^2 = \\\\sum\_{k=\<N\>} |a\_k|^2}$$
     周期序列的<font color="orange">平均功率</font>等于其所有<font color="orange">谐波分量</font>的<font color="orange">总功率</font>。
 
 ### 3.8 傅里叶级数与LTI系统 ➡️🎶
@@ -950,8 +950,8 @@ math: true
 | :----------------- | :--------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------- |
 | 狄拉克$\delta$函数      | $\delta(t)$                                                                  | $1$                                                                                        |
 | 直流信号 (常数)          | $1$                                                                          | $2\pi \delta(\omega)$                                                                      |
-| 单位阶跃函数             | $u(t) = \begin{cases} 1 & t > 0 \\ 0 & t < 0 \end{cases}$                    | $\pi \delta(\omega) + \frac{1}{j\omega}$                                                   |
-| 符号函数               | $\text{sgn}(t) = \begin{cases} 1 & t > 0 \\ -1 & t < 0 \end{cases}$          | $\frac{2}{j\omega}$                                                                        |
+| 单位阶跃函数             | $u(t) = \begin{cases} 1 & t > 0 \\\\ 0 & t < 0 \end{cases}$                    | $\pi \delta(\omega) + \frac{1}{j\omega}$                                                   |
+| 符号函数               | $\text{sgn}(t) = \begin{cases} 1 & t > 0 \\\\ -1 & t < 0 \end{cases}$          | $\frac{2}{j\omega}$                                                                        |
 | 单边指数衰减             | $e^{-at}u(t), \quad a > 0$                                                   | $\frac{1}{a+j\omega}$                                                                      |
 | 双边指数衰减             | $e^{-a\|t\|}$                                                                | $\frac{2a}{a^2+\omega^2}$                                                                  |
 | 复指数信号              | $e^{j\omega_0 t}$                                                            | $2\pi \delta(\omega - \omega_0)$                                                           |
@@ -961,8 +961,8 @@ math: true
 | 周期冲击串 (Dirac Comb) | $\sum_{n=-\infty}^{\infty} \delta(t - nT)$                                   | $\frac{2\pi}{T} \sum_{k=-\infty}^{\infty} \delta\left(\omega - k \frac{2\pi}{T}\right)$    |
 |                    | ${te^{-at}u(t)},Re(a)>0$                                                     | ${\frac{1}{(a+j\omega)^2}}$                                                                |
 |                    | ${\frac{t^{n-1}}{(n-1)!}e^{-at}u(t),Re(a)>0}$                                | ${\frac{1}{(a+j\omega)^{n}}}$                                                              |
-| 低通滤波器              | ${\frac{sin(Wt)}{\pi t}}$                                                    | $\text{X}(j\omega) = \begin{cases} 1 & \|{\omega}\| < W \\ 0 & \|\omega\| > W \end{cases}$ |
-| 冲击门函数              | $\text{x}(t) = \begin{cases} 1 & \|t\| < T_1 \\ 0 & \|t\| > T_1 \end{cases}$ | $\frac{2sin(\omega T_1)}{\omega}$                                                          |
+| 低通滤波器              | ${\frac{sin(Wt)}{\pi t}}$                                                    | $\text{X}(j\omega) = \begin{cases} 1 & \|{\omega}\| < W \\\\ 0 & \|\omega\| > W \end{cases}$ |
+| 冲击门函数              | $\text{x}(t) = \begin{cases} 1 & \|t\| < T_1 \\\\ 0 & \|t\| > T_1 \end{cases}$ | $\frac{2sin(\omega T_1)}{\omega}$                                                          |
 | 减幅正弦               | $e^{-at}sin(\omega_0t)u(t)$                                                  | ${\frac{\omega_0}{(a+j\omega)^2+\omega_0^2}}$                                              |
 
 #### Proof: DC Signal (Constant) ➖ $\longleftrightarrow$ Dirac Delta Function
@@ -1199,7 +1199,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
      $X(e^{j\omega}) = \sum_{n=-\infty}^{-1} a^{-n} e^{-j\omega n} + \sum_{n=0}^{\infty} a^{n} e^{-j\omega n} = \dots = \frac{1-a^2}{1-2a\cos\omega+a^2}$
     *   特性: $x[n]$ 是<font color="orange">实偶序列</font> $\implies X(e^{j\omega})$ 是<font color="orange">实偶函数</font> (且为正)。
 
-3.  **矩形脉冲序列**: $x[n] = \begin{cases} 1, & |n| \le N_1 \\ 0, & |n| > N_1 \end{cases}$
+3.  **矩形脉冲序列**: $x[n] = \begin{cases} 1, & |n| \le N_1 \\\\ 0, & |n| > N_1 \end{cases}$
     $X(e^{j\omega}) = \sum_{n=-N_1}^{N_1} e^{-j\omega n} = \frac{\sin(\omega(N_1 + 1/2))}{\sin(\omega/2)}$
     (这是一个周期性的 Sinc 类函数，通常称为 Dirichlet 函数)
     *   特性: $x[n]$ 是<font color="orange">实偶序列</font> $\implies X(e^{j\omega})$ 是<font color="orange">实偶函数</font>。
@@ -1215,7 +1215,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 符号表示: $x[n] \leftrightarrow X(e^{j\omega})$
 
 1.  **单位冲激序列**
-    *   时域: $x[n] = \delta[n] = \begin{cases} 1 & n=0 \\ 0 & n \ne 0 \end{cases}$
+    *   时域: $x[n] = \delta[n] = \begin{cases} 1 & n=0 \\\\ 0 & n \ne 0 \end{cases}$
     *   频域: $X(e^{j\omega}) = 1$
 
 2.  **直流信号 (常数)**
@@ -1223,7 +1223,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     *   频域: $X(e^{j\omega}) = 2\pi \sum_{k=-\infty}^{\infty} \delta(\omega - 2\pi k)$
 
 3.  **单位阶跃序列**
-    *   时域: $x[n] = u[n] = \begin{cases} 1 & n \ge 0 \\ 0 & n < 0 \end{cases}$
+    *   时域: $x[n] = u[n] = \begin{cases} 1 & n \ge 0 \\\\ 0 & n < 0 \end{cases}$
     *   频域: $X(e^{j\omega}) = \frac{1}{1 - e^{-j\omega}} + \pi \sum_{k=-\infty}^{\infty} \delta(\omega - 2\pi k)$
 
 4.  **符号序列**
@@ -1264,10 +1264,10 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 13. **理想低通滤波器冲击响应**
     *   时域: $x[n] = \frac{\sin(Wn)}{\pi n}, \quad 0 < W \le \pi$
-    *   频域: $X(e^{j\omega}) = \begin{cases} 1 & |\omega| \le W \\ 0 & W < |\omega| \le \pi \end{cases}$ (并以 $2\pi$ 为周期延拓)
+    *   频域: $X(e^{j\omega}) = \begin{cases} 1 & |\omega| \le W \\\\ 0 & W < |\omega| \le \pi \end{cases}$ (并以 $2\pi$ 为周期延拓)
 
 14. **矩形脉冲序列**
-    *   时域: $x[n] = \text{rect}_M[n] = \begin{cases} 1 & |n| \le M \\ 0 & |n| > M \end{cases}$ (总长度 $2M+1$)
+    *   时域: $x[n] = \text{rect}_M[n] = \begin{cases} 1 & |n| \le M \\\\ 0 & |n| > M \end{cases}$ (总长度 $2M+1$)
     *   频域: $X(e^{j\omega}) = \sum_{n=-M}^{M} e^{-j\omega n} = \frac{\sin(\omega(M+1/2))}{\sin(\omega/2)}$ (Dirichlet 核)
 
 15. **衰减正弦序列**
@@ -1332,7 +1332,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     *   一阶差分: $x[n] - x[n-1] \leftrightarrow (1-e^{-j\omega})X(e^{j\omega})$
     *   累加求和: $\sum_{k=-\infty}^{n} x[k] \leftrightarrow \frac{1}{1-e^{-j\omega}}X(e^{j\omega}) + \pi X(e^{j0}) \sum_{k=-\infty}^{\infty} \delta(\omega-2\pi k)$
     *   **注意点 ⚠️**: DTFT 中的 $(1-e^{-j\omega})$ 对应 CTFT 中的 $j\omega$ (微分)。$1/(1-e^{-j\omega})$ 对应 $1/(j\omega)$ (积分)。
-*   **时域内插 (扩展)**: $x_k[n] = \begin{cases} x[n/k], & n = mk \\ 0, & \text{otherwise} \end{cases} \leftrightarrow X(e^{jk\omega})$ (频谱被压缩 $k$ 倍，并在 $2\pi$ 内出现 $k$ 个周期)
+*   **时域内插 (扩展)**: $x_k[n] = \begin{cases} x[n/k], & n = mk \\\\ 0, & \text{otherwise} \end{cases} \leftrightarrow X(e^{jk\omega})$ (频谱被压缩 $k$ 倍，并在 $2\pi$ 内出现 $k$ 个周期)
 *   **频域微分**: $nx[n] \leftrightarrow j \frac{dX(e^{j\omega})}{d\omega}$
 *   **Parseval 定理 (能量守恒)** ⚡:
     $\sum_{n=-\infty}^{\infty} |x[n]|^2 = \frac{1}{2\pi} \int_{2\pi} |X(e^{j\omega})|^2 d\omega$
@@ -1627,7 +1627,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 *   **理想低通滤波器的时域特性**：
     *   连续时间理想低通滤波器：
-        *   频率响应：$\boxed{H(j\omega) = \begin{cases} 1, & |\omega| < \omega_c \\ 0, & |\omega| > \omega_c \end{cases}}$
+        *   频率响应：$\boxed{H(j\omega) = \begin{cases} 1, & |\omega| < \omega_c \\\\ 0, & |\omega| > \omega_c \end{cases}}$
         *   冲激响应：$\boxed{h(t) = \frac{\omega_c}{\pi} Sa(\omega_c t)}$ （萨姆函数，非因果）
         *   单位阶跃响应：$\boxed{s(t) = h(t) * u(t) = \frac{1}{2} + \frac{1}{\pi} Si(\omega_c t)}$ （涉及<font color="orange">正弦积分 Si(x)</font>）
     *   离散时间理想低通滤波器：
@@ -1859,7 +1859,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
         $\boxed{H_0(j\omega) = \frac{1-e^{-j\omega T}}{j\omega} = T \frac{\sin(\omega T/2)}{\omega T/2} e^{-j\omega T/2} = T \text{Sa}(\frac{\omega T}{2}) e^{-j\omega T/2}}$
     *   $X_0(j\omega) = [\frac{1}{T}\sum X(j(\omega-k\omega_s))] \cdot [T \text{Sa}(\frac{\omega T}{2}) e^{-j\omega T/2}]$
     *   要从 $X_0(j\omega)$ 恢复 $X(j\omega)$，需要一个补偿滤波器 $H_r(j\omega)$，使得：
-        $H_0(j\omega) H_r(j\omega) = H_{ideal}(j\omega) = \begin{cases} T, & |\omega|<\omega_c \\ 0, & |\omega|>\omega_c \end{cases}$
+        $H_0(j\omega) H_r(j\omega) = H_{ideal}(j\omega) = \begin{cases} T, & |\omega|<\omega_c \\\\ 0, & |\omega|>\omega_c \end{cases}$
         $\implies H_r(j\omega) = \frac{H_{ideal}(j\omega)}{H_0(j\omega)} = \frac{H_{ideal}(j\omega)}{T \text{Sa}(\frac{\omega T}{2}) e^{-j\omega T/2}}$
     *   补偿滤波器需要具有 $\frac{1}{\text{Sa}(\omega T/2)}$ 的幅度特性（高频提升）和 $e^{j\omega T/2}$ 的相位特性（相位超前）。
 
@@ -1874,7 +1874,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 
 *   **滤波器**: <font color="orange">理想低通滤波器</font>。
 *   **内插函数**: $h_r(t) = T h_{LPF}(t)$，其中 $h_{LPF}(t)$ 是增益为 1 的理想低通滤波器的冲激响应。
-    *   $H_{LPF}(j\omega) = \begin{cases} 1, & |\omega|<\omega_c \\\\ 0, & |\omega|>\omega_c \end{cases}$
+    *   $H_{LPF}(j\omega) = \begin{cases} 1, & |\omega|<\omega_c \\\\\\\\ 0, & |\omega|>\omega_c \end{cases}$
     *   $h_{LPF}(t) = \frac{\sin(\omega_c t)}{\pi t}$
     *   **内插函数**: $h_r(t) = T \frac{\sin(\omega_c t)}{\pi t} = \frac{T \omega_c}{\pi} \text{Sa}(\omega_c t)$
 *   **重建公式 (Whittaker–Shannon interpolation formula)**:
@@ -1894,7 +1894,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
 #### 三、一阶保持内插 (线性内插) 📈📉
 
 *   **内插函数**: <font color="orange">三角形脉冲</font> $h_1(t)$ (幻灯片 28)。
-    $h_1(t) = \begin{cases} 1 - |t|/T, & |t| \le T \\\\ 0, & |t| > T \end{cases}$
+    $h_1(t) = \begin{cases} 1 - |t|/T, & |t| \le T \\\\\\\\ 0, & |t| > T \end{cases}$
 *   **重建信号**: 将相邻采样点用<font color="orange">直线</font>连接起来。
 *   **频域**: $H_1(j\omega) = T \text{Sa}^2(\frac{\omega T}{2})$。与 ZOH 相比，旁瓣衰减更快，高频抑制更好。
 *   **效果**: 比零阶保持更平滑 (幻灯片 29-30)，但仍是近似恢复。
@@ -1983,14 +1983,14 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
         $Y_c(j\omega) = [\frac{1}{T} X_c(j\omega) H_d(e^{j\omega T})] \cdot T \quad$ (在 $|\omega| < \pi/T$ 内)
         $Y_c(j\omega) = X_c(j\omega) H_d(e^{j\omega T})$
     *   因此，等效连续时间频率响应为：
-        $\boxed{H_c(j\omega) = \begin{cases} H_d(e^{j\omega T}), & |\omega| < \omega_s/2 \\\\ 0, & |\omega| > \omega_s/2 \end{cases}}$
+        $\boxed{H_c(j\omega) = \begin{cases} H_d(e^{j\omega T}), & |\omega| < \omega_s/2 \\\\\\\\ 0, & |\omega| > \omega_s/2 \end{cases}}$
 *   **重要条件**: 上述等效关系<font color="orange">仅在</font> C/D 转换时<font color="orange">没有发生频谱混叠</font> (即 $x_c(t)$ 带限且 $\omega_s > 2\omega_M$) 的情况下成立。
 *   **结论** (幻灯片 46-47):
     *   当满足采样定理时，用离散时间系统 $H_d$ 处理连续时间信号 $x_c$，等效于用一个频率响应为 $H_d(e^{j\omega T})$ (仅在 $|\omega|<\omega_s/2$ 区间内) 的<font color="orange">连续时间 LTI 系统</font> $H_c$ 来处理 $x_c$。
     *   等效系统的频率响应 $H_c(j\omega)$ 就是离散时间系统频率响应 $H_d(e^{j\Omega})$ 在一个周期 $(-\pi, \pi)$ 内的特性，只是频率轴进行了<font color="orange">尺度变换</font> ($\Omega = \omega T$)。
 *   **示例：数字微分器** (幻灯片 47-48):
     *   理想连续时间微分器: $H_c(j\omega) = j\omega$ (非带限)。
-    *   带限微分器: $H_c(j\omega) = \begin{cases} j\omega, & |\omega|<\omega_c \\ 0, & |\omega|>\omega_c \end{cases}$。
+    *   带限微分器: $H_c(j\omega) = \begin{cases} j\omega, & |\omega|<\omega_c \\\\ 0, & |\omega|>\omega_c \end{cases}$。
     *   对应的离散时间系统 (假设 $\omega_s=2\omega_c=\pi/T$):
         $H_d(e^{j\Omega}) = H_c(j\omega)|_{\omega=\Omega/T} = j\Omega/T$ for $|\Omega|<\pi$。
     *   这个离散系统可以通过设计 FIR 或 IIR 滤波器来实现。
@@ -2026,7 +2026,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
         **物理意义**: 时域抽取（压缩）对应频域<font color="orange">频谱展宽 (尺度扩展 N 倍)</font> 并进行周期延拓叠加。若 $x[n]$ 不满足 $\omega_M < \pi/N$，会发生<font color="orange">混叠</font>。
 *   **内插 (Interpolation)**: 与抽取相反，将序列点数增加。
     *   **升采样 (Upsampling)**: 在原始序列 $x[n]$ 的点之间插入 $L-1$ 个零点，得到 $x_u[n]$。
-        $x_u[n] = \begin{cases} x[n/L], & n=kL \\ 0, & \text{otherwise} \end{cases}$
+        $x_u[n] = \begin{cases} x[n/L], & n=kL \\\\ 0, & \text{otherwise} \end{cases}$
         频域关系: $X_u(e^{j\omega}) = X(e^{j\omega L})$ (频谱被<font color="orange">压缩 L 倍</font>)
     *   **内插**: 对升采样后的序列 $x_u[n]$ 进行<font color="orange">低通滤波</font>（截止频率 $\pi/L$），以去除压缩后产生的镜像频谱，得到内插后的信号 $x_i[n]$。
 
@@ -2058,7 +2058,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     *   **条件**: 为了避免时域发生<font color="orange">混叠</font>（即周期延拓不重叠），原始信号 $x(t)$ 必须是<font color="orange">时限信号</font>，设其持续时间为 $[-T_M, T_M]$。
     *   频域采样间隔 $\omega_0$ 必须满足 $\frac{2\pi}{\omega_0} \ge 2T_M$，即 $\boxed{\omega_0 \le \frac{\pi}{T_M}}$。
     *   **恢复方法**: 在时域将周期延拓的信号 $\tilde{x}_p(t)$ 通过一个<font color="orange">时间窗</font> (理想低通滤波器在时域的对应，即矩形窗) $w(t)$ 截取出原始信号 $x(t)$。
-        *   $w(t) = \begin{cases} \omega_0, & |t| < \pi/\omega_0 \\ 0, & |t| > \pi/\omega_0 \end{cases}$
+        *   $w(t) = \begin{cases} \omega_0, & |t| < \pi/\omega_0 \\\\ 0, & |t| > \pi/\omega_0 \end{cases}$
         *   $x(t) = \tilde{x}_p(t) w(t)$
     *   **频域恢复**: 对应的频域操作是，将频域采样后的冲激谱 $\tilde{X}_p(j\omega)$ 与<font color="orange">矩形窗的频谱</font> $W(j\omega)$ 进行卷积（scaled by $1/(2\pi)$）。
         *   $W(j\omega) = \omega_0 \frac{2\sin(\omega \pi/\omega_0)}{\omega} = 2\pi \text{Sa}(\frac{\omega\pi}{\omega_0}) = 2\pi \text{sinc}(\omega/\omega_0)$
@@ -2584,7 +2584,7 @@ $\boxed{ F(\omega) = \frac{\omega_0}{(a+j\omega)^2 + \omega_0^2} = \frac{\omega_
     2.  **时移**: $x[n-n_0] \leftrightarrow z^{-n_0}X(z)$，ROC: $R$ (可能增加或去除 $z=0$ 或 $z=\infty$)。
     3.  **Z 域尺度变换**: $z_0^n x[n] \leftrightarrow X(z/z_0)$，ROC: $|z_0|R$ (原 ROC 尺度伸缩 $|z_0|$ 倍)。
     4.  **时域反转**: $x[-n] \leftrightarrow X(1/z)$，ROC: $1/R$ (边界取倒数)。
-    5.  **时域内插 (扩展)**: $x_k[n] = \begin{cases} x[n/k], & n=mk \\ 0, & \text{else} \end{cases} \leftrightarrow X(z^k)$，ROC: $R^{1/k}$。
+    5.  **时域内插 (扩展)**: $x_k[n] = \begin{cases} x[n/k], & n=mk \\\\ 0, & \text{else} \end{cases} \leftrightarrow X(z^k)$，ROC: $R^{1/k}$。
     6.  **共轭对称性**:
         *   $x^*[n] \leftrightarrow X^*(z^*)$，ROC 不变。
         *   若 $x[n]$ 是实序列，则 $X(z) = X^*(z^*)$，零极点必<font color="orange">共轭成对</font>出现。
