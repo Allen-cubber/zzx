@@ -6,8 +6,6 @@ tags:
   - 数字信号处理
 summary: 在本讲中，我们将深入学习如何优化离散傅里叶变换（DFT）的计算效率，掌握快速傅里叶变换（FFT）的核心原理与实现。
 ---
-# 📝 数字信号处理笔记：第16讲 —— 快速DFT算法 (FFT)
-
 在本讲中，我们将深入学习如何优化离散傅里叶变换（DFT）的计算效率，掌握<font color="orange">快速傅里叶变换</font>（FFT）的核心原理与实现。
 
 ---
@@ -49,7 +47,7 @@ $$\boxed{ab + ac = a(b+c)}$$
 
 ---
 
-## 3. 基-2 FFT 算法分类 🧬
+## 3. FFT 算法分类 🧬
 
 根据分解方式的不同，最基本的 FFT 算法分为两种：
 1.  <font color="orange">按时间抽取</font>（DIT, Decimation in Time）
@@ -58,7 +56,7 @@ $$\boxed{ab + ac = a(b+c)}$$
 ---
 
 ## 4. 按时间抽取 FFT (DIT-FFT) ⏳
-
+![](Pastedimage20251219194439.png)
 ### 4.1 算法推导
 将 $N$ 点序列 $x[n]$ 按序号的**奇偶**分为两组：
 *   偶数点：$x_1[r] = x[2r]$
@@ -70,11 +68,13 @@ $$\boxed{X(k + N/2) = X_1[k] - W_N^k X_2[k]}$$
 （其中 $0 \leq k \leq N/2-1$）
 
 ### 4.2 <font color="orange">蝶形运算</font>单元
+![](Pastedimage20251219193904.png)
 这是 FFT 的最小计算单元。每进行一次蝶形运算，包含：
 *   $1$ 次复数乘法
 *   $2$ 次复数加法
 
 ### 4.3 运算流图特点（以 $N=8$ 为例）
+![](Gemini_Generated_Image_nhyplqnhyplqnhyp.png)
 *   **分解层数**：$L = \boxed{\log_2 N}$ 层（对于 $8$ 点，需分解 $3$ 层）。
 *   **每层蝶形数**：每层有 $N/2$ 个蝶形。
 *   **蝶形跨距**：随层数增加逐渐变大。
@@ -94,13 +94,14 @@ $$\boxed{X(k + N/2) = X_1[k] - W_N^k X_2[k]}$$
 ---
 
 ## 5. 按频率抽取 FFT (DIF-FFT) 📻
-
+![](Pastedimage20251219194246.png)
 ### 5.1 算法推导
 将输出序列 $X(k)$ 按**奇偶**划分。它将输入序列 $x[n]$ 分为前后两半：
 $$\boxed{X[2r] = \sum_{n=0}^{N/2-1} [x(n) + x(n+N/2)] W_{N/2}^{nr}}$$
 $$\boxed{X[2r+1] = \sum_{n=0}^{N/2-1} [x(n) - x(n+N/2)] W_N^n W_{N/2}^{nr}}$$
 
 ### 5.2 运算特点
+![](Gemini_Generated_Image_gp8nsvgp8nsvgp8n.png)
 *   **蝶形单元**：先做加减法，再做乘法（与 DIT 相反）。
 *   **跨距变化**：蝶形跨距随层数增加<font color="orange">逐渐变小</font>。
 *   **时序特点**：输入序列 $x[n]$ 为正常顺序，输出频谱 $X(k)$ 为<font color="orange">比特逆序</font>。
