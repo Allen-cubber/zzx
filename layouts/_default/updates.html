@@ -11,6 +11,7 @@
 {{ partial "view-switcher.html" . }}
 
 {{- $pages := where site.RegularPages "Type" "in" (site.Params.mainSections | default (slice "posts")) }}
+{{- $pages := where $pages "Section" "!=" "blog-setup" }}
 {{- $pages := $pages.ByLastmod.Reverse }}
 
 <div id="post-list" class="archive-cards view-grid">
