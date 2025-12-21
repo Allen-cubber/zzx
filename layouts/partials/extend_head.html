@@ -20,7 +20,7 @@
     }
 </style>
 
-{{- if and (.IsPage) (ne .Title "updates") (ne .Title "search") -}}
+{{- if and (.IsPage) (ne .Title "最近更新") (ne .Title "搜索") -}}
 <style>
     /* 注意：这里不需要改 :root 全局变量了，
        因为我们要避免污染其他页面。

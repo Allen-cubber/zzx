@@ -173,6 +173,7 @@
   "active": "c85445924e512b37",
   "lastOpenFiles": [
     "content/updates.md",
+    "content/search.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "public/assets/css/stylesheet.d810209ed88a4d4573b19f207b2b42cdfabea7233b6bf03e70e68dafa5ffb435.css",
     "public/assets/css/stylesheet.d4d75b2201e2799b894dfae17ffa070a1b1920998846633e24813db92e8740c3.css",
@@ -216,7 +217,6 @@
     "content/guestbook.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
-    "content/notes/信息论与编码/复习重点/index.md",
-    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md"
+    "content/notes/信息论与编码/复习重点/index.md"
   ]
 }
