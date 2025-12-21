@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md",
+                "file": "content/search.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "search"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md",
+                "file": "content/search.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "search 的大纲"
             }
           }
         ],
@@ -156,7 +156,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,6 +172,21 @@
   },
   "active": "c85445924e512b37",
   "lastOpenFiles": [
+    "content/updates.md",
+    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
+    "public/assets/css/stylesheet.d810209ed88a4d4573b19f207b2b42cdfabea7233b6bf03e70e68dafa5ffb435.css",
+    "public/assets/css/stylesheet.d4d75b2201e2799b894dfae17ffa070a1b1920998846633e24813db92e8740c3.css",
+    "public/assets/css/stylesheet.1892644ece62512a0f27c49a2d28d5bd44f0e22b1981dc96697173cb4038fce5.css",
+    "public/assets/css/stylesheet.912db1d92f4d01750d39fbd237eccd45878e4751f5d5608df298d53767d788c1.css",
+    "public/assets/css/stylesheet.ce3aa6a9a92b552e1dbce51bfe0106d6024cc1407452903453f66701991016bb.css",
+    "public/assets/css/stylesheet.d687f22b1af0e8e11dc52af4b1309bbf6e5457f370a4ae941e48e6ad06b9e3e2.css",
+    "public/assets/css/stylesheet.8e16156827217156f2d4c0c1984a2f3bec76e89af36c5e50206c9c915c30a412.css",
+    "public/assets/css/stylesheet.1d285f1f0b7df275ec6ca2b7f3385275e8a4ee6a3cbe312ccfd79818c77f7bf1.css",
+    "public/assets/css/stylesheet.b1579babe6825000a76379e9e70331f622c8a09c3ee8d01edc2939c705a6ce0c.css",
+    "public/notes/数字信号处理/未命名/index.html",
+    "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
+    "content/notes/数字通信原理/1.第一章绪论/index.md",
+    "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md",
     "content/notes/数字信号处理/未命名.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字信号处理/数字信号处理笔记合集/index.md",
@@ -186,7 +202,6 @@
     "content/notes/数字信号处理/11.FFT/Gemini_Generated_Image_gp8nsvgp8nsvgp8n.png",
     "Gemini_Generated_Image_gp8nsvgp8nsvgp8n.png",
     "content/notes/数字信号处理/5.有限长离散变换/index.md",
-    "content/notes/数字信号处理/11.FFT",
     "content/notes/信号与系统/index.md",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
     "content/notes/数字信号处理/4.离散时间系统的时域分析/index.md",
@@ -194,28 +209,14 @@
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/musings/微信聊天记录生成器/index.md",
     "content/notes/数字通信原理/实验三数字载波调制传输系统/index.md",
-    "content/musings/微信聊天记录生成器",
     "content/notes/数字通信原理/实验一 模拟信号的数字编码/index.md",
     "content/notes/数字系统设计/5.第六章状态机/index.md",
-    "content/notes/数字通信原理/实验三数字载波调制传输系统",
     "content/notes/数字信号处理/9.IIR数字滤波器设计/index.md",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
-    "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
-    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "content/guestbook.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
-    "public/notes/数字通信原理/7.第九章同步技术/index.html",
-    "public/notes/数字通信原理/7.第九章同步技术",
-    "public/notes/数字通信原理/6.第七章传输信道/index.html",
-    "public/notes/数字通信原理/6.第七章传输信道",
-    "public/notes/信息论与编码/复习重点/index.html",
-    "public/notes/信息论与编码/复习重点",
-    "public/images/lulu.ico",
     "content/notes/信息论与编码/5.信道编码的基本概念/index.md",
     "content/notes/信息论与编码/复习重点/index.md",
-    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md",
-    "content/notes/信息论与编码/2022A.md",
-    "content/notes/数字通信原理/系统框图/index.md",
-    "content/notes/数字通信原理/复习重点/index.md"
+    "content/notes/数字信号处理/7.LTI系统的变换域分析/index.md"
   ]
 }

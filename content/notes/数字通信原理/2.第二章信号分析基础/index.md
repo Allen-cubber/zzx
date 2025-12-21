@@ -33,11 +33,11 @@ tags:
 
 #### 1.1 确定信号 vs. 随机信号
 
-*   <font color="orange">**确定信号**</font> (Deterministic Signal) 🎯
+*   <font color="orange">**确定信号**</font>  🎯
     *   **定义**：指在任何时刻的取值都是确定的、可预知的信号。
     *   **例子**：用于系统测试的正弦波、方波等<font color="orange">测试信号</font>，以及通信同步用的<font color="orange">训练序列</font>。
 
-*   <font color="orange">**随机信号**</font> (Random Signal) 🎲
+*   <font color="orange">**随机信号**</font>  🎲
     *   **定义**：信号的取值具有不确定性，含有不可预知的成分。
     *   **例子**：
         1.  **承载信息的信号**：在数字通信中，虽然我们知道所有可能的符号（符号集），但无法预知下一个具体发送的是哪个符号。
@@ -46,16 +46,16 @@ tags:
 
 #### 1.2 周期信号 vs. 非周期信号
 
-*   <font color="orange">**周期信号**</font> (Periodic Signal) 🔁
+*   <font color="orange">**周期信号**</font>  🔁
     *   **定义**：信号$x(t)$满足 $x(t) = x(t + T₀)$，其中 $T₀$ 是满足此式的最小正周期。
-*   <font color="orange">**非周期信号**</font> (Aperiodic Signal) ➡️
+*   <font color="orange">**非周期信号**</font>  ➡️
     *   **定义**：不具有周期性的信号。
 
 #### 1.3 连续信号 vs. 离散信号
 
-*   <font color="orange">**连续信号**</font> (Continuous-time Signal) 📈
+*   <font color="orange">**连续信号**</font>  📈
     *   **定义**：在时间上是连续的信号，用 $x(t)$ 表示。
-*   <font color="orange">**离散信号**</font> (Discrete-time Signal) 📊
+*   <font color="orange">**离散信号**</font>  📊
     *   **定义**：仅在特定的离散时刻有定义的信号，用 $x[n]$ 表示。
 
 > 🤔 **思考一下**：一个连续的周期信号，经过采样后，得到的离散信号一定是周期的吗？
@@ -65,7 +65,7 @@ tags:
 
 这是一个非常重要的分类，它决定了我们分析信号时所使用的数学工具。
 
-*   <font color="orange">**能量信号**</font> (Energy Signal) ⚡
+*   <font color="orange">**能量信号**</font>  ⚡
     *   **定义**：信号的总能量 $E_x$ 是一个有限的非零值。
     *   **数学描述**：$0 < E_x < \infty$
     *   **能量计算公式**：
@@ -73,7 +73,7 @@ tags:
         \boxed{E_x = \lim_{T\to\infty} \int_{-T/2}^{T/2} x^2(t) dt = \int_{-\infty}^{\infty} x^2(t) dt}
         $$
 
-*   <font color="orange">**功率信号**</font> (Power Signal) 💪
+*   <font color="orange">**功率信号**</font>  💪
     *   **定义**：信号的平均功率 $P_x$ 是一个有限的非零值。
     *   **数学描述**：$0 < P_x < \infty$
     *   **功率计算公式**：
@@ -150,15 +150,15 @@ tags:
 
 ### 3. 相关函数与卷积 🤝
 
-#### 3.1 相关函数 (Correlation Function)
+#### 3.1 相关函数 
 
 相关运算用于衡量两个信号之间的相似程度，或者一个信号在不同时刻的相似度。在通信中，它常用于信号检测和识别。
 
-*   <font color="orange">**互相关函数**</font> (Cross-correlation)：衡量 $f₁(t)$ 和 $f₂(t)$ 的相似性。
+*   <font color="orange">**互相关函数**</font> ：衡量 $f₁(t)$ 和 $f₂(t)$ 的相似性。
     *   能量信号：$R_{12}(\tau) = \int_{-\infty}^{\infty} f_1^*(t) f_2(t+\tau) dt$
     *   功率信号：$R_{12}(\tau) = \lim_{T\to\infty} \frac{1}{T} \int_{-T/2}^{T/2} f_1^*(t) f_2(t+\tau) dt$
 
-*   <font color="orange">**自相关函数**</font> (Autocorrelation)：$f₁(t) = f₂(t) = f(t)$，衡量信号自身在不同时刻的相似性。
+*   <font color="orange">**自相关函数**</font> ：$f₁(t) = f₂(t) = f(t)$，衡量信号自身在不同时刻的相似性。
 
 *   **重要性质**:
     *   $R₁₂(τ) = R₂₁*(-τ)$ (共轭对称性)
@@ -179,7 +179,7 @@ tags:
     \boxed{P(\omega) = \int_{-\infty}^{\infty} R(\tau)e^{-j\omega\tau} d\tau \quad \Leftrightarrow \quad R(\tau) = \frac{1}{2\pi} \int_{-\infty}^{\infty} P(\omega)e^{j\omega\tau} d\omega}
     $$
 
-#### 3.3 卷积 (Convolution)
+#### 3.3 卷积
 
 卷积运算通常用于描述信号通过一个线性时不变 (LTI) 系统后的输出。
 
@@ -200,21 +200,21 @@ tags:
 
 #### 4.1 信号空间与基函数
 
-*   <font color="orange">**内积**</font> (Inner Product)：两个信号 $sᵢ(t)$ 和 $sⱼ(t)$ 的内积定义为它们的相关运算在零点的取值。
+*   <font color="orange">**内积**</font> ：两个信号 $sᵢ(t)$ 和 $sⱼ(t)$ 的内积定义为它们的相关运算在零点的取值。
     $$
     \langle s_i(t), s_j(t) \rangle = \int_{0}^{T} s_i(t)s_j(t) dt
     $$
-*   <font color="orange">**基函数**</font> (Basis Functions) ${Ψₖ(t)}$：一组用于构建信号空间的函数，它们需要满足：
+*   <font color="orange">**基函数**</font>  ${Ψₖ(t)}$：一组用于构建信号空间的函数，它们需要满足：
     1.  **线性独立**：任何一个基函数都不能被其他基函数的线性组合表示。
     2.  **完备性**：空间中任何一个信号都可以由这组基函数线性表示。
 
 #### 4.2 正交基与标准正交基
 
-*   <font color="orange">**正交基**</font> (Orthogonal Basis)：一组基函数，其中任意两个不同的基函数内积为零。
+*   <font color="orange">**正交基**</font> ：一组基函数，其中任意两个不同的基函数内积为零。
     $$
     \langle \Psi_i(t), \Psi_j(t) \rangle = \int_{0}^{T} \Psi_i(t)\Psi_j(t) dt = \begin{cases} K_i, & i=j \\\\ 0, & i \neq j \end{cases}
     $$
-*   <font color="orange">**标准正交基**</font> (Orthonormal Basis)：一种特殊的正交基，其中每个基函数自身的内积（能量）都为1 ($Kᵢ=1$)。
+*   <font color="orange">**标准正交基**</font> ：一种特殊的正交基，其中每个基函数自身的内积（能量）都为1 ($Kᵢ=1$)。
     $$
     \boxed{\langle \Psi_i(t), \Psi_j(t) \rangle = \int_{0}^{T} \Psi_i(t)\Psi_j(t) dt = \begin{cases} 1, & i=j \\\\ 0, & i \neq j \end{cases}}
     $$
@@ -247,7 +247,7 @@ tags:
 
 希尔伯特变换是一种重要的数学工具，它可以在不改变信号频谱幅度的前提下，将其所有频率分量<font color="orange">相移-90度</font>。
 
-#### 5.1 希尔伯特变换 (Hilbert Transform)
+#### 5.1 希尔伯特变换 
 
 *   **定义**：实函数 $f(t)$ 的希尔伯特变换，记作 $f̂(t)$ 或 $H[f(t)]$，定义为 $f(t)$ 与 $1/(πt)$ 的卷积。
     $$
@@ -269,7 +269,7 @@ tags:
 
 > **注意点** 📌：希尔伯特变换 (HT) 与傅里叶变换 (FT)、拉普拉斯变换 (LT) 等不同。FT/LT是将信号从一个域（如时域）映射到另一个域（频域），而HT是<font color="orange">在同一个域内</font>（时域到时域）对信号进行变换。
 
-#### 5.2 解析信号 (Analytic Signal)
+#### 5.2 解析信号 
 
 解析信号是一个复信号，其实部是原实信号，虚部是原信号的希尔伯特变换。它在分析<font color="orange">带通信号</font>时极其有用。
 
@@ -314,7 +314,7 @@ tags:
 
 #### 6.1 基本概念
 
-*   <font color="orange">**随机过程**</font> (Random Process) ${X(t), t∈T}$：
+*   <font color="orange">**随机过程**</font>  ${X(t), t∈T}$：
     *   所有可能样本函数（实现）的集合。可以想象成一次随机试验的结果是一整条时间波形，而不是一个数字。
     *   **样本函数** $x_n(t)$：随机过程的一次具体实现，是一条确定的时间波形。
     *   在**某一时刻 $tᵢ$**，随机过程的取值 $X(tᵢ)$ 是一个<font color="orange">随机变量</font>。
@@ -371,7 +371,7 @@ tags:
 > *   宽平稳过程不一定是严平稳过程。
 > *   **特例**：对于<font color="orange">高斯随机过程</font>，由于其概率密度函数完全由均值和协方差函数确定，所以**宽平稳等价于严平稳**。
 
-#### 7.2 各态历经性 (Ergodicity)
+#### 7.2 各态历经性
 
 *   **概念**：对于某些平稳随机过程，其任意一次<font color="orange">样本实现（时间序列）</font>都经历了整个过程的所有可能状态。
 *   **核心思想**：<font color="orange">**时间平均 = 统计平均（集合平均）**</font>。
@@ -394,7 +394,7 @@ tags:
 
 ### 8. 通信系统中几种常用的随机过程 📡
 
-#### 8.1 高斯随机过程 (Gaussian Process)
+#### 8.1 高斯随机过程 
 
 *   **定义**：任意n个时刻 $t₁, t₂, ..., tₙ$ 上的采样点 $X(t₁), ..., X(tₙ)$ 构成的 $n$ 维随机向量服从<font color="orange">多维高斯（正态）分布</font>。
 *   **核心特性** ✨：
@@ -403,7 +403,7 @@ tags:
     3.  对于高斯过程，任意两个时刻的随机变量**不相关**等价于**统计独立**。
     4.  高斯过程经过<font color="orange">线性系统</font>后，输出仍然是高斯过程。
 
-#### 8.2 高斯白噪声 (White Gaussian Noise, WGN)
+#### 8.2 高斯白噪声 (WGN)
 
 高斯白噪声是通信系统中最基本、最重要的噪声模型。
 
@@ -425,7 +425,7 @@ tags:
 
 > **注意点** 📌：理想的白噪声总功率无穷大（常数PSD在无限带宽上积分），在物理上不存在。但在分析带宽有限的通信系统时，只要噪声在系统通带内是平坦的，就可以将其建模为白噪声，这是一种非常有效且准确的近似。
 
-#### 8.3 窄带随机过程 (Narrowband Random Process)
+#### 8.3 窄带随机过程 
 
 *   **定义**：一个随机过程，其频谱集中在某个中心频率 $f_c$ 附近，且带宽 $Δf$ 远小于中心频率 ($Δf << f_c$)。通常是白噪声通过一个窄带带通滤波器后的输出。
 *   **表示方法 (同相-正交表示)**：
@@ -443,7 +443,7 @@ tags:
     *   当一个确定性的正弦信号 $Acos(2πf_c t)$ 与窄带高斯噪声相加时，合成信号的包络服从**莱斯分布 (Ricean Distribution)**。
     *   当信噪比很大时，莱斯分布趋近于高斯分布；当信噪比为零时（无正弦信号），莱斯分布退化为瑞利分布。
 
-#### 8.4 循环平稳过程 (Cyclostationary Process)
+#### 8.4 循环平稳过程
 
 *   **定义**：均值和自相关函数是时间的<font color="orange">周期函数</font>。
 *   **来源**：在数字通信中，由一个平稳的随机符号序列（例如${a_n}$）乘以一个周期性的脉冲成形函数 $g(t-nT)$ 得到的信号，通常是循环平稳的。
@@ -451,7 +451,7 @@ tags:
 
 ---
 
-### 9. 匹配滤波器 (Matched Filter) ⭐
+### 9. 匹配滤波器 ⭐
 
 匹配滤波器是在白噪声背景下检测已知信号的最佳线性滤波器。
 
@@ -477,13 +477,14 @@ tags:
 *   **重要结论** 💡：
     1.  最大信噪比仅与<font color="orange">信号能量 $E_s$</font> 和<font color="orange">噪声功率谱密度 $N₀$</font> 有关，与信号的具体波形无关。
     2.  匹配滤波器的输出在 $t=t₀$ 时刻的值，等价于接收信号 $r(t)$ 与信号 $s(t)$ 的<font color="orange">相关运算</font>结果。因此，匹配滤波器可以用**相关器**来实现。
-        $$
-        y(t_0) = \int r(\tau)h(t_0-\tau)d\tau = \int r(\tau)s(\tau)d\tau
-        $$
+        $$y(t) = r(t) * h(t) = \int_{-\infty}^{+\infty} r(\tau) h(t - \tau) d\tau $$
+$$y(t) = \int_{-\infty}^{+\infty} r(\tau) s(t_0 - t + \tau) d\tau$$
+$$y(t_0) = \int_{-\infty}^{+\infty} r(\tau) s(t_0 - t_0 + \tau) d\tau$$
 
+$$y(t_0) = \int_{-\infty}^{+\infty} r(\tau) s(\tau) d\tau$$
 ---
 
-### 10. 信号的带宽 (Bandwidth) 📏
+### 10. 信号的带宽  📏
 
 *   **理论与现实的矛盾**：
     *   **时域有限**的信号，其**频域必然无限宽**。
