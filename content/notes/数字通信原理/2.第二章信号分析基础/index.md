@@ -472,7 +472,7 @@ tags:
     $$
     \boxed{\left(\frac{S}{N}\right)_{\max} = \frac{2E_s}{N_0}}
     $$
-    其中 $E_s$ 是信号 $s(t)$ 在一个码元周期内的能量，$N₀/2$ 是噪声的双边功率谱密度。
+    其中 $E_s$ 是信号 $s(t)$ 在一个码元周期内的能量，$N₀$ 是噪声的单边功率谱密度。
 
 *   **重要结论** 💡：
     1.  最大信噪比仅与<font color="orange">信号能量 $E_s$</font> 和<font color="orange">噪声功率谱密度 $N₀$</font> 有关，与信号的具体波形无关。
