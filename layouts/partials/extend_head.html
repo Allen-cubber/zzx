@@ -63,7 +63,7 @@
 </style>
 {{- end -}}
 
-{{- if eq .Title "最近更新" -}}
+{{- if eq .File.TranslationBaseName "updates" -}}
 <style>
      @media screen and (min-width: 1300px) {
         .main {
@@ -73,3 +73,4 @@
         }
     }
 </style>
+{{- end -}}
