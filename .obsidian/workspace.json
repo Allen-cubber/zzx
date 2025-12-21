@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/search.md",
+                "file": "content/updates.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "search"
+              "title": "updates"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/search.md",
+                "file": "content/updates.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "search 的大纲"
+              "title": "updates 的大纲"
             }
           }
         ],
@@ -172,8 +172,8 @@
   },
   "active": "c85445924e512b37",
   "lastOpenFiles": [
-    "content/updates.md",
     "content/search.md",
+    "content/updates.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "public/assets/css/stylesheet.d810209ed88a4d4573b19f207b2b42cdfabea7233b6bf03e70e68dafa5ffb435.css",
     "public/assets/css/stylesheet.d4d75b2201e2799b894dfae17ffa070a1b1920998846633e24813db92e8740c3.css",
