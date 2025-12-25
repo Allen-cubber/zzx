@@ -326,6 +326,7 @@ $$ \boxed{ P_s(f) = \frac{1}{T}|G_T(f)|^2 \sum_{m=-\infty}^{\infty} R_a(m) e^{-j
 
 ### 5.几种码型的功率谱特点
 ![](Pastedimage20251102143200.png)
+![](Pastedimage20251224150005.png)
 -   **不归零码 (NRZ)**：
     -   主瓣宽度为 $1/T = R_b$ (码元速率)。
     -   在 $f=0$ 处有较大的值（直流分量）。
