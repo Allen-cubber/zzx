@@ -21,46 +21,119 @@
 </style>
 
 {{- if and (.IsPage) (ne .Title "最近更新") (ne .Title "搜索") -}}
-<style>
-    /* 注意：这里不需要改 :root 全局变量了，
-       因为我们要避免污染其他页面。
-       我们直接针对 body.single 下的 .main 进行样式覆盖。
-    */
 
-    /* --- 1. 针对电脑大屏 (文章页专用布局) --- */
+<div id="width-toggle-btn" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; cursor: pointer; background: var(--entry); padding: 10px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none;">
+    <svg id="icon-expand" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="15 3 21 3 21 9"></polyline>
+        <polyline points="9 21 3 21 3 15"></polyline>
+        <line x1="21" y1="3" x2="14" y2="10"></line>
+        <line x1="3" y1="21" x2="10" y2="14"></line>
+    </svg>
+    <svg id="icon-compress" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="4 14 10 14 10 20"></polyline>
+        <polyline points="20 10 14 10 14 4"></polyline>
+        <line x1="14" y1="10" x2="21" y2="3"></line>
+        <line x1="3" y1="21" x2="10" y2="14"></line>
+    </svg>
+</div>
+
+<style>
+    /* 增加一个平滑过渡动画，让切换看起来更丝滑 */
+    .main {
+        transition: margin-right 0.3s ease, margin-left 0.3s ease;
+    }
+
+    /* --- 针对电脑大屏 (>= 1300px) --- */
     @media screen and (min-width: 1300px) {
+        /* 显示切换按钮 */
+        #width-toggle-btn {
+            display: block !important;
+        }
+
         .main {
-            /* 强制覆盖默认的 max-width */
             max-width: none !important; 
             width: auto !important;
-
-            /* 左边留给目录的空间 */
             margin-left: 23% !important; 
             
-            /* 右边留白 */
-            margin-right: 2% !important; 
+            /* 【核心逻辑】默认状态：正常模式 (23%) */
+            margin-right: 23% !important; 
+        }
+
+        /* 【核心逻辑】宽屏状态：全屏模式 (2%) 
+           当 body 拥有 'wide-mode' 类时生效 */
+        body.wide-mode .main {
+            margin-right: 2% !important;
         }
     }
 
-    /* --- 2. 超大屏幕微调 --- */
+    /* --- 超大屏幕微调 (>= 1800px) --- */
+    /* 注意：如果不希望宽屏模式在超大屏失效，需要保留 wide-mode 的覆盖 */
     @media screen and (min-width: 1800px) {
         .main {
             margin-left: 25% !important; 
-            margin-right: 5% !important;
+            margin-right: 5% !important; /* 默认超大屏留白 */
+        }
+        
+        /* 保持宽屏模式优先级 */
+        body.wide-mode .main {
+            margin-right: 2% !important;
         }
     }
 
-    /* --- 3. 移动端/小屏保护 --- */
-    /* 当屏幕小于 1300px 时，恢复默认的居中显示，
-       防止在笔记本小屏幕上目录挤占正文 */
+    /* --- 移动端/小屏保护 (< 1300px) --- */
     @media screen and (max-width: 1299px) {
         .main {
             margin: auto !important;
-            max-width: calc(100% - 30px) !important; /* 保持原主题的移动端体验 */
+            max-width: calc(100% - 30px) !important;
             width: 100% !important;
+        }
+        /* 小屏时不显示按钮，防止遮挡内容 */
+        #width-toggle-btn {
+            display: none !important;
         }
     }
 </style>
+
+<script>
+    (function() {
+        const btn = document.getElementById('width-toggle-btn');
+        const iconExpand = document.getElementById('icon-expand');
+        const iconCompress = document.getElementById('icon-compress');
+        
+        // 1. 检查本地存储，看用户之前是否选择了宽屏模式
+        const isWide = localStorage.getItem('blog-wide-mode') === 'true';
+        if (isWide) {
+            document.body.classList.add('wide-mode');
+            toggleIcons(true);
+        }
+
+        // 2. 切换图标显示的函数
+        function toggleIcons(isWideNow) {
+            if (isWideNow) {
+                iconExpand.style.display = 'none';
+                iconCompress.style.display = 'block';
+            } else {
+                iconExpand.style.display = 'block';
+                iconCompress.style.display = 'none';
+            }
+        }
+
+        // 3. 点击事件
+        btn.addEventListener('click', function() {
+            // 切换 body 的类名
+            document.body.classList.toggle('wide-mode');
+            
+            // 判断当前是否是宽屏
+            const currentIsWide = document.body.classList.contains('wide-mode');
+            
+            // 切换图标
+            toggleIcons(currentIsWide);
+            
+            // 保存状态到本地存储
+            localStorage.setItem('blog-wide-mode', currentIsWide);
+        });
+    })();
+</script>
 {{- end -}}
 
 {{- if eq .Title "最近更新" -}}
