@@ -1,5 +1,5 @@
 ---
-title: 第三章 VHDL语言基础
+title: 第二章 VHDL语言基础
 tags:
   - 大三上
   - 数字系统设计

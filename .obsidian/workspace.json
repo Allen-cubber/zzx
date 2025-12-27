@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
+                "file": "content/notes/数字系统设计/5.第六章状态机/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
+                "file": "content/notes/数字系统设计/5.第六章状态机/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,11 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
+    "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
+    "content/notes/数字系统设计/5.第六章状态机/index.md",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
+    "content/notes/数字系统设计/2.第三章语法基础/index.md",
+    "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227165352.png",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227164835.png",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227164831.png",
@@ -181,11 +186,6 @@
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227165352.png",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227164835.png",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227164831.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227161749.png",
-    "content/notes/数字系统设计/5.第六章状态机/index.md",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
-    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
-    "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
