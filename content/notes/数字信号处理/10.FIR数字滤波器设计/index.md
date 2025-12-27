@@ -90,6 +90,8 @@ $$
     确定通带截止频率 $\omega_p$、阻带截止频率 $\omega_s$、通带波纹 $\delta_p$、阻带衰减 $\alpha_s$。
 2.  **选择窗函数**：
     根据 <font color="orange">最小阻带衰减</font> 要求，查表选择合适的窗函数 $w[n]$。
+    $$\delta = \min(\delta_p, \delta_s)$$
+    $$A = -20 \log_{10}(\delta)$$
     *   例如：若要求阻带衰减 $\ge 40dB$，则矩形窗(-21dB)不满足，需选汉宁窗(-44dB)或更高阶窗。
 3.  **计算滤波器长度**：
     根据 <font color="orange">过渡带宽度</font> $\Delta\omega = |\omega_s - \omega_p|$ 和所选窗的特性公式计算 $M$ 或 $N$。

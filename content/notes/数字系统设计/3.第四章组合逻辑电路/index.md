@@ -329,7 +329,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 -- 定义4位串行进位加法器的实体
-entity ripple_carry_adder_4bit is
+entity test is
     port (
         a   : in  std_logic_vector(3 downto 0); -- 4位输入a
         b   : in  std_logic_vector(3 downto 0); -- 4位输入b
@@ -337,48 +337,42 @@ entity ripple_carry_adder_4bit is
         sum : out std_logic_vector(3 downto 0); -- 4位和输出
         cout: out std_logic                       -- 最终进位输出
     );
-end entity ripple_carry_adder_4bit;
+end entity test;
 
 -- 定义结构化描述的结构体
-architecture structural of ripple_carry_adder_4bit is
+ARCHITECTURE Behavioral OF test IS
 
-    -- 1. 将1位全加器声明为一个元件(Component)
-    component full_adder is
-        port (
-            a   : in  std_logic;
-            b   : in  std_logic;
-            cin : in  std_logic;
-            s   : out std_logic;
-            cout: out std_logic
+    -- 【第一步】 在 BEGIN 之前声明元件 (Component Declaration)
+    -- 注意：端口名称和类型必须与原始 Entity 定义完全一致
+    COMPONENT full_adder
+        PORT (
+            a    : IN  std_logic;
+            b    : IN  std_logic;
+            cin  : IN  std_logic;
+            s    : OUT std_logic;
+            cout : OUT std_logic
         );
-    end component full_adder;
+    END COMPONENT;
 
-    -- 2. 定义一个内部信号，用于连接各个全加器之间的进位
-    signal c_ripple : std_logic_vector(4 downto 0);
+    -- 定义内部信号
+    SIGNAL c_ripple : std_logic_vector(4 DOWNTO 0);
 
-begin
-
-    -- 3. 将外部的初始进位连接到内部进位信号的最低位
-    c_ripple(0) <= cin;
-
-    -- 4. 使用 for...generate 语句例化4个全加器
-    --    这是一种优雅的结构化描述方式
-    GEN_FULL_ADDERS: for i in 0 to 3 generate
-        -- 例化一个名为 U_FA 的 full_adder 元件
-        U_FA: entity work.full_adder(behavioral)
-            port map (
-                a    => a(i),                -- 当前位的 a
-                b    => b(i),                -- 当前位的 b
-                cin  => c_ripple(i),         -- 来自上一级的进位
-                s    => sum(i),              -- 当前位的和
-                cout => c_ripple(i + 1)      -- 向下一级的进位
+BEGIN
+	c_ripple(0) <= cin;
+    GEN_FULL_ADDERS : FOR i IN 0 TO 3 GENERATE
+        -- 【第二步】 在代码体中进行元件例化 (Component Instantiation)
+        U_FA : full_adder
+            PORT MAP (
+                a    => a(i),
+                b    => b(i),
+                cin  => c_ripple(i),
+                s    => sum(i),
+                cout => c_ripple(i + 1)
             );
-    end generate GEN_FULL_ADDERS;
+    END GENERATE GEN_FULL_ADDERS;
+	cout <= c_ripple(4);
 
-    -- 5. 将内部进位信号的最高位连接到最终的进位输出
-    cout <= c_ripple(4);
-
-end architecture structural;
+END Behavioral;
 ```
 
 #### ✨ 代码解析
@@ -484,19 +478,58 @@ Architecture behav of mux4 is
     signal sel :std_logic_vector(1 downto 0);
 Begin
     sel <= b & a; -- 合并地址信号
-    process(input, sel)
-    begin
-        if (sel="00") then y <= input(0);
-        elsif (sel="01") then y <= input(1);
-        elsif (sel="10") then y <= input(2);
-        elsif (sel="11") then y <= input(3);
-        else y <= 'Z'; -- 高阻态
-        end if;
-    end process;
+    WITH sel SELECT
+    y <= input(0) WHEN "00",
+         input(1) WHEN "01",
+         input(2) WHEN "10",
+         input(3) WHEN OTHERS;
 End behav;
 ```
 
-### 6.2 求补器 (Two's Complementer)
+#### 四种方法实现
+这是最标准、最清晰的 `CASE` 写法。因为它天生表示“并行且互斥”的选择，完全符合 Mux 的硬件原理。
+```vhdl
+PROCESS(sel, a, b, c, d)
+BEGIN
+    CASE sel IS
+        WHEN "00" => y <= a;
+        WHEN "01" => y <= b;
+        WHEN "10" => y <= c;
+        WHEN OTHERS => y <= d; -- 必须有 OTHERS,因为sel还有除0和1外的其他状态
+    END CASE;
+END PROCESS;
+```
+这是 `CASE` 的并行版本，写起来最快，一行搞定。非常适合写顶层的简单连线。
+```vhdl
+WITH sel SELECT
+    y <= a WHEN "00",
+         b WHEN "01",
+         c WHEN "10",
+         d WHEN OTHERS;
+```
+虽然 `IF` 带有优先级含义，但在这种“条件互斥”（00, 01, 10 不会同时发生）的情况下，综合器非常聪明，它知道你想要的是 Mux，而不是一长串的优先级判断链。**综合结果通常和 CASE 一样。**
+```vhdl
+PROCESS(sel, a, b, c, d)
+BEGIN
+    IF sel = "00" THEN
+        y <= a;
+    ELSIF sel = "01" THEN
+        y <= b;
+    ELSIF sel = "10" THEN
+        y <= c;
+    ELSE
+        y <= d;
+    END IF;
+END PROCESS;
+```
+这是 `IF` 的并行版本。同样，虽然逻辑上有优先级，但对于 Mux 这种简单逻辑，综合器也能完美处理。
+```vhdl
+y <= a WHEN sel = "00" ELSE
+     b WHEN sel = "01" ELSE
+     c WHEN sel = "10" ELSE
+     d;
+```
+### 6.2 求补器
 *   **功能**：将输入信号转换成其**补码**输出。
 *   **补码定义** (定点整数)：
     $$
