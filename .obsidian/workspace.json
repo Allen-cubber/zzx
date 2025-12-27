@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/5.第六章状态机/index.md",
+                "file": "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字系统设计/5.第六章状态机/index.md",
+                "file": "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,21 +171,23 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pastedimage20251227213538.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pastedimage20251227213227.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pastedimage20251227212923.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pastedimage20251227212635.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pasted image 20251227213538.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pasted image 20251227213227.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pasted image 20251227212923.png",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/Pasted image 20251227212635.png",
+    "Pasted image 20251227213538.png",
+    "Pasted image 20251227213227.png",
+    "Pasted image 20251227212923.png",
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "content/notes/数字系统设计/5.第六章状态机/index.md",
+    "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
     "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227165352.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227164835.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227164831.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227161749.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227161317.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227160906.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251227160409.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227165352.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227164835.png",
-    "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251227164831.png",
     "content/notes/数字系统设计/7.第八章综合/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
@@ -214,8 +216,6 @@
     "public/assets/css/stylesheet.912db1d92f4d01750d39fbd237eccd45878e4751f5d5608df298d53767d788c1.css",
     "public/assets/css/stylesheet.ce3aa6a9a92b552e1dbce51bfe0106d6024cc1407452903453f66701991016bb.css",
     "public/assets/css/stylesheet.d687f22b1af0e8e11dc52af4b1309bbf6e5457f370a4ae941e48e6ad06b9e3e2.css",
-    "public/assets/css/stylesheet.8e16156827217156f2d4c0c1984a2f3bec76e89af36c5e50206c9c915c30a412.css",
-    "content/notes/数字通信原理/1.第一章绪论/index.md",
-    "content/notes/数字信号处理/2.离散时间信号的时域分析/index.md"
+    "public/assets/css/stylesheet.8e16156827217156f2d4c0c1984a2f3bec76e89af36c5e50206c9c915c30a412.css"
   ]
 }

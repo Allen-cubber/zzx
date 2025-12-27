@@ -177,6 +177,7 @@ summary: 时序电路输出依赖当前输入和历史状态，由组合逻辑�
 #### 计数器法实现示例
 以含 3 个状态的 ASM 图为例：
 1.  **状态分配**：2 个状态变量 Q2、Q1，编码为 S0 (00)、S1 (10)、S2 (11)，未指定状态 01 强迫回到 00。
+	![](Pastedimage20251227193514.png)
 2.  **状态转换表**：
 
 | 现态 Q2 | 现态 Q1 | 输入 X | 次态 Q2⁺ | 次态 Q1⁺ | 输出 Z1 | 输出 Z2 |
@@ -189,6 +190,7 @@ summary: 时序电路输出依赖当前输入和历史状态，由组合逻辑�
 
 3.  **驱动方程推导**：通过卡诺图化简，得到 Q2⁺、Q1⁺ 的逻辑方程。
 4.  **硬件电路**：由 2 个 D 触发器、与门、或门等组成，实现状态转换和输出。
+	![](Pastedimage20251227193558.png)
 
 > ⚠️ **易错点**：未指定状态（如示例中的 01）若不处理，可能导致电路进入无效循环，需强制其回到有效状态。
 
@@ -204,8 +206,113 @@ summary: 时序电路输出依赖当前输入和历史状态，由组合逻辑�
     *   **G 状态**：干线绿灯 (`major_green=1`)、支线红灯 (`minor_green=0`)。
     *   **R 状态**：干线红灯 (`major_green=0`)、支线绿灯 (`minor_green=1`)。
 2.  **绘制 ASM 图**：
+	- **矩形 (状态框)**：决定灯的颜色（Moore 输出）。
+	- **菱形 (判断框)**：检测 `car` 和 `timed` 信号。
+	- **椭圆 (条件输出框)**：**关键点！** `start_timer` 最好作为一个**条件输出 (Mealy 输出)**。即：在检测到车、准备跳转的那一瞬间发出一个脉冲信号启动计时器。
 ![](Pastedimage20251022115005.png)
 3.  **后续实现**：基于 ASM 图推导状态转换表、驱动方程，或用 VHDL 编程实现。
+- **矩形框内容** $\rightarrow$ 写在 `CASE state` 的直接赋值里。
+- **菱形框结构** $\rightarrow$ 转化为 `IF...THEN...ELSE` 语句。
+- **椭圆框内容** $\rightarrow$ 写在 `IF` 语句的 `THEN` 里面。
+- **箭头指向** $\rightarrow$ `next_state <= ...`。
+
+```vhdl
+LIBRARY ieee;
+USE ieee.std_logic_1164.ALL;
+
+ENTITY traffic_controller IS
+    PORT (
+        clock       : IN  std_logic;
+        reset       : IN  std_logic; -- 必须增加复位信号
+        car         : IN  std_logic; -- 支线有车传感器
+        timed       : IN  std_logic; -- 计时结束信号
+        
+        start_timer : OUT std_logic; -- 输出：启动计时脉冲
+        major_green : OUT std_logic; -- 输出：干线绿灯
+        minor_green : OUT std_logic  -- 输出：支线绿灯
+    );
+END traffic_controller;
+
+ARCHITECTURE Behavioral OF traffic_controller IS
+
+    -- 1. 定义状态类型
+    TYPE state_type IS (S_MAJOR, S_MINOR);
+    SIGNAL current_state, next_state : state_type;
+
+BEGIN
+
+    -- 2. 时序进程 (Sequential Process)
+    -- 负责状态寄存器的翻转，只听时钟和复位的
+    PROCESS (clock, reset)
+    BEGIN
+        IF reset = '1' THEN
+            current_state <= S_MAJOR; -- 复位后默认干线绿灯
+        ELSIF rising_edge(clock) THEN
+            current_state <= next_state;
+        END IF;
+    END PROCESS;
+
+    -- 3. 组合逻辑进程 (Combinational Process)
+    -- 负责画 ASM 图中的 矩形、菱形 和 椭圆
+    PROCESS (current_state, car, timed)
+    BEGIN
+        -- A. 默认输出赋值 (防止生成锁存器 Latch)
+        next_state  <= current_state; -- 默认保持当前状态
+        start_timer <= '0';           -- 默认不启动计时
+        major_green <= '0';
+        minor_green <= '0';
+
+        CASE current_state IS
+        
+            -----------------------------------------------------
+            -- 状态 1: 干线通行 (S_MAJOR)
+            -----------------------------------------------------
+            WHEN S_MAJOR =>
+                -- [矩形框] 状态输出 (Moore)
+                major_green <= '1'; 
+                minor_green <= '0';
+
+                -- [菱形框] 判断输入 logic
+                IF car = '1' THEN
+                    -- [椭圆框] 条件输出 (Mealy)
+                    -- 在状态转换的一瞬间发出启动脉冲
+                    start_timer <= '1'; 
+                    next_state  <= S_MINOR;
+                END IF;
+
+            -----------------------------------------------------
+            -- 状态 2: 支线通行 (S_MINOR)
+            -----------------------------------------------------
+            WHEN S_MINOR =>
+                -- [矩形框] 状态输出 (Moore)
+                major_green <= '0';
+                minor_green <= '1';
+
+                -- [菱形框] 判断输入 logic
+                IF timed = '1' THEN
+                    next_state <= S_MAJOR;
+                END IF;
+                
+        END CASE;
+    END PROCESS;
+
+END Behavioral;
+```
+* **1. 为什么 `start_timer` 放在 IF 里面？**
+	- 这对应 ASM 图中的**椭圆框 (条件输出)**。
+	- 需要的是一个**脉冲 (Pulse)** 信号来告诉计时器“开始数数”。
+	- 如果把它写在 `S_MINOR` 的状态输出里（矩形框），那么只要在支线绿灯期间，`start_timer` 就会一直为高电平，这通常不是计时器想要的触发信号。
+	- 写在 `IF car='1'` 里面，它只会在跳转的那一个时钟周期内变高，完美实现触发功能。
+* **2. 关于设置默认值的解释**
+	- **组合逻辑进程（PROCESS 敏感列表里没有 clk）**：
+	    - **规则**：所有输出在所有路径下都必须赋值。
+	    - **技巧**：在 `BEGIN` 刚开始的地方，把所有输出信号都赋一个默认值。
+	    - **目的**：**防止生成锁存器 (Latch)**。
+	- **时序逻辑进程（PROCESS 敏感列表里有 clk）**：
+	    - **规则**：没赋值就是保持（生成 D 触发器）。
+	    - **区别**：在时序进程里，**不需要**写这堆默认赋值，因为生成 D 触发器本来就是我们的目的。
+* **3.RTL图如下**：
+![](Pastedimage20251227201003.png)
 
 ## 六、有限状态机的分类
 ### 6.1 按信号输出方式分类
@@ -246,16 +353,17 @@ ENTITY traffic IS
 END ENTITY traffic;
 ARCHITECTURE asm1 OF traffic IS
 BEGIN
-    PROCESS (clock, timed, car)
+    PROCESS (clock)
         TYPE state_type IS (G, R);  -- 符号化状态
-        VARIABLE state: state_type;
+        VARIABLE state: state_type;  -- 状态寄存器1个
     BEGIN
         IF (rising_edge(clock)) THEN
+	        start_timer <= '0'; -- 【修正】每拍先默认清零，需要脉冲时再置1
             CASE state IS
                 WHEN G =>
-                    major_green <= '1'; minor_green <= '0';
+                    major_green <= '1'; minor_green <= '0'; -- 输出信号寄存器2个
                     IF (car = '1') THEN
-                        start_timer <= '1';
+                        start_timer <= '1'; -- 输出信号寄存器1个
                         state := R;
                     END IF;
                 WHEN R =>
@@ -269,7 +377,8 @@ BEGIN
     END PROCESS;
 END ARCHITECTURE;
 ```
-
+* RTL图如下：
+![](Pastedimage20251227202506.png)
 #### 2. 双进程状态机
 *   **结构**：
     *   第一个进程（同步时序）：描述次态到现态的转移，仅敏感于时钟。
@@ -291,14 +400,14 @@ BEGIN
     seq: PROCESS (clock)
     BEGIN
         IF (rising_edge(clock)) THEN
-            pr_state <= nx_state;
+            pr_state <= nx_state; -- 状态寄存器1个
         END IF;
     END PROCESS seq;
 
     -- 组合逻辑进程：状态转移与输出
     com: PROCESS (pr_state, car, timed)
     BEGIN
-        start_timer <= '0';  -- 初始值，避免 latch
+        start_timer <= '0';  -- 防锁存（Latch）设计
         CASE pr_state IS
             WHEN G =>
                 major_green <= '1'; minor_green <= '0';
@@ -319,7 +428,8 @@ BEGIN
     END PROCESS com;
 END ARCHITECTURE;
 ```
-
+* RTL图如下：
+![](Pastedimage20251227203812.png)
 #### 3. 三进程状态机
 
 *   **结构**：
@@ -343,7 +453,7 @@ BEGIN
     seq: PROCESS (clock)
     BEGIN
         IF (rising_edge(clock)) THEN
-            pr_state <= nx_state;
+            pr_state <= nx_state; -- 状态寄存器1个
         END IF;
     END PROCESS seq;
 
@@ -382,6 +492,7 @@ BEGIN
 END ARCHITECTURE;
 ```
 
+* RTL图如下： ![](Pastedimage20251227204509.png)
 > 💡 **注意点**：三进程状态机的输出逻辑也可用并行语句改写（如 WHEN-ELSE），但需注意并行语句不能放在进程内。
 
 ### 6.3 按表达方式分类
@@ -402,11 +513,11 @@ SIGNAL present_state, next_state : m_state;
 *   **定义**：手动指定状态的二进制编码，而非依赖综合器自动分配。
 *   **常用编码方式**：
 
-| 编码方式 | 原理 | 优点 | 缺点 | 适用场景 |
-|---|---|---|---|---|
-| **二进制编码** | n 个寄存器描述 2ⁿ个状态（如 4 状态用 2 个寄存器：00, 01, 10, 11） | 寄存器数量最少 | 需更多组合逻辑，速度慢 | CPLD（组合逻辑资源丰富）、小型状态机 |
-| **格雷码编码** | 相邻状态仅 1 位二进制变化（如 4 状态：00, 01, 11, 10） | 无两位同时翻转，抗干扰强 | 寄存器数量与二进制编码相同，速度慢 | 异步输出场景、小型状态机 |
-| **独热码（One-hot）** | 每个状态用 1 个寄存器表示（如 4 状态用 4 个寄存器：0001, 0010, 0100, 1000） | 逻辑简单，速度快，无竞争冒险 | 寄存器数量多 | FPGA（触发器资源丰富）、大型状态机 |
+| 编码方式             | 原理                                                    | 优点             | 缺点                | 适用场景                 |
+| ---------------- | ----------------------------------------------------- | -------------- | ----------------- | -------------------- |
+| **二进制编码**        | n 个寄存器描述 2ⁿ个状态（如 4 状态用 2 个寄存器：00, 01, 10, 11）         | 寄存器数量最少        | 需更多组合逻辑，速度慢       | CPLD（组合逻辑资源丰富）、小型状态机 |
+| **格雷码编码**        | 相邻状态仅 1 位二进制变化（如 4 状态：00, 01, 11, 10）                 | 无两位同时翻转，抗干扰强   | 寄存器数量与二进制编码相同，速度慢 | 异步输出场景、小型状态机         |
+| **独热码（One-hot）** | 每个状态用 1 个寄存器表示（如 4 状态用 4 个寄存器：0001, 0010, 0100, 1000） | 逻辑简单，速度快，无竞争冒险 | 寄存器数量多            | FPGA（触发器资源丰富）、大型状态机  |
 
 *   **手动指定编码示例（VHDL）**：
 
@@ -442,22 +553,35 @@ END ARCHITECTURE;
 *   **特点**：输出直接由现态和输入决定，与时钟不同步，可能出现毛刺。
 *   **VHDL 代码核心片段**：
 ```vhdl
-CASE pr_state IS
-    WHEN stateA =>
-        x <= a;  -- 输出直接赋值，非同步
-        IF (d = '1') THEN
-            nx_state <= stateB;
-        ELSE
-            nx_state <= stateA;
-        END IF;
-    WHEN stateB =>
-        x <= b;  -- 输出直接赋值，非同步
-        IF (d = '1') THEN
-            nx_state <= stateA;
-        ELSE
-            nx_state <= stateB;
-        END IF;
-END CASE;
+-- 同步时序进程：状态同步
+PROCESS (rst, clk)
+BEGIN
+    IF (rst = '1') THEN
+        pr_state <= stateA;
+    ELSIF (clk'EVENT AND clk = '1') THEN
+        pr_state <= nx_state;
+    END IF;
+END PROCESS;
+
+PROCESS (a, b, d, pr_state)
+BEGIN
+    CASE pr_state IS
+        WHEN stateA =>
+            x <= a;  -- 直接由组合逻辑驱动输出
+            IF (d = '1') THEN
+                nx_state <= stateB;
+            ELSE
+                nx_state <= stateA;
+            END IF;
+        WHEN stateB =>
+            x <= b;  -- 直接由组合逻辑驱动输出
+            IF (d = '1') THEN
+                nx_state <= stateA;
+            ELSE
+                nx_state <= stateB;
+            END IF;
+    END CASE;
+END PROCESS;
 ```
 *   **仿真结果**：输出 x 与时钟不同步，输入变化时输出可能出现瞬间错误。
 

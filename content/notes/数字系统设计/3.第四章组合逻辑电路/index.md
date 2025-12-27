@@ -165,6 +165,8 @@ End behav;
 > *   `process` 语句的敏感列表 `(indata, g1, g2a, g2b)` 中包含了所有影响输出的信号，当其中任何一个信号变化时，进程都会被触发执行。
 > *   `case` 语句也可以用一系列 `if-elsif-else` 语句来改写。
 
+![](Pastedimage20251227212635.png)
+
 ---
 
 ## 4. 编码器的设计 ✒️
@@ -219,7 +221,7 @@ End behav;
 ```
 > **易错点** 💥
 > `if-elsif` 语句是一种流程控制语句，判断条件有**先后次序**。这使得它非常适合用来描述优先级编码器。例如，当 `input` 为 `"01011111"` 时，`input(7)`和`input(5)`都有效（为'0'），但因为程序先判断 `input(7)`，所以最终输出对应 `input(7)` 的编码 `"111"`。
-
+![](Pastedimage20251227212923.png)
 ---
 
 ## 5. 加法器的设计 ➕
@@ -485,7 +487,7 @@ Begin
          input(3) WHEN OTHERS;
 End behav;
 ```
-
+![](Pastedimage20251227213227.png)
 #### 四种方法实现
 这是最标准、最清晰的 `CASE` 写法。因为它天生表示“并行且互斥”的选择，完全符合 Mux 的硬件原理。
 ```vhdl
@@ -522,6 +524,7 @@ BEGIN
     END IF;
 END PROCESS;
 ```
+![](Pastedimage20251227213538.png)
 这是 `IF` 的并行版本。
 ```vhdl
 y <= a WHEN sel = "00" ELSE
