@@ -507,7 +507,7 @@ WITH sel SELECT
          c WHEN "10",
          d WHEN OTHERS;
 ```
-虽然 `IF` 带有优先级含义，但在这种“条件互斥”（00, 01, 10 不会同时发生）的情况下，综合器非常聪明，它知道你想要的是 Mux，而不是一长串的优先级判断链。**综合结果通常和 CASE 一样。**
+ `IF` 带有优先级含义，综合结果是一长串的优先级判断链。
 ```vhdl
 PROCESS(sel, a, b, c, d)
 BEGIN
@@ -522,7 +522,7 @@ BEGIN
     END IF;
 END PROCESS;
 ```
-这是 `IF` 的并行版本。同样，虽然逻辑上有优先级，但对于 Mux 这种简单逻辑，综合器也能完美处理。
+这是 `IF` 的并行版本。
 ```vhdl
 y <= a WHEN sel = "00" ELSE
      b WHEN sel = "01" ELSE
