@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/8.数字系统设计方法/index.md",
+                "file": "content/notes/数字系统设计/7.第八章综合/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字系统设计/8.数字系统设计方法/index.md",
+                "file": "content/notes/数字系统设计/7.第八章综合/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,11 +171,13 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
-    "content/notes/数字系统设计/5.第六章状态机/index.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/notes/数字系统设计/7.第八章综合/index.md",
-    "content/notes/数字系统设计/8.数字系统设计方法/index.md",
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
+    "content/notes/数字系统设计/5.第六章状态机/index.md",
+    "content/notes/数字系统设计/8.数字系统设计方法/index.md",
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "content/notes/数字系统设计/8.数字系统设计方法",
     "content/notes/数字系统设计/7.第八章综合/未命名.md",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pastedimage20251228164050.png",
@@ -189,11 +191,9 @@
     "content/notes/数字系统设计/4.第五章时序逻辑电路/Pasted image 20251228162744.png",
     "Pasted image 20251228155606.png",
     "content/notes/未命名.md",
-    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/musings/数模/index.md",
     "content/notes/信号与系统/index.md",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",

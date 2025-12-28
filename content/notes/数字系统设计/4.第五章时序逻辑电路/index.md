@@ -158,7 +158,8 @@ D触发器是最常用、最基本的触发器。
     有多种等效的描述方法：
 
     **方法一：使用 `event` 属性 (最标准)**
-    ```vhdl
+
+```vhdl
    -- 1. 库声明 (Library Declaration)
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL; -- 使用标准逻辑类型 std_logic
@@ -185,10 +186,11 @@ BEGIN
     END PROCESS;
 
 END Behavioral;
-    ```
-    ![](Pastedimage20251227160906.png)
-    **方法二：使用 `rising_edge` 函数 (推荐)**
-    ```vhdl
+```
+
+![](Pastedimage20251227160906.png)
+**方法二：使用 `rising_edge` 函数 (推荐)**
+```vhdl
     -- 需要 use ieee.std_logic_1164.all;
     process(clk)
     begin
@@ -196,15 +198,15 @@ END Behavioral;
             Q <= D;
         end if;
     end process;
-    ```
-    **方法三：使用 `wait until` (多用于测试平台)**
-    ```vhdl
+```
+**方法三：使用 `wait until` (多用于测试平台)**
+```vhdl
     process
     begin
         wait until rising_edge(clk);
         Q <= D;
     end process;
-    ```
+```
 
 *   **仿真波形**：从仿真波形可以看出，`Q` 的值只在 `clk` 的上升沿发生跳变，去采样当时 `D` 的值。在时钟的其他时刻，无论 `D` 如何变化，`Q` 都保持不变。
 
@@ -612,3 +614,124 @@ end architecture behavioral;
     *   为了避免无意中生成多余的寄存器（例如同时对 `Q` 和 `Qbar` 在时钟边沿下赋值），推荐使用一个内部的**信号 (signal)** 或**变量 (variable)** 来代表触发器的状态。
     *   **信号**的赋值在进程外，是并行语句。
     *   **变量**的有效范围在进程内，其赋值语句也必须在进程内。
+
+## 附录 时序电路易错点
+### 1. 非法赋初值
+*  **在时序逻辑进程中，千万不要在 `if rising_edge` 之外给信号赋固定值**，除非是一个特殊的双边沿逻辑或组合逻辑混合电路。
+```vhdl
+process(clk)
+begin
+    -- Q <= '0'; 错误
+    if rising_edge(clk) then
+        Q <= D;
+    end if;
+end process;
+```
+如果你写 `Q <= '0'` 的初衷是想要复位功能，应该这样写：
+```vhdl
+process(clk, rst) -- 敏感列表加上复位
+begin
+    if rst = '1' then      -- 异步复位
+        Q <= '0';
+    elsif rising_edge(clk) then
+        Q <= D;
+    end if;
+end process;
+```
+带同步复位的 D 触发器
+```vhdl
+process(clk)
+begin
+    if rising_edge(clk) then
+        if rst = '1' then  -- 同步复位
+            Q <= '0';
+        else
+            Q <= D;
+        end if;
+    end if;
+end process;
+```
+
+### 2. 双边沿逻辑
+* 在一个普通的寄存器描述中，不能同时定义“上升沿”和“非上升沿”的行为，即 `if rising_edge(clk)` 不能出现 `else` 。
+```vhdl
+if rising_edge(clk) then
+    Q <= D;       -- 上升沿
+else -- 错误，应该删去
+    Q <= not D;   -- 非上升沿，错误，应该删去
+end if;
+```
+
+### 3. 多重驱动
+* 试图在两个不同的 `PROCESS` 里给同一个信号赋值。仿真器会显示 `X`（不确定态）或直接报错。
+```vhdl
+signal Q : std_logic;
+
+-- 进程 A：试图在时钟上升沿把 Q 置 1
+process(clk)
+begin
+    if rising_edge(clk) then
+        Q <= '1';
+    end if;
+end process;
+
+-- 进程 B：试图在复位时把 Q 置 0
+process(rst)
+begin
+    if rst = '1' then
+        Q <= '0';
+    end if;
+end process;
+```
+✅ 正确写法：用 `if-else` 来划分优先级。
+```vhdl
+process(clk, rst)
+begin
+    if rst = '1' then
+        Q <= '0';      -- 复位优先级最高
+    elsif rising_edge(clk) then
+        Q <= '1';      -- 正常时钟逻辑
+    end if;
+end process;
+```
+
+### 4. 门控时钟
+* 组合逻辑（AND门）是有延迟的，容易产生极窄的毛刺。这些毛刺会被触发器误认为是时钟沿，导致数据错误翻转。应该**使用使能信号**控制。
+```vhdl
+signal gated_clk : std_logic;
+
+-- 试图用与门制造一个“可开关”的时钟
+gated_clk <= clk AND enable; 
+
+process(gated_clk) -- 用这个假时钟去驱动触发器
+begin
+    if rising_edge(gated_clk) then
+        Q <= D;
+    end if;
+end process;
+```
+
+### 5. 异步复位的敏感列表缺失
+* ❌ 错误代码
+```vhdl
+-- 敏感列表里只有 clk，没有 rst！
+process(clk) 
+begin
+    if rst = '1' then      -- 这里写了异步复位的逻辑
+        Q <= '0';
+    elsif rising_edge(clk) then
+        Q <= D;
+    end if;
+end process;
+```
+* ✅ 正确写法
+```vhdl
+process(clk, rst) -- 把 rst 加上！
+begin
+    if rst = '1' then
+        Q <= '0';
+    elsif rising_edge(clk) then
+        Q <= D;
+    end if;
+end process;
+```
