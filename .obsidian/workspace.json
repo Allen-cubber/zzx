@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
+                "file": "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字系统设计/6.第七章仿真/index.md",
+                "file": "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,12 +171,13 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/基带不为矩形波的误码率.md",
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
+    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
+    "content/notes/数字系统设计/6.第七章仿真/index.md",
     "content/notes/数字系统设计/4.第五章时序逻辑电路/index.md",
     "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
-    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "content/notes/数字通信原理/1.第一章绪论/index.md",
     "content/notes/数字通信原理/1.第一章绪论/Pastedimage20250906173427.png",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
