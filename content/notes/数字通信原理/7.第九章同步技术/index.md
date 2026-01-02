@@ -215,3 +215,100 @@ MQAM 既调幅又调相，无法直接用 M 次方环。
 | **MQAM 载波恢复**<br><br>  <br><br>(主要指 DD 环)        | **MQAM**<br><br>  <br><br>(如 16QAM)     | **判决引导 (Decision Directed)**。<br><br>  <br><br>假设判决结果是正确的，反推相位误差。通常结合判决反馈环 (DF-PLL)。    | **有**<br><br>  <br><br>($\pi/2$ 整数倍) | 适用于幅度相位同时变化的信号；<br><br>  <br><br>跟踪性能好。                         | **存在门限效应**。<br><br>  <br><br>如果误码率太高，错误的判决会导致环路失锁（甚至反向调节）。       |
 | **插入导频法**<br><br>  <br><br>(Pilot Insertion)     | **所有调制**<br><br>  <br><br>(尤其抗衰落)       | 在频谱零点或边缘**插入线谱（正弦波）**。<br><br>  <br><br>接收端用窄带滤波器提取该线谱作为载波。                             | **无**<br><br>  <br><br>(相位绝对正确)      | **无相位模糊**；<br><br>  <br><br>电路最简单；<br><br>  <br><br>无需复杂的非线性处理。 | **浪费功率和带宽**。<br><br>  <br><br>部分发射功率分给了导频，降低了信号的信噪比。             |
 | **最大似然估计法**<br><br>  <br><br>(MLE / Feedforward) | **MPSK, MQAM**<br><br>  <br><br>(突发通信)  | **开环前馈结构**。<br><br>  <br><br>对接收信号进行数学运算（如 Viterbi-Viterbi 算法），直接算出相位偏移 $\hat{\theta}$。 | **有**<br><br>  <br><br>($2\pi/M$)    | **速度极快**（无反馈环路的延时）；<br><br>  <br><br>适合全数字实现和**突发通信**。          | 计算量大（涉及大量的反正切和复数运算）；<br><br>  <br><br>需要高速 DSP 或 FPGA 支持。        |
+
+## 附录2 相干解调中载波同步误差对信号的影响
+
+对于MQAM（多进制正交幅度调制）信号，我们可以将其表示为同相分量 $I(t)$ 和正交分量 $Q(t)$ 的组合。
+
+假设发送信号 $S(t)$ 为：
+
+$$S(t) = I(t)\cos(wt) - Q(t)\sin(wt)$$
+
+在接收端，相干解调需要两路正交的本地载波来分别提取 $I$ 路和 $Q$ 路信号。
+
+题目给出本地载波（通常指I路）为 $c_I(t) = A\cos(wt+x)$。为了解调MQAM，接收机内部会自动生成与 $c_I(t)$ 正交的另一路载波 $c_Q(t) = -A\sin(wt+x)$。
+
+分别计算两路的输出（经过乘法器和低通滤波器LPF后）：
+
+*  **I路（同相支路）输出**
+
+$$y_I(t) = S(t) \cdot A\cos(wt+x)$$
+
+$$y_I(t) = [I(t)\cos(wt) - Q(t)\sin(wt)] \cdot A\cos(wt+x)$$
+
+利用积化和差公式：
+
+- $\cos(wt)\cos(wt+x) = \frac{1}{2}[\cos(x) + \cos(2wt+x)]$
+    
+- $\sin(wt)\cos(wt+x) = \frac{1}{2}[\sin(-x) + \sin(2wt+x)] = \frac{1}{2}[-\sin(x) + \sin(2wt+x)]$
+    
+
+代入后得到：
+
+$$y_I(t) = \frac{A}{2}I(t)[\cos x + \cos(2wt+x)] - \frac{A}{2}Q(t)[-\sin x + \sin(2wt+x)]$$
+
+经过低通滤波器（滤除 $2wt$ 高频分量）后，得到的 $I$ 路基带信号 $I'(t)$ 为：
+
+$$I'(t) = \frac{A}{2} [ I(t)\cos x + Q(t)\sin x ]$$
+
+ *  **Q路（同相支路）输出**
+
+$$y_Q(t) = S(t) \cdot [-A\sin(wt+x)]$$
+
+$$y_Q(t) = [I(t)\cos(wt) - Q(t)\sin(wt)] \cdot [-A\sin(wt+x)]$$
+
+利用积化和差公式：
+
+- $\cos(wt)\sin(wt+x) = \frac{1}{2}[\sin(2wt+x) + \sin(x)]$
+    
+- $\sin(wt)\sin(wt+x) = \frac{1}{2}[\cos(-x) - \cos(2wt+x)] = \frac{1}{2}[\cos x - \cos(2wt+x)]$
+    
+
+代入后得到（注意前面的负号）：
+
+$$y_Q(t) = -I(t)\frac{A}{2}[\sin(2wt+x) + \sin x] + Q(t)\frac{A}{2}[\cos x - \cos(2wt+x)]$$
+
+经过低通滤波器后，得到的 $Q$ 路基带信号 $Q'(t)$ 为：
+
+$$Q'(t) = \frac{A}{2} [ -I(t)\sin x + Q(t)\cos x ]$$
+
+*  **综上，解调后回复的基带信号表达式为：**
+
+$$\begin{cases} I_{out} = \frac{A}{2} ( I(t)\cos x + Q(t)\sin x ) \\ Q_{out} = \frac{A}{2} ( -I(t)\sin x + Q(t)\cos x ) \end{cases}$$
+
+_(注：这里出现了同相和正交分量的**相互串扰**)_
+
+
+$$\begin{bmatrix} I_{out} \\ Q_{out} \end{bmatrix} = K \cdot \begin{bmatrix} \cos x & \sin x \\ -\sin x & \cos x \end{bmatrix} \begin{bmatrix} I(t) \\ Q(t) \end{bmatrix}$$
+
+观察这个矩阵，这就是数学中标准的**旋转矩阵**。
+
+ **1. x = 0 时（理想情况）**
+
+- **公式**：$I_{out} = K \cdot I(t)$, $Q_{out} = K \cdot Q(t)$。
+    
+- **星座图**：呈现标准的矩形（或十字形）分布，星座点清晰，水平和垂直排列整齐。这是标准的MQAM星座图。
+    
+
+ **2. x > 0 时（本地载波相位超前）**
+
+- **数学含义**：旋转矩阵 $\begin{bmatrix} \cos x & \sin x \\ -\sin x & \cos x \end{bmatrix}$ 对应的是**顺时针旋转**（或者说，信号矢量相对于坐标轴滞后了）。
+    
+- **星座图变化**：
+    
+    1. 整个星座图相对于原点发生了**顺时针旋转**（旋转角度为 $|x|$）。
+        
+    2. 由于旋转，原本只在I轴上的投影现在分摊到了Q轴上，产生了**同相-正交干扰（IQ串扰）**。
+        
+    3. 如果 $x$ 很大，会导致判决错误。
+        
+
+ **3. x < 0 时（本地载波相位滞后）**
+
+- **数学含义**：此时 $-x > 0$，相当于逆时针旋转矩阵。
+    
+- **星座图变化**：
+    
+    1. 整个星座图相对于原点发生了**逆时针旋转**（旋转角度为 $|x|$）。
+        
+    2. 同样存在严重的IQ串扰。

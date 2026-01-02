@@ -220,8 +220,7 @@ Begin
 End behav;
 ```
 > **易错点** 💥
-> `if-elsif` 语句是一种流程控制语句，判断条件有**先后次序**。这使得它非常适合用来描述优先级编码器。例如，当 `input` 为 `"01011111"` 时，`input(7)`和`input(5)`都有效（为'0'），但因为程序先判断 `input(7)`，所以最终输出对应 `input(7)` 的编码 `"111"`。
-![](Pastedimage20251227212923.png)
+> `if-elsif` 语句是一种流程控制语句，判断条件有**先后次序**。这使得它非常适合用来描述优先级编码器。例如，当 `input` 为 `"01011111"` 时，`input(7)`和`input(5)`都有效（为'0'），但因为程序先判断 `input(7)`，所以最终输出对应 `input(7)` 的编码 `"111"`。![](Pastedimage20251227212923.png)
 ---
 
 ## 5. 加法器的设计 ➕
@@ -576,6 +575,35 @@ end process;
 *   `dr`：方向控制端。
     *   当 `dr='1'` 时，`a` 作输入，`b` 作输出。
     *   当 `dr='0'` 时，`b` 作输入，`a` 作输出。
+
+### 6.5 比较器
+* 实现了一个 **8位数值比较器**，通过逐位比较（使用 `XNOR` 同或门）来判断两个输入向量 `x` 和 `y` 是否完全相等。只有当 `x` 和 `y` 的每一位都完全相同时，`eqi` 才能坚持到最后保持为 `1`。
+
+```vhdl
+LIBRARY IEEE;
+USE IEEE.std_logic_1164.ALL;
+
+ENTITY comparator IS
+    PORT (
+        x, y : IN std_logic_vector(7 DOWNTO 0);
+        eq   : OUT std_logic  -- eq 为 1 表示相等，为 0 表示不等
+    );
+END comparator;
+
+ARCHITECTURE behav OF comparator IS
+BEGIN
+    PROCESS(x, y)
+        VARIABLE eqi : std_logic;
+    BEGIN
+        eqi := '1';
+        FOR I IN x'range LOOP
+            eqi := eqi AND (x(I) XNOR y(I));
+        END LOOP;
+        eq <= eqi;
+        
+    END PROCESS;
+END behav;
+```
 
 ---
 
