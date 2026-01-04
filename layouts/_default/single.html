@@ -22,7 +22,6 @@
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
       {{- partial "post_meta.html" . -}}
-      <!-- ===== 我们添加的 PDF 下载链接 开始 ===== -->
       {{- with .Params.pdf_url }}
       <span class="pdf-download">
           · <a href="{{ . }}" download rel="noopener noreferrer" target="_blank">
@@ -31,12 +30,10 @@
           </a>
       </span>
       {{- end }}
-      <!-- ===== 我们添加的 PDF 下载链接 结束 ===== -->
       {{- partial "translation_list.html" . -}}
       {{- partial "edit_post.html" . -}}
       {{- partial "post_canonical.html" . -}}
     </div>
-    <!-- 文章标签列表 -->
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     {{- with ($.GetTerms $tags) }}
     <div class="post-tags-container">
@@ -62,7 +59,13 @@
     {{- else }}{{ .Content }}{{ end }}
   </div>
   {{- end }}
-
+  <hr style="margin: 1rem 0; opacity: 0.2;">
+  <div style="text-align: center; margin-bottom: 10px;">
+      <a href="/guestbook/" target="_blank" rel="noopener noreferrer" style="font-size: 14px; text-decoration: none; color: var(--secondary);">
+          内容有误？点这里反馈!
+      </a>
+  </div>
+  
   <footer class="post-footer">
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}

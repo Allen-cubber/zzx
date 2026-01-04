@@ -900,7 +900,7 @@ $$ P_b = Q\left(\sqrt{\frac{E_b}{N_0} \cdot 2\sin^2\theta}\right) = Q\left(\sqrt
 
 **设传输信号为：**
 $$ s_1(t) = A \cos(2\pi f_1 t) + kA \cos(2\pi f_c t) $$
-$$ s_2(t) = A \cos(2\pi f_2 t) + kA \cos(2\pi f_c t) $$
+$$ s_2(t) = A \cos(2\pi f_2 t) - kA \cos(2\pi f_c t) $$
 其中 $0 \le t \le T_b$。假设 $f_1, f_2, f_c$ 相互正交（即任意两个不同频率的信号乘积积分为0）。$k$ 为导频系数。符号先验等概，采用相干解调。
 
 **(1) 求 $s_1(t)$ 与 $s_2(t)$ 的相关系数 $\rho$。**
