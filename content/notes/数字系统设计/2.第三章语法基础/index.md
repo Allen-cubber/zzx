@@ -560,6 +560,12 @@ VHDL语句分为 **并行语句** 和 **顺序语句**。
              d2 WHEN "10",
              d3 WHEN OTHERS;
 ```
+如果想让多个条件对应同一个结果，可以用竖线分隔：
+```vhdl
+WITH sel SELECT
+    y <= '1' WHEN "00" | "11", -- 如果是 00 或 11，输出 1
+         '0' WHEN OTHERS;
+```
 ##### **进程语句 (PROCESS)**：它本身是一个并行语句，但其内部包含的是顺序语句。
 ##### 元件例化语句 (Component Instantiation)
 
