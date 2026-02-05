@@ -5,4 +5,4 @@ tags:
   - 美赛
 summary: 2026MCM_B
 ---
-{{< pdfjs src="/pdfs/2026_LaTeX__Template_for_MCM_ICM.pdf >}}
+{{< pdfjs src="/pdfs/2026_LaTeX__Template_for_MCM_ICM.pdf" >}}
