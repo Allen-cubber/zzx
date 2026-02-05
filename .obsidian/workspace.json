@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
+                "file": "content/musings/2026MCM_B/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
+                "file": "content/musings/2026MCM_B/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,11 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
+    "static/pdfs/2026_LaTeX__Template_for_MCM_ICM.pdf",
+    "static/pdfs",
+    "static/新建文件夹",
+    "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
+    "content/musings/2026MCM_B/index.md",
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pastedimage20260106204715.png",
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pastedimage20260106204650.png",
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pastedimage20260106204641.png",
@@ -181,9 +186,7 @@
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pasted image 20260106204844.png",
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pasted image 20260106204833.png",
     "content/notes/数字通信原理/实验四同步原理与复用技术/Pasted image 20260106204810.png",
-    "content/notes/数字通信原理/实验四同步原理与复用技术/Pasted image 20260106204755.png",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
-    "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字通信原理/实验四同步原理与复用技术",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
@@ -209,13 +212,10 @@
     "content/notes/信号与系统/index.md",
     "content/notes/数字信号处理/10.FIR数字滤波器设计/index.md",
     "content/musings/数模",
-    "content/musings/未命名.md",
     "content/notes/数字系统设计/实验",
     "content/musings/思想自由应该有边界吗",
     "public/assets/css/stylesheet.d810209ed88a4d4573b19f207b2b42cdfabea7233b6bf03e70e68dafa5ffb435.css",
     "public/assets/css/stylesheet.d4d75b2201e2799b894dfae17ffa070a1b1920998846633e24813db92e8740c3.css",
-    "public/assets/css/stylesheet.1892644ece62512a0f27c49a2d28d5bd44f0e22b1981dc96697173cb4038fce5.css",
-    "public/assets/css/stylesheet.912db1d92f4d01750d39fbd237eccd45878e4751f5d5608df298d53767d788c1.css",
-    "public/assets/css/stylesheet.ce3aa6a9a92b552e1dbce51bfe0106d6024cc1407452903453f66701991016bb.css"
+    "public/assets/css/stylesheet.1892644ece62512a0f27c49a2d28d5bd44f0e22b1981dc96697173cb4038fce5.css"
   ]
 }
