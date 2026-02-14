@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/ai洗车问题测试/index.md",
+                "file": "content/musings/从杨朱思想到对“公平”的思考/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/ai洗车问题测试/index.md",
+                "file": "content/musings/从杨朱思想到对“公平”的思考/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,9 +171,14 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
+    "content/musings/Cvalue/index.md",
+    "content/musings/思想自由应该有边界吗/index.md",
+    "content/musings/数模/index.md",
+    "content/musings/思想自由应该有边界吗/Gemini_Generated_Image_8vtgnk8vtgnk8vtg.png",
+    "Gemini_Generated_Image_8vtgnk8vtgnk8vtg.png",
+    "content/musings/ai洗车问题测试/index.md",
     "Gemini_Generated_Image_co1yo9co1yo9co1y.png",
     "content/musings/ai洗车问题测试/Gemini_Generated_Image_co1yo9co1yo9co1y.png",
-    "content/musings/ai洗车问题测试/index.md",
     "content/musings/2026MCM_B/index.md",
     "content/musings/ai洗车问题测试",
     "content/notes/电磁波与电磁场/index.md",
@@ -192,9 +197,6 @@
     "static/pdfjs/web/images/toolbarButton-zoomOut.svg",
     "static/pdfjs/web/images/treeitem-collapsed.svg",
     "static/pdfjs/web/images/toolbarButton-zoomIn.svg",
-    "static/pdfjs/web/images/toolbarButton-viewThumbnail.svg",
-    "static/pdfjs/web/images/toolbarButton-editorSignature.svg",
-    "static/pdfjs/web/images/toolbarButton-viewOutline.svg",
     "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
@@ -214,8 +216,6 @@
     "content/notes/数字系统设计/7.第八章综合/index.md",
     "content/notes/数字系统设计/8.数字系统设计方法/index.md",
     "content/notes/数字系统设计/7.第八章综合/未命名.md",
-    "content/notes/未命名.md",
-    "content/notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
-    "content/musings/数模/index.md"
+    "content/notes/未命名.md"
   ]
 }
