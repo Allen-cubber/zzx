@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/从杨朱思想到对“公平”的思考/index.md",
+                "file": "content/musings/麻将 AI 模拟对战沙盒/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/从杨朱思想到对“公平”的思考/index.md",
+                "file": "content/musings/麻将 AI 模拟对战沙盒/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,6 +171,10 @@
   },
   "active": "d4cf8d5456d06043",
   "lastOpenFiles": [
+    "content/musings/从杨朱思想到对“公平”的思考/index.md",
+    "content/musings/麻将 AI 模拟对战沙盒/index.md",
+    "content/musings/麻将 AI 模拟对战沙盒",
+    "content/musings/未命名.md",
     "content/musings/Cvalue/index.md",
     "content/musings/思想自由应该有边界吗/index.md",
     "content/musings/数模/index.md",
@@ -190,7 +194,6 @@
     "static/pdfjs/web/locale/uz/viewer.ftl",
     "static/pdfjs/web/locale/ur/viewer.ftl",
     "static/pdfjs/web/locale/uk/viewer.ftl",
-    "static/pdfjs/web/locale/tl/viewer.ftl",
     "static/pdfjs/web/images/toolbarButton-print.svg",
     "static/pdfjs/web/images/toolbarButton-viewsManagerToggle.svg",
     "static/pdfjs/web/images/treeitem-expanded.svg",
@@ -213,9 +216,6 @@
     "content/notes/数字通信原理/8.第十章扩频技术/index.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字系统设计/5.第六章状态机/index.md",
-    "content/notes/数字系统设计/7.第八章综合/index.md",
-    "content/notes/数字系统设计/8.数字系统设计方法/index.md",
-    "content/notes/数字系统设计/7.第八章综合/未命名.md",
-    "content/notes/未命名.md"
+    "content/notes/数字系统设计/7.第八章综合/index.md"
   ]
 }
