@@ -1,14 +1,10 @@
 ---
-title: 麻将 AI 模拟对战沙盒
+title: 🀄 麻将 AI 模拟对战沙盒
 date: 2026-02-26T08:00:00+08:00
 tags:
   - 网页开发
 summary: 这是一个基于 Python (Flask) 和纯原生前端技术构建的麻将 (Mahjong) 模拟对战与牌理分析沙盒。
 ---
-
-
-# 🀄 麻将 AI 模拟对战沙盒 (Mahjong AI Sandbox)
-
 ![Python](https://img.shields.io/badge/Python-3.9+-blue.svg)
 ![Flask](https://img.shields.io/badge/Framework-Flask-lightgrey.svg)
 ![TailwindCSS](https://img.shields.io/badge/Frontend-TailwindCSS-06B6D4.svg)
@@ -46,7 +42,7 @@ $$Score = w_1 \cdot EV_{base} + w_2 \cdot Ukeire + w_3 \cdot Utility_{dora}$$
 
 其中 $Utility_{dora}$ 确保了 AI 在面对平级决策时，具备保留高打点潜力的攻击性。
 
-## 🚀 本地运行 (Local Setup)
+## 🚀 本地运行
 
 1. **克隆仓库**:
 ```bash
@@ -82,7 +78,7 @@ python app.py
 
 随后在浏览器访问 `http://127.0.0.1:5000` 即可开始对战。
 
-## ☁️ 云端部署 (Cloud Deployment via Render)
+## ☁️ 云端部署
 
 本项目已针对 PaaS 平台（如 Render）的自动化 CI/CD 进行了优化配置：
 
