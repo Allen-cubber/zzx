@@ -20,8 +20,21 @@
               "icon": "lucide-file",
               "title": "index"
             }
+          },
+          {
+            "id": "65f7f5b04e347613",
+            "type": "leaf",
+            "state": {
+              "type": "image",
+              "state": {
+                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151116.png"
+              },
+              "icon": "lucide-image",
+              "title": "Pastedimage20251025151116"
+            }
           }
-        ]
+        ],
+        "currentTab": 1
       }
     ],
     "direction": "vertical"
@@ -142,13 +155,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字通信原理/期末复习/index.md",
+                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151116.png",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "Pastedimage20251025151116 的大纲"
             }
           }
         ],
@@ -169,11 +182,15 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "085ba0b8a8c2cc89",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/notes/数字通信原理/期末复习/Pastedimage20251025151116.png",
+    "content/notes/数字通信原理/期末复习/Pastedimage20251025151224.png",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151033.png",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025150936.png",
+    "content/notes/数字通信原理/期末复习/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "Pasted.md",
-    "content/notes/数字通信原理/期末复习/index.md",
     "Pasted image 20260306101739.png",
     "content/notes/数字通信原理/期末复习/Pastedimage20260306101756.png",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
@@ -200,7 +217,6 @@
     "content/musings/数模/index.md",
     "content/musings/思想自由应该有边界吗/Gemini_Generated_Image_8vtgnk8vtgnk8vtg.png",
     "Gemini_Generated_Image_8vtgnk8vtgnk8vtg.png",
-    "Gemini_Generated_Image_co1yo9co1yo9co1y.png",
     "content/musings/2026MCM_B/index.md",
     "content/musings/ai洗车问题测试",
     "content/notes/电磁波与电磁场/index.md",
@@ -210,12 +226,9 @@
     "static/pdfjs/web/locale/vi/viewer.ftl",
     "static/pdfjs/web/locale/wo/viewer.ftl",
     "static/pdfjs/web/locale/uz/viewer.ftl",
-    "static/pdfjs/web/images/toolbarButton-print.svg",
-    "static/pdfjs/web/images/toolbarButton-viewsManagerToggle.svg",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
-    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/基带不为矩形波的误码率.md"
+    "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md"
   ]
 }
