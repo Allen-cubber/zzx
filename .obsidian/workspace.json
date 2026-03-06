@@ -8,26 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "39fe2ffa764bc79d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "content/notes/数字通信原理/期末复习/index.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
             "id": "085ba0b8a8c2cc89",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+                "file": "content/notes/数字通信原理/期末复习/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -183,11 +169,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "39fe2ffa764bc79d",
+  "active": "085ba0b8a8c2cc89",
   "lastOpenFiles": [
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
+    "Pasted.md",
     "content/notes/数字通信原理/期末复习/index.md",
+    "Pasted image 20260306101739.png",
+    "content/notes/数字通信原理/期末复习/Pastedimage20260306101756.png",
+    "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
@@ -223,13 +212,10 @@
     "static/pdfjs/web/locale/uz/viewer.ftl",
     "static/pdfjs/web/images/toolbarButton-print.svg",
     "static/pdfjs/web/images/toolbarButton-viewsManagerToggle.svg",
-    "static/pdfjs/web/images/treeitem-expanded.svg",
-    "static/pdfjs/web/images/toolbarButton-zoomOut.svg",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
     "content/notes/数字系统设计/2.第三章语法基础/index.md",
     "content/notes/数字通信原理/7.第九章同步技术/index.md",
     "content/notes/数字系统设计/3.第四章组合逻辑电路/index.md",
-    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/基带不为矩形波的误码率.md",
-    "content/notes/数字系统设计/6.第七章仿真/index.md"
+    "content/notes/数字通信原理/5.第六章数字载波调制传输系统/基带不为矩形波的误码率.md"
   ]
 }
