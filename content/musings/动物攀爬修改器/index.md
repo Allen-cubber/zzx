@@ -1,5 +1,5 @@
 ---
-title: 逆向实战：从零手搓《Climber Animals Together》超级跳跃 Mod
+title: 《Climber Animals Together》超级跳跃 Mod
 tags:
   - 网页开发
 date: 2026-03-0T08:00:00+08:00
