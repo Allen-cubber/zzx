@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/musings/动物攀爬修改器/index.md",
+                "file": "content/notes/计算机网络/第一章 概述/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/musings/动物攀爬修改器/index.md",
+                "file": "content/notes/计算机网络/第一章 概述/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,29 +169,33 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "085ba0b8a8c2cc89",
   "lastOpenFiles": [
+    "content/notes/计算机网络/第一章 概述/Pastedimage20260312111750.png",
+    "content/notes/计算机网络/第一章 概述/Pastedimage20260312111702.png",
+    "content/notes/计算机网络/第一章 概述/Pastedimage20260312111622.png",
+    "content/notes/计算机网络/第一章 概述/Pasted image 20260312111750.png",
+    "content/notes/计算机网络/第一章 概述/Pasted image 20260312111702.png",
+    "content/notes/计算机网络/第一章 概述/Pasted image 20260312111622.png",
+    "Pasted image 20260312111750.png",
+    "Pasted image 20260312111702.png",
+    "Pasted image 20260312111622.png",
+    "计算机网络第8版课件-第1章-概述-60-94.pdf",
+    "content/musings/动物攀爬修改器/index.md",
+    "content/notes/计算机网络/第一章 概述/index.md",
+    "content/notes/计算机网络/第一章 概述",
+    "content/notes/计算机网络",
     "content/musings/动物攀爬修改器/afb5d4b529c4d44b546213dd7165a524.jpg",
     "afb5d4b529c4d44b546213dd7165a524.jpg",
     "content/notes/数字通信原理/期末复习/index.md",
-    "content/musings/动物攀爬修改器/index.md",
     "content/musings/动物攀爬修改器",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151116.png",
-    "content/notes/数字通信原理/期末复习/Pastedimage20251025151116.png",
-    "content/notes/数字通信原理/期末复习/Pastedimage20251025151224.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025151033.png",
-    "content/notes/数字通信原理/4.第五章数字基带信号传输/Pastedimage20251025150936.png",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "Pasted.md",
-    "Pasted image 20260306101739.png",
-    "content/notes/数字通信原理/期末复习/Pastedimage20260306101756.png",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "content/notes/数字系统设计/I2C通信/index.md",
-    "content/notes/数字系统设计/I2C通信/e7f0b298777a69885cd859035ec989fd.png",
-    "e7f0b298777a69885cd859035ec989fd.png",
     "content/notes/数字系统设计/I2C通信",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
     "content/notes/数字通信原理/1.第一章绪论/index.md",
@@ -211,11 +215,7 @@
     "content/notes/电磁波与电磁场/index.md",
     "static/pdfjs/web/locale/zh-CN/viewer.ftl",
     "static/pdfjs/web/locale/zh-TW/viewer.ftl",
-    "static/pdfjs/web/locale/xh/viewer.ftl",
-    "static/pdfjs/web/locale/vi/viewer.ftl",
-    "static/pdfjs/web/locale/wo/viewer.ftl",
     "content/notes/数字通信原理/实验二基带编码实验/index.md",
-    "content/notes/数字系统设计/2.第三章语法基础/index.md",
-    "content/notes/数字通信原理/7.第九章同步技术/index.md"
+    "content/notes/数字系统设计/2.第三章语法基础/index.md"
   ]
 }
