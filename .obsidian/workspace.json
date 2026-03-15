@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "32d4fa622e887f33",
+        "id": "f8402253f126dd2b",
         "type": "tabs",
         "children": [
           {
-            "id": "085ba0b8a8c2cc89",
+            "id": "a31f97cc16776cc6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
+                "file": "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
+                "file": "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,21 +169,27 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "085ba0b8a8c2cc89",
+  "active": "a31f97cc16776cc6",
   "lastOpenFiles": [
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pastedimage20260315175635.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pastedimage20260315175219.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pastedimage20260315175115.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pasted image 20260315175635.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pasted image 20260315175219.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/Pasted image 20260315175115.png",
-    "Pasted image 20260315175635.png",
-    "Pasted image 20260315175219.png",
-    "Pasted image 20260315175115.png",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/未命名绘图.drawio.svg",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/1.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315205418.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315205301.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315205250.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315205229.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315205221.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315204612.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pastedimage20260315204439.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pasted image 20260315210913.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pasted image 20260315210840.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pasted image 20260315205418.png",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/Pasted image 20260315205301.png",
+    "content/notes/数字电子技术/第三章 门电路/index.md",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
+    "content/notes/数字电子技术/第四章 组合逻辑电路",
+    "Pasted image 20260315182732.png.~tmp",
     "content/notes/数字电子技术/第一章 数制和码制/index.md",
     "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
+    "content/notes/数字电子技术/第三章 门电路",
+    "content/notes/数字电子技术/未命名.md",
     "content/notes/数字电子技术/第二章 逻辑代数基础",
     "content/notes/数字图像处理/实验一/index.md",
     "content/notes/计算机网络/CSMACA/index.md",
@@ -196,9 +202,7 @@
     "计算机网络第8版课件-第1章-概述-60-94.pdf",
     "content/musings/动物攀爬修改器/index.md",
     "content/notes/计算机网络/第一章 概述",
-    "content/notes/计算机网络",
     "content/notes/数字通信原理/期末复习/index.md",
-    "content/musings/动物攀爬修改器",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
     "Pasted.md",
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
@@ -206,16 +210,12 @@
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
     "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
     "content/notes/数字系统设计/I2C通信/index.md",
-    "content/notes/数字系统设计/I2C通信",
     "content/notes/数字通信原理/2.第二章信号分析基础/index.md",
     "content/notes/数字通信原理/1.第一章绪论/index.md",
     "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
     "content/notes/数字通信原理/未命名.md",
     "content/musings/麻将 AI 模拟对战沙盒/index.md",
     "content/musings/ai洗车问题测试/index.md",
-    "content/musings/从杨朱思想到对“公平”的思考/index.md",
-    "content/musings/未命名.md",
-    "content/musings/Cvalue/index.md",
-    "content/musings/思想自由应该有边界吗/index.md"
+    "content/musings/从杨朱思想到对“公平”的思考/index.md"
   ]
 }
