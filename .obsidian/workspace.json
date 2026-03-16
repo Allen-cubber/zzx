@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
+                "file": "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
+                "file": "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -156,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -172,18 +171,23 @@
   },
   "active": "a31f97cc16776cc6",
   "lastOpenFiles": [
-    "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316171638.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316171613.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316171508.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316171217.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316171127.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316170936.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316170913.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316165744.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316165725.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316165533.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/Pastedimage20260316165530.png",
+    "Pasted image 20260316152835.png.~tmp",
+    "Pasted image 20260316152638.png.~tmp",
     "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120743.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120704.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120526.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120506.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120503.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120427.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120337.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316120002.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316113942.png",
-    "content/notes/数字电子技术/第五章 半导体存储电路/Pastedimage20260316112807.png",
+    "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
+    "content/notes/数字电子技术/第六章 时序逻辑电路",
+    "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
     "Chapter 5 鍗婂浣撳瓨鍌ㄥ櫒_yang(3) 1.pdf",
     "Chapter 5 鍗婂浣撳瓨鍌ㄥ櫒_yang(3).pdf",
     "content/notes/数字电子技术/第五章 半导体存储电路",
@@ -197,11 +201,8 @@
     "content/notes/数字电子技术/第二章 逻辑代数基础",
     "content/notes/数字图像处理/实验一/index.md",
     "content/notes/计算机网络/CSMACA/index.md",
-    "content/notes/数字图像处理/实验一",
     "content/notes/数字图像处理/未命名.md",
-    "content/notes/数字图像处理",
     "content/notes/计算机网络/第一章 概述/index.md",
-    "content/notes/计算机网络/CSMACA",
     "content/musings/动物攀爬修改器/index.md",
     "content/notes/数字通信原理/期末复习/index.md",
     "content/notes/数字通信原理/5.第六章数字载波调制传输系统/index.md",
@@ -215,7 +216,6 @@
     "content/notes/数字通信原理/1.第一章绪论/index.md",
     "content/notes/数字通信原理/实验四同步原理与复用技术/index.md",
     "content/notes/数字通信原理/未命名.md",
-    "content/musings/麻将 AI 模拟对战沙盒/index.md",
-    "content/musings/ai洗车问题测试/index.md"
+    "content/musings/麻将 AI 模拟对战沙盒/index.md"
   ]
 }
