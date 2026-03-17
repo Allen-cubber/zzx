@@ -1,19 +1,13 @@
 ---
-title: 实验一
+title: 实验一 视觉感知现象验证与分析
 tags:
   - 数字图像处理
   - 大三下
 date: 2026-03-15T08:00:00+08:00
 summary: 视觉感知现象验证与分析
-draft: true
+draft: false
 ---
 <h1 align="center">第二章实验报告</h1>
-
-<div style="text-align: center;">
-  <strong>班级</strong>：23级信息工程5班
-  <strong>姓名</strong>：张哲轩
-  <strong>学号</strong>：202330352051
-</div>
 
 ---
 

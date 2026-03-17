@@ -2,8 +2,8 @@
   "alwaysUpdateLinks": true,
   "pdfExportSettings": {
     "pageSize": "A3",
-    "landscape": true,
-    "margin": "2",
+    "landscape": false,
+    "margin": "0",
     "downscalePercent": 100
   },
   "showLineNumber": true,
