@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
+                "file": "content/notes/数字图像处理/第二章 数字图像基础/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
+                "file": "content/notes/数字图像处理/第二章 数字图像基础/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -171,25 +171,30 @@
   },
   "active": "a31f97cc16776cc6",
   "lastOpenFiles": [
-    "content/notes/数字电子技术/第三章 门电路/index.md",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155706.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155647.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155459.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155450.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155434.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pastedimage20260318155357.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pasted image 20260318155706.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pasted image 20260318155647.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pasted image 20260318155459.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pasted image 20260318155450.png",
+    "content/notes/数字图像处理/第二章 数字图像基础/Pasted image 20260318155434.png",
+    "content/notes/数字图像处理/第一章 概论/index.md",
+    "content/notes/数字图像处理/第二章 数字图像基础/index.md",
+    "content/notes/数字图像处理/第二章 数字图像基础",
     "content/notes/数字电子技术/第五章 半导体存储电路/index.md",
+    "content/notes/数字图像处理/第一章 概论",
+    "content/notes/数字电子技术/第三章 门电路/index.md",
     "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
     "content/notes/数字电子技术/第四章 组合逻辑电路/index.md",
     "content/notes/数字电子技术/第一章 数制和码制/index.md",
     "content/notes/数字图像处理/实验二/index.md",
     "content/notes/数字图像处理/实验二/a95fab8849484dcdd190db9f25c6973f.jpg.~tmp",
-    "content/notes/数字图像处理/实验二/Figure_1.png",
     "content/notes/数字图像处理/实验一/index.md",
-    "content/notes/数字图像处理/实验二/a95fab8849484dcdd190db9f25c6973f.jpg",
     "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/index.md",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317135320.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317131003.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317130955.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317130947.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317130811.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317125131.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317125043.png",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/Pastedimage20260317124831.png",
     "Pasted image 20260317130811.png.~tmp",
     "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/数字电子技术/第七章 脉冲波形的产生和整形",
@@ -203,8 +208,6 @@
     "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
     "Pasted image 20260316152835.png.~tmp",
     "Pasted image 20260316152638.png.~tmp",
-    "content/notes/数字电子技术/第六章 时序逻辑电路",
-    "Chapter 5 鍗婂浣撳瓨鍌ㄥ櫒_yang(3) 1.pdf",
     "content/notes/数字图像处理/未命名.md",
     "content/musings/动物攀爬修改器/index.md",
     "content/notes/数字通信原理/期末复习/index.md",
@@ -213,8 +216,6 @@
     "content/notes/数字通信原理/4.第五章数字基带信号传输/index.md",
     "content/notes/数字通信原理/系统框图/index.md",
     "content/notes/数字通信原理/6.第七章传输信道/index.md",
-    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
-    "content/notes/数字系统设计/I2C通信/index.md",
-    "content/notes/数字通信原理/2.第二章信号分析基础/index.md"
+    "content/notes/数字通信原理/3.第三章模拟信号的数字编码/index.md"
   ]
 }
