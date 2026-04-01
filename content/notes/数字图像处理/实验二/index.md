@@ -16,7 +16,7 @@ draft: true
 </div>
 
 ---
-![](a95fab8849484dcdd190db9f25c6973f.jpg)
+
 ## 实验一：灰度变换增强图像（伽马变换）
 
 ### 1. 实验题目
@@ -70,7 +70,7 @@ if __name__ == "__main__":
 
 ### 3. 实验结果
 
-![](Figure_1.png)
+![[content/notes/数字图像处理/实验二/Figure_1.png]]
 
 **视觉观察结果：**
 
