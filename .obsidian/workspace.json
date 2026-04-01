@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
+                "file": "content/notes/计算机网络/第四章 网络层/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
+                "file": "content/notes/计算机网络/第四章 网络层/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -185,8 +185,9 @@
   },
   "active": "a31f97cc16776cc6",
   "lastOpenFiles": [
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/index.md",
+    "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
+    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/index.md",
     "content/notes/数字图像处理/实验二/index.md",
     "content/notes/数字图像处理/实验二/Figure_1.png",
     "content/notes/数字图像处理/实验二/Figure_2.png",
@@ -196,7 +197,6 @@
     "Figure_1.png",
     "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/数字图像处理/实验三",
-    "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/计算机网络/第四章 网络层",
     "content/notes/高频电子线路/高频电子线路/index.md",
     "content/notes/计算机网络/第三章 数据链路层/Pastedimage20260326111321.png",
