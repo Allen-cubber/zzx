@@ -710,11 +710,37 @@ math: true
         *   源: 立即数, 通用寄存器, 段寄存器 (除CS), 存储单元
         *   目的: 通用寄存器, 段寄存器 (除CS), 存储单元
     *   ❗注意:
-        *   `CS` 不能作为目的操作数。
-        *   **源和目的不能同时为存储单元。
+        *   `CS`\ `IP` 不能作为目的操作数，防止程序逻辑崩溃。`MOV CS, AX`
+        *   **源和目的不能同时为存储单元。**`MOV [BX], [DI]`
+	        ```
+	        MOV AL, [DI]  ; 先将内存 VAR2 的内容读入寄存器 AL
+			MOV [BX], AL  ; 再将 AL 的内容写入内存 VAR1
+			```
         *   段寄存器（如`DS`, `ES`, `SS`）不能直接用立即数赋值，通常需要通过通用寄存器（如`AX`）中转。例如：`MOV AX, DATA_SEG_ADDR; MOV DS, AX`。
-        *   至少有一个操作数需要明确指出操作的数据大小（字节或字），可通过寄存器名（如`AL` vs `AX`）或`BYTE PTR`/`WORD PTR`伪指令指定。
+        *   至少有一个操作数需要明确指出操作的数据大小（字节或字），可通过寄存器名（如`AL` vs `AX`）或`BYTE PTR`/`WORD PTR`伪指令指定。`MOV BYTE PTR [BX], 0`
         *   `OFFSET` 操作符用于获取标号（内存地址）的偏移地址，而不是内容。例如 `MOV DX, OFFSET ARRAY` 是将 `ARRAY` 的偏移地址送入 `DX`。
+
+- `MOV DS, 1234H`
+    
+- `MOV AX, [BX+DI]`
+    
+- `MOV [BX], [BP]`
+    
+- `MOV AL, BX`
+    
+- `MOV CS, AX`
+    
+- `MOV WORD PTR [SI], 55AAH`
+    
+- `MOV ES, DS`
+    
+- `MOV [BX], 10H`
+    
+- `MOV AX, OFFSET VAR` （假设 VAR 是一个已定义的数据标号）
+    
+- `MOV IP, AX`
+
+×√×××   √××√×
 
 *   **2) `PUSH` 进栈指令 (Push Word onto Stack)**
     *   格式: `PUSH 源`
@@ -744,12 +770,17 @@ math: true
 
 *   **5) `XLAT` 表转换指令 (Table Lookup-Translation)**
     *   格式: `XLAT` 或 `XLAT 转换表` （转换表名是可选的，仅作注释）
-    *   功能: 查表转换字节代码。 $\boxed{AL \leftarrow [DS:BX + AL]}$
+    *   功能: 根据一个给定的索引，从内存中的一张表格里查出对应的一个字节数据，并返回这个数据。它的硬件级操作公式是完全固定的： $\boxed{AL \leftarrow [DS:BX + AL]}$
     *   隐式操作数: `BX` 包含转换表的基地址, `AL` 包含要转换的值（作为查表位移量）。
     *   ❗注意:
         *   使用前必须设置好 `BX` 和 `AL`。
         *   该指令只处理字节操作。
         *   表格最大256字节。
+	- **第一步（定位表格）**：将转换表的首地址（偏移地址）送入 `BX` 寄存器。
+    
+	- **第二步（提供索引）**：将你需要查找的序号（0~255之间）送入 `AL` 寄存器。
+    
+	- **第三步（执行查表）**：调用 `XLAT`。执行后，`AL` 原本的索引值就消失了，取而代之的是查出来的数据。
 
 **2. 输入输出指令 (Input and Output)**
 
@@ -761,6 +792,7 @@ math: true
         *   `IN AX, DX` (16位端口, $0000-FFFFH$)
     *   功能: 从指定I/O端口读取数据到累加器 (`AL` 或 `AX`)。
     *   ❗注意: 端口地址大于 $FFH$ 时，必须先将端口地址放入 `DX` 寄存器，再使用 `IN AL/AX, DX` 格式。
+    * 在 8086 的处理器内部设计中，`AX` 是累加器（负责数据收发），`CX` 是计数器（负责循环），`BX` 是基址寄存器（负责内存寻址），而 **`DX` (Data Register) 被赋予了 I/O 指针的特殊使命**。
 
 *   **2) `OUT` 输出指令 (Output)**
     *   格式:
@@ -791,6 +823,17 @@ math: true
     *   功能: 类似于`LDS`，但加载的是`ES`段寄存器。
     *   操作: $\boxed{目的寄存器 \leftarrow [源地址]}$ , $\boxed{ES \leftarrow [源地址+2]\ \ \ \ }$
     *   操作数: 源是内存双字单元, 目的是16位通用寄存器 (常用`DI`)。
+	`LDS` 和 `LES` 最经典的搭档是 **字符串操作指令**（如 `MOVSB`, `MOVSW`）。
+	在 8086 中，字符串传送指令（如把一段内存数据复制到另一段内存）有着严苛的硬件默认要求：
+	
+	- **源串**的地址必须由 `DS:SI` 指出。
+	    
+	- **目的串**的地址必须由 `ES:DI` 指出。
+	
+	```
+	LDS SI, [源指针地址]
+	LES DI, [目的指针地址]
+	```
 
 **4. 标志传送指令 (Flag Transfers)**
 
@@ -945,9 +988,12 @@ math: true
 
 *   **3) `CBW` 把字节转换为字指令 (Convert Byte to Word)**
     *   格式: `CBW`
-    *   功能: 将`AL`中的**字节按符号位**扩展到`AH`，形成一个字在`AX`中。 $\boxed{AX \leftarrow sign\_extend(AL)}$
+    *   功能: 将`AL`中的**字节按符号位**扩展到`AH`，形成一个字在`AX`中,以**应对负数**和**配合除法指令**。 $\boxed{AX \leftarrow sign\_extend(AL)}$
     *   ❗注意: 用于`IDIV`字节除法前准备被除数。无操作数，不影响标志位。
-
+    * **硬件逻辑：** CPU 会检查 `AL` 的最高位（即第 7 位，符号位）。
+		- 如果最高位是`0`（正数），CPU 就会把 `AH` 全部填充为 `00H`。
+		- 如果最高位是 `1`（负数），CPU 就会把 `AH` 全部填充为 `FFH`（即全 1）。
+	
 *   **4) `CWD` 把字转换为双字指令 (Convert Word to Double Word)**
     *   格式: `CWD`
     *   功能: 将`AX`中的字按符号位扩展到`DX`，形成一个双字在`DX:AX`中。 $\boxed{DX:AX \leftarrow sign\_extend(AX)}$
@@ -993,9 +1039,9 @@ math: true
 
 *   **5) `TEST` 测试指令 (Test)**
     *   格式: `TEST 目的, 源`
-    *   功能: 计算 `目的 \land 源`，仅根据结果设置标志位，**不保存结果**。
+    *   功能: 计算 `目的 AND 源`，仅根据结果设置标志位，**不保存结果**。
     *   标志位: 同`AND`。
-    *   用途: 常用于测试某些位是否为1或0，而不改变操作数本身。
+    *   用途: 常用于测试某些位是否为1或0，而不改变操作数本身。例如快速判断寄存器是否为 0 或正负。`TEST AX, AX`:如果 `AX` 本身是 0，执行后零标志位 `ZF` 会变成 1。如果 `AX` 是负数，符号标志位 `SF` 会变成 1。
 
 **2. 移位指令 (Shift)**
 
@@ -1093,7 +1139,13 @@ math: true
     *   格式: `STOS 目的串` (或 `STOSB`, `STOSW`)
     *   功能: $\boxed{[ES:DI] \leftarrow AL/AX}$，然后根据`DF`更新`DI`。
     *   用途: 与`REP`连用实现内存块初始化（需先将初始值放入`AL`/`AX`）。
-
+- **两块内存** 互相对比：`CMPS` (DS:SI vs ES:DI)
+    
+- **寄存器找内存**：`SCAS` (AL/AX vs ES:DI)
+    
+- **内存走向寄存器**：`LODS` (DS:SI -> AL/AX)
+    
+- **寄存器走向内存**：`STOS` (AL/AX -> ES:DI)
 ---
 
 #### ↪️ 3.3.5 控制转移指令（掌握）
@@ -1114,7 +1166,23 @@ math: true
         *   **段间 (Far):** 目标地址在其他代码段，同时修改 `CS` 和 `IP`。
             *   **直接:** `JMP FAR PTR label` (指令中包含目标的`CS:IP`)。
             *   **间接:** `JMP mem_dword` (目标`CS:IP`在内存双字中)。
+```
+; --- 段内跳转示例 ---
+JMP NEXT_STEP       ; 默认是段内跳转，只改变 IP
+...
+NEXT_STEP:
+    MOV AX, BX
 
+
+; --- 段间跳转示例 ---
+JMP FAR PTR OTHER_SEG_LABEL ; 明确告诉编译器这是跨段的，同时替换 CS 和 IP
+...
+
+OTHER_CODE SEGMENT
+OTHER_SEG_LABEL:            ; 这个标号在另一个段里
+    MOV CX, DX
+OTHER_CODE ENDS
+```
 *   **2) `CALL` 过程调用指令 (Call)**
     *   格式: `CALL 目的`
     *   功能: 调用一个子程序（过程）。
@@ -1183,7 +1251,7 @@ math: true
 **4. 中断指令 (Interrupt)**
 
 *   **1) `INT n` 软件中断指令**
-    *   格式: `INT n` ($n$ 为中断类型号, 0-255)
+    *   格式: `INT n ($n$ 为中断类型号, 0-255)
     *   功能: 产生一个软件中断。
     *   操作: 压栈 `FLAGS`, `CS`, `IP` ($TF=0, IF=0$)，然后从中断向量表地址 $4 \times n$ 处取出中断服务程序的入口地址 (`CS:IP`)并跳转。
 
@@ -1374,10 +1442,10 @@ math: true
 
 *   **数据段 (DATA SEGMENT):** 用于存放程序中使用的变量和数据。
     ```assembly
-    DATA SEGMENT
+    DATAS SEGMENT
         X DB ?     ; 定义一个字节变量 X，初始值未知
         Y DW ?     ; 定义一个字变量 Y，初始值未知
-    DATA ENDS
+    DATAS ENDS
     ```
 *   **附加段 (EXTRA SEGMENT):** 可选段，用于存放额外的数据，常用于字符串操作的目的串。
     ```assembly
@@ -1395,7 +1463,7 @@ math: true
 *   **代码段 (CODE SEGMENT):** 包含程序的执行指令。
     ```assembly
     CODE SEGMENT
-        ASSUME CS:CODE, DS:DATA, ES:EXTRA, SS:STACK ; 设定段寄存器与逻辑段的关联
+        ASSUME CS:CODE, DS:DATAS, ES:EXTRA, SS:STACK ; 设定段寄存器与逻辑段的关联
 
     START: ; 程序入口点标号
         ; --- 初始化段寄存器 ---
@@ -1455,11 +1523,9 @@ END START
 3.  **CS:IP 初始化:** `CS` 设置为代码段的基地址，`IP` 设置为 `END` 语句指定的入口标号的偏移地址。
 4.  **SS:SP 初始化:** 如果定义了 `STACK` 类型的堆栈段，链接器 `LINK` 会自动设置 `SS:SP` 指向栈底；否则操作系统会自动分配堆栈。
 
----
-
 ### 4.2 DOS系统功能调用（掌握）
 ---
-DOS (Disk Operating System) 提供了一系列中断服务程序，其中 `INT 21H` 是最常用也最重要的一个，它包含了大量的子功能，用于处理文件操作、输入输出、内存管理等。调用这些功能的通用步骤是：
+**DOS (Disk Operating System) 提供了一系列中断服务程序**，其中 `INT 21H` 是最常用也最重要的一个，它包含了大量的子功能，用于处理文件操作、输入输出、内存管理等。调用这些功能的通用步骤是：
 
 1.  将 **子功能号** 放入 `AH` 寄存器。
 2.  根据具体功能的要求，将 **入口参数** 放入指定的寄存器（如 `DL`, `DX`, `AL` 等）。
@@ -1583,6 +1649,12 @@ END START ; 指定程序入口点为 START
 *   **地址计数器:** `$`
     *   表示当前指令或数据所在的偏移地址。
     *   `COUNT EQU $-NUM1` ; 计算从 `NUM1` 开始到当前位置的字节数（即 `NUM1` 数组的长度）。
+```
+DATA SEGMENT
+    MSG DB 'Hello, World!'  ; 定义了一个字符串
+    MSG_LEN EQU $ - MSG     ; 字符串的字节长度
+DATA ENDS
+```
     *   `LEN EQU ($-VAR1)/2` ; 计算 `VAR1` 数组包含的 **字** 的个数 (因为 `VAR1` 是 `DW` 定义的)。 ❗ **注意点:** 需根据数据类型（DB/DW）调整除数。
 *   **未知数据:** `?`
     *   在 `DB`, `DW`, `DD` 中表示该数据项的值是未知的，汇编器会为其分配空间，但不进行初始化。
@@ -1634,8 +1706,7 @@ END START ; 指定程序入口点为 START
 **示例：比较 AL 和 BL 的值**
 
 *   **目标:** 如果 `AL == BL`，则将 'Y' 存入 DL；否则，将 'N' 存入 DL。最后通过 DOS 功能调用显示 DL 中的字符。
-*   **流程图逻辑:**
-![图片](Pasted-image-20250825203707.png)
+
 *   **实现方法一 (课件 P14):** 先判断相等 (`JE`)，再处理不等 (`JNE`)。
     ```assembly
     CMP AL, BL      ; 比较 AL 和 BL
@@ -1668,7 +1739,6 @@ END START ; 指定程序入口点为 START
     JMP EXIT        ; 跳转到出口
 
     LP1: MOV DL, 'Y' ; 相等路径 (Y 路径)
-         ; JMP EXIT  ; 这里可以省略
 
     EXIT: MOV AH, 2   ; DOS 功能调用：显示字符
           INT 21H
@@ -1967,7 +2037,7 @@ END START ; 指定程序入口点为 START
         RET
     SUM ENDP
     ```
-    ❗ **注意点:**
+    * ❗ **注意点:**
         *   使用 `AX` (AH:AL) 来存放累加和，因为字节数组累加可能超过255。`AL` 存低8位和，`AH` 存高8位（进位）。
         *   `ADD AL, [SI]` 可能产生进位 (`CF=1`)，`ADC AH, 0` 将 `CF` 的值加到 `AH` 上，实现了16位累加。
         *   `LOOP` 指令自动处理 `CX` 减一和判断跳转。
