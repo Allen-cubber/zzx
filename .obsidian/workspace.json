@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+                "file": "content/notes/计算机网络/第四章 网络层/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,8 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 247.49999618530273,
-    "collapsed": true
+    "width": 247.49999618530273
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -143,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+                "file": "content/notes/计算机网络/第四章 网络层/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -157,8 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300,
-    "collapsed": true
+    "width": 300
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -173,6 +171,7 @@
   },
   "active": "a31f97cc16776cc6",
   "lastOpenFiles": [
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
@@ -194,7 +193,6 @@
     "content/notes/计算机网络/第三章 数据链路层/Pastedimage20260326100410.png",
     "content/notes/微机原理与单片机/关于存储器寻址/index.md",
     "content/notes/微机原理与单片机/关于存储器寻址",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/微机原理与单片机/微机与接口填空/答案版.md",
     "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
     "content/notes/数字电子技术/第八章 AD转换/index.md",
