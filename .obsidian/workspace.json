@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/计算机网络/第四章 网络层/index.md",
+                "file": "content/notes/高频电子线路/高频电子线路/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/计算机网络/第四章 网络层/index.md",
+                "file": "content/notes/高频电子线路/高频电子线路/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -156,7 +156,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,19 +171,26 @@
   },
   "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260408155348.png",
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260408154307.png",
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260408153640.png",
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260408151013.png",
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260408150937.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260408155348.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260408154307.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260408153640.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260408151013.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260408150937.png",
-    "Pasted image 20260408155348.png",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/notes/高频电子线路/高频电子线路/Pastedimage20260410103751.png",
+    "content/notes/高频电子线路/高频电子线路/Pastedimage20260410104108.png",
+    "content/notes/高频电子线路/高频电子线路/Pastedimage 20260410103751.png",
+    "content/musings/数字系统设计课设/index.md",
+    "content/musings/数字系统设计课设/Pastedimage20260410210003.png",
+    "content/musings/数字系统设计课设/Pastedimage20260410205947.png",
+    "content/musings/数字系统设计课设/Pastedimage20260410002727.png",
+    "content/musings/数字系统设计课设/Pastedimage20260410002136.png",
+    "content/musings/数字系统设计课设/Pastedimage20260410000921.png",
+    "content/musings/数字系统设计课设/Pastedimage20260409185531.png",
+    "content/musings/数字系统设计课设/Pastedimage20260409185424.png",
+    "content/musings/数字系统设计课设/Pastedimage20260409185356.png",
+    "content/notes/高频电子线路/简答题/index.md",
+    "content/notes/高频电子线路/高频电子线路/index.md",
+    "content/notes/高频电子线路/简答题",
+    "content/musings/数字系统设计课设",
     "content/notes/计算机网络/第四章 网络层/index.md",
+    "content/musings/政务文本智能审核助手/index.md",
+    "content/musings/政务文本智能审核助手",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
     "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/index.md",
@@ -191,7 +198,6 @@
     "content/notes/数字图像处理/实验三/index.md",
     "content/notes/数字图像处理/实验三",
     "content/notes/计算机网络/第四章 网络层",
-    "content/notes/高频电子线路/高频电子线路/index.md",
     "content/notes/微机原理与单片机/关于存储器寻址/index.md",
     "content/notes/微机原理与单片机/关于存储器寻址",
     "content/notes/微机原理与单片机/微机与接口填空/答案版.md",
@@ -210,12 +216,6 @@
     "content/notes/数字图像处理/第一章 概论",
     "content/notes/数字电子技术/第一章 数制和码制/index.md",
     "content/notes/数字图像处理/实验二/a95fab8849484dcdd190db9f25c6973f.jpg.~tmp",
-    "content/notes/数字图像处理/实验一/index.md",
-    "Pasted image 20260317130811.png.~tmp",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形",
-    "content/notes/数字电子技术/未命名.md",
-    "content/notes/计算机网络/第二章 物理层/index.md",
-    "content/notes/计算机网络/第三章 数据链路层",
-    "content/notes/计算机网络/第一章 概述/index.md"
+    "content/notes/数字图像处理/实验一/index.md"
   ]
 }
