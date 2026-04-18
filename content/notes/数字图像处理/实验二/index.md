@@ -5,18 +5,8 @@ tags:
   - 数字图像处理
 date: 2026-03-16T08:00:00+08:00
 summary:
-draft: true
+draft: false
 ---
-<h1 align="center">实验报告：图像灰度变换与直方图统计</h1>
-
-<div style="text-align: center;">
-
-专业：信息工程5班  姓名：张哲轩  学号：202330352051
-
-</div>
-
----
-
 ## 实验一：灰度变换增强图像（伽马变换）
 
 ### 1. 实验题目

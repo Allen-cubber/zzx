@@ -5,15 +5,7 @@ tags:
   - 数字图像处理
 date: 2026-03-31T08:00:00+08:00
 summary: 实验三
-draft: true
----
-
-<h1 align="center">3月18号实验报告</h1>
-<div style="text-align: center;">
-
-专业：信息工程5班  姓名：张哲轩  学号：202330352051
-
-</div>
+draft: false
 ---
 ## 一、 实验题目
 

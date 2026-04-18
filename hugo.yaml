@@ -14,15 +14,18 @@ menu:
     - name: "标签"
       url: "/tags/"
       weight: 10
-    - name: 学习笔记
+    - name: 笔记
       url: "/notes/"
       weight: 20
-    - name: 随笔
-      url: "/musings/"
+    - name: 学术
+      url: "/academic/"
       weight: 30
+    - name: 散文
+      url: "/essays/"
+      weight: 40
     - name: 搜索
       url: "/search/"
-      weight: 40
+      weight: 50
 
 # Markdown 渲染器配置 (核心)
 markup:
