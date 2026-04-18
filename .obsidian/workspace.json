@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+                "file": "content/essays/从杨朱思想到对“公平”的思考/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+                "file": "content/essays/从杨朱思想到对“公平”的思考/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -171,6 +171,10 @@
   },
   "active": "02e02b4ee822884f",
   "lastOpenFiles": [
+    "content/essays/思想自由应该有边界吗/index.md",
+    "content/essays/永远在移动的终点线/index.md",
+    "content/notes/数字图像处理/实验二/index.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/musings/Truckmodel/index.md",
     "content/notes/高频电子线路/简答题/3.md",
     "content/musings/Truckmodel",
@@ -186,13 +190,11 @@
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416110156.png",
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416104038.png",
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416103541.png",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
     "content/notes/数字图像处理/第三章 空间域图像增强/index.md",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强",
     "content/notes/数字图像处理/第二章 数字图像基础/index.md",
     "content/notes/数字图像处理/第三章 空间域图像增强",
-    "content/notes/数字图像处理/实验二/index.md",
     "content/notes/数字图像处理/实验三/index.md",
     "content/notes/数字图像处理/实验四/index.md",
     "content/notes/数字图像处理/实验一/index.md",
@@ -214,8 +216,6 @@
     "content/notes/数字图像处理/实验三",
     "content/notes/计算机网络/第四章 网络层",
     "content/notes/微机原理与单片机/关于存储器寻址",
-    "content/notes/微机原理与单片机/微机与接口填空/答案版.md",
-    "content/notes/数字电子技术/第二章 逻辑代数基础/index.md",
-    "content/notes/数字电子技术/第八章 AD转换/index.md"
+    "content/notes/微机原理与单片机/微机与接口填空/答案版.md"
   ]
 }
