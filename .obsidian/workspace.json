@@ -4,30 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "7379e83868e7c3d2",
+        "id": "dbc65f3d617c78d5",
         "type": "tabs",
         "children": [
           {
-            "id": "927ae14b8b43ec52",
+            "id": "1dd702ca43dbc5e9",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/2026MCM_B/index.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "9392225051948a1d",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "content/models/Truckmodel/index.md",
+                "file": "content/academic/Truckmodel/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/2026MCM_B/index.md",
+                "file": "content/academic/Truckmodel/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -183,10 +169,10 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "927ae14b8b43ec52",
+  "active": "1dd702ca43dbc5e9",
   "lastOpenFiles": [
-    "content/models/Truckmodel/index.md",
     "content/academic/2026MCM_B/index.md",
+    "content/models/Truckmodel/index.md",
     "2026-04-20.md",
     "content/models/Truckmodel/价格敏感性分析.jpg",
     "单一车型结果统计拼图.md",

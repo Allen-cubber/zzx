@@ -138,8 +138,8 @@ $$
 
 $$
 \begin{aligned}
-x_i+s_{ix}&\le W\cdot p_i,\\
-y_i+s_{iy}&\le L\cdot p_i,\\
+x_i+s_{ix}&\le W\cdot p_i,\\\\
+y_i+s_{iy}&\le L\cdot p_i,\\\\
 z_i+s_{iz}&\le H\cdot p_i
 \end{aligned}
 $$
@@ -148,8 +148,8 @@ $$
 
 $$
 \begin{aligned}
-x_i+s_{ix} &\le x_j+M(1-l_{ij}), & x_j+s_{jx} &\le x_i+M(1-r_{ij}),\\
-y_i+s_{iy} &\le y_j+M(1-f_{ij}), & y_j+s_{jy} &\le y_i+M(1-b_{ij}),\\
+x_i+s_{ix} &\le x_j+M(1-l_{ij}), & x_j+s_{jx} &\le x_i+M(1-r_{ij}),\\\\
+y_i+s_{iy} &\le y_j+M(1-f_{ij}), & y_j+s_{jy} &\le y_i+M(1-b_{ij}),\\\\
 z_i+s_{iz} &\le z_j+M(1-d_{ij}), & z_j+s_{jz} &\le z_i+M(1-u_{ij})
 \end{aligned}
 $$
@@ -186,9 +186,9 @@ $$
 
 $$
 \begin{aligned}
-x_i+0.5s_{ix}&\ge x_j-M(1-sup_{ij}),\\
-x_i+0.5s_{ix}&\le x_j+s_{jx}+M(1-sup_{ij}),\\
-y_i+0.5s_{iy}&\ge y_j-M(1-sup_{ij}),\\
+x_i+0.5s_{ix}&\ge x_j-M(1-sup_{ij}),\\\\
+x_i+0.5s_{ix}&\le x_j+s_{jx}+M(1-sup_{ij}),\\\\
+y_i+0.5s_{iy}&\ge y_j-M(1-sup_{ij}),\\\\
 y_i+0.5s_{iy}&\le y_j+s_{jy}+M(1-sup_{ij})
 \end{aligned}
 $$
@@ -275,8 +275,8 @@ $$
 
 $$
 N_r^{\mathrm{LB}}=\max\left\{
-\left\lceil \frac{V_{\mathrm{tot}}}{V_r}\right\rceil,
-\left\lceil \frac{M_{\mathrm{tot}}}{M_r}\right\rceil
+\left\lceil \frac{V\_{\mathrm{tot}}}{V_r}\right\rceil,
+\left\lceil \frac{M\_{\mathrm{tot}}}{M_r}\right\rceil
 \right\}
 $$
 
