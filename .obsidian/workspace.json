@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "551c345253e8a25d",
+        "id": "926eb40cc0917450",
         "type": "tabs",
         "children": [
           {
-            "id": "02e02b4ee822884f",
+            "id": "32f9d6bec1ef8146",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/essays/从杨朱思想到对“公平”的思考/index.md",
+                "file": "content/models/Truckmodel/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -78,7 +78,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 247.49999618530273
+    "width": 263.49999618530273
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/essays/从杨朱思想到对“公平”的思考/index.md",
+                "file": "content/models/Truckmodel/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -169,12 +169,18 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "02e02b4ee822884f",
+  "active": "32f9d6bec1ef8146",
   "lastOpenFiles": [
+    "content/essays/从杨朱思想到对“公平”的思考/index.md",
+    "2026-04-20.md",
+    "content/models/Truckmodel/index.md",
+    "content/notes/高频电子线路/简答题/4.md",
+    "content/models/Truckmodel/未命名.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/Pasted-image-20250605120746.png",
     "content/essays/思想自由应该有边界吗/index.md",
     "content/essays/永远在移动的终点线/index.md",
     "content/notes/数字图像处理/实验二/index.md",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/musings/Truckmodel/index.md",
     "content/notes/高频电子线路/简答题/3.md",
     "content/musings/Truckmodel",
@@ -189,7 +195,6 @@
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416112400.png",
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416110156.png",
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260416104038.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260416103541.png",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
     "content/notes/数字图像处理/第三章 空间域图像增强/index.md",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强",
@@ -208,14 +213,9 @@
     "content/musings/数字系统设计课设/index.md",
     "content/notes/高频电子线路/简答题",
     "content/musings/数字系统设计课设",
-    "content/musings/政务文本智能审核助手/index.md",
     "content/musings/政务文本智能审核助手",
-    "content/notes/计算机网络/第三章 数据链路层/index.md",
-    "content/notes/数字电子技术/第六章 时序逻辑电路/index.md",
-    "content/notes/数字电子技术/第七章 脉冲波形的产生和整形/index.md",
     "content/notes/数字图像处理/实验三",
     "content/notes/计算机网络/第四章 网络层",
-    "content/notes/微机原理与单片机/关于存储器寻址",
-    "content/notes/微机原理与单片机/微机与接口填空/答案版.md"
+    "content/notes/微机原理与单片机/关于存储器寻址"
   ]
 }
