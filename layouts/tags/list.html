@@ -3,19 +3,125 @@
   <header class="terms-page-header">
     <h1>{{ .Title }}</h1>
   </header>
-  
+
+  <div class="tags-search" role="search" aria-label="标签查找">
+    <label for="tags-search-input" class="tags-search-label">查找标签</label>
+    <input
+      id="tags-search-input"
+      class="tags-search-input"
+      type="search"
+      placeholder="输入标签关键词，例如：数字信号处理"
+      autocomplete="off"
+    />
+    <p id="tags-search-stats" class="tags-search-stats" aria-live="polite"></p>
+  </div>
+
   {{ $tags := .Site.Taxonomies.tags.ByCount }}
+  {{ $stageTags := slice }}
+  {{ $topicTags := slice }}
+
+  {{ range $tags }}
+    {{ $name := .Page.Title }}
+    {{ if or (findRE "^大[一二三四五六七八九十]+[上下]$" $name) (findRE "^研[一二三四五六七八九十]+[上下]?$" $name) }}
+      {{ $stageTags = $stageTags | append . }}
+    {{ else }}
+      {{ $topicTags = $topicTags | append . }}
+    {{ end }}
+  {{ end }}
+
   {{ if $tags }}
-    <div class="tags-list">
-      {{ range $tags }}
-        <a href="{{ .Page.Permalink }}" class="tag-item">
-          <span class="tag-name">{{ .Page.Title }}</span>
-          <span class="tag-count">{{ .Count }}</span>
-        </a>
-      {{ end }}
+    <div class="tags-group" data-tags-group>
+      <h2 class="tags-group-title">主题标签</h2>
+      <p class="tags-group-desc">按学科与内容主题组织，适合按知识点检索。</p>
+      <div class="tags-list">
+        {{ range $topicTags }}
+          <a href="{{ .Page.Permalink }}" class="tag-item" data-tag-item data-tag-name="{{ lower .Page.Title }}">
+            <span class="tag-name">{{ .Page.Title }}</span>
+            <span class="tag-count">{{ .Count }}</span>
+          </a>
+        {{ end }}
+      </div>
     </div>
+
+    {{ if gt (len $stageTags) 0 }}
+      <div class="tags-group tags-group-stage" data-tags-group>
+        <h2 class="tags-group-title">学习阶段标签</h2>
+        <p class="tags-group-desc">按年级学期组织，适合回看某个阶段的学习轨迹。</p>
+        <div class="tags-list">
+          {{ range $stageTags }}
+            <a href="{{ .Page.Permalink }}" class="tag-item tag-item-stage" data-tag-item data-tag-name="{{ lower .Page.Title }}">
+              <span class="tag-name">{{ .Page.Title }}</span>
+              <span class="tag-count">{{ .Count }}</span>
+            </a>
+          {{ end }}
+        </div>
+      </div>
+    {{ end }}
+
+    <p id="tags-search-empty" class="tags-search-empty" hidden>没有找到匹配的标签，请换个关键词试试。</p>
   {{ else }}
     <p>目前还没有任何标签。</p>
   {{ end }}
 </div>
+
+<script>
+  (function () {
+    var input = document.getElementById('tags-search-input');
+    var stats = document.getElementById('tags-search-stats');
+    var empty = document.getElementById('tags-search-empty');
+    var items = Array.prototype.slice.call(document.querySelectorAll('[data-tag-item]'));
+    var groups = Array.prototype.slice.call(document.querySelectorAll('[data-tags-group]'));
+
+    if (!input || items.length === 0) {
+      return;
+    }
+
+    var total = items.length;
+
+    function normalizeText(text) {
+      return (text || '').toLowerCase().trim();
+    }
+
+    function updateStats(visibleCount, keyword) {
+      if (!stats) {
+        return;
+      }
+      if (!keyword) {
+        stats.textContent = '共 ' + total + ' 个标签';
+        return;
+      }
+      stats.textContent = '匹配到 ' + visibleCount + ' / ' + total + ' 个标签';
+    }
+
+    function filterTags() {
+      var keyword = normalizeText(input.value);
+      var visibleCount = 0;
+
+      items.forEach(function (item) {
+        var name = item.getAttribute('data-tag-name') || '';
+        var matched = !keyword || name.indexOf(keyword) !== -1;
+        item.style.display = matched ? '' : 'none';
+        if (matched) {
+          visibleCount += 1;
+        }
+      });
+
+      groups.forEach(function (group) {
+        var hasVisible = Array.prototype.some.call(group.querySelectorAll('[data-tag-item]'), function (item) {
+          return item.style.display !== 'none';
+        });
+        group.style.display = hasVisible ? '' : 'none';
+      });
+
+      if (empty) {
+        empty.hidden = visibleCount !== 0;
+      }
+
+      updateStats(visibleCount, keyword);
+    }
+
+    input.addEventListener('input', filterTags);
+    updateStats(total, '');
+  })();
+</script>
 {{ end }}

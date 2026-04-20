@@ -354,7 +354,55 @@ body.home.list::before {
   width: 100%;
 }
 
+.tags-search {
+    margin-top: 1.4rem;
+}
+.tags-search-label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+}
+.tags-search-input {
+    width: 100%;
+    height: 42px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0 12px;
+    background: var(--entry);
+    color: var(--primary);
+    font-size: 0.95rem;
+}
+.tags-search-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+.tags-search-stats {
+    margin: 0.6rem 0 0;
+    color: var(--secondary);
+    font-size: 0.86rem;
+}
+.tags-search-empty {
+    margin-top: 1.5rem;
+    color: var(--secondary);
+    text-align: center;
+}
+
 /* 2. 所有标签列表 (/tags/) */
+.tags-group {
+    margin-top: 2rem;
+}
+.tags-group-title {
+    margin: 0;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+.tags-group-desc {
+    margin: 0.4rem 0 0;
+    color: var(--secondary);
+    font-size: 0.92rem;
+}
 .tags-list {
   display: flex;
   flex-wrap: wrap;
@@ -400,6 +448,9 @@ body.home.list::before {
   background-color: var(--entry);
   color: var(--primary);
 }
+.tags-group-stage .tag-item-stage {
+    border-style: dashed;
+}
 
 /* 3. 单个标签文章列表 (/tags/your-tag/) */
 .post-list {
@@ -440,4 +491,171 @@ body.home.list::before {
   white-space: nowrap;
   margin-left: 20px;
   font-family: 'Courier New', Courier, monospace;
+}
+
+.tag-landing-stats {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+}
+.tag-landing-stat {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.86rem;
+    color: var(--secondary);
+    background: var(--entry);
+}
+
+.tag-landing-toolbar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 12px;
+    margin: 16px 0 8px;
+    flex-wrap: wrap;
+}
+
+.tag-learning-path {
+    margin-top: 1.6rem;
+    border: 1px solid var(--border);
+    background: var(--entry);
+    border-radius: var(--radius);
+    padding: 1rem 1rem 0.8rem;
+}
+
+.tag-learning-grid {
+    margin-top: 0.8rem;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.tag-learning-col {
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 0.8rem 0.9rem;
+    background: var(--theme);
+}
+
+.tag-learning-title {
+    margin: 0;
+    font-size: 0.98rem;
+}
+
+.tag-learning-list {
+    margin: 0.55rem 0 0;
+    padding-left: 1.1rem;
+    font-size: 0.9rem;
+}
+
+.tag-learning-list li {
+    margin-bottom: 0.35rem;
+}
+
+.tag-learning-list a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.tag-learning-list a:hover {
+    text-decoration: underline;
+}
+
+.tag-learning-empty {
+    color: var(--secondary);
+}
+
+.tag-landing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+    margin-top: 0.6rem;
+}
+
+.tag-landing-card {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.tag-landing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+.tag-landing-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.tag-landing-card-header {
+    position: relative;
+}
+
+.tag-landing-card-title {
+    font-size: 1.18rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 10px 20px 10px;
+}
+
+.tag-path-badge {
+    display: inline-flex;
+    margin: 16px 0 0 20px;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    color: var(--secondary);
+    border: 1px solid var(--border);
+    background: var(--theme);
+}
+
+.tag-landing-card-content {
+    padding: 0 20px 18px;
+    color: var(--secondary);
+    font-size: 0.92rem;
+    flex-grow: 1;
+}
+
+.tag-landing-card-content p {
+    margin: 0;
+}
+
+.tag-landing-card-footer {
+    padding: 14px 20px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    color: var(--secondary);
+    gap: 10px;
+}
+
+.tag-related-section {
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .tag-landing-toolbar {
+        justify-content: flex-start;
+    }
+    .tag-learning-grid {
+        grid-template-columns: 1fr;
+    }
+    .tag-landing-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
 }

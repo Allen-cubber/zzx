@@ -1,16 +1,305 @@
 {{ define "main" }}
 <div class="main-container">
-  <header class="terms-page-header">
-    <h1>标签：#{{ .Title }}</h1>
-  </header>
-  
-  <ul class="post-list">
-    {{ range .Pages }}
-      <li class="post-item">
-        <a href="{{ .Permalink }}" class="post-title">{{ .Title }}</a>
-        <span class="post-date">{{ .Date.Format "2006-01-02" }}</span>
-      </li>
+  {{ $isStageTag := or (findRE "^大[一二三四五六七八九十]+[上下]$" .Title) (findRE "^研[一二三四五六七八九十]+[上下]?$" .Title) }}
+  {{ $pages := .Pages.ByLastmod.Reverse }}
+  {{ $count := len $pages }}
+  {{ $latest := index $pages 0 }}
+  {{ $manualCfg := index site.Data.tag_learning_paths .Title }}
+
+  {{ $pathIntro := slice }}
+  {{ $pathAdvanced := slice }}
+  {{ $pathPractice := slice }}
+  {{ $picked := newScratch }}
+  {{ $levelMap := newScratch }}
+
+  {{ $manualIntroPaths := slice }}
+  {{ $manualAdvancedPaths := slice }}
+  {{ $manualPracticePaths := slice }}
+
+  {{ with $manualCfg }}
+    {{ $manualIntroPaths = .intro | default (slice) }}
+    {{ $manualAdvancedPaths = .advanced | default (slice) }}
+    {{ $manualPracticePaths = .practice | default (slice) }}
+  {{ end }}
+
+  {{ range $manualIntroPaths }}
+    {{ with site.GetPage . }}
+      {{ if in .Params.tags $.Title }}
+        {{ $pathIntro = $pathIntro | append . }}
+        {{ $picked.Set .RelPermalink true }}
+        {{ $levelMap.Set .RelPermalink "推荐先读" }}
+      {{ end }}
     {{ end }}
-  </ul>
+  {{ end }}
+
+  {{ range $manualAdvancedPaths }}
+    {{ with site.GetPage . }}
+      {{ if in .Params.tags $.Title }}
+        {{ $pathAdvanced = $pathAdvanced | append . }}
+        {{ $picked.Set .RelPermalink true }}
+        {{ $levelMap.Set .RelPermalink "进阶阅读" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ range $manualPracticePaths }}
+    {{ with site.GetPage . }}
+      {{ if in .Params.tags $.Title }}
+        {{ $pathPractice = $pathPractice | append . }}
+        {{ $picked.Set .RelPermalink true }}
+        {{ $levelMap.Set .RelPermalink "实践项目" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ range $pages }}
+    {{ if not ($picked.Get .RelPermalink) }}
+      {{ $title := .Title }}
+      {{ $section := .Section }}
+      {{ if or (eq $section "academic") (eq $section "tools-web") (findRE "实验|课设|课程设计|项目|建模|沙盒|系统|工具" $title) }}
+        {{ $pathPractice = $pathPractice | append . }}
+        {{ $levelMap.Set .RelPermalink "实践项目" }}
+      {{ else if or (findRE "第一章|第二章|概述|基础|入门|绪论|总览|复习重点" $title) (findRE "^[12]\\.|^第[一二]章" $title) }}
+        {{ $pathIntro = $pathIntro | append . }}
+        {{ $levelMap.Set .RelPermalink "推荐先读" }}
+      {{ else }}
+        {{ $pathAdvanced = $pathAdvanced | append . }}
+        {{ $levelMap.Set .RelPermalink "进阶阅读" }}
+      {{ end }}
+      {{ $picked.Set .RelPermalink true }}
+    {{ end }}
+  {{ end }}
+
+  {{ $related := slice }}
+  {{ $seen := newScratch }}
+  {{ range $pages }}
+    {{ with .Params.tags }}
+      {{ range . }}
+        {{ $tagName := . }}
+        {{ if and (ne $tagName $.Title) (not ($seen.Get $tagName)) }}
+          {{ $seen.Set $tagName true }}
+          {{ $related = $related | append (dict "name" $tagName "url" (printf "/tags/%s/" (urlize $tagName))) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <header class="terms-page-header">
+    {{ if $isStageTag }}
+      <h1>学习阶段：{{ .Title }}</h1>
+      <p class="tags-group-desc">这里汇总了该阶段下的全部文章，可按关键词查找、按时间排序。</p>
+    {{ else }}
+      <h1>主题标签：#{{ .Title }}</h1>
+      <p class="tags-group-desc">这里汇总了该主题下的全部文章，可按关键词查找、按时间排序。</p>
+    {{ end }}
+
+    <div class="tag-landing-stats">
+      <span class="tag-landing-stat">文章数 {{ $count }}</span>
+      {{ with $latest }}
+        <span class="tag-landing-stat">最近更新 {{ .Lastmod.Format "2006-01-02" }}</span>
+      {{ end }}
+    </div>
+  </header>
+
+  <section class="tag-learning-path" aria-label="学习路径推荐">
+    <h2 class="tags-group-title">学习路径</h2>
+    <p class="tags-group-desc">按“先基础、再进阶、后实践”的顺序组织，建议从左到右阅读。</p>
+
+    <div class="tag-learning-grid">
+      <div class="tag-learning-col">
+        <h3 class="tag-learning-title">推荐先读</h3>
+        <ul class="tag-learning-list">
+          {{ if gt (len $pathIntro) 0 }}
+            {{ range first 6 $pathIntro }}
+              <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          {{ else }}
+            <li class="tag-learning-empty">暂无明确的入门条目</li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="tag-learning-col">
+        <h3 class="tag-learning-title">进阶阅读</h3>
+        <ul class="tag-learning-list">
+          {{ if gt (len $pathAdvanced) 0 }}
+            {{ range first 6 $pathAdvanced }}
+              <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          {{ else }}
+            <li class="tag-learning-empty">暂无进阶条目</li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <div class="tag-learning-col">
+        <h3 class="tag-learning-title">实践项目</h3>
+        <ul class="tag-learning-list">
+          {{ if gt (len $pathPractice) 0 }}
+            {{ range first 6 $pathPractice }}
+              <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+            {{ end }}
+          {{ else }}
+            <li class="tag-learning-empty">暂无实践条目</li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="tag-landing-toolbar">
+    <div class="sort-group sort-group-wide">
+      <label for="tag-search-input" class="sort-label">关键词筛选</label>
+      <input id="tag-search-input" class="tags-search-input" type="search" placeholder="输入文章标题关键词" autocomplete="off" />
+    </div>
+    <div class="sort-group">
+      <label for="tag-sort-field" class="sort-label">排序字段</label>
+      <select id="tag-sort-field" class="sort-select" aria-label="选择排序字段">
+        <option value="lastmod" selected>更新时间</option>
+        <option value="date">创建时间</option>
+        <option value="title">标题</option>
+      </select>
+    </div>
+    <div class="sort-group">
+      <label for="tag-sort-direction" class="sort-label">排序方向</label>
+      <select id="tag-sort-direction" class="sort-select" aria-label="选择排序方向">
+        <option value="desc" selected>倒序</option>
+        <option value="asc">正序</option>
+      </select>
+    </div>
+  </div>
+
+  <p id="tag-search-status" class="tags-search-stats" aria-live="polite"></p>
+
+  {{ if $manualCfg }}
+    <p class="tags-search-stats">当前专题已启用手写学习路径配置。</p>
+  {{ end }}
+
+  <div id="tag-post-grid" class="tag-landing-grid">
+    {{ range $pages }}
+      {{ $pathLevel := "进阶阅读" }}
+      {{ with ($levelMap.Get .RelPermalink) }}
+        {{ $pathLevel = . }}
+      {{ end }}
+      <article
+        class="tag-landing-card"
+        data-title="{{ lower .Title }}"
+        data-date="{{ .Date.Unix }}"
+        data-lastmod="{{ .Lastmod.Unix }}"
+      >
+        <a href="{{ .Permalink }}" class="tag-landing-link" aria-label="post link to {{ .Title }}"></a>
+        <div class="tag-landing-card-header">
+          <span class="tag-path-badge">{{ $pathLevel }}</span>
+          <h2 class="tag-landing-card-title">{{ .Title }}</h2>
+        </div>
+        <div class="tag-landing-card-content">
+          <p>{{ .Summary | plainify | truncate 120 }}</p>
+        </div>
+        <div class="tag-landing-card-footer">
+          <span class="card-meta">发布 {{ .Date.Format "2006-01-02" }}</span>
+          <span class="card-meta">更新 {{ .Lastmod.Format "2006-01-02" }}</span>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+
+  <p id="tag-search-empty" class="tags-search-empty" hidden>当前筛选条件下没有匹配文章。</p>
+
+  {{ if gt (len $related) 0 }}
+    <section class="tag-related-section">
+      <h2 class="tags-group-title">相关标签</h2>
+      <p class="tags-group-desc">基于本专题文章中共同出现的标签推荐。</p>
+      <div class="tags-list">
+        {{ range first 10 $related }}
+          <a href="{{ .url }}" class="tag-item">
+            <span class="tag-name">{{ .name }}</span>
+          </a>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
 </div>
+
+<script>
+  (function () {
+    var searchInput = document.getElementById('tag-search-input');
+    var sortField = document.getElementById('tag-sort-field');
+    var sortDirection = document.getElementById('tag-sort-direction');
+    var grid = document.getElementById('tag-post-grid');
+    var status = document.getElementById('tag-search-status');
+    var empty = document.getElementById('tag-search-empty');
+
+    if (!grid) {
+      return;
+    }
+
+    var cards = Array.prototype.slice.call(grid.querySelectorAll('.tag-landing-card'));
+    var total = cards.length;
+
+    function normalizeText(text) {
+      return (text || '').toLowerCase().trim();
+    }
+
+    function updateStatus(visibleCount, keyword) {
+      if (!status) {
+        return;
+      }
+      if (!keyword) {
+        status.textContent = '共 ' + total + ' 篇文章';
+        return;
+      }
+      status.textContent = '匹配到 ' + visibleCount + ' / ' + total + ' 篇文章';
+    }
+
+    function sortCards(list) {
+      var field = sortField ? sortField.value : 'lastmod';
+      var direction = sortDirection ? sortDirection.value : 'desc';
+      var factor = direction === 'asc' ? 1 : -1;
+
+      list.sort(function (a, b) {
+        if (field === 'title') {
+          var ta = a.getAttribute('data-title') || '';
+          var tb = b.getAttribute('data-title') || '';
+          return ta.localeCompare(tb, 'zh-Hans-CN') * factor;
+        }
+
+        var va = Number(a.getAttribute('data-' + field) || 0);
+        var vb = Number(b.getAttribute('data-' + field) || 0);
+        return (va - vb) * factor;
+      });
+    }
+
+    function render() {
+      var keyword = normalizeText(searchInput ? searchInput.value : '');
+      var visible = cards.filter(function (card) {
+        var title = card.getAttribute('data-title') || '';
+        var matched = !keyword || title.indexOf(keyword) !== -1;
+        card.style.display = matched ? '' : 'none';
+        return matched;
+      });
+
+      sortCards(visible);
+      visible.forEach(function (card) {
+        grid.appendChild(card);
+      });
+
+      if (empty) {
+        empty.hidden = visible.length !== 0;
+      }
+      updateStatus(visible.length, keyword);
+    }
+
+    if (searchInput) {
+      searchInput.addEventListener('input', render);
+    }
+    if (sortField) {
+      sortField.addEventListener('change', render);
+    }
+    if (sortDirection) {
+      sortDirection.addEventListener('change', render);
+    }
+
+    render();
+  })();
+</script>
 {{ end }}
