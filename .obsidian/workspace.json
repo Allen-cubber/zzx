@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "2fb3cd0453cc872b",
+            "id": "927ae14b8b43ec52",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/models/Truckmodel/index.md",
+                "file": "content/academic/2026MCM_B/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -22,12 +22,12 @@
             }
           },
           {
-            "id": "927ae14b8b43ec52",
+            "id": "9392225051948a1d",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/2026MCM_B/index.md",
+                "file": "content/models/Truckmodel/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/models/Truckmodel/index.md",
+                "file": "content/academic/2026MCM_B/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -183,12 +183,12 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "2fb3cd0453cc872b",
+  "active": "927ae14b8b43ec52",
   "lastOpenFiles": [
-    "content/academic/2026MCM_B/index.md",
     "content/models/Truckmodel/index.md",
-    "content/models/Truckmodel/价格敏感性分析.jpg",
+    "content/academic/2026MCM_B/index.md",
     "2026-04-20.md",
+    "content/models/Truckmodel/价格敏感性分析.jpg",
     "单一车型结果统计拼图.md",
     "content/models/Truckmodel/箱体尺寸鲁棒性-标准集装箱.jpg",
     "content/models/Truckmodel/单一车型结果统计拼图.jpg",
