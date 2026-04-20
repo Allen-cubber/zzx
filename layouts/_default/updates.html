@@ -10,7 +10,8 @@
 </header>
 {{ partial "view-switcher.html" . }}
 
-{{- $pages := where site.RegularPages "Type" "in" (site.Params.mainSections | default (slice "posts")) }}
+{{- /* Include all sectioned content pages instead of only mainSections. */ -}}
+{{- $pages := where site.RegularPages "Section" "!=" "" }}
 {{- $pages := where $pages "Section" "!=" "blog-setup" }}
 {{- $pages := $pages.ByLastmod.Reverse }}
 
