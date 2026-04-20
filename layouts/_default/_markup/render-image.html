@@ -1,4 +1,17 @@
-{{- $u := urls.Parse .Destination -}}
+{{- $dest := .Destination -}}
+{{- $width := "" -}}
+{{- if strings.Contains $dest "|" -}}
+  {{- $parts := strings.Split $dest "|" -}}
+  {{- $dest = index $parts 0 -}}
+  {{- if gt (len $parts) 1 -}}
+    {{- $maybeWidth := strings.TrimSpace (index $parts 1) -}}
+    {{- if gt (len (findRE `^[0-9]+$` $maybeWidth)) 0 -}}
+      {{- $width = $maybeWidth -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $u := urls.Parse $dest -}}
 {{- $src := $u.String -}}
 {{- if not $u.IsAbs -}}
   {{- $path := strings.TrimPrefix "./" $u.Path }}
@@ -13,6 +26,9 @@
   {{- end -}}
 {{- end -}}
 {{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading" "lazy") -}}
+{{- if $width -}}
+  {{- $attributes = merge $attributes (dict "width" $width) -}}
+{{- end -}}
 <img
   {{- range $k, $v := $attributes -}}
     {{- if $v -}}

@@ -14,11 +14,53 @@
 {{- $pages := where site.RegularPages "Section" "!=" "" }}
 {{- $pages := where $pages "Section" "!=" "blog-setup" }}
 {{- $pages := $pages.ByLastmod.Reverse }}
+{{- $sections := slice -}}
+{{- range $pages -}}
+    {{- if (and .Title (not .Params.hidden)) -}}
+        {{- $sections = $sections | append .Section -}}
+    {{- end -}}
+{{- end -}}
+{{- $sections = sort (uniq $sections) -}}
+
+<div class="updates-toolbar" id="updates-sort-toolbar">
+    <div class="sort-group sort-group-wide">
+        <span class="sort-label">快速筛选</span>
+        <div class="recent-filter" role="group" aria-label="按最近天数筛选">
+            <button type="button" class="recent-filter-btn active" data-days="all">全部</button>
+            <button type="button" class="recent-filter-btn" data-days="7">最近 7 天</button>
+            <button type="button" class="recent-filter-btn" data-days="30">最近 30 天</button>
+            <button type="button" class="recent-filter-btn" data-days="90">最近 90 天</button>
+        </div>
+    </div>
+    <div class="sort-group">
+        <label for="section-filter" class="sort-label">栏目筛选</label>
+        <select id="section-filter" class="sort-select" aria-label="按栏目筛选">
+            <option value="all" selected>全部栏目</option>
+            {{- range $sections }}
+            <option value="{{ . }}">{{ replace . "-" " " | title }}</option>
+            {{- end }}
+        </select>
+    </div>
+    <div class="sort-group">
+        <label for="sort-field" class="sort-label">排序字段</label>
+        <select id="sort-field" class="sort-select" aria-label="选择排序字段">
+            <option value="lastmod" selected>更新时间</option>
+            <option value="date">创建时间</option>
+        </select>
+    </div>
+    <div class="sort-group">
+        <label for="sort-direction" class="sort-label">排序方向</label>
+        <select id="sort-direction" class="sort-select" aria-label="选择排序方向">
+            <option value="desc" selected>倒序（新到旧）</option>
+            <option value="asc">正序（旧到新）</option>
+        </select>
+    </div>
+</div>
 
 <div id="post-list" class="archive-cards view-grid">
 {{- range $pages }}
     {{- if (and .Title (not .Params.hidden)) }}
-    <article class="archive-card">
+    <article class="archive-card" data-date="{{ .Date.Unix }}" data-lastmod="{{ .Lastmod.Unix }}" data-section="{{ .Section }}">
         <a href="{{ .Permalink }}" class="card-link" aria-label="post link to {{ .Title | plainify }}"></a>
         <div class="card-header">
             {{- with .Params.cover }}

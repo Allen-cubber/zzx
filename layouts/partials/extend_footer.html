@@ -7,6 +7,10 @@
         const viewToggleButton = document.getElementById('view-toggle-button');
         const viewOptions = document.getElementById('view-options');
         const postList = document.getElementById('post-list');
+        const sortFieldSelect = document.getElementById('sort-field');
+        const sortDirectionSelect = document.getElementById('sort-direction');
+        const sectionFilterSelect = document.getElementById('section-filter');
+        const recentFilterButtons = Array.from(document.querySelectorAll('.recent-filter-btn'));
 
         if (!viewToggleButton || !viewOptions || !postList) {
             return;
@@ -64,6 +68,142 @@
             setView(savedView);
         } else {
             setView('grid'); // 默认设置为卡片视图
+        }
+
+        // 仅在“最近更新”页启用排序（页面上存在排序控件时）。
+        if (sortFieldSelect && sortDirectionSelect) {
+            const sortStorageKey = 'updates-sort-preference';
+
+            function applySort(field, direction) {
+                const cards = Array.from(postList.querySelectorAll('.archive-card'));
+                const dir = direction === 'asc' ? 1 : -1;
+
+                cards.sort(function(a, b) {
+                    const aValue = Number(a.dataset[field]) || 0;
+                    const bValue = Number(b.dataset[field]) || 0;
+
+                    if (aValue === bValue) {
+                        return 0;
+                    }
+                    return (aValue - bValue) * dir;
+                });
+
+                const fragment = document.createDocumentFragment();
+                cards.forEach(function(card) {
+                    fragment.appendChild(card);
+                });
+                postList.appendChild(fragment);
+            }
+
+            function saveSortPreference(field, direction) {
+                localStorage.setItem(
+                    sortStorageKey,
+                    JSON.stringify({ field: field, direction: direction, days: state.days, section: state.section })
+                );
+            }
+
+            function getSortPreference() {
+                const saved = localStorage.getItem(sortStorageKey);
+                if (!saved) {
+                    return { field: 'lastmod', direction: 'desc', days: 'all', section: 'all' };
+                }
+
+                try {
+                    const parsed = JSON.parse(saved);
+                    const field = parsed.field === 'date' ? 'date' : 'lastmod';
+                    const direction = parsed.direction === 'asc' ? 'asc' : 'desc';
+                    const days = normalizeDays(parsed.days);
+                    const section = normalizeSection(parsed.section);
+                    return { field: field, direction: direction, days: days, section: section };
+                } catch (error) {
+                    return { field: 'lastmod', direction: 'desc', days: 'all', section: 'all' };
+                }
+            }
+
+            function normalizeDays(value) {
+                if (value === '7' || value === '30' || value === '90') {
+                    return value;
+                }
+                return 'all';
+            }
+
+            function normalizeSection(value) {
+                if (!sectionFilterSelect || value === 'all') {
+                    return 'all';
+                }
+
+                const exists = Array.from(sectionFilterSelect.options).some(function(option) {
+                    return option.value === value;
+                });
+                return exists ? value : 'all';
+            }
+
+            function setRecentFilterUI(days) {
+                recentFilterButtons.forEach(function(button) {
+                    const active = button.dataset.days === days;
+                    button.classList.toggle('active', active);
+                    button.setAttribute('aria-pressed', active ? 'true' : 'false');
+                });
+            }
+
+            function applyFilters(field, days, section) {
+                const cards = Array.from(postList.querySelectorAll('.archive-card'));
+                const threshold = Math.floor(Date.now() / 1000) - Number(days) * 86400;
+
+                cards.forEach(function(card) {
+                    const value = Number(card.dataset[field]) || 0;
+                    const sectionMatch = section === 'all' || card.dataset.section === section;
+                    const dayMatch = days === 'all' || value >= threshold;
+                    card.style.display = sectionMatch && dayMatch ? '' : 'none';
+                });
+            }
+
+            function applyUpdatesViewState() {
+                applySort(state.field, state.direction);
+                applyFilters(state.field, state.days, state.section);
+                setRecentFilterUI(state.days);
+                if (sectionFilterSelect) {
+                    sectionFilterSelect.value = state.section;
+                }
+            }
+
+            function onSortChange() {
+                state.field = sortFieldSelect.value;
+                state.direction = sortDirectionSelect.value;
+                applyUpdatesViewState();
+                saveSortPreference(state.field, state.direction);
+            }
+
+            const initial = getSortPreference();
+            const state = {
+                field: initial.field,
+                direction: initial.direction,
+                days: initial.days,
+                section: initial.section
+            };
+
+            sortFieldSelect.value = state.field;
+            sortDirectionSelect.value = state.direction;
+            applyUpdatesViewState();
+
+            sortFieldSelect.addEventListener('change', onSortChange);
+            sortDirectionSelect.addEventListener('change', onSortChange);
+
+            if (sectionFilterSelect) {
+                sectionFilterSelect.addEventListener('change', function() {
+                    state.section = normalizeSection(sectionFilterSelect.value);
+                    applyUpdatesViewState();
+                    saveSortPreference(state.field, state.direction);
+                });
+            }
+
+            recentFilterButtons.forEach(function(button) {
+                button.addEventListener('click', function() {
+                    state.days = normalizeDays(button.dataset.days);
+                    applyUpdatesViewState();
+                    saveSortPreference(state.field, state.direction);
+                });
+            });
         }
     });
 </script>
