@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/高频电子线路/高频电子线路填空/index.md",
+                "file": "content/notes/高频电子线路/频率分析/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/高频电子线路/高频电子线路填空/index.md",
+                "file": "Pasted image 20260421102239.png",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "Pasted image 20260421102239 的大纲"
             }
           }
         ],
@@ -169,25 +169,35 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1dd702ca43dbc5e9",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/notes/计算机网络/第五章 运输层/Pasted image 20260421102239.png",
+    "content/notes/高频电子线路/频率分析/index.md",
+    "content/notes/数字图像处理/实验五/index.md",
+    "content/notes/数字图像处理/实验四/index.md",
+    "content/notes/高频电子线路/变频干扰分析/index.md",
+    "content/notes/高频电子线路/高频电子线路/index.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/notes/计算机网络/第五章 运输层/index.md",
+    "content/notes/计算机网络/第五章 运输层",
+    "content/notes/高频电子线路/频率分析",
+    "content/notes/高频电子线路/变频干扰分析",
+    "content/notes/计算机网络/第四章 网络层/index.md",
+    "Pasted image 20260421102239.png",
+    "content/notes/高频电子线路/高频电子线路填空/index.md",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pastedimage20260321115501.png",
     "public/notes/微机原理与单片机/微机原理与接口技术/Pastedimage20260321115443.png",
     "data/tag_learning_paths.yaml",
     "data",
     "public/assets/css/stylesheet.6a05881ec62bc6e580f5c34e53d13ec7ffb5f95684fa057810e4d6daeabae131.css",
-    "content/notes/高频电子线路/高频电子线路/index.md",
     "content/academic/高频电子线路课程设计/index.md",
     "public/tags/通信电子线路/index.xml",
     "public/tags/通信电子线路/index.html",
     "public/tags/通信电子线路",
     "content/notes/电磁波与电磁场/index.md",
     "public/tags/电磁波与电磁场/index.xml",
-    "public/tags/电磁波与电磁场/index.html",
-    "public/tags/电磁波与电磁场",
     "content/academic/光纤通信技术论文汇报/index.md",
     "content/academic/Truckmodel/index.md",
-    "public/assets/css/stylesheet.476c0849664a3525f99af0a8a5be2d0bf8fa29d1276c162a84cd0c49419ee7cb.css",
     "public/tools-web/动物攀爬修改器/afb5d4b529c4d44b546213dd7165a524.jpg",
     "public/tools-web/微信聊天记录生成器/Pastedimage20251216230816.png",
     "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155706.png",
@@ -195,8 +205,6 @@
     "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155647.png",
     "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155434.png",
     "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155450.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155357.png",
-    "public/notes/数字图像处理/实验三/Figure_3.png",
     "content/academic/2026MCM_B/index.md",
     "content/models/Truckmodel/index.md",
     "2026-04-20.md",
@@ -204,18 +212,10 @@
     "content/essays/从杨朱思想到对“公平”的思考/index.md",
     "content/notes/高频电子线路/简答题/4.md",
     "content/models/Truckmodel/未命名.md",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/essays/思想自由应该有边界吗/index.md",
     "content/essays/永远在移动的终点线/index.md",
     "content/notes/数字图像处理/实验二/index.md",
     "content/musings/Truckmodel/index.md",
-    "content/notes/高频电子线路/简答题/3.md",
-    "content/notes/微机原理与单片机/关于存储器寻址/index.md",
-    "content/notes/计算机网络/第四章 网络层/index.md",
-    "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
-    "content/notes/数字图像处理/第三章 空间域图像增强/index.md",
-    "content/notes/数字图像处理/第二章 数字图像基础/index.md",
-    "content/notes/数字图像处理/实验三/index.md",
-    "content/notes/数字图像处理/实验四/index.md"
+    "content/notes/高频电子线路/简答题/3.md"
   ]
 }

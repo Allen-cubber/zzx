@@ -783,7 +783,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
     *   通常后接<font color="orange">带通滤波器</font>（选频网络）选出所需的中频 $f_I = |\omega_o - \omega_s|$。
     *   输出中频信号 $v_I$ 的包络形状没有变化，只是<font color="orange">填充频率</font>由 $\omega_s$ 变成了 $\omega_I$。
 *   **混频器的电路组成** 🏗️：
-    1.  <font color="orange">输入回路</font>：调谐于 $f_s$，选择所需输入信号。
+    1.  <font color="orange">输入回路</font>：调谐于 $f_s$，选择所需输入信号。ff
     2.  <font color="orange">本地振荡器 (LO)</font>：产生混频所需的本振信号 $f_o$。
     3.  <font color="orange">非线性器件</font>：起频率变换作用 (核心)。
     4.  <font color="orange">输出选频网络</font>：调谐于 $f_I$，取得所需中频输出信号。
@@ -819,10 +819,10 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
 *   **特点比较 (P147)**：
     *   **共同点**：$v_s$ 和 $v_o$ 都作用于 BJT 的输入结 (BE结)，利用 $i_c$ 与 $v_{be}$ 的非线性关系 (转移特性) 进行频率变换。
     *   **共基 (CB) vs 共射 (CE)**：
-        *   <font color="orange">共基电路</font> (c, d)：高频端工作特性优于共射电路。适用于较高频率 (如 100MHz ~ 300MHz，调频接收机)。
+        *   <font color="orange">共基电路</font> (c, d)：**高频端工作特性**优于共射电路。适用于较高频率 (如 100MHz ~ 300MHz，调频接收机)。
         *   <font color="orange">共射电路</font> (a, b)：
-            *   (a) 基入基注：优点是所需本振功率小，输入阻抗高，变频增益大，本振负载轻。缺点是 $v_s$ 对 $v_o$ 有影响，易<font color="orange">频率牵引</font> (本振频率受输入信号影响)。
-            *   (b) 基入射注：优点是 $v_s$ 与 $v_o$ 互相影响小，不易频率牵引。缺点是要求本振输出功率较大。
+            *   (a) 基入基注：优点是**所需本振功率小**，输入阻抗高，变频增益大，本振负载轻。缺点是 $v_s$ 对 $v_o$ 有影响，易<font color="orange">频率牵引</font> (本振频率受输入信号影响)。
+            *   (b) 基入射注：优点是 $v_s$ 与 $v_o$ 互相影响小，**不易频率牵引**。缺点是要求本振输出功率较大。
             *   共射电路常用于频率较低场合 (如 $f < 100$MHz，广播、电视接收机)。
 *   **工作原理与分析 (以图4.6.1(a)为例, P147)**：
     *   **幂级数法**：
@@ -920,7 +920,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   若正常中频为 $f_I = f_o - f_s$ (下变频)，则干扰频率 $f_n = \frac{1}{q} |p f_o \pm f_I| = \frac{1}{q} |p f_s + (p \pm 1) f_I|$。
         *   表现形式：<font color="orange">串台</font> (听到不想要的电台)、<font color="orange">哨叫声</font>。
         *   **主要类型**：
-            *   **<font color="orange">中频干扰</font>** (IF Interference)：当 $p=0, q=1$ 时，$f_n = f_I$。即干扰频率等于中频频率。
+	            *   **<font color="orange">中频干扰</font>** (IF Interference)：当 $p=0, q=1$ 时，$f_n = f_I$。即干扰频率等于中频频率。
                 *   **抑制方法**：提高混频器<font color="orange">前级</font>的选择性 (如RF滤波器)，增加<font color="orange">中频陷波器</font> (IF Trap)，合理选择中频数值 (避开工作波段)。
             *   **<font color="orange">镜像频率干扰</font>** (Image Frequency Interference)：当 $p=1, q=1$ 时。
                 *   干扰频率 $f_{im} = f_o + f_I$ (若 $f_o = f_s + f_I > f_s$) 或 $f_{im} = f_o - f_I$ (若 $f_o = f_s - f_I < f_s$)。
