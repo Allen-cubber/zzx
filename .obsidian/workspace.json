@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/高频电子线路/频率分析/index.md",
+                "file": "content/academic/智能头盔调研/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "Pasted image 20260421102239.png",
+                "file": "content/academic/智能头盔调研/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "Pasted image 20260421102239 的大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -156,7 +156,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300.5
+    "width": 300.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -169,42 +170,42 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "1dd702ca43dbc5e9",
   "lastOpenFiles": [
-    "content/notes/计算机网络/第五章 运输层/Pasted image 20260421102239.png",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/academic/SRP项目/index.md",
+    "content/academic/SRP项目/train_batch40441.jpg",
+    "content/academic/SRP项目/train_batch40440.jpg",
+    "content/academic/SRP项目/train_batch2.jpg",
+    "content/academic/SRP项目/train_batch1.jpg",
+    "content/academic/SRP项目/train_batch0.jpg",
+    "content/academic/SRP项目/results.png",
+    "content/academic/SRP项目/results.csv",
+    "content/academic/SRP项目/locked_id_1_000000.png",
+    "content/academic/SRP项目/labels.jpg",
+    "content/academic/SRP项目/distance_error_scatter.png",
+    "content/academic/SRP项目/da_v2_depth_000001.png",
+    "content/academic/SRP项目/args.yaml",
+    "content/academic/SRP项目/158",
+    "content/academic/SRP项目/result/158",
+    "content/academic/SRP项目/result/results.csv",
+    "content/academic/SRP项目/result/args.yaml",
+    "content/academic/SRP项目/result",
+    "content/academic/SRP项目/基于单目视觉的无人机目标定位方法研究_JSJCLYKZ_V33_i03_宋俊_2025.pdf",
+    "content/academic/SRP项目/A Hybrid Framework for Object Distance Estimation using a Monocular Camera_DASC_2023.pdf",
+    "content/academic/SRP项目/srp结题报告.doc",
     "content/notes/高频电子线路/频率分析/index.md",
     "content/notes/数字图像处理/实验五/index.md",
     "content/notes/数字图像处理/实验四/index.md",
     "content/notes/高频电子线路/变频干扰分析/index.md",
     "content/notes/高频电子线路/高频电子线路/index.md",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/计算机网络/第五章 运输层/index.md",
-    "content/notes/计算机网络/第五章 运输层",
-    "content/notes/高频电子线路/频率分析",
-    "content/notes/高频电子线路/变频干扰分析",
     "content/notes/计算机网络/第四章 网络层/index.md",
-    "Pasted image 20260421102239.png",
     "content/notes/高频电子线路/高频电子线路填空/index.md",
-    "public/notes/微机原理与单片机/微机原理与接口技术/Pastedimage20260321115501.png",
-    "public/notes/微机原理与单片机/微机原理与接口技术/Pastedimage20260321115443.png",
-    "data/tag_learning_paths.yaml",
-    "data",
-    "public/assets/css/stylesheet.6a05881ec62bc6e580f5c34e53d13ec7ffb5f95684fa057810e4d6daeabae131.css",
     "content/academic/高频电子线路课程设计/index.md",
-    "public/tags/通信电子线路/index.xml",
-    "public/tags/通信电子线路/index.html",
-    "public/tags/通信电子线路",
     "content/notes/电磁波与电磁场/index.md",
-    "public/tags/电磁波与电磁场/index.xml",
     "content/academic/光纤通信技术论文汇报/index.md",
     "content/academic/Truckmodel/index.md",
-    "public/tools-web/动物攀爬修改器/afb5d4b529c4d44b546213dd7165a524.jpg",
-    "public/tools-web/微信聊天记录生成器/Pastedimage20251216230816.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155706.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155459.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155647.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155434.png",
-    "public/notes/数字图像处理/第二章-数字图像基础/Pastedimage20260318155450.png",
     "content/academic/2026MCM_B/index.md",
     "content/models/Truckmodel/index.md",
     "2026-04-20.md",
@@ -215,7 +216,6 @@
     "content/essays/思想自由应该有边界吗/index.md",
     "content/essays/永远在移动的终点线/index.md",
     "content/notes/数字图像处理/实验二/index.md",
-    "content/musings/Truckmodel/index.md",
-    "content/notes/高频电子线路/简答题/3.md"
+    "content/musings/Truckmodel/index.md"
   ]
 }
