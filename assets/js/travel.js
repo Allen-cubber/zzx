@@ -219,17 +219,29 @@
             });
             marker.on("click", function () {
                 if (state.mode === "overview" && place.spots.length) {
-                    enterDetailMode(place.id);
+                    if (isMobileTravel()) {
+                        if (state.activeId === place.id && els.card.classList.contains("is-visible")) {
+                            enterDetailMode(place.id);
+                        } else {
+                            showPlaceCard(place.id);
+                        }
+                    } else {
+                        enterDetailMode(place.id);
+                    }
                 } else {
                     focusPlace(place.id, true);
                     showPlaceCard(place.id);
                 }
             });
             marker.on("mouseover", function () {
-                showPlaceCard(place.id);
+                if (!isMobileTravel()) {
+                    showPlaceCard(place.id);
+                }
             });
             marker.on("mouseout", function () {
-                hidePlaceCard();
+                if (!isMobileTravel()) {
+                    hidePlaceCard();
+                }
             });
             marker.addTo(state.map);
             state.markers[place.id] = marker;
@@ -812,6 +824,10 @@
 
     function prefersReducedMotion() {
         return window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
+    function isMobileTravel() {
+        return window.matchMedia && window.matchMedia("(max-width: 720px)").matches;
     }
 
     function clamp(value, min, max) {
