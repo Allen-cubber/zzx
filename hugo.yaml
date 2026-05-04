@@ -78,9 +78,6 @@ params:
     icon: "📝"
     text: "Z2X Blog"
 
-  assets:
-    disableFingerprinting: true
-
 outputs:
   home: ["HTML", "RSS", "JSON"] # 告诉 Hugo 为主页也生成 JSON
 
@@ -90,4 +87,3 @@ outputFormats:
     baseName: "index"
     isPlainText: true
     notAlternative: true
-

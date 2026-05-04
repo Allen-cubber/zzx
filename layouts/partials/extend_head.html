@@ -9,10 +9,7 @@
 {{- end -}}
 
 {{- /* 加载首页动画JavaScript */ -}}
-{{- with resources.Get "js/home_animations.js" -}}
-{{- $homeAnimations := . | minify -}}
-<script defer src="{{ $homeAnimations.RelPermalink }}"></script>
-{{- end -}}
+<script defer src="{{ "js/home_animations.js" | absURL }}"></script>
 <style>
     /* 修改文章页标题字号 */
     .post-single .post-title {
