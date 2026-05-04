@@ -49,12 +49,40 @@
     function init() {
         initAmbientBackground();
         state.activeId = "";
+        initResponsiveSidebar();
         bindEvents();
         renderStats();
         renderTimeline();
         renderPhotoStrip();
         initMap();
         hidePlaceCard();
+    }
+
+    function initResponsiveSidebar() {
+        if (!window.matchMedia || !els.workspace) {
+            return;
+        }
+
+        var media = window.matchMedia("(max-width: 720px)");
+        var sync = function () {
+            if (media.matches) {
+                els.workspace.classList.add("is-sidebar-collapsed");
+            } else {
+                els.workspace.classList.remove("is-sidebar-collapsed");
+            }
+            if (state.map) {
+                window.setTimeout(function () {
+                    state.map.invalidateSize();
+                }, 240);
+            }
+        };
+
+        sync();
+        if (media.addEventListener) {
+            media.addEventListener("change", sync);
+        } else if (media.addListener) {
+            media.addListener(sync);
+        }
     }
 
     function bindEvents() {

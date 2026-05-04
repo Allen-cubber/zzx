@@ -796,59 +796,207 @@
 
 @media (max-width: 720px) {
     .travel-page {
+        --travel-radius: 12px;
+        --travel-control-height: 42px;
         width: calc(100vw - 18px);
         min-height: calc(100vh - var(--header-height));
+        margin-top: 0;
     }
 
     .travel-title-block h1 {
-        font-size: 2rem;
+        font-size: clamp(2.2rem, 12vw, 3rem);
+        line-height: 1;
+    }
+
+    .travel-toolbar {
+        gap: 12px;
+        margin-bottom: 12px;
     }
 
     .travel-stats {
         width: 100%;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         justify-content: space-between;
+        padding: 7px;
+    }
+
+    .travel-stats span {
+        justify-content: center;
+        min-height: 42px;
+        padding: 0 8px;
+        font-size: 1rem;
+    }
+
+    .travel-stats strong {
+        font-size: 1.12rem;
     }
 
     .travel-map-panel {
+        height: min(720px, max(560px, calc(100svh - 230px)));
         min-height: 560px;
+        border-radius: var(--travel-radius);
     }
 
     .travel-map-topbar {
+        inset: 10px 10px auto 10px;
         align-items: flex-start;
+        justify-content: space-between;
         flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .travel-layer-switch,
+    .travel-icon-row {
+        height: var(--travel-control-height);
+        padding: 4px;
+    }
+
+    .travel-layer-switch button {
+        min-width: 48px;
+        min-height: calc(var(--travel-control-height) - 10px);
+        padding: 0 9px;
+        font-size: 0.88rem;
+    }
+
+    .travel-icon-btn {
+        width: 34px;
+        height: 34px;
+    }
+
+    .travel-icon-btn svg {
+        width: 17px;
+        height: 17px;
+    }
+
+    .travel-icon-row {
+        margin-left: auto;
+        gap: 6px;
+    }
+
+    .travel-back-btn {
+        min-height: var(--travel-control-height);
+        padding: 0 12px;
+        font-size: 0.9rem;
     }
 
     .travel-sidebar {
-        top: 10px;
+        top: auto;
         right: 10px;
-        bottom: auto;
-        width: min(320px, calc(100% - 20px));
-        max-height: 310px;
+        bottom: 10px;
+        left: 10px;
+        width: auto;
+        max-height: min(42svh, 370px);
+        padding: 12px;
+        row-gap: 10px;
+        border-radius: calc(var(--travel-radius) + 2px);
+    }
+
+    .travel-sidebar-head {
+        min-height: 38px;
+        gap: 10px;
+    }
+
+    .travel-sidebar-head h2 {
+        font-size: 1.15rem;
+    }
+
+    .travel-sidebar .travel-kicker {
+        margin-bottom: 2px;
+        font-size: 0.68rem;
+    }
+
+    .travel-photo-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+        max-height: 64px;
+    }
+
+    .travel-strip-item {
+        height: 64px;
     }
 
     .travel-workspace.is-sidebar-collapsed .travel-sidebar {
-        max-height: 70px;
+        right: auto;
+        width: 142px;
+        max-height: 56px;
+        padding: 8px 10px;
+    }
+
+    .travel-workspace.is-sidebar-collapsed .travel-sidebar-head {
+        min-height: 38px;
+    }
+
+    .travel-workspace.is-sidebar-collapsed .travel-sidebar h2 {
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    .travel-workspace.is-sidebar-collapsed .travel-sidebar .travel-icon-btn {
+        width: 34px;
+        height: 34px;
     }
 
     .travel-timeline {
-        max-height: 176px;
+        max-height: min(22svh, 170px);
+    }
+
+    .travel-timeline-item {
+        margin-bottom: 8px;
+        padding: 10px 10px 10px 32px;
+    }
+
+    .travel-timeline-item::before {
+        left: 12px;
+        top: 17px;
+    }
+
+    .travel-timeline-note {
+        -webkit-line-clamp: 1;
     }
 
     .travel-place-card {
         left: 10px;
-        bottom: 10px;
+        top: 62px;
+        bottom: auto;
         width: calc(100% - 20px);
+        min-height: 0;
         padding: 10px;
     }
 
     .travel-place-inner {
-        grid-template-columns: 86px minmax(0, 1fr);
+        grid-template-columns: 78px minmax(0, 1fr);
+        gap: 10px;
     }
 
     .travel-place-photo,
     .travel-photo-fallback {
-        width: 86px;
-        height: 120px;
+        width: 78px;
+        height: 104px;
+    }
+
+    .travel-place-body h3 {
+        font-size: 1.12rem;
+    }
+
+    .travel-place-body p {
+        display: -webkit-box;
+        overflow: hidden;
+        font-size: 0.84rem;
+        line-height: 1.45;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .travel-tags {
+        gap: 5px;
+        margin-top: 7px;
+    }
+
+    .travel-tags span {
+        min-height: 22px;
+        padding: 0 7px;
+        font-size: 0.7rem;
     }
 }
 
