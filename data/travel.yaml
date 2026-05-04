@@ -1,232 +1,47 @@
 title: " My Travel Atlas"
 subtitle: "把抵达过的坐标、照片和时间留在同一张中国地图上。"
 places:
-  - id: "beijing"
-    city: "北京"
-    country: "中国"
-    date: "2024-04-12"
-    lat: 39.9042
-    lng: 116.4074
-    accent: "#007aff"
-    note: "在胡同和中轴线上慢慢走，城市像一本翻开的旧书。"
-    tags:
-      - "城市漫步"
-      - "博物馆"
-    photo: ""
-    spots:
-      - id: "beijing-forbidden-city"
-        city: "故宫"
-        country: "北京"
-        date: "2024-04-12"
-        lat: 39.9163
-        lng: 116.3972
-        accent: "#ff453a"
-        note: "红墙、金瓦和层层院落，把北京的时间感一下子拉近。"
-        tags:
-          - "宫殿"
-          - "中轴线"
-        photo: ""
-      - id: "beijing-beihai"
-        city: "北海公园"
-        country: "北京"
-        date: "2024-04-13"
-        lat: 39.9250
-        lng: 116.3890
-        accent: "#34c759"
-        note: "湖面和白塔很安静，适合在树影里慢慢绕一圈。"
-        tags:
-          - "公园"
-          - "湖边"
-        photo: ""
-      - id: "beijing-798"
-        city: "798 艺术区"
-        country: "北京"
-        date: "2024-04-14"
-        lat: 39.9842
-        lng: 116.4958
-        accent: "#bf5af2"
-        note: "厂房、展览和咖啡馆混在一起，周末散步很松弛。"
-        tags:
-          - "展览"
-          - "街区"
-        photo: ""
-      - id: "beijing-summer-palace"
-        city: "颐和园"
-        country: "北京"
-        date: "2024-04-15"
-        lat: 39.9999
-        lng: 116.2755
-        accent: "#0a84ff"
-        note: "昆明湖边的风很开阔，走到长廊时会自然慢下来。"
-        tags:
-          - "园林"
-          - "湖景"
-        photo: ""
-  - id: "shanghai"
-    city: "上海"
-    country: "中国"
-    date: "2024-07-21"
-    lat: 31.2304
-    lng: 121.4737
-    accent: "#ff9f0a"
-    note: "傍晚从外滩看灯光亮起来，江面把风景折成两层。"
-    tags:
-      - "夜景"
-      - "江边"
-    photo: ""
-  - id: "chengdu"
-    city: "成都"
-    country: "中国"
-    date: "2025-02-03"
-    lat: 30.5728
-    lng: 104.0668
-    accent: "#34c759"
-    note: "慢节奏的一天，从茶馆、巷子和热气腾腾的晚饭开始。"
-    tags:
-      - "美食"
-      - "慢旅行"
-    photo: ""
-  - id: "xian"
-    city: "西安"
-    country: "中国"
-    date: "2025-04-06"
-    lat: 34.3416
-    lng: 108.9398
-    accent: "#5856d6"
-    note: "城墙上的风很开阔，夜色一落下来，历史就贴近了许多。"
-    tags:
-      - "古城"
-      - "夜游"
-    photo: ""
-  - id: "hangzhou"
-    city: "杭州"
-    country: "中国"
-    date: "2025-06-14"
-    lat: 30.2741
-    lng: 120.1551
-    accent: "#00c7be"
-    note: "湖面、山影和雨后的树色，让一天自然慢下来。"
-    tags:
-      - "湖边"
-      - "雨天"
-    photo: ""
-  - id: "guangzhou"
-    city: "广州"
-    country: "中国"
-    date: "2025-08-09"
-    lat: 23.1291
-    lng: 113.2644
-    accent: "#ff375f"
-    note: "骑楼街、早茶和湿热的晚风，把城市的生活感铺得很满。"
-    tags:
-      - "早茶"
-      - "街区"
-    photo: ""
-  - id: "chongqing"
+  - id: "city-mor8jr30"
     city: "重庆"
     country: "中国"
-    date: "2025-09-18"
-    lat: 29.5630
-    lng: 106.5516
-    accent: "#ff453a"
-    note: "轻轨穿过高楼，江面和山城的灯一起亮起来，层层叠叠很有电影感。"
-    tags:
-      - "山城"
-      - "夜景"
+    date: "2023-07-06"
+    lat: 30.05518
+    lng: 107.874871
+    accent: "#ff0000"
+    note: ""
+    tags: []
     photo: ""
-  - id: "nanjing"
-    city: "南京"
+    spots:
+      - id: "city-mor8jr30-mor8kp8m"
+        city: "三峡广场"
+        country: "重庆"
+        date: "2023-07-06"
+        lat: 29.559852
+        lng: 106.457349
+        accent: "#ff0000"
+        note: ""
+        tags: []
+        photo: "微信图片_20260504212832_1146_13.jpg"
+  - id: "city-mor6y2lq"
+    city: "郑州"
     country: "中国"
-    date: "2025-10-03"
-    lat: 32.0603
-    lng: 118.7969
-    accent: "#bf5af2"
-    note: "梧桐树影把街道切得很温柔，城墙和湖面都适合慢慢走。"
-    tags:
-      - "梧桐"
-      - "历史"
+    date: "2023-06-12"
+    lat: 34.746126
+    lng: 113.628843
+    accent: "#007aff"
+    note: ""
+    tags: []
     photo: ""
-  - id: "qingdao"
-    city: "青岛"
-    country: "中国"
-    date: "2025-10-29"
-    lat: 36.0671
-    lng: 120.3826
-    accent: "#0a84ff"
-    note: "红瓦、海风和起伏的街坡连在一起，傍晚的海边特别干净。"
-    tags:
-      - "海边"
-      - "老城"
-    photo: ""
-  - id: "xiamen"
-    city: "厦门"
-    country: "中国"
-    date: "2025-11-16"
-    lat: 24.4798
-    lng: 118.0894
-    accent: "#30d158"
-    note: "海岸线很轻，骑行路上一直能闻到植物和潮湿空气的味道。"
-    tags:
-      - "海岛"
-      - "骑行"
-    photo: ""
-  - id: "guilin"
-    city: "桂林"
-    country: "中国"
-    date: "2025-12-08"
-    lat: 25.2736
-    lng: 110.2900
-    accent: "#64d2ff"
-    note: "山水的轮廓很清楚，江面像一条慢慢展开的长卷。"
-    tags:
-      - "山水"
-      - "江景"
-    photo: ""
-  - id: "dali"
-    city: "大理"
-    country: "中国"
-    date: "2026-01-12"
-    lat: 25.6065
-    lng: 100.2676
-    accent: "#ffd60a"
-    note: "苍山和洱海把光线托得很开，适合把日程放松到只剩散步。"
-    tags:
-      - "洱海"
-      - "慢旅行"
-    photo: "/images/travel/homepage-bg.jpg"
-  - id: "lhasa"
-    city: "拉萨"
-    country: "中国"
-    date: "2026-02-05"
-    lat: 29.6500
-    lng: 91.1000
-    accent: "#ff9f0a"
-    note: "高原的天空很近，阳光落在白墙和经幡上，颜色非常安静。"
-    tags:
-      - "高原"
-      - "日光"
-    photo: ""
-  - id: "harbin"
-    city: "哈尔滨"
-    country: "中国"
-    date: "2026-02-24"
-    lat: 45.8038
-    lng: 126.5349
-    accent: "#5e5ce6"
-    note: "中央大街的雪光和建筑线条很有北方冬天的质感。"
-    tags:
-      - "冰雪"
-      - "建筑"
-    photo: ""
-  - id: "wuhan"
-    city: "武汉"
-    country: "中国"
-    date: "2026-03-18"
-    lat: 30.5928
-    lng: 114.3055
-    accent: "#ff2d55"
-    note: "江桥、轮渡和热干面把一座城市的早晨拉得很有劲。"
-    tags:
-      - "江城"
-      - "早餐"
-    photo: ""
+    spots:
+      - id: "city-mor6y2lq-mor7t7du"
+        city: "郑州方特欢乐世界"
+        country: "郑州"
+        date: "2023-06-12"
+        lat: 34.76718
+        lng: 113.924434
+        accent: "#007aff"
+        note: "高考结束后班级组织的一次欢乐的出行。"
+        tags:
+          - "方特"
+          - "乐园"
+        photo: "微信图片_20260504211155_1145_13.jpg"

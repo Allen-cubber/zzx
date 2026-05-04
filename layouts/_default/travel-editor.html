@@ -1,0 +1,163 @@
+{{- define "main" -}}
+{{- $travelData := site.Data.travel | default dict -}}
+
+{{- if not hugo.IsServer -}}
+<section class="travel-editor-page travel-editor-offline">
+  <p>这个页面只在本地 Hugo server 中启用，线上站点不会开放编辑入口。</p>
+</section>
+{{- else -}}
+<section class="travel-editor-page" data-travel-editor>
+  <script id="travel-editor-seed" type="application/json">{{ $travelData | jsonify | safeJS }}</script>
+
+  <header class="travel-editor-header">
+    <div class="travel-editor-actions">
+      <span class="travel-editor-status" data-editor-status>未绑定文件</span>
+      <button type="button" class="travel-editor-btn" data-editor-bind>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path></svg>
+        绑定 travel.yaml
+      </button>
+      <button type="button" class="travel-editor-btn travel-editor-btn-primary" data-editor-save>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><path d="M17 21v-8H7v8"></path><path d="M7 3v5h8"></path></svg>
+        保存
+      </button>
+      <button type="button" class="travel-editor-icon-btn" title="复制 YAML" aria-label="复制 YAML" data-editor-copy>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+      </button>
+      <button type="button" class="travel-editor-icon-btn" title="下载 YAML" aria-label="下载 YAML" data-editor-download>
+        <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><path d="M7 10l5 5 5-5"></path><path d="M12 15V3"></path></svg>
+      </button>
+    </div>
+  </header>
+
+  <div class="travel-editor-shell">
+    <aside class="travel-editor-panel travel-editor-list-panel">
+      <div class="travel-editor-panel-head">
+        <div>
+          <span class="travel-editor-label">目的地</span>
+          <strong data-editor-place-count>0</strong>
+        </div>
+        <button type="button" class="travel-editor-icon-btn" title="新增城市" aria-label="新增城市" data-editor-add-place>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+        </button>
+      </div>
+      <div class="travel-editor-places" data-editor-places></div>
+    </aside>
+
+    <main class="travel-editor-panel travel-editor-form-panel">
+      <section class="travel-editor-dataset">
+        <label>
+          <span>数据标题</span>
+          <input type="text" data-root-field="title" autocomplete="off">
+        </label>
+        <label>
+          <span>副标题</span>
+          <input type="text" data-root-field="subtitle" autocomplete="off">
+        </label>
+      </section>
+
+      <form class="travel-editor-form" data-editor-form>
+        <div class="travel-editor-empty" data-editor-empty></div>
+        <div class="travel-editor-fields" data-editor-fields hidden>
+          <div class="travel-editor-form-title">
+            <div>
+              <span data-editor-selected-type>城市</span>
+              <h2 data-editor-selected-name>未命名</h2>
+            </div>
+            <button type="button" class="travel-editor-btn" data-editor-add-spot>
+              <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"></path></svg>
+              新增景点
+            </button>
+          </div>
+
+          <div class="travel-editor-grid">
+            <label>
+              <span>ID</span>
+              <input type="text" data-field="id" autocomplete="off">
+            </label>
+            <label>
+              <span>名称</span>
+              <input type="text" data-field="city" autocomplete="off">
+            </label>
+            <label>
+              <span>地区</span>
+              <input type="text" data-field="country" autocomplete="off">
+            </label>
+            <label>
+              <span>日期</span>
+              <input type="date" data-field="date">
+            </label>
+            <label>
+              <span>纬度</span>
+              <input type="number" step="0.000001" data-field="lat">
+            </label>
+            <label>
+              <span>经度</span>
+              <input type="number" step="0.000001" data-field="lng">
+            </label>
+            <label>
+              <span>色标</span>
+              <input type="color" data-field="accent">
+            </label>
+            <label>
+              <span>照片文件名</span>
+              <input type="text" data-field="photo" placeholder="beijing.jpg" autocomplete="off">
+            </label>
+          </div>
+
+          <label class="travel-editor-wide-field">
+            <span>标签</span>
+            <textarea rows="3" data-field="tags" placeholder="一行一个标签"></textarea>
+          </label>
+          <label class="travel-editor-wide-field">
+            <span>记录</span>
+            <textarea rows="5" data-field="note"></textarea>
+          </label>
+        </div>
+      </form>
+    </main>
+
+    <aside class="travel-editor-side">
+      <section class="travel-editor-panel travel-editor-map-panel">
+        <div class="travel-editor-panel-head">
+          <div>
+            <span class="travel-editor-label">地图选点</span>
+            <strong data-editor-coordinate-label>点击地图设置坐标</strong>
+          </div>
+          <div class="travel-editor-layer-switch" role="group" aria-label="地图图层">
+            <button type="button" class="is-active" data-editor-layer="standard">标准</button>
+            <button type="button" data-editor-layer="satellite">卫星</button>
+          </div>
+        </div>
+        <form class="travel-editor-search" data-editor-search-form>
+          <label>
+            <span>搜索地点坐标</span>
+            <input type="search" data-editor-search-input placeholder="故宫 / 杭州西湖 / 北京 798" autocomplete="off">
+          </label>
+          <button type="submit" class="travel-editor-btn">
+            <svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+            搜索
+          </button>
+          <small>坐标来自 OpenStreetMap / Nominatim</small>
+          <div class="travel-editor-search-results" data-editor-search-results hidden></div>
+        </form>
+        <div class="travel-editor-map" data-editor-map></div>
+      </section>
+
+      <section class="travel-editor-panel travel-editor-preview-panel">
+        <div class="travel-editor-preview" data-editor-photo-preview>
+          <span>照片预览</span>
+        </div>
+        <label class="travel-editor-yaml-preview">
+          <span>YAML 预览</span>
+          <textarea readonly data-editor-yaml></textarea>
+        </label>
+      </section>
+    </aside>
+  </div>
+</section>
+
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+{{- $editorJS := resources.Get "js/travel-editor.js" | fingerprint -}}
+<script defer src="{{ $editorJS.RelPermalink }}" integrity="{{ $editorJS.Data.Integrity }}"></script>
+{{- end -}}
+{{- end -}}

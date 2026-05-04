@@ -34,21 +34,20 @@
         transitionLayer: null,
         ambient: null,
         ambientLayers: [],
-        ambientIndex: 0,
-        headerTimer: 0
+        ambientIndex: 0
     };
 
     var chinaBounds = [[18.0, 73.0], [54.5, 135.5]];
     var detailEnterZoom = 10;
     var detailExitZoom = 9;
     var detailEnterDistanceMeters = 70000;
+    var travelPhotoBasePath = "/images/travel/";
     var imageryAttribution = "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
 
     init();
 
     function init() {
         initAmbientBackground();
-        initAutoHeader();
         state.activeId = "";
         bindEvents();
         renderStats();
@@ -258,12 +257,13 @@
         }).slice(0, 6);
         els.photoStrip.innerHTML = "";
         items.forEach(function (place) {
+            var photoUrl = getTravelPhotoUrl(place.photo);
             var item = document.createElement("button");
             item.type = "button";
             item.className = "travel-strip-item";
             item.style.setProperty("--strip-color", place.accent);
-            item.innerHTML = place.photo ?
-                '<img src="' + escapeAttribute(place.photo) + '" alt=""><span>' + escapeHTML(place.city) + '</span>' :
+            item.innerHTML = photoUrl ?
+                '<img src="' + escapeAttribute(photoUrl) + '" alt=""><span>' + escapeHTML(place.city) + '</span>' :
                 '<strong>' + escapeHTML(place.city.slice(0, 1)) + '</strong><span>' + escapeHTML(place.city) + '</span>';
             item.addEventListener("click", function () {
                 if (state.mode === "overview" && place.spots.length) {
@@ -294,8 +294,9 @@
         var tags = place.tags.map(function (tag) {
             return "<span>" + escapeHTML(tag) + "</span>";
         }).join("");
-        var image = place.photo ?
-            '<img class="travel-place-photo" src="' + escapeAttribute(place.photo) + '" alt="' + escapeAttribute(place.city) + '">' :
+        var photoUrl = getTravelPhotoUrl(place.photo);
+        var image = photoUrl ?
+            '<img class="travel-place-photo" src="' + escapeAttribute(photoUrl) + '" alt="' + escapeAttribute(place.city) + '">' :
             '<div class="travel-photo-fallback" aria-hidden="true">' + escapeHTML(place.city.slice(0, 1)) + '</div>';
 
         els.card.style.setProperty("--place-color", place.accent);
@@ -417,7 +418,7 @@
             accent: /^#[0-9a-f]{6}$/i.test(String(place.accent || "")) ? String(place.accent) : "#007aff",
             note: String(place.note || ""),
             tags: Array.isArray(place.tags) ? place.tags.map(String).filter(Boolean) : [],
-            photo: String(place.photo || ""),
+            photo: normalizeTravelPhoto(place.photo),
             spots: Array.isArray(place.spots) ? place.spots.map(normalizePlace).filter(Boolean) : []
         };
     }
@@ -695,39 +696,6 @@
         document.body.prepend(els.ambient);
     }
 
-    function initAutoHeader() {
-        document.body.classList.add("travel-auto-header", "travel-header-hidden");
-        var header = document.querySelector(".header");
-        if (!header) {
-            return;
-        }
-
-        document.addEventListener("mousemove", function (event) {
-            if (event.clientY <= 18) {
-                showTravelHeader();
-            } else if (event.clientY > 96 && !header.matches(":hover")) {
-                scheduleHeaderHide();
-            }
-        });
-
-        header.addEventListener("mouseenter", showTravelHeader);
-        header.addEventListener("mouseleave", scheduleHeaderHide);
-        header.addEventListener("focusin", showTravelHeader);
-        header.addEventListener("focusout", scheduleHeaderHide);
-    }
-
-    function showTravelHeader() {
-        window.clearTimeout(state.headerTimer);
-        document.body.classList.remove("travel-header-hidden");
-    }
-
-    function scheduleHeaderHide() {
-        window.clearTimeout(state.headerTimer);
-        state.headerTimer = window.setTimeout(function () {
-            document.body.classList.add("travel-header-hidden");
-        }, 360);
-    }
-
     function setAmbientBackground(place) {
         if (!els.ambientLayers.length || !place) {
             return;
@@ -738,7 +706,7 @@
         var currentLayer = els.ambientLayers[els.ambientIndex];
 
         nextLayer.style.backgroundImage = getAmbientImage(place);
-        nextLayer.classList.toggle("has-photo", Boolean(place.photo));
+        nextLayer.classList.toggle("has-photo", Boolean(getTravelPhotoUrl(place.photo)));
         nextLayer.classList.add("is-active");
         currentLayer.classList.remove("is-active");
         els.ambientIndex = nextIndex;
@@ -747,10 +715,11 @@
     function getAmbientImage(place) {
         var accent = /^#[0-9a-f]{6}$/i.test(place.accent) ? place.accent : "#007aff";
 
-        if (place.photo) {
+        var photoUrl = getTravelPhotoUrl(place.photo);
+        if (photoUrl) {
             return [
                 "linear-gradient(135deg, rgba(246, 248, 252, 0.48), rgba(246, 248, 252, 0.72))",
-                'url("' + escapeCssUrl(place.photo) + '")'
+                'url("' + escapeCssUrl(photoUrl) + '")'
             ].join(", ");
         }
 
@@ -765,6 +734,37 @@
         return places.slice().sort(function (a, b) {
             return String(b.date).localeCompare(String(a.date));
         })[0] || {};
+    }
+
+    function normalizeTravelPhoto(value) {
+        var photo = String(value || "").trim();
+        if (!photo) {
+            return "";
+        }
+        if (photo.indexOf(travelPhotoBasePath) === 0) {
+            return photo.slice(travelPhotoBasePath.length);
+        }
+        if (photo.indexOf("images/travel/") === 0) {
+            return photo.slice("images/travel/".length);
+        }
+        if (photo.indexOf("static/images/travel/") === 0) {
+            return photo.slice("static/images/travel/".length);
+        }
+        if (photo.indexOf("travel/") === 0) {
+            return photo.slice("travel/".length);
+        }
+        return photo;
+    }
+
+    function getTravelPhotoUrl(value) {
+        var photo = normalizeTravelPhoto(value);
+        if (!photo) {
+            return "";
+        }
+        if (/^(https?:)?\/\//i.test(photo) || photo.charAt(0) === "/" || photo.indexOf("data:") === 0) {
+            return photo;
+        }
+        return travelPhotoBasePath + photo.replace(/^\.?\/*/, "");
     }
 
     function formatDate(value) {

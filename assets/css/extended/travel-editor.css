@@ -1,0 +1,790 @@
+.travel-editor-page {
+    --editor-ink: #17202a;
+    --editor-muted: #6c7480;
+    --editor-line: rgba(23, 32, 42, 0.12);
+    --editor-surface: rgba(255, 255, 255, 0.86);
+    --editor-surface-strong: rgba(255, 255, 255, 0.96);
+    --editor-control: rgba(247, 249, 252, 0.92);
+    --editor-control-hover: #ffffff;
+    --editor-primary: #007aff;
+    --editor-green: #34c759;
+    --editor-red: #ff453a;
+    --editor-shadow: 0 22px 58px rgba(31, 45, 61, 0.14);
+    --editor-radius: 14px;
+    --editor-control-height: 44px;
+    width: min(1500px, calc(100vw - 48px));
+    min-height: calc(100vh - var(--header-height) - 28px);
+    margin: 0 0 0 50%;
+    transform: translateX(-50%);
+    color: var(--editor-ink);
+}
+
+.travel-editor-offline {
+    display: grid;
+    place-items: center;
+    gap: 12px;
+    min-height: 52vh;
+    text-align: center;
+}
+
+.travel-editor-offline p {
+    max-width: 520px;
+    margin: 0;
+    color: var(--editor-muted);
+}
+
+.travel-editor-header {
+    display: flex;
+    align-items: end;
+    justify-content: flex-end;
+    gap: 18px;
+    margin: 0 0 18px;
+}
+
+.travel-editor-kicker,
+.travel-editor-label {
+    display: block;
+    margin: 0 0 4px;
+    color: var(--editor-muted);
+    font-size: 0.76rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.travel-editor-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.travel-editor-status {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    max-width: 260px;
+    padding: 6px 12px;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface);
+    color: var(--editor-muted);
+    font-size: 0.86rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 10px 30px rgba(31, 45, 61, 0.08);
+}
+
+.travel-editor-status[data-state="ok"] {
+    color: #146c2e;
+    border-color: rgba(52, 199, 89, 0.3);
+    background: rgba(226, 248, 232, 0.9);
+}
+
+.travel-editor-status[data-state="warn"] {
+    color: #8a5a00;
+    border-color: rgba(255, 159, 10, 0.28);
+    background: rgba(255, 245, 224, 0.9);
+}
+
+.travel-editor-status[data-state="error"] {
+    color: #9b1c1c;
+    border-color: rgba(255, 69, 58, 0.26);
+    background: rgba(255, 235, 235, 0.9);
+}
+
+.travel-editor-btn,
+.travel-editor-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: var(--editor-control-height);
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-control);
+    color: var(--editor-ink);
+    font: inherit;
+    font-weight: 800;
+    box-shadow: 0 12px 32px rgba(31, 45, 61, 0.11);
+    cursor: pointer;
+    transition: transform 180ms ease, background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+.travel-editor-btn {
+    gap: 8px;
+    padding: 0 14px;
+}
+
+.travel-editor-btn svg,
+.travel-editor-icon-btn svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.25;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.travel-editor-icon-btn {
+    width: var(--editor-control-height);
+    padding: 0;
+}
+
+.travel-editor-btn:hover,
+.travel-editor-icon-btn:hover {
+    background: var(--editor-control-hover);
+    border-color: rgba(0, 122, 255, 0.28);
+    transform: translateY(-1px);
+}
+
+.travel-editor-btn:disabled,
+.travel-editor-icon-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.52;
+    transform: none;
+}
+
+.travel-editor-btn-primary {
+    border-color: rgba(0, 122, 255, 0.52);
+    background: var(--editor-primary);
+    color: #ffffff;
+}
+
+.travel-editor-btn-primary:hover {
+    background: #0a84ff;
+    color: #ffffff;
+}
+
+.travel-editor-shell {
+    display: grid;
+    grid-template-columns: minmax(260px, 320px) minmax(420px, 1fr) minmax(360px, 430px);
+    gap: 16px;
+    align-items: stretch;
+}
+
+.travel-editor-panel {
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface);
+    box-shadow: var(--editor-shadow);
+    backdrop-filter: blur(22px) saturate(1.18);
+}
+
+.travel-editor-list-panel,
+.travel-editor-form-panel,
+.travel-editor-side {
+    min-height: 680px;
+}
+
+.travel-editor-list-panel,
+.travel-editor-form-panel {
+    overflow: hidden;
+}
+
+.travel-editor-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 68px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--editor-line);
+}
+
+.travel-editor-panel-head strong {
+    display: block;
+    color: var(--editor-ink);
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.travel-editor-places {
+    height: calc(100% - 68px);
+    max-height: calc(100vh - 190px);
+    padding: 12px;
+    overflow: auto;
+}
+
+.travel-editor-empty-list {
+    display: grid;
+    place-items: center;
+    min-height: 180px;
+    color: var(--editor-muted);
+    text-align: center;
+}
+
+.travel-editor-empty {
+    display: none;
+}
+
+.travel-editor-place-card {
+    padding: 10px;
+    border: 1px solid transparent;
+    border-radius: var(--editor-radius);
+    background: rgba(255, 255, 255, 0.44);
+    transition: background 180ms ease, border-color 180ms ease;
+}
+
+.travel-editor-place-card + .travel-editor-place-card {
+    margin-top: 10px;
+}
+
+.travel-editor-place-card.is-active {
+    border-color: rgba(0, 122, 255, 0.28);
+    background: rgba(0, 122, 255, 0.08);
+}
+
+.travel-editor-place-main,
+.travel-editor-spot-row {
+    display: grid;
+    grid-template-columns: 1fr 36px;
+    align-items: center;
+    gap: 8px;
+}
+
+.travel-editor-place-select,
+.travel-editor-spot-row button:first-child {
+    display: flex;
+    align-items: center;
+    min-width: 0;
+    gap: 10px;
+    min-height: 42px;
+    border: 0;
+    border-radius: var(--editor-radius);
+    background: transparent;
+    color: var(--editor-ink);
+    text-align: left;
+    cursor: pointer;
+}
+
+.travel-editor-place-select {
+    padding: 6px;
+}
+
+.travel-editor-place-select strong,
+.travel-editor-spot-row strong {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.travel-editor-place-select em {
+    display: block;
+    margin-top: 2px;
+    color: var(--editor-muted);
+    font-size: 0.82rem;
+    font-style: normal;
+}
+
+.travel-editor-place-dot,
+.travel-editor-spot-row span {
+    width: 13px;
+    height: 13px;
+    flex: 0 0 auto;
+    border-radius: 999px;
+    background: var(--accent, var(--editor-primary));
+    box-shadow: 0 0 0 5px color-mix(in srgb, var(--accent, #007aff) 18%, transparent);
+}
+
+.travel-editor-row-delete {
+    display: grid;
+    place-items: center;
+    width: 36px;
+    height: 36px;
+    border: 0;
+    border-radius: var(--editor-radius);
+    background: transparent;
+    color: var(--editor-muted);
+    cursor: pointer;
+    transition: background 160ms ease, color 160ms ease;
+}
+
+.travel-editor-row-delete svg {
+    width: 18px;
+    height: 18px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    stroke-linecap: round;
+}
+
+.travel-editor-row-delete:hover {
+    background: rgba(255, 69, 58, 0.12);
+    color: var(--editor-red);
+}
+
+.travel-editor-spot-list {
+    margin: 8px 0 0 24px;
+    padding-left: 12px;
+    border-left: 1px solid var(--editor-line);
+}
+
+.travel-editor-spot-row {
+    border-radius: var(--editor-radius);
+}
+
+.travel-editor-spot-row.is-active {
+    background: rgba(0, 122, 255, 0.1);
+}
+
+.travel-editor-spot-row span {
+    width: 10px;
+    height: 10px;
+}
+
+.travel-editor-add-spot-row {
+    width: 100%;
+    min-height: 34px;
+    margin-top: 4px;
+    border: 1px dashed var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: transparent;
+    color: var(--editor-muted);
+    font-weight: 800;
+    cursor: pointer;
+}
+
+.travel-editor-form-panel {
+    padding: 16px;
+}
+
+.travel-editor-dataset {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 14px;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: rgba(255, 255, 255, 0.42);
+}
+
+.travel-editor-form-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.travel-editor-form-title span {
+    color: var(--editor-muted);
+    font-size: 0.86rem;
+    font-weight: 800;
+}
+
+.travel-editor-form-title h2 {
+    margin: 2px 0 0;
+    color: var(--editor-ink);
+    font-size: clamp(1.7rem, 3vw, 2.5rem);
+    line-height: 1.05;
+}
+
+.travel-editor-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.travel-editor-dataset label,
+.travel-editor-grid label,
+.travel-editor-wide-field,
+.travel-editor-yaml-preview {
+    display: grid;
+    gap: 7px;
+    min-width: 0;
+    color: var(--editor-muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.travel-editor-dataset input,
+.travel-editor-grid input,
+.travel-editor-wide-field textarea,
+.travel-editor-yaml-preview textarea {
+    width: 100%;
+    min-width: 0;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface-strong);
+    color: var(--editor-ink);
+    font: inherit;
+    font-weight: 650;
+    outline: none;
+    transition: border-color 160ms ease, box-shadow 160ms ease, background 160ms ease;
+}
+
+.travel-editor-dataset input,
+.travel-editor-grid input {
+    min-height: var(--editor-control-height);
+    padding: 0 12px;
+}
+
+.travel-editor-grid input[type="color"] {
+    padding: 5px;
+}
+
+.travel-editor-wide-field {
+    margin-top: 12px;
+}
+
+.travel-editor-wide-field textarea,
+.travel-editor-yaml-preview textarea {
+    resize: vertical;
+    padding: 12px;
+    line-height: 1.55;
+}
+
+.travel-editor-yaml-preview textarea {
+    min-height: 180px;
+    max-height: 280px;
+    resize: none;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+
+.travel-editor-dataset input:focus,
+.travel-editor-grid input:focus,
+.travel-editor-wide-field textarea:focus,
+.travel-editor-yaml-preview textarea:focus {
+    border-color: rgba(0, 122, 255, 0.55);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.12);
+}
+
+.travel-editor-side {
+    display: grid;
+    grid-template-rows: minmax(390px, 1fr) auto;
+    gap: 16px;
+}
+
+.travel-editor-map-panel {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.travel-editor-layer-switch {
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+    height: 38px;
+    padding: 4px;
+    border-radius: var(--editor-radius);
+    background: rgba(23, 32, 42, 0.08);
+}
+
+.travel-editor-layer-switch button {
+    min-width: 54px;
+    border: 0;
+    border-radius: calc(var(--editor-radius) - 4px);
+    background: transparent;
+    color: var(--editor-muted);
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.travel-editor-layer-switch button.is-active {
+    background: var(--editor-surface-strong);
+    color: var(--editor-ink);
+    box-shadow: 0 8px 18px rgba(31, 45, 61, 0.12);
+}
+
+.travel-editor-search {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 10px;
+    padding: 12px;
+    border-bottom: 1px solid var(--editor-line);
+    background: rgba(255, 255, 255, 0.36);
+}
+
+.travel-editor-search label {
+    display: grid;
+    gap: 6px;
+    min-width: 0;
+    color: var(--editor-muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.travel-editor-search input {
+    width: 100%;
+    min-width: 0;
+    min-height: var(--editor-control-height);
+    padding: 0 12px;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface-strong);
+    color: var(--editor-ink);
+    font: inherit;
+    font-weight: 650;
+    outline: none;
+}
+
+.travel-editor-search input:focus {
+    border-color: rgba(0, 122, 255, 0.55);
+    box-shadow: 0 0 0 4px rgba(0, 122, 255, 0.12);
+}
+
+.travel-editor-search-results {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 8px;
+    max-height: 216px;
+    overflow: auto;
+}
+
+.travel-editor-search small {
+    grid-column: 1 / -1;
+    color: var(--editor-muted);
+    font-size: 0.72rem;
+    font-weight: 750;
+}
+
+.travel-editor-search-results[hidden] {
+    display: none;
+}
+
+.travel-editor-search-results button,
+.travel-editor-search-empty {
+    width: 100%;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface-strong);
+    color: var(--editor-ink);
+}
+
+.travel-editor-search-results button {
+    display: grid;
+    gap: 3px;
+    padding: 10px 12px;
+    text-align: left;
+    cursor: pointer;
+    transition: border-color 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.travel-editor-search-results button:hover {
+    border-color: rgba(0, 122, 255, 0.42);
+    background: var(--editor-control-hover);
+    transform: translateY(-1px);
+}
+
+.travel-editor-search-results strong,
+.travel-editor-search-results span,
+.travel-editor-search-results em {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.travel-editor-search-results strong {
+    font-size: 0.95rem;
+}
+
+.travel-editor-search-results span {
+    color: var(--editor-muted);
+    font-size: 0.82rem;
+}
+
+.travel-editor-search-results em {
+    color: var(--editor-primary);
+    font-size: 0.78rem;
+    font-style: normal;
+    font-weight: 800;
+}
+
+.travel-editor-search-empty {
+    padding: 12px;
+    color: var(--editor-muted);
+    font-weight: 800;
+    text-align: center;
+}
+
+.travel-editor-map {
+    flex: 1;
+    height: auto;
+    min-height: 390px;
+    background: #dfe8ef;
+}
+
+.travel-editor-preview-panel {
+    display: grid;
+    gap: 12px;
+    padding: 12px;
+}
+
+.travel-editor-preview {
+    display: grid;
+    place-items: end start;
+    min-height: 150px;
+    overflow: hidden;
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background:
+        linear-gradient(135deg, color-mix(in srgb, var(--accent, #007aff) 62%, #ffffff), color-mix(in srgb, var(--accent, #007aff) 18%, #ffffff));
+    background-position: center;
+    background-size: cover;
+}
+
+.travel-editor-preview span {
+    max-width: calc(100% - 24px);
+    margin: 12px;
+    padding: 8px 10px;
+    border-radius: var(--editor-radius);
+    background: rgba(255, 255, 255, 0.84);
+    color: var(--editor-ink);
+    font-size: 0.82rem;
+    font-weight: 800;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    backdrop-filter: blur(12px);
+}
+
+.travel-editor-marker {
+    display: grid;
+    place-items: center;
+}
+
+.travel-editor-marker span {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.92);
+    border-radius: 999px;
+    background: var(--accent, var(--editor-primary));
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.24), 0 0 0 7px color-mix(in srgb, var(--accent, #007aff) 18%, transparent);
+    transition: transform 180ms ease, box-shadow 180ms ease;
+}
+
+.travel-editor-marker.is-spot span {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+}
+
+.travel-editor-marker.is-selected span {
+    transform: scale(1.32);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.32), 0 0 0 10px color-mix(in srgb, var(--accent, #007aff) 24%, transparent);
+}
+
+.travel-editor-page .leaflet-container {
+    font: inherit;
+}
+
+.travel-editor-page .leaflet-tooltip {
+    border: 1px solid var(--editor-line);
+    border-radius: var(--editor-radius);
+    background: var(--editor-surface-strong);
+    color: var(--editor-ink);
+    box-shadow: 0 12px 30px rgba(31, 45, 61, 0.14);
+    font-weight: 800;
+}
+
+.dark .travel-editor-page {
+    --editor-ink: #f4f7fb;
+    --editor-muted: #a8b1bf;
+    --editor-line: rgba(255, 255, 255, 0.14);
+    --editor-surface: rgba(24, 27, 32, 0.82);
+    --editor-surface-strong: rgba(34, 38, 46, 0.94);
+    --editor-control: rgba(45, 49, 58, 0.92);
+    --editor-control-hover: rgba(58, 63, 74, 0.96);
+    --editor-shadow: 0 24px 60px rgba(0, 0, 0, 0.36);
+}
+
+.dark .travel-editor-place-card,
+.dark .travel-editor-dataset {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.dark .travel-editor-layer-switch {
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.dark .travel-editor-search {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.dark .travel-editor-status[data-state="ok"] {
+    color: #99f2b1;
+    background: rgba(52, 199, 89, 0.16);
+}
+
+.dark .travel-editor-status[data-state="warn"] {
+    color: #ffd699;
+    background: rgba(255, 159, 10, 0.16);
+}
+
+.dark .travel-editor-status[data-state="error"] {
+    color: #ffb4ae;
+    background: rgba(255, 69, 58, 0.16);
+}
+
+.dark .travel-editor-preview span {
+    background: rgba(20, 23, 28, 0.82);
+}
+
+@media screen and (max-width: 1180px) {
+    .travel-editor-page {
+        width: min(100% - 28px, 900px);
+    }
+
+    .travel-editor-header {
+        align-items: start;
+        flex-direction: column;
+    }
+
+    .travel-editor-actions {
+        justify-content: flex-start;
+    }
+
+    .travel-editor-shell {
+        grid-template-columns: 1fr;
+    }
+
+    .travel-editor-list-panel,
+    .travel-editor-form-panel,
+    .travel-editor-side {
+        min-height: 0;
+    }
+
+    .travel-editor-places {
+        max-height: 420px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .travel-editor-page {
+        width: calc(100% - 20px);
+    }
+
+    .travel-editor-actions {
+        width: 100%;
+    }
+
+    .travel-editor-status,
+    .travel-editor-btn {
+        width: 100%;
+    }
+
+    .travel-editor-dataset,
+    .travel-editor-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .travel-editor-form-title {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .travel-editor-side {
+        grid-template-rows: auto auto;
+    }
+
+    .travel-editor-search {
+        grid-template-columns: 1fr;
+    }
+}

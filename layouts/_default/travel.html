@@ -2,7 +2,7 @@
 {{- $travelData := site.Data.travel | default dict -}}
 
 <section class="travel-page" data-travel-page>
-  <script id="travel-seed" type="application/json">{{ $travelData | jsonify | safeHTML }}</script>
+  <script id="travel-seed" type="application/json">{{ $travelData | jsonify | safeJS }}</script>
 
   <header class="travel-toolbar" aria-label="旅行地图">
     <div class="travel-title-block">
