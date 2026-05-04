@@ -287,6 +287,8 @@
         setFieldValue("photo", normalizeTravelPhoto(context.item.photo));
         setFieldValue("tags", (context.item.tags || []).join("\n"));
         setFieldValue("note", context.item.note);
+        setFieldValue("photos", formatPhotosField(context.item.photos || []));
+        setFieldValue("story", context.item.story);
         updateCoordinateLabel();
     }
 
@@ -378,6 +380,8 @@
             note: "",
             tags: [],
             photo: "",
+            photos: [],
+            story: "",
             spots: []
         });
 
@@ -405,7 +409,9 @@
             accent: randomAccent(place.accent),
             note: "",
             tags: [],
-            photo: ""
+            photo: "",
+            photos: [],
+            story: ""
         });
 
         place.spots.push(spot);
@@ -463,6 +469,8 @@
             item.accent = safeColor(value);
         } else if (field === "photo") {
             item.photo = normalizeTravelPhoto(value);
+        } else if (field === "photos") {
+            item.photos = parsePhotos(value);
         } else {
             item[field] = value;
         }
@@ -893,6 +901,8 @@
             note: asString(input.note),
             tags: Array.isArray(input.tags) ? input.tags.map(asString).filter(Boolean) : [],
             photo: normalizeTravelPhoto(input.photo),
+            photos: normalizeTravelPhotos(input.photos),
+            story: asString(input.story),
             spots: Array.isArray(input.spots) ? input.spots.map(normalizePlace).filter(Boolean) : []
         };
     }
@@ -928,6 +938,8 @@
         lines.push(child + "note: " + yamlString(place.note));
         writeTags(lines, place.tags || [], indent + 2);
         lines.push(child + "photo: " + yamlString(place.photo));
+        writePhotos(lines, place.photos || [], indent + 2);
+        writeBlockString(lines, "story", place.story || "", indent + 2);
 
         if (Array.isArray(place.spots) && place.spots.length) {
             lines.push(child + "spots:");
@@ -947,6 +959,34 @@
         lines.push(base + "tags:");
         tags.forEach(function (tag) {
             lines.push(spaces(indent + 2) + "- " + yamlString(tag));
+        });
+    }
+
+    function writePhotos(lines, photos, indent) {
+        var base = spaces(indent);
+        if (!photos.length) {
+            lines.push(base + "photos: []");
+            return;
+        }
+
+        lines.push(base + "photos:");
+        photos.forEach(function (photo) {
+            lines.push(spaces(indent + 2) + "- file: " + yamlString(photo.file));
+            lines.push(spaces(indent + 4) + "caption: " + yamlString(photo.caption || ""));
+        });
+    }
+
+    function writeBlockString(lines, key, value, indent) {
+        var base = spaces(indent);
+        var text = asString(value).replace(/\r\n/g, "\n").trim();
+        if (!text) {
+            lines.push(base + key + ": \"\"");
+            return;
+        }
+
+        lines.push(base + key + ": |");
+        text.split("\n").forEach(function (line) {
+            lines.push(spaces(indent + 2) + line);
         });
     }
 
@@ -973,6 +1013,28 @@
         return String(value || "").split(/[\n,，]/).map(function (tag) {
             return tag.trim();
         }).filter(Boolean);
+    }
+
+    function parsePhotos(value) {
+        return String(value || "").split(/\n/).map(function (line) {
+            var trimmed = line.trim();
+            if (!trimmed) {
+                return null;
+            }
+            var parts = trimmed.split("|");
+            return {
+                file: normalizeTravelPhoto(parts.shift() || ""),
+                caption: parts.join("|").trim()
+            };
+        }).filter(function (photo) {
+            return photo && photo.file;
+        });
+    }
+
+    function formatPhotosField(photos) {
+        return normalizeTravelPhotos(photos).map(function (photo) {
+            return photo.file + (photo.caption ? " | " + photo.caption : "");
+        }).join("\n");
     }
 
     function asString(value) {
@@ -1036,6 +1098,30 @@
             return photo.slice("travel/".length);
         }
         return photo;
+    }
+
+    function normalizeTravelPhotos(value) {
+        if (!Array.isArray(value)) {
+            return [];
+        }
+
+        return value.map(function (item) {
+            if (typeof item === "string") {
+                return {
+                    file: normalizeTravelPhoto(item),
+                    caption: ""
+                };
+            }
+            if (!item || typeof item !== "object") {
+                return null;
+            }
+            return {
+                file: normalizeTravelPhoto(item.file || item.photo || item.src || ""),
+                caption: asString(item.caption)
+            };
+        }).filter(function (item) {
+            return item && item.file;
+        });
     }
 
     function getTravelPhotoUrl(value) {

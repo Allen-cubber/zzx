@@ -69,6 +69,38 @@
       <div class="travel-timeline" data-travel-timeline></div>
     </aside>
   </div>
+
+  <div class="travel-detail-overlay" data-travel-detail hidden>
+    <article class="travel-detail-panel" role="dialog" aria-modal="true" aria-label="旅行详情">
+      <header class="travel-detail-head">
+        <div>
+          <p data-travel-detail-meta></p>
+          <h2 data-travel-detail-title></h2>
+        </div>
+        <button type="button" class="travel-icon-btn" title="关闭" aria-label="关闭详情" data-travel-detail-close>
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        </button>
+      </header>
+      <div class="travel-detail-media" data-travel-detail-media></div>
+      <div class="travel-detail-story" data-travel-detail-story></div>
+    </article>
+  </div>
+
+  <div class="travel-lightbox" data-travel-lightbox hidden>
+    <button type="button" class="travel-lightbox-close" title="关闭" aria-label="关闭图片" data-travel-lightbox-close>
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    </button>
+    <button type="button" class="travel-lightbox-nav travel-lightbox-prev" title="上一张" aria-label="上一张" data-travel-lightbox-prev>
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 6-6 6 6 6"></path></svg>
+    </button>
+    <figure>
+      <img data-travel-lightbox-image alt="">
+      <figcaption data-travel-lightbox-caption></figcaption>
+    </figure>
+    <button type="button" class="travel-lightbox-nav travel-lightbox-next" title="下一张" aria-label="下一张" data-travel-lightbox-next>
+      <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"></path></svg>
+    </button>
+  </div>
 </section>
 
 <script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>

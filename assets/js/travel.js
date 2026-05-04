@@ -18,7 +18,10 @@
         baseLayers: {},
         markers: {},
         scaleCheckTimer: 0,
-        isTransitioning: false
+        cardHideTimer: 0,
+        isTransitioning: false,
+        lightboxItems: [],
+        lightboxIndex: 0
     };
 
     var els = {
@@ -31,6 +34,14 @@
         count: root.querySelector("[data-travel-count]"),
         countryCount: root.querySelector("[data-travel-country-count]"),
         back: root.querySelector("[data-travel-back]"),
+        detail: root.querySelector("[data-travel-detail]"),
+        detailTitle: root.querySelector("[data-travel-detail-title]"),
+        detailMeta: root.querySelector("[data-travel-detail-meta]"),
+        detailMedia: root.querySelector("[data-travel-detail-media]"),
+        detailStory: root.querySelector("[data-travel-detail-story]"),
+        lightbox: root.querySelector("[data-travel-lightbox]"),
+        lightboxImage: root.querySelector("[data-travel-lightbox-image]"),
+        lightboxCaption: root.querySelector("[data-travel-lightbox-caption]"),
         transitionLayer: null,
         ambient: null,
         ambientLayers: [],
@@ -41,6 +52,7 @@
     var detailEnterZoom = 10;
     var detailExitZoom = 9;
     var detailEnterDistanceMeters = 70000;
+    var placeCardHideDelay = 5000;
     var travelPhotoBasePath = "/images/travel/";
     var imageryAttribution = "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
 
@@ -113,6 +125,45 @@
 
         els.back.addEventListener("click", exitDetailMode);
 
+        els.card.addEventListener("click", function (event) {
+            var button = event.target.closest("[data-travel-open-detail]");
+            if (button) {
+                cancelPlaceCardHide();
+                openPlaceDetail(button.getAttribute("data-travel-open-detail"));
+            }
+        });
+        els.card.addEventListener("mouseenter", cancelPlaceCardHide);
+        els.card.addEventListener("mouseleave", function () {
+            if (!isMobileTravel()) {
+                schedulePlaceCardHide();
+            }
+        });
+
+        root.querySelector("[data-travel-detail-close]").addEventListener("click", closePlaceDetail);
+        els.detail.addEventListener("click", function (event) {
+            if (event.target === els.detail) {
+                closePlaceDetail();
+            }
+        });
+        els.detailMedia.addEventListener("click", function (event) {
+            var button = event.target.closest("[data-travel-lightbox-index]");
+            if (button) {
+                openLightbox(Number(button.getAttribute("data-travel-lightbox-index")));
+            }
+        });
+        root.querySelector("[data-travel-lightbox-close]").addEventListener("click", closeLightbox);
+        root.querySelector("[data-travel-lightbox-prev]").addEventListener("click", function () {
+            shiftLightbox(-1);
+        });
+        root.querySelector("[data-travel-lightbox-next]").addEventListener("click", function () {
+            shiftLightbox(1);
+        });
+        els.lightbox.addEventListener("click", function (event) {
+            if (event.target === els.lightbox) {
+                closeLightbox();
+            }
+        });
+
         Array.prototype.forEach.call(root.querySelectorAll("[data-travel-layer]"), function (button) {
             button.addEventListener("click", function () {
                 setBaseLayer(button.getAttribute("data-travel-layer"));
@@ -125,6 +176,20 @@
                 window.setTimeout(function () {
                     state.map.invalidateSize();
                 }, 160);
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                if (!els.lightbox.hidden) {
+                    closeLightbox();
+                } else if (!els.detail.hidden) {
+                    closePlaceDetail();
+                }
+            } else if (!els.lightbox.hidden && event.key === "ArrowLeft") {
+                shiftLightbox(-1);
+            } else if (!els.lightbox.hidden && event.key === "ArrowRight") {
+                shiftLightbox(1);
             }
         });
     }
@@ -240,7 +305,7 @@
             });
             marker.on("mouseout", function () {
                 if (!isMobileTravel()) {
-                    hidePlaceCard();
+                    schedulePlaceCardHide();
                 }
             });
             marker.addTo(state.map);
@@ -326,6 +391,7 @@
             return;
         }
 
+        cancelPlaceCardHide();
         setAmbientBackground(place);
         state.activeId = id;
         updateMarkerState();
@@ -338,6 +404,11 @@
         var image = photoUrl ?
             '<img class="travel-place-photo" src="' + escapeAttribute(photoUrl) + '" alt="' + escapeAttribute(place.city) + '">' :
             '<div class="travel-photo-fallback" aria-hidden="true">' + escapeHTML(place.city.slice(0, 1)) + '</div>';
+        var detailButton =
+            '<button type="button" class="travel-detail-link" data-travel-open-detail="' + escapeAttribute(place.id) + '">' +
+            '详情' +
+            '<svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>' +
+            '</button>';
 
         els.card.style.setProperty("--place-color", place.accent);
         els.card.innerHTML =
@@ -348,16 +419,116 @@
             '<h3>' + escapeHTML(place.city) + '</h3>' +
             '<p>' + escapeHTML(place.note || "") + '</p>' +
             '<div class="travel-tags">' + tags + '</div>' +
+            detailButton +
             '</div>' +
             '</div>';
         els.card.classList.add("is-visible");
     }
 
     function hidePlaceCard() {
+        cancelPlaceCardHide();
         state.activeId = "";
         updateMarkerState();
         renderTimeline();
         els.card.classList.remove("is-visible");
+    }
+
+    function schedulePlaceCardHide() {
+        cancelPlaceCardHide();
+        state.cardHideTimer = window.setTimeout(function () {
+            state.cardHideTimer = 0;
+            hidePlaceCard();
+        }, placeCardHideDelay);
+    }
+
+    function cancelPlaceCardHide() {
+        if (state.cardHideTimer) {
+            window.clearTimeout(state.cardHideTimer);
+            state.cardHideTimer = 0;
+        }
+    }
+
+    function openPlaceDetail(id) {
+        var place = getPlaceById(id);
+        if (!place) {
+            return;
+        }
+
+        var photos = getPlacePhotos(place);
+        state.lightboxItems = photos;
+        state.lightboxIndex = 0;
+        els.detailTitle.textContent = place.city;
+        els.detailMeta.textContent = [formatDate(place.date), place.country].filter(Boolean).join(" · ");
+        els.detailMedia.innerHTML = renderDetailPhotos(photos, place);
+        els.detailStory.innerHTML = renderDetailStory(place);
+        els.detail.hidden = false;
+        root.classList.add("is-detail-open");
+    }
+
+    function closePlaceDetail() {
+        els.detail.hidden = true;
+        root.classList.remove("is-detail-open");
+        closeLightbox();
+    }
+
+    function renderDetailPhotos(photos, place) {
+        if (!photos.length) {
+            return '<div class="travel-detail-photo-empty" style="--place-color:' + escapeAttribute(place.accent) + '">' + escapeHTML(place.city.slice(0, 1)) + '</div>';
+        }
+
+        return photos.map(function (photo, index) {
+            var classes = "travel-detail-photo" + (index === 0 ? " is-primary" : "");
+            return [
+                '<button type="button" class="' + classes + '" data-travel-lightbox-index="' + index + '">',
+                '<img src="' + escapeAttribute(photo.url) + '" alt="' + escapeAttribute(photo.caption || place.city) + '" loading="lazy">',
+                photo.caption ? '<span>' + escapeHTML(photo.caption) + '</span>' : '',
+                '</button>'
+            ].join("");
+        }).join("");
+    }
+
+    function renderDetailStory(place) {
+        var text = String(place.story || "").trim() || String(place.note || "").trim();
+        if (!text) {
+            return '<p class="travel-detail-empty-text">还没有写下这段旅程。</p>';
+        }
+
+        return text.split(/\n{2,}/).map(function (paragraph) {
+            return '<p>' + escapeHTML(paragraph).replace(/\n/g, "<br>") + '</p>';
+        }).join("");
+    }
+
+    function openLightbox(index) {
+        if (!state.lightboxItems.length) {
+            return;
+        }
+        state.lightboxIndex = clamp(index, 0, state.lightboxItems.length - 1);
+        renderLightbox();
+        els.lightbox.hidden = false;
+        root.classList.add("is-lightbox-open");
+    }
+
+    function closeLightbox() {
+        els.lightbox.hidden = true;
+        root.classList.remove("is-lightbox-open");
+    }
+
+    function shiftLightbox(direction) {
+        if (!state.lightboxItems.length) {
+            return;
+        }
+        state.lightboxIndex = (state.lightboxIndex + direction + state.lightboxItems.length) % state.lightboxItems.length;
+        renderLightbox();
+    }
+
+    function renderLightbox() {
+        var item = state.lightboxItems[state.lightboxIndex];
+        if (!item) {
+            return;
+        }
+        els.lightboxImage.src = item.url;
+        els.lightboxImage.alt = item.caption || "";
+        els.lightboxCaption.textContent = item.caption || (state.lightboxIndex + 1) + " / " + state.lightboxItems.length;
     }
 
     function focusPlace(id, moveMap) {
@@ -459,6 +630,8 @@
             note: String(place.note || ""),
             tags: Array.isArray(place.tags) ? place.tags.map(String).filter(Boolean) : [],
             photo: normalizeTravelPhoto(place.photo),
+            photos: normalizeTravelPhotos(place.photos),
+            story: String(place.story || ""),
             spots: Array.isArray(place.spots) ? place.spots.map(normalizePlace).filter(Boolean) : []
         };
     }
@@ -796,6 +969,30 @@
         return photo;
     }
 
+    function normalizeTravelPhotos(value) {
+        if (!Array.isArray(value)) {
+            return [];
+        }
+
+        return value.map(function (item) {
+            if (typeof item === "string") {
+                return {
+                    file: normalizeTravelPhoto(item),
+                    caption: ""
+                };
+            }
+            if (!item || typeof item !== "object") {
+                return null;
+            }
+            return {
+                file: normalizeTravelPhoto(item.file || item.photo || item.src || ""),
+                caption: String(item.caption || "")
+            };
+        }).filter(function (item) {
+            return item && item.file;
+        });
+    }
+
     function getTravelPhotoUrl(value) {
         var photo = normalizeTravelPhoto(value);
         if (!photo) {
@@ -805,6 +1002,31 @@
             return photo;
         }
         return travelPhotoBasePath + photo.replace(/^\.?\/*/, "");
+    }
+
+    function getPlacePhotos(place) {
+        var seen = {};
+        var photos = [];
+
+        function add(file, caption) {
+            var url = getTravelPhotoUrl(file);
+            if (!url || seen[url]) {
+                return;
+            }
+            seen[url] = true;
+            photos.push({
+                file: normalizeTravelPhoto(file),
+                url: url,
+                caption: caption || ""
+            });
+        }
+
+        add(place.photo, place.city);
+        (place.photos || []).forEach(function (photo) {
+            add(photo.file, photo.caption || place.city);
+        });
+
+        return photos;
     }
 
     function formatDate(value) {
