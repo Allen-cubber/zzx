@@ -1160,7 +1160,7 @@ $\boxed{ \sin \omega_1 t \sin \omega_2 t = \frac{1}{2}[\cos(\omega_1 - \omega_2)
         *   导致<font color="orange">增益下降</font>，输入阻抗附加<font color="orange">电感分量</font>。
     *   **饱和压降 ($U_{CES}$) 增大效应** 🔺:
         *   在高频时，$U_{CES}$ 会<font color="orange">增大</font>。
-        *   导致电压利用系数 $\xi = (V_{CC}-U_{CES})/V_{CC}$ <font color="orange">减小</font>，从而使<font color="orange">效率 $\eta_c$ 下降</font>。
+        *   导致电压利用系数 $\xi = (V_{CC}-U_{CES})/V_{CC}$ <font color="orange">减小</font>，从而使效率 $\eta_c$ 下降。
 
 ### 5.5 馈电电路和耦合网络 ⚙️
 
@@ -1471,7 +1471,7 @@ LC 振荡器主要由三部分构成：
     *   数学表达: 放大器的增益 $A$ 必须是输出幅度 $V_{OM}$ 的<font color="orange">减函数</font>。即在平衡点 Q 附近：
         $\boxed{\frac{\partial A}{\partial V_{OM}} \Bigg|_{V_{OM}=V_{OMQ}} < 0}$
     *   **软自激**: 起振时 $AF > 1$，幅度自动增长，直至 $AF=1$ 达到稳定点 Q。无需外部激励。
-    *   **硬自激**: (出现在某些非线性特性下) 起振时 $AF < 1$，需要外部信号<font color="orange">预加激励</font>，使幅度达到某个阈值以上才能进入稳定振荡区。(见 Slide 12 图示)
+    *   **硬自激**: (出现在某些非线性特性下) 起振时 $AF < 1$，需要外部信号<font color="orange">预加激励</font>，使幅度达到某个阈值以上才能进入稳定振荡区。
 
 2.  **相位稳定条件 (频率稳定)** ⏱️
     *   当频率因干扰<font color="orange">偏离</font> $\omega_0$ 时，系统应产生一个<font color="orange">附加的相移</font>，使得总相移<font color="orange">不满足</font> $2n\pi$ 的条件，从而抑制偏离的频率，使频率自动回到 $\omega_0$。
@@ -1553,7 +1553,7 @@ LC 振荡器主要由三部分构成：
         *   **优点**: 频率稳定性高，可用 $C_3$ 调谐频率。
         *   **缺点**: $C_1, C_2$ 不能太大 (否则反馈太弱难起振)，$C_3$ 太小会使振荡幅度下降，严重时停振，限制了频率上限。 (Slide 32)
     *   **西勒电路 (Seiler Circuit)** (Slide 33, 34)
-        *   在克拉泼电路基础上，将 $C_3$ 分为固定电容 $C_3$ 和可变电容 $C_4$ 串联 (或 C3 固定，C4 并联在 L 上 - 如图示)。
+        *   在克拉泼电路基础上，将 $C_3$ 分为固定电容 $C_3$ 和可变电容 $C_4$ 串联 (或 C3 固定，C4 并联在 L 上 )。
         *   总串联电容 $C_\Sigma \approx C_3 + C_4$ (图中是并联，等效串联电容 $\frac{1}{C_\Sigma} = \frac{1}{C_1'} + \frac{1}{C_2'} + \frac{1}{C_3'}$， 其中 $C_1' = C_1+C_o, C_2'=C_2+C_i$, $C_3$ 是串在 L 上的，Slide 34 推导似乎是假设 C4 并联 L)。Slide 34 的 $C_\Sigma = C_4 + C_3$ 是一个简化结果。
         *   **关键**: 通过合理设计，使得在用 $C_4$ 调谐频率时，回路的<font color="orange">等效并联电阻 $R_p'$</font> 变化不大，从而使<font color="orange">振荡幅度</font>在调谐范围内<font color="orange">比较稳定</font>。
         *   **优点**: 频率稳定性好，振荡频率较高，<font color="orange">波段内幅度比较平稳</font>。
@@ -1590,7 +1590,7 @@ LC 振荡器主要由三部分构成：
     *   等效 Lq 大, Cq, rq 小。
     *   Q 值极高。
     *   频率稳定性极高。
-    *   $\omega_s$ 与 $\omega_p$ 之间范围很窄 (感性区)。
+    *   $\omega_s$ 与 $\omega_p$ 之间**范围很窄** (感性区)。
     *   极陡峭的相频特性。
 *   **晶体作用**:
     *   在 $\omega_s < \omega < \omega_p$ 时，作为<font color="orange">电感元件</font>使用 (用于并联型)。

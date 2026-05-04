@@ -4,6 +4,10 @@
 {{- /* Head custom content area end */ -}}
 {{ partial "mathjax.html" . }}
 
+{{- if eq .Layout "travel" -}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+{{- end -}}
+
 {{- /* 加载首页动画JavaScript */ -}}
 <script defer src="{{ "js/home_animations.js" | absURL }}"></script>
 <style>
@@ -20,7 +24,7 @@
     }
 </style>
 
-{{- if and (.IsPage) (ne .Title "最近更新") (ne .Title "搜索") -}}
+{{- if and (.IsPage) (ne .Layout "travel") (ne .Title "最近更新") (ne .Title "搜索") -}}
 
 <div id="width-toggle-btn" style="position: fixed; bottom: 30px; left: 30px; z-index: 9999; cursor: pointer; background: var(--entry); padding: 10px; border-radius: 50%; box-shadow: 0 4px 6px rgba(0,0,0,0.1); display: none;">
     <svg id="icon-expand" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
