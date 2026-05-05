@@ -9,6 +9,8 @@
     var uidSeed = 0;
     var travelPhotoBasePath = "/images/travel/";
     var accentPalette = ["#007aff", "#34c759", "#ff9f0a", "#ff453a", "#5856d6", "#bf5af2", "#00c7be", "#ffd60a", "#64d2ff", "#ff2d55"];
+    var draftStorageKey = "travel-editor-draft-v2";
+    var draftSaveDelay = 500;
     var seedNode = document.getElementById("travel-editor-seed");
     var state = {
         data: normalizeData(parseSeed(seedNode ? seedNode.textContent : "{}")),
@@ -20,7 +22,11 @@
         baseLayers: {},
         searchCache: {},
         searchLastAt: 0,
-        searchController: null
+        searchController: null,
+        isDirty: false,
+        draftTimer: 0,
+        lastDraftAt: 0,
+        lastSavedYaml: ""
     };
 
     var els = {
@@ -52,7 +58,9 @@
     init();
 
     function init() {
-        if (state.data.places.length) {
+        state.lastSavedYaml = generateYaml();
+        restoreDraftIfAvailable();
+        if (!state.selectedUid && state.data.places.length) {
             state.selectedUid = state.data.places[0]._uid;
         }
 
@@ -65,6 +73,9 @@
         renderPhotoPreview();
         updateYamlPreview();
         updateDirectSaveAvailability();
+        if (state.isDirty) {
+            setStatus("已恢复上次未保存的本地备份", "warn");
+        }
     }
 
     function bindEvents() {
@@ -154,6 +165,7 @@
             field.addEventListener("input", function () {
                 state.data[field.dataset.rootField] = field.value;
                 updateYamlPreview();
+                markDirty();
             });
         });
 
@@ -161,6 +173,21 @@
             button.addEventListener("click", function () {
                 setMapLayer(button.dataset.editorLayer);
             });
+        });
+
+        window.addEventListener("beforeunload", function (event) {
+            flushDraftBackup();
+            if (state.isDirty) {
+                event.preventDefault();
+                event.returnValue = "";
+            }
+        });
+
+        window.addEventListener("pagehide", flushDraftBackup);
+        document.addEventListener("visibilitychange", function () {
+            if (document.visibilityState === "hidden") {
+                flushDraftBackup();
+            }
         });
     }
 
@@ -387,6 +414,7 @@
 
         state.data.places.unshift(place);
         selectUid(place._uid, true);
+        markDirty();
         setStatus("已新增城市", "ok");
     }
 
@@ -416,6 +444,7 @@
 
         place.spots.push(spot);
         selectUid(spot._uid, true);
+        markDirty();
         setStatus("已新增二级目的地", "ok");
     }
 
@@ -426,6 +455,7 @@
         state.selectedUid = state.data.places.length ? state.data.places[0]._uid : "";
         renderAll();
         fitMapToData();
+        markDirty();
         setStatus("已删除城市", "ok");
     }
 
@@ -438,6 +468,7 @@
         var first = state.data.places[0];
         state.selectedUid = first ? first._uid : "";
         renderAll();
+        markDirty();
         setStatus("已删除景点", "ok");
     }
 
@@ -484,6 +515,7 @@
         if (["lat", "lng", "city", "country", "accent"].indexOf(field) !== -1) {
             renderMapMarkers();
         }
+        markDirty();
     }
 
     function setSelectedCoordinates(latlng) {
@@ -499,6 +531,7 @@
         renderMapMarkers();
         renderList();
         updateYamlPreview();
+        markDirty();
         setStatus("坐标已更新", "ok");
     }
 
@@ -697,6 +730,7 @@
         renderMapMarkers();
         updateYamlPreview();
         updateCoordinateLabel();
+        markDirty();
 
         if (state.map) {
             if (result.bounds) {
@@ -811,6 +845,9 @@
             var writable = await state.fileHandle.createWritable();
             await writable.write(generateYaml());
             await writable.close();
+            state.lastSavedYaml = generateYaml();
+            state.isDirty = false;
+            clearDraftBackup();
             setStatus("已保存到 " + state.fileHandle.name, "ok");
         } catch (error) {
             setStatus("保存失败：" + error.message, "error");
@@ -854,6 +891,176 @@
     function setStatus(message, type) {
         els.status.textContent = message;
         els.status.dataset.state = type || "";
+    }
+
+    function markDirty() {
+        state.isDirty = generateYaml() !== state.lastSavedYaml;
+        scheduleDraftBackup();
+    }
+
+    function scheduleDraftBackup() {
+        if (!state.isDirty) {
+            clearDraftBackup();
+            return;
+        }
+
+        if (state.draftTimer) {
+            window.clearTimeout(state.draftTimer);
+        }
+        state.draftTimer = window.setTimeout(function () {
+            state.draftTimer = 0;
+            saveDraftBackup(true);
+        }, draftSaveDelay);
+    }
+
+    function flushDraftBackup() {
+        if (state.draftTimer) {
+            window.clearTimeout(state.draftTimer);
+            state.draftTimer = 0;
+        }
+        saveDraftBackup(false);
+    }
+
+    function saveDraftBackup(showStatus) {
+        if (!state.isDirty || !window.localStorage) {
+            return;
+        }
+
+        try {
+            var now = Date.now();
+            window.localStorage.setItem(draftStorageKey, JSON.stringify({
+                version: 2,
+                savedAt: now,
+                baselineYaml: state.lastSavedYaml,
+                yaml: generateYaml(),
+                selected: getSelectedDraftIdentity(),
+                data: stripEditorMeta(state.data)
+            }));
+            state.lastDraftAt = now;
+            if (showStatus) {
+                setStatus("已自动备份 " + formatDraftTime(now), "ok");
+            }
+        } catch (error) {
+            setStatus("自动备份失败：" + error.message, "error");
+        }
+    }
+
+    function restoreDraftIfAvailable() {
+        if (!window.localStorage) {
+            return;
+        }
+
+        var draft = null;
+        try {
+            draft = JSON.parse(window.localStorage.getItem(draftStorageKey) || "null");
+        } catch (error) {
+            draft = null;
+        }
+
+        if (!draft || !draft.data || !draft.yaml || draft.yaml === state.lastSavedYaml) {
+            clearDraftBackup();
+            return;
+        }
+
+        state.data = normalizeData(draft.data);
+        state.selectedUid = findDraftSelectedUid(draft.selected) || "";
+        state.isDirty = true;
+        state.lastDraftAt = Number(draft.savedAt) || Date.now();
+    }
+
+    function clearDraftBackup() {
+        if (state.draftTimer) {
+            window.clearTimeout(state.draftTimer);
+            state.draftTimer = 0;
+        }
+        try {
+            window.localStorage.removeItem(draftStorageKey);
+        } catch (error) {
+            // localStorage can be unavailable in private or restricted contexts.
+        }
+    }
+
+    function getSelectedDraftIdentity() {
+        var context = getSelectedContext();
+        if (!context.item) {
+            return null;
+        }
+        return {
+            type: context.type,
+            id: context.item.id,
+            city: context.item.city,
+            parentId: context.parent ? context.parent.id : ""
+        };
+    }
+
+    function findDraftSelectedUid(selected) {
+        if (!selected) {
+            return "";
+        }
+
+        var found = "";
+        state.data.places.some(function (place) {
+            if (selected.type === "place" && sameDraftItem(place, selected)) {
+                found = place._uid;
+                return true;
+            }
+
+            return (place.spots || []).some(function (spot) {
+                if (selected.type === "spot" && sameDraftItem(spot, selected) && (!selected.parentId || selected.parentId === place.id)) {
+                    found = spot._uid;
+                    return true;
+                }
+                return false;
+            });
+        });
+        return found;
+    }
+
+    function sameDraftItem(item, selected) {
+        return item && selected && item.id === selected.id && item.city === selected.city;
+    }
+
+    function stripEditorMeta(data) {
+        return {
+            title: data.title,
+            subtitle: data.subtitle,
+            places: (data.places || []).map(stripPlaceMeta)
+        };
+    }
+
+    function stripPlaceMeta(place) {
+        return {
+            id: place.id,
+            city: place.city,
+            country: place.country,
+            date: place.date,
+            lat: place.lat,
+            lng: place.lng,
+            accent: place.accent,
+            note: place.note,
+            tags: (place.tags || []).slice(),
+            photo: place.photo,
+            photos: (place.photos || []).map(function (photo) {
+                return {
+                    file: photo.file,
+                    caption: photo.caption || ""
+                };
+            }),
+            story: place.story,
+            spots: (place.spots || []).map(stripPlaceMeta)
+        };
+    }
+
+    function formatDraftTime(timestamp) {
+        var date = new Date(timestamp);
+        if (isNaN(date.getTime())) {
+            return "";
+        }
+        return date.toLocaleTimeString("zh-CN", {
+            hour: "2-digit",
+            minute: "2-digit",
+            second: "2-digit"
+        });
     }
 
     function getSelectedContext() {

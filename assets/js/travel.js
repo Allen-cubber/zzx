@@ -53,6 +53,7 @@
     var detailExitZoom = 9;
     var detailEnterDistanceMeters = 70000;
     var placeCardHideDelay = 5000;
+    var markerClusterDistance = 34;
     var travelPhotoBasePath = "/images/travel/";
     var imageryAttribution = "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
 
@@ -126,6 +127,13 @@
         els.back.addEventListener("click", exitDetailMode);
 
         els.card.addEventListener("click", function (event) {
+            var closeButton = event.target.closest("[data-travel-card-close]");
+            if (closeButton) {
+                event.preventDefault();
+                hidePlaceCard();
+                return;
+            }
+
             var button = event.target.closest("[data-travel-open-detail]");
             if (button) {
                 cancelPlaceCardHide();
@@ -235,8 +243,11 @@
 
         setBaseLayer(state.activeLayer);
         renderMapLayers();
+        state.map.on("zoomend moveend", function () {
+            renderMapLayers();
+            scheduleScaleModeCheck();
+        });
         fitTravelBounds();
-        state.map.on("zoomend moveend", scheduleScaleModeCheck);
     }
 
     function setBaseLayer(layerName) {
@@ -272,48 +283,168 @@
         });
         state.markers = {};
 
-        getCurrentItems().forEach(function (place) {
-            var marker = L.marker([place.lat, place.lng], {
-                title: place.city,
-                icon: L.divIcon({
-                    className: state.mode === "detail" ? "travel-leaflet-marker travel-leaflet-marker-spot" : "travel-leaflet-marker",
-                    html: '<span style="--pin-color:' + escapeAttribute(place.accent) + '"></span>',
-                    iconSize: [28, 28],
-                    iconAnchor: [14, 14]
-                })
-            });
-            marker.on("click", function () {
-                if (state.mode === "overview" && place.spots.length) {
-                    if (isMobileTravel()) {
-                        if (state.activeId === place.id && els.card.classList.contains("is-visible")) {
-                            enterDetailMode(place.id);
-                        } else {
-                            showPlaceCard(place.id);
-                        }
-                    } else {
-                        enterDetailMode(place.id);
-                    }
-                } else {
-                    focusPlace(place.id, true);
-                    showPlaceCard(place.id);
-                }
-            });
-            marker.on("mouseover", function () {
-                if (!isMobileTravel()) {
-                    showPlaceCard(place.id);
-                }
-            });
-            marker.on("mouseout", function () {
-                if (!isMobileTravel()) {
-                    schedulePlaceCardHide();
-                }
-            });
+        getMarkerGroups(getCurrentItems()).forEach(function (group, index) {
+            if (group.items.length > 1) {
+                var clusterMarker = createClusterMarker(group);
+                clusterMarker.addTo(state.map);
+                state.markers["cluster-" + index] = clusterMarker;
+                return;
+            }
+
+            var place = group.items[0];
+            var marker = createPlaceMarker(place);
             marker.addTo(state.map);
             state.markers[place.id] = marker;
         });
 
         renderModeUI();
         updateMarkerState();
+    }
+
+    function getMarkerGroups(items) {
+        if (!state.map) {
+            return items.map(function (place) {
+                return createMarkerGroup(place, null);
+            });
+        }
+
+        var threshold = state.mode === "detail" ? markerClusterDistance - 6 : markerClusterDistance;
+        var groups = [];
+        items.forEach(function (place) {
+            var point = state.map.latLngToContainerPoint([place.lat, place.lng]);
+            var target = groups.filter(function (group) {
+                return distanceBetweenPoints(group.point, point) <= threshold;
+            })[0];
+
+            if (target) {
+                addToMarkerGroup(target, place, point);
+            } else {
+                groups.push(createMarkerGroup(place, point));
+            }
+        });
+
+        return groups;
+    }
+
+    function createMarkerGroup(place, point) {
+        var startPoint = point || { x: 0, y: 0 };
+        return {
+            items: [place],
+            sumX: startPoint.x,
+            sumY: startPoint.y,
+            point: startPoint
+        };
+    }
+
+    function addToMarkerGroup(group, place, point) {
+        group.items.push(place);
+        group.sumX += point.x;
+        group.sumY += point.y;
+        group.point = {
+            x: group.sumX / group.items.length,
+            y: group.sumY / group.items.length
+        };
+    }
+
+    function createPlaceMarker(place) {
+        var marker = L.marker([place.lat, place.lng], {
+            title: place.city,
+            icon: L.divIcon({
+                className: state.mode === "detail" ? "travel-leaflet-marker travel-leaflet-marker-spot" : "travel-leaflet-marker",
+                html: '<span style="--pin-color:' + escapeAttribute(place.accent) + '"></span>',
+                iconSize: [28, 28],
+                iconAnchor: [14, 14]
+            })
+        });
+        marker._travelIds = [place.id];
+        bindPlaceMarkerEvents(marker, place);
+        return marker;
+    }
+
+    function createClusterMarker(group) {
+        var latLng = state.map.containerPointToLatLng([group.point.x, group.point.y]);
+        var ids = group.items.map(function (place) {
+            return place.id;
+        });
+        var marker = L.marker(latLng, {
+            title: group.items.length + " 个目的地：" + group.items.map(function (place) {
+                return place.city;
+            }).join("、"),
+            icon: L.divIcon({
+                className: "travel-leaflet-marker travel-leaflet-marker-cluster" + (state.mode === "detail" ? " travel-leaflet-marker-cluster-spot" : ""),
+                html: '<span style="--pin-color:' + escapeAttribute(group.items[0].accent) + '"><b>' + group.items.length + '</b></span>',
+                iconSize: [38, 38],
+                iconAnchor: [19, 19]
+            })
+        });
+        marker._travelIds = ids;
+        marker.on("click", function () {
+            zoomToMarkerGroup(group.items);
+        });
+        return marker;
+    }
+
+    function bindPlaceMarkerEvents(marker, place) {
+        marker.on("click", function () {
+            if (state.mode === "overview" && place.spots.length) {
+                if (isMobileTravel()) {
+                    if (state.activeId === place.id && els.card.classList.contains("is-visible")) {
+                        enterDetailMode(place.id);
+                    } else {
+                        showPlaceCard(place.id);
+                    }
+                } else {
+                    enterDetailMode(place.id);
+                }
+            } else {
+                focusPlace(place.id, true);
+                showPlaceCard(place.id);
+            }
+        });
+        marker.on("mouseover", function () {
+            if (!isMobileTravel()) {
+                showPlaceCard(place.id);
+            }
+        });
+        marker.on("mouseout", function () {
+            if (!isMobileTravel()) {
+                schedulePlaceCardHide();
+            }
+        });
+    }
+
+    function zoomToMarkerGroup(items) {
+        if (!state.map || !items.length) {
+            return;
+        }
+
+        var bounds = L.latLngBounds(items.map(function (place) {
+            return [place.lat, place.lng];
+        }));
+        var sameCoordinate = bounds.getNorthEast().equals(bounds.getSouthWest());
+        if (sameCoordinate) {
+            if (state.map.getZoom() < state.map.getMaxZoom()) {
+                state.map.flyTo([items[0].lat, items[0].lng], Math.min(state.map.getZoom() + 2, state.map.getMaxZoom()), {
+                    duration: prefersReducedMotion() ? 0 : 0.45
+                });
+                return;
+            }
+            focusPlace(items[0].id, false);
+            showPlaceCard(items[0].id);
+            return;
+        }
+
+        state.map.flyToBounds(bounds.pad(0.55), {
+            maxZoom: state.mode === "detail" ? 15 : 9,
+            animate: !prefersReducedMotion(),
+            duration: prefersReducedMotion() ? 0 : 0.45
+        });
+    }
+
+    function distanceBetweenPoints(a, b) {
+        var dx = a.x - b.x;
+        var dy = a.y - b.y;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
     function renderStats() {
@@ -412,6 +543,7 @@
 
         els.card.style.setProperty("--place-color", place.accent);
         els.card.innerHTML =
+            '<button type="button" class="travel-place-close" data-travel-card-close title="关闭" aria-label="关闭卡片">×</button>' +
             '<div class="travel-place-inner">' +
             image +
             '<div class="travel-place-body">' +
@@ -549,9 +681,11 @@
 
     function updateMarkerState() {
         Object.keys(state.markers).forEach(function (id) {
-            var element = state.markers[id].getElement();
+            var marker = state.markers[id];
+            var element = marker.getElement();
+            var ids = marker._travelIds || [id];
             if (element) {
-                element.classList.toggle("is-active", id === state.activeId);
+                element.classList.toggle("is-active", ids.indexOf(state.activeId) !== -1);
             }
         });
     }
