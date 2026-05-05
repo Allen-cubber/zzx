@@ -146,6 +146,11 @@
                 schedulePlaceCardHide();
             }
         });
+        els.timeline.addEventListener("mouseleave", function () {
+            if (!isMobileTravel()) {
+                schedulePlaceCardHide();
+            }
+        });
 
         root.querySelector("[data-travel-detail-close]").addEventListener("click", closePlaceDetail);
         els.detail.addEventListener("click", function (event) {
@@ -481,7 +486,16 @@
                 }
             });
             item.addEventListener("mouseenter", function () {
-                setAmbientBackground(place);
+                if (isMobileTravel()) {
+                    setAmbientBackground(place);
+                    return;
+                }
+                showPlaceCard(place.id);
+            });
+            item.addEventListener("mouseleave", function () {
+                if (!isMobileTravel()) {
+                    schedulePlaceCardHide();
+                }
             });
             els.timeline.appendChild(item);
         });
