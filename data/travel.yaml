@@ -1,15 +1,18 @@
-title: " My Travel Atlas"
+title: "我的旅行地图"
 subtitle: "把抵达过的坐标、照片和时间留在同一张中国地图上。"
 places:
   - id: "city-mor8jr30"
-    city: "重庆"
+    city: "重庆市"
     country: "中国"
     date: "2023-07-06"
     lat: 30.05518
     lng: 107.874871
     accent: "#ff0000"
-    note: ""
-    tags: []
+    note: "山城的立体街巷、两江夜色和火锅烟火气都很鲜明，是一座越走越有层次的城市。"
+    tags:
+      - "山城"
+      - "两江"
+      - "火锅"
     photo: ""
     spots:
       - id: "city-mor8jr30-mor8kp8m"
@@ -23,14 +26,17 @@ places:
         tags: []
         photo: "微信图片_20260504212832_1146_13.jpg"
   - id: "city-mor6y2lq"
-    city: "郑州"
+    city: "郑州市"
     country: "中国"
     date: "2023-06-12"
     lat: 34.746126
     lng: 113.628843
     accent: "#007aff"
-    note: ""
-    tags: []
+    note: "中原腹地的交通枢纽，城市节奏直接利落，也留着黄河和河南记忆的底色。"
+    tags:
+      - "中原"
+      - "黄河"
+      - "河南"
     photo: ""
     spots:
       - id: "city-mor6y2lq-mor7t7du"
@@ -45,3 +51,318 @@ places:
           - "方特"
           - "乐园"
         photo: "微信图片_20260504211155_1145_13.jpg"
+  - id: "jincheng"
+    city: "晋城市"
+    country: "中国"
+    date: ""
+    lat: 35.491315
+    lng: 112.851831
+    accent: "#34c759"
+    note: "家乡所在的晋东南小城，太行山和丹河把熟悉的日常留得很稳。"
+    tags:
+      - "家乡"
+      - "晋东南"
+      - "太行山"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "chengdu"
+    city: "成都市"
+    country: "中国"
+    date: "2023-07-09"
+    lat: 30.572815
+    lng: 104.066801
+    accent: "#ff9f0a"
+    note: "松弛、热闹又有烟火气，街巷里的节奏很适合慢慢走。"
+    tags:
+      - "天府之国"
+      - "烟火气"
+      - "川味"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "guangzhou"
+    city: "广州市"
+    country: "中国"
+    date: "2023-08-29"
+    lat: 23.12911
+    lng: 113.264385
+    accent: "#af52de"
+    note: "本科时光所在的第二故乡，珠江、骑楼和校园记忆连在一起。"
+    tags:
+      - "第二故乡"
+      - "本科"
+      - "岭南"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "shenzhen"
+    city: "深圳市"
+    country: "中国"
+    date: "2024-03-09"
+    lat: 22.543099
+    lng: 114.057868
+    accent: "#00c7be"
+    note: "一座向海生长的城市，高楼、山线和海风都带着很快的速度。"
+    tags:
+      - "海滨"
+      - "都市"
+      - "湾区"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "nanchang"
+    city: "南昌市"
+    country: "中国"
+    date: "2024-04-30"
+    lat: 28.682892
+    lng: 115.858198
+    accent: "#ff453a"
+    note: "赣江穿城而过，滕王阁和老城夜色把英雄城的气质托出来。"
+    tags:
+      - "赣江"
+      - "滕王阁"
+      - "英雄城"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "lushan"
+    city: "庐山市"
+    country: "中国"
+    date: "2024-05-02"
+    lat: 29.448706
+    lng: 116.043742
+    accent: "#64d2ff"
+    note: "山水、云雾和湖光在这里交叠，适合把脚步放慢。"
+    tags:
+      - "庐山"
+      - "云雾"
+      - "山水"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "wuyuan"
+    city: "婺源县"
+    country: "中国"
+    date: "2024-05-04"
+    lat: 29.254015
+    lng: 117.86219
+    accent: "#ffd60a"
+    note: "徽派村落和田园线条很清透，春末的绿意格外舒展。"
+    tags:
+      - "徽派"
+      - "古村"
+      - "田园"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "jiangmen"
+    city: "江门市"
+    country: "中国"
+    date: "2024-07-13"
+    lat: 22.578738
+    lng: 113.081901
+    accent: "#30d158"
+    note: "侨乡的街巷带着南方慢热的温度，碉楼和老骑楼很有故事感。"
+    tags:
+      - "侨乡"
+      - "骑楼"
+      - "五邑"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "shenyang"
+    city: "沈阳市"
+    country: "中国"
+    date: "2025-01-04"
+    lat: 41.805699
+    lng: 123.431472
+    accent: "#5e5ce6"
+    note: "冬天的盛京厚重又清冽，城市骨架里有很强的东北气场。"
+    tags:
+      - "东北"
+      - "盛京"
+      - "冬日"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "harbin"
+    city: "哈尔滨市"
+    country: "中国"
+    date: "2025-01-07"
+    lat: 45.803775
+    lng: 126.534967
+    accent: "#0a84ff"
+    note: "冰雪、欧式建筑和松花江的风，组成一座很有辨识度的冬城。"
+    tags:
+      - "冰雪"
+      - "松花江"
+      - "中央大街"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "changchun"
+    city: "长春市"
+    country: "中国"
+    date: "2025-01-11"
+    lat: 43.817072
+    lng: 125.323544
+    accent: "#bf5af2"
+    note: "冬日里的城市安静舒展，电影、汽车和宽阔街道留下鲜明印象。"
+    tags:
+      - "北国"
+      - "电影"
+      - "汽车城"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "zhuhai"
+    city: "珠海市"
+    country: "中国"
+    date: "2025-03-14"
+    lat: 22.270715
+    lng: 113.576726
+    accent: "#32ade6"
+    note: "海岸线很柔和，情侣路和海风让城市显得轻盈。"
+    tags:
+      - "海岸"
+      - "情侣路"
+      - "湾区"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "changsha"
+    city: "长沙市"
+    country: "中国"
+    date: "2025-05-01"
+    lat: 28.228209
+    lng: 112.938814
+    accent: "#ff375f"
+    note: "热烈、年轻、夜晚很亮，湘江两岸的城市能量很足。"
+    tags:
+      - "湘江"
+      - "夜生活"
+      - "湘味"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "huizhou"
+    city: "惠州市"
+    country: "中国"
+    date: "2025-07-01"
+    lat: 23.111847
+    lng: 114.416196
+    accent: "#00a2ff"
+    note: "湖、山和海在这座城市里相互靠近，有一种温和的南方感。"
+    tags:
+      - "西湖"
+      - "山海"
+      - "岭南"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "datong"
+    city: "大同市"
+    country: "中国"
+    date: "2025-08-12"
+    lat: 40.076763
+    lng: 113.300129
+    accent: "#ffcc00"
+    note: "古城墙、云冈和北方风光让这座城市显得辽阔又厚重。"
+    tags:
+      - "古城"
+      - "云冈"
+      - "北魏"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "ulanqab"
+    city: "乌兰察布市"
+    country: "中国"
+    date: "2025-08-13"
+    lat: 40.994526
+    lng: 113.132585
+    accent: "#ac8e68"
+    note: "草原、风车和高原天光很开阔，视野一下被拉远。"
+    tags:
+      - "草原"
+      - "高原"
+      - "风车"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "hohhot"
+    city: "呼和浩特市"
+    country: "中国"
+    date: "2025-08-16"
+    lat: 40.842585
+    lng: 111.749181
+    accent: "#63e6be"
+    note: "青城的节奏舒缓，草原文化和城市烟火感放在同一幅画里。"
+    tags:
+      - "青城"
+      - "草原文化"
+      - "内蒙古"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "qingyuan"
+    city: "清远市"
+    country: "中国"
+    date: "2025-09-07"
+    lat: 23.682064
+    lng: 113.056031
+    accent: "#66d4cf"
+    note: "北江山水和岭南山城气质很清爽，是从珠三角出发的放松处。"
+    tags:
+      - "北江"
+      - "山水"
+      - "岭南"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "shunde"
+    city: "顺德区"
+    country: "中国"
+    date: "2025-11-01"
+    lat: 22.80524
+    lng: 113.293359
+    accent: "#ffb340"
+    note: "食物是这里最直接的城市语言，水乡和街巷都很耐逛。"
+    tags:
+      - "美食"
+      - "水乡"
+      - "岭南"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "dongguan"
+    city: "东莞市"
+    country: "中国"
+    date: "2025-11-27"
+    lat: 23.020536
+    lng: 113.751765
+    accent: "#ff6b6b"
+    note: "制造业城市的密度很高，也有可慢慢展开的街区和公园。"
+    tags:
+      - "湾区"
+      - "制造业"
+      - "城市漫步"
+    photo: ""
+    photos: []
+    story: ""
+  - id: "zhanjiang"
+    city: "湛江市"
+    country: "中国"
+    date: "2026-04-25"
+    lat: 21.270708
+    lng: 110.359377
+    accent: "#0fb9b1"
+    note: "南海边的海港城市，风里有很明显的热带和海盐气息。"
+    tags:
+      - "海港"
+      - "南海"
+      - "热带"
+    photo: ""
+    photos: []
+    story: ""

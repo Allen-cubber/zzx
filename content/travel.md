@@ -1,5 +1,5 @@
 ---
-title: "旅行地图"
+title: "我的旅行地图"
 description: "走过的城市、照片和时间线。"
 layout: "travel"
 url: "/travel/"
@@ -14,4 +14,3 @@ menu:
     url: "/travel/"
     weight: 45
 ---
-
