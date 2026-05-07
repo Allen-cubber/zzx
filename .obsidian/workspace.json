@@ -13,26 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/数字图像处理/第五章 图像恢复与重建/index.md",
+                "file": "content/academic/智能头盔调研/简述.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
-            }
-          },
-          {
-            "id": "628082c2c398b6b0",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "content/notes/高频电子线路/高频电子线路/index.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "index"
+              "title": "简述"
             }
           }
         ]
@@ -156,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/数字图像处理/第五章 图像恢复与重建/index.md",
+                "file": "content/academic/智能头盔调研/简述.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "简述 的大纲"
             }
           }
         ],
@@ -185,12 +171,31 @@
   },
   "active": "1dd702ca43dbc5e9",
   "lastOpenFiles": [
+    "api/deepseek.mjs",
+    "api/deepseek.js",
+    "public/assets/index-v36NRyvB.js",
+    "public/assets/index-DmXGe7Z8.css",
+    "static/assets/index-v36NRyvB.js",
+    "api",
+    "hugo-server.err.log",
+    "hugo-server.out.log",
+    "static/assets/index-Cw_s5TvU.js",
+    "static/assets/index-DmXGe7Z8.css",
+    "static/assets/index-D7_TyVmH.js",
+    "content/academic/智能头盔调研/index.md",
+    "content/academic/智能头盔调研/简述.md",
+    "content/academic/智能头盔调研/index_clean.md",
+    "content/notes/计算机网络/第五章 运输层/index.md",
+    "content/notes/数字图像处理/报告/deep-research-report.md",
+    "content/notes/数字图像处理/第八章  图像压缩/index.md",
+    "content/notes/数字图像处理/报告/deep-research-report (2).md",
+    "content/notes/高频电子线路/高频电子线路/index.md",
+    "content/notes/计算机网络/第三章 数据链路层/index.md",
+    "content/notes/数字图像处理/第五章 图像恢复与重建/index.md",
     "content/notes/数字图像处理/实验五/index.md",
     "content/notes/高频电子线路/简答题/6.md",
-    "content/notes/高频电子线路/高频电子线路/index.md",
     "content/notes/高频电子线路/简答题/5.md",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-    "content/notes/计算机网络/第五章 运输层/index.md",
     "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/计算机网络/第四章 网络层/Pastedimage20260421102239.png",
     "content/notes/计算机网络/第四章 网络层/Pasted image 20260421102239.png",
@@ -200,22 +205,10 @@
     "content/notes/计算机网络/第五章 运输层/chapter5_tcp_flow_control.png",
     "content/notes/计算机网络/第五章 运输层/chapter5_tcp_sliding_window.png",
     "content/notes/计算机网络/第五章 运输层/chapter5_tcp_header.png",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-7.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-6.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-5.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-4.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-3.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-2.pdf",
-    "content/notes/计算机网络/第五章 运输层/计算机网络第8版课件-第5章-运输层-页面-1.pdf",
-    "content/notes/数字图像处理/第五章 图像恢复与重建/index.md",
     "content/notes/数字图像处理/第五章 图像恢复与重建/fig_5_18_motion_blur_model.png",
     "content/notes/数字图像处理/第五章 图像恢复与重建/fig_5_17_air_turbulence_model.png",
-    "content/notes/数字图像处理/第五章 图像恢复与重建/chapter5_yang.pdf",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
-    "content/notes/数字图像处理/第五章 图像恢复与重建",
-    "content/academic/智能头盔调研/index.md",
     "content/academic/SRP项目/index.md",
-    "content/academic/SRP项目/results.csv",
     "content/notes/高频电子线路/频率分析/index.md",
     "content/notes/数字图像处理/实验四/index.md",
     "content/notes/高频电子线路/变频干扰分析/index.md",
@@ -223,13 +216,6 @@
     "content/academic/高频电子线路课程设计/index.md",
     "content/notes/电磁波与电磁场/index.md",
     "content/academic/光纤通信技术论文汇报/index.md",
-    "content/academic/Truckmodel/index.md",
-    "content/academic/2026MCM_B/index.md",
-    "content/models/Truckmodel/index.md",
-    "2026-04-20.md",
-    "单一车型结果统计拼图.md",
-    "content/essays/从杨朱思想到对“公平”的思考/index.md",
-    "content/notes/高频电子线路/简答题/4.md",
-    "content/models/Truckmodel/未命名.md"
+    "content/academic/Truckmodel/index.md"
   ]
 }
