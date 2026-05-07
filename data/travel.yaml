@@ -13,8 +13,18 @@ places:
       - "山城"
       - "两江"
       - "火锅"
-    photo: ""
-    photos: []
+    photo: "微信图片_20260508003850_1307_13.jpg"
+    photos:
+      - file: "微信图片_20260508003847_1305_13.jpg"
+        caption: "城市天际线"
+      - file: "微信图片_20260508003454_1297_13.jpg"
+        caption: "重庆小面"
+      - file: "微信图片_20260508003455_1298_13.jpg"
+        caption: "重庆火锅"
+      - file: "微信图片_20260508003456_1299_13.jpg"
+        caption: "嘉陵江上"
+      - file: "4eb4a1565fad858028b1d6e05c5e3f9b.jpg"
+        caption: "依山而建"
     story: ""
     spots:
       - id: "city-mor8jr30-mor8kp8m"
@@ -24,9 +34,195 @@ places:
         lat: 29.559852
         lng: 106.457349
         accent: "#ff0000"
-        note: ""
-        tags: []
+        note: "第一个到重庆的晚上，在附近吃的火锅。"
+        tags:
+          - "广场"
         photo: "微信图片_20260504212832_1146_13.jpg"
+        photos:
+          - file: "微信图片_20260508003455_1298_13.jpg"
+            caption: "重庆火锅"
+          - file: "微信图片_20260508003457_1300_13.jpg"
+            caption: "很有精神"
+        story: ""
+      - id: "city-mor8jr30-movovs3w"
+        city: "洪崖洞"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.565074
+        lng: 106.575343
+        accent: "#bf5af2"
+        note: "整个建筑依山而建，很有层次感，夜晚亮起灯光后更加迷人。但是有点挤，人山人海一点也不夸张。"
+        tags:
+          - "夜景"
+          - "美食"
+          - "古建"
+        photo: "微信图片_20260508003850_1307_13.jpg"
+        photos:
+          - file: "微信图片_20260508003854_1309_13.jpg"
+            caption: "洪崖洞夜景"
+          - file: "微信图片_20260508004931_1336_13.jpg"
+            caption: "人山人海"
+        story: ""
+      - id: "city-mor8jr30-movoyz5r"
+        city: "白公馆"
+        country: "重庆市"
+        date: "2023-07-08"
+        lat: 29.579212
+        lng: 106.428027
+        accent: "#64d2ff"
+        note: "历史感很厚重"
+        tags:
+          - "历史"
+          - "革命"
+        photo: "微信图片_20260508004053_1315_13.jpg"
+        photos:
+          - file: "微信图片_20260508004055_1316_13.jpg"
+            caption: "文物展示"
+          - file: "476760536bb06fc76294863d09d17ea2.jpg"
+            caption: "外景"
+        story: ""
+      - id: "city-mor8jr30-movp1195"
+        city: "磁器口"
+        country: "重庆市"
+        date: "2023-07-08"
+        lat: 29.579297
+        lng: 106.442435
+        accent: "#34c759"
+        note: "我不记得这里有什么特色了……"
+        tags:
+          - "步行街"
+        photo: "微信图片_20260508004058_1317_13.jpg"
+        photos: []
+        story: ""
+      - id: "city-mor8jr30-movp3krl"
+        city: "重庆科技馆"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.573469
+        lng: 106.573932
+        accent: "#64d2ff"
+        note: ""
+        tags:
+          - "科技馆"
+          - "建筑"
+        photo: "微信图片_20260508003458_1301_13.jpg"
+        photos:
+          - file: "微信图片_20260508003448_1293_13.jpg"
+            caption: "✌"
+          - file: "微信图片_20260508003452_1296_13.jpg"
+            caption: "焦老师开讲"
+        story: ""
+      - id: "city-mor8jr30-movp8mwj"
+        city: "人民解放纪念碑"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.560146
+        lng: 106.573358
+        accent: "#bf5af2"
+        note: "重庆最繁华的地方。这里有两个保安不停的围着纪念碑转。"
+        tags:
+          - "历史"
+          - "纪念碑"
+        photo: "微信图片_20260508003836_1303_13.jpg"
+        photos: []
+        story: ""
+      - id: "city-mor8jr30-movpbrn0"
+        city: "千厮门嘉陵江大桥"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.568396
+        lng: 106.57517
+        accent: "#00c7be"
+        note: "正午从科技馆出来徒步走过这座斜拉索大桥，和广州的猎德大桥有点相似。"
+        tags:
+          - "建筑"
+          - "大桥"
+        photo: "微信图片_20260508003855_1310_13.jpg"
+        photos:
+          - file: "微信图片_20260508003843_1304_13.jpg"
+            caption: "徒步中"
+          - file: "微信图片_20260508003849_1306_13.jpg"
+            caption: "大桥街景"
+          - file: "微信图片_20260508003831_1302_13.jpg"
+            caption: "夜晚的大桥"
+          - file: "微信图片_20260508003847_1305_13.jpg"
+            caption: "远望科技馆"
+        story: ""
+      - id: "city-mor8jr30-movpe8ct"
+        city: "西南大学"
+        country: "重庆市"
+        date: "2023-07-09"
+        lat: 29.823237
+        lng: 106.419588
+        accent: "#bf5af2"
+        note: "老恩师的母校。校园很大，绿化做的很好，校内有观光车可以乘坐。"
+        tags:
+          - "名校"
+          - "211"
+        photo: "bfcb723d278eb4a233e4012d75496f53.jpg"
+        photos:
+          - file: "微信图片_20260508004339_1329_13.jpg"
+            caption: "主席像"
+          - file: "微信图片_20260508004403_1333_13.jpg"
+            caption: "广场"
+          - file: "微信图片_20260508004400_1332_13.jpg"
+            caption: "图书馆"
+          - file: "微信图片_20260508004408_1335_13.jpg"
+            caption: "“师魂”"
+          - file: "微信图片_20260508004355_1330_13.jpg"
+            caption: "袁隆平塑像"
+          - file: "微信图片_20260508004357_1331_13.jpg"
+            caption: "校歌"
+          - file: "微信图片_20260508004251_1326_13.jpg"
+            caption: "本人撞钟"
+          - file: "微信图片_20260508004406_1334_13.jpg"
+            caption: "川东师范"
+        story: ""
+      - id: "city-mor8jr30-movqdmcq"
+        city: "汉海海洋世界"
+        country: "重庆市"
+        date: "2023-07-06"
+        lat: 29.395524
+        lng: 106.54427
+        accent: "#007aff"
+        note: "很漂亮，很出片。"
+        tags:
+          - "自然"
+          - "水族馆"
+        photo: "微信图片_20260508004051_1313_13.jpg"
+        photos:
+          - file: "微信图片_20260508004241_1324_13.jpg"
+            caption: "水母"
+          - file: "微信图片_20260508004256_1328_13.jpg"
+            caption: "水母"
+          - file: "微信图片_20260508004229_1321_13.jpg"
+            caption: "水母"
+          - file: "微信图片_20260508004234_1322_13.jpg"
+            caption: "水母"
+          - file: "微信图片_20260508004246_1325_13.jpg"
+            caption: "热带鱼"
+          - file: "微信图片_20260508004216_1320_13.jpg"
+            caption: "🐟"
+          - file: "微信图片_20260508004052_1314_13.jpg"
+            caption: "🐟"
+          - file: "微信图片_20260508004049_1312_13.jpg"
+            caption: "🐟"
+          - file: "微信图片_20260508004238_1323_13.jpg"
+            caption: "鲨鱼"
+          - file: "微信图片_20260508004101_1319_13.jpg"
+            caption: "破壳而出"
+        story: ""
+      - id: "city-mor8jr30-movqxgzu"
+        city: "重庆来福士广场"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.568348
+        lng: 106.582682
+        accent: "#00c7be"
+        note: "上去之前我以为我不恐高……"
+        tags:
+          - "高空栈道"
+        photo: "微信图片_20260508004059_1318_13.jpg"
         photos: []
         story: ""
   - id: "city-mor6y2lq"
@@ -496,8 +692,8 @@ places:
         accent: "#0a47ff"
         note: "zc在这里丢了他的身份证哈哈哈哈……"
         tags:
-          - "哈工大"
-          - "校园"
+          - "名校"
+          - "985"
         photo: "微信图片_20260505151351_1197_13.jpg"
         photos:
           - file: "微信图片_20260505151354_1199_13.jpg"
@@ -543,7 +739,7 @@ places:
       - "北国"
       - "电影"
       - "汽车城"
-    photo: ""
+    photo: "微信图片_20260505202802_1251_13.jpg"
     photos: []
     story: ""
     spots:
