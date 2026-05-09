@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/智能头盔调研/简述.md",
+                "file": "content/essays/gpt前夜/index.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "简述"
+              "title": "index"
             }
           }
         ]
@@ -142,13 +142,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/智能头盔调研/简述.md",
+                "file": "content/essays/gpt前夜/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "简述 的大纲"
+              "title": "index 的大纲"
             }
           }
         ],
@@ -156,7 +156,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300.5
+    "width": 300.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -171,6 +172,24 @@
   },
   "active": "1dd702ca43dbc5e9",
   "lastOpenFiles": [
+    "content/essays/gpt前夜/ChatGPTImage2026年5月9日21_51_28.jpg",
+    "content/essays/gpt前夜/ChatGPT Image 2026年5月9日 21_51_28.jpg",
+    "content/essays/gpt前夜/ChatGPTImage2026年5月9日21_51_28.png",
+    "content/essays/gpt前夜/ChatGPTImage 2026年5月9日 21_51_28.png",
+    "content/essays/gpt前夜/ChatGPT Image 2026年5月9日 21_51_28.png",
+    "ChatGPT Image 2026年5月9日 21_51_28.png",
+    "content/essays/思想自由应该有边界吗/index.md",
+    "content/essays/gpt前夜/index.md",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+    "content/essays/gpt前夜",
+    "content/notes/计算机网络/第五章 运输层/index.md",
+    "data/travel.yaml.crswap",
+    "content/notes/计算机网络/第五章 运输层/Pastedimage20260508112432.png",
+    "content/notes/计算机网络/第五章 运输层/Pasted image 20260508112432.png",
+    "Pasted image 20260508112432.png",
+    "public/images/travel/avatar1.jpg",
+    "static/images/travel/avatar1.jpg",
+    "content/academic/智能头盔调研/简述.md",
     "api/deepseek.mjs",
     "api/deepseek.js",
     "public/assets/index-v36NRyvB.js",
@@ -179,13 +198,8 @@
     "api",
     "hugo-server.err.log",
     "hugo-server.out.log",
-    "static/assets/index-Cw_s5TvU.js",
-    "static/assets/index-DmXGe7Z8.css",
-    "static/assets/index-D7_TyVmH.js",
     "content/academic/智能头盔调研/index.md",
-    "content/academic/智能头盔调研/简述.md",
     "content/academic/智能头盔调研/index_clean.md",
-    "content/notes/计算机网络/第五章 运输层/index.md",
     "content/notes/数字图像处理/报告/deep-research-report.md",
     "content/notes/数字图像处理/第八章  图像压缩/index.md",
     "content/notes/数字图像处理/报告/deep-research-report (2).md",
@@ -195,18 +209,7 @@
     "content/notes/数字图像处理/实验五/index.md",
     "content/notes/高频电子线路/简答题/6.md",
     "content/notes/高频电子线路/简答题/5.md",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/notes/计算机网络/第四章 网络层/index.md",
-    "content/notes/计算机网络/第四章 网络层/Pastedimage20260421102239.png",
-    "content/notes/计算机网络/第四章 网络层/Pasted image 20260421102239.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_four_way_release.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_three_way_handshake.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_congestion_control.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_flow_control.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_sliding_window.png",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_header.png",
-    "content/notes/数字图像处理/第五章 图像恢复与重建/fig_5_18_motion_blur_model.png",
-    "content/notes/数字图像处理/第五章 图像恢复与重建/fig_5_17_air_turbulence_model.png",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
     "content/academic/SRP项目/index.md",
     "content/notes/高频电子线路/频率分析/index.md",
@@ -214,8 +217,6 @@
     "content/notes/高频电子线路/变频干扰分析/index.md",
     "content/notes/高频电子线路/高频电子线路填空/index.md",
     "content/academic/高频电子线路课程设计/index.md",
-    "content/notes/电磁波与电磁场/index.md",
-    "content/academic/光纤通信技术论文汇报/index.md",
-    "content/academic/Truckmodel/index.md"
+    "content/notes/电磁波与电磁场/index.md"
   ]
 }

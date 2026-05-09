@@ -181,7 +181,7 @@ places:
       - id: "city-mor8jr30-movqdmcq"
         city: "汉海海洋世界"
         country: "重庆市"
-        date: "2023-07-06"
+        date: "2023-07-08"
         lat: 29.395524
         lng: 106.54427
         accent: "#007aff"
@@ -224,6 +224,24 @@ places:
           - "高空栈道"
         photo: "微信图片_20260508004059_1318_13.jpg"
         photos: []
+        story: ""
+      - id: "city-mor8jr30-mowd5unn"
+        city: "李子坝"
+        country: "重庆市"
+        date: "2023-07-07"
+        lat: 29.555678
+        lng: 106.5339
+        accent: "#ff453a"
+        note: "在江边看轻轨穿楼。"
+        tags:
+          - "轻轨穿楼"
+          - "打卡点"
+        photo: "微信图片_20260508003450_1295_13.jpg"
+        photos:
+          - file: "微信图片_20260508003449_1294_13.jpg"
+            caption: "江景"
+          - file: "微信图片_20260508003456_1299_13.jpg"
+            caption: ""
         story: ""
   - id: "city-mor6y2lq"
     city: "郑州市"

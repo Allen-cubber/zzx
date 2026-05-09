@@ -21,7 +21,8 @@
         cardHideTimer: 0,
         isTransitioning: false,
         lightboxItems: [],
-        lightboxIndex: 0
+        lightboxIndex: 0,
+        ambientKey: ""
     };
 
     var els = {
@@ -391,6 +392,12 @@
 
     function bindPlaceMarkerEvents(marker, place) {
         marker.on("click", function () {
+            if (state.mode === "detail") {
+                focusPlace(place.id, false);
+                openPlaceDetail(place.id);
+                return;
+            }
+
             if (state.mode === "overview" && place.spots.length) {
                 if (isMobileTravel()) {
                     if (state.activeId === place.id && els.card.classList.contains("is-visible")) {
@@ -435,7 +442,11 @@
                 return;
             }
             focusPlace(items[0].id, false);
-            showPlaceCard(items[0].id);
+            if (state.mode === "detail") {
+                openPlaceDetail(items[0].id);
+            } else {
+                showPlaceCard(items[0].id);
+            }
             return;
         }
 
@@ -481,6 +492,9 @@
             item.addEventListener("click", function () {
                 if (state.mode === "overview" && place.spots.length) {
                     enterDetailMode(place.id);
+                } else if (state.mode === "detail") {
+                    focusPlace(place.id, false);
+                    openPlaceDetail(place.id);
                 } else {
                     focusPlace(place.id, true);
                 }
@@ -1061,6 +1075,12 @@
         if (!els.ambientLayers.length || !place) {
             return;
         }
+
+        var ambientKey = place.id + "|" + normalizeTravelPhoto(place.photo) + "|" + place.accent;
+        if (ambientKey === state.ambientKey) {
+            return;
+        }
+        state.ambientKey = ambientKey;
 
         var nextIndex = els.ambientIndex === 0 ? 1 : 0;
         var nextLayer = els.ambientLayers[nextIndex];
