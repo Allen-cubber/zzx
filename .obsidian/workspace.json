@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/RoboOmni/index.md",
+                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
                 "mode": "preview",
                 "source": false
               },
@@ -78,7 +78,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.49999618530273
+    "width": 263.49999618530273,
+    "collapsed": true
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -142,7 +143,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/RoboOmni/index.md",
+                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -171,8 +172,8 @@
   },
   "active": "1dd702ca43dbc5e9",
   "lastOpenFiles": [
-    "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.jpg",
     "content/academic/RoboOmni/index.md",
+    "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.jpg",
     "content/academic/RoboOmni/598f30bd5da9909734e2d5b6da0c084e.jpg",
     "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.png",
     "content/academic/RoboOmni/image1.jpg",
