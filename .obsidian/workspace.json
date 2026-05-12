@@ -4,17 +4,31 @@
     "type": "split",
     "children": [
       {
-        "id": "dbc65f3d617c78d5",
+        "id": "645d4f210e8dc739",
         "type": "tabs",
         "children": [
           {
-            "id": "1dd702ca43dbc5e9",
+            "id": "3126dcb40ff6aec5",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-                "mode": "preview",
+                "file": "content/academic/pi0.7/index.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "index"
+            }
+          },
+          {
+            "id": "6636e9393ac91629",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/academic/RoboOmni/index.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
@@ -78,8 +92,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 263.49999618530273,
-    "collapsed": true
+    "width": 263.49999618530273
   },
   "right": {
     "id": "7ce2dd81d4fb5cdf",
@@ -143,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
+                "file": "content/academic/pi0.7/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -170,26 +183,33 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "1dd702ca43dbc5e9",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/academic/pi0.7/Pastedimage20260512213134.png",
+    "content/academic/pi0.7/Pastedimage20260512211030.png",
+    "content/academic/pi0.7/Pasted image 20260512213134.png",
+    "content/academic/pi0.7/Pasted image 20260512211030.png",
     "content/academic/RoboOmni/index.md",
+    "content/academic/pi0.7/index.md",
+    "Pasted image 20260512213134.png",
+    "Pasted image 20260512211030.png",
+    "content/academic/未命名.md",
+    "content/academic/pi0.7",
+    "content/notes/计算机网络/第四章 网络层/index.md",
+    "content/notes/计算机网络/第六章 应用层/index.md",
+    "content/notes/计算机网络/第五章 运输层/index.md",
+    "content/notes/计算机网络/第六章 应用层",
+    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.jpg",
     "content/academic/RoboOmni/598f30bd5da9909734e2d5b6da0c084e.jpg",
     "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.png",
     "content/academic/RoboOmni/image1.jpg",
     "content/academic/RoboOmni/image.jpg",
-    "content/academic/RoboOmni/9b94462f99c726bcf4e62d9e32118c8e.png",
-    "content/academic/RoboOmni/intro.jpg",
     "content/academic/RoboOmni/intro.jpg.crdownload",
     "content/academic/光纤通信技术论文汇报/index.md",
     "content/academic/SRP项目/index.md",
     "content/academic/RoboOmni",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-    "content/notes/计算机网络/第五章 运输层/index.md",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_congestion_control.png",
     "content/essays/gpt前夜/index.md",
-    "content/essays/gpt前夜/ChatGPTImage2026年5月9日21_51_28.jpg",
-    "content/essays/gpt前夜/ChatGPT Image 2026年5月9日 21_51_28.jpg",
     "content/essays/思想自由应该有边界吗/index.md",
     "content/essays/gpt前夜",
     "data/travel.yaml.crswap",
@@ -198,8 +218,6 @@
     "api/deepseek.js",
     "public/assets/index-v36NRyvB.js",
     "public/assets/index-DmXGe7Z8.css",
-    "static/assets/index-v36NRyvB.js",
-    "api",
     "content/academic/智能头盔调研/index.md",
     "content/academic/智能头盔调研/index_clean.md",
     "content/notes/数字图像处理/报告/deep-research-report.md",
@@ -211,11 +229,7 @@
     "content/notes/数字图像处理/实验五/index.md",
     "content/notes/高频电子线路/简答题/6.md",
     "content/notes/高频电子线路/简答题/5.md",
-    "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/数字图像处理/第四章 图像变换及频率域图像增强/index.md",
-    "content/notes/高频电子线路/频率分析/index.md",
-    "content/notes/数字图像处理/实验四/index.md",
-    "content/notes/高频电子线路/变频干扰分析/index.md",
-    "content/notes/高频电子线路/高频电子线路填空/index.md"
+    "content/notes/高频电子线路/频率分析/index.md"
   ]
 }
