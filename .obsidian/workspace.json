@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/计算机网络/第六章 应用层/index.md",
+                "file": "content/academic/pi0.7/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/计算机网络/第六章 应用层/index.md",
+                "file": "content/academic/pi0.7/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -185,6 +185,7 @@
   },
   "active": "3126dcb40ff6aec5",
   "lastOpenFiles": [
+    "content/notes/计算机网络/第六章 应用层/index.md",
     "content/academic/pi0.7/index.md",
     "content/academic/pi0.7/Pastedimage20260512213134.png",
     "content/academic/pi0.7/Pastedimage20260512211030.png",
@@ -196,7 +197,6 @@
     "content/academic/未命名.md",
     "content/academic/pi0.7",
     "content/notes/计算机网络/第四章 网络层/index.md",
-    "content/notes/计算机网络/第六章 应用层/index.md",
     "content/notes/计算机网络/第五章 运输层/index.md",
     "content/notes/计算机网络/第六章 应用层",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
