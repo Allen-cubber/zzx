@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/pi0.7/index.md",
+                "file": "content/notes/计算机网络/第六章 应用层/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/pi0.7/index.md",
+                "file": "content/notes/计算机网络/第六章 应用层/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -183,14 +183,14 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "3126dcb40ff6aec5",
   "lastOpenFiles": [
+    "content/academic/pi0.7/index.md",
     "content/academic/pi0.7/Pastedimage20260512213134.png",
     "content/academic/pi0.7/Pastedimage20260512211030.png",
     "content/academic/pi0.7/Pasted image 20260512213134.png",
     "content/academic/pi0.7/Pasted image 20260512211030.png",
     "content/academic/RoboOmni/index.md",
-    "content/academic/pi0.7/index.md",
     "Pasted image 20260512213134.png",
     "Pasted image 20260512211030.png",
     "content/academic/未命名.md",
@@ -204,7 +204,6 @@
     "content/academic/RoboOmni/598f30bd5da9909734e2d5b6da0c084e.jpg",
     "content/academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.png",
     "content/academic/RoboOmni/image1.jpg",
-    "content/academic/RoboOmni/image.jpg",
     "content/academic/RoboOmni/intro.jpg.crdownload",
     "content/academic/光纤通信技术论文汇报/index.md",
     "content/academic/SRP项目/index.md",
