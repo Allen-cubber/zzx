@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/ConnectFour/index.md",
+                "file": "content/notes/计算机网络/第一章 概述/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/ConnectFour/index.md",
+                "file": "content/notes/计算机网络/第一章 概述/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -171,12 +171,19 @@
   },
   "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
+    "content/notes/计算机网络/第一章 概述/Pastedimage20260518193414.png",
+    "content/notes/计算机网络/第一章 概述/Pastedimage20260518191551.png",
+    "content/notes/计算机网络/第一章 概述/Pasted image 20260518193414.png",
+    "content/notes/计算机网络/第一章 概述/Pasted image 20260518191551.png",
+    "Pasted image 20260518193414.png",
+    "Pasted image 20260518191551.png",
+    "content/notes/计算机网络/第二章 物理层/index.md",
+    "content/academic/ConnectFour/index.md",
     "content/academic/ConnectFour/Pastedimage20260518003638.png",
     "content/academic/ConnectFour/Pasted image 20260518003638.png",
     "Pasted image 20260518003638.png",
     "content/notes/高频电子线路/简答题/index.md",
     "content/notes/高频电子线路/高频电子线路/index.md",
-    "content/academic/ConnectFour/index.md",
     "content/academic/未命名.md",
     "content/academic/ConnectFour",
     "content/notes/计算机网络/第三章 数据链路层/index.md",
@@ -184,10 +191,6 @@
     "content/notes/计算机网络/第六章 应用层/index.md",
     "content/notes/计算机网络/第六章 应用层/Pastedimage20260514110100.png",
     "content/notes/计算机网络/第六章 应用层/Pastedimage20260514110120.png",
-    "content/notes/计算机网络/第六章 应用层/Pasted image 20260514110100.png",
-    "content/notes/计算机网络/第六章 应用层/Pasted image 20260514110120.png",
-    "Pasted image 20260514110120.png",
-    "Pasted image 20260514110100.png",
     "content/academic/智能跟踪小车/CURRENT_FEATURES.md",
     "content/academic/智能头盔调研/index.md",
     "CURRENT_FEATURES.md",
@@ -198,8 +201,6 @@
     "content/academic/pi0.7/index.md",
     "content/academic/zm.md",
     "content/notes/数字图像处理/实验六/index.md",
-    "content/notes/数字图像处理/实验六/OIP.webp",
-    "content/notes/数字图像处理/实验六/Figure_comparison.png",
     "content/academic/RoboOmni/index.md",
     "content/notes/数字图像处理/实验六/metrics.txt",
     "content/academic/pi0.7",
@@ -215,7 +216,6 @@
     "content/essays/gpt前夜",
     "data/travel.yaml.crswap",
     "content/academic/智能头盔调研/简述.md",
-    "content/academic/智能头盔调研/index_clean.md",
-    "content/notes/数字图像处理/报告/deep-research-report.md"
+    "content/academic/智能头盔调研/index_clean.md"
   ]
 }

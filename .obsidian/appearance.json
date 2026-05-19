@@ -1,6 +1,8 @@
 {
   "baseFontSizeAction": true,
   "baseFontSize": 20,
-  "theme": "moonstone",
-  "cssTheme": ""
+  "theme": "obsidian",
+  "cssTheme": "",
+  "showViewHeader": true,
+  "showRibbon": true
 }
