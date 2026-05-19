@@ -53,6 +53,16 @@
 
       <div class="travel-map-viewport" id="travel-map" data-travel-map></div>
       <article class="travel-place-card" data-travel-place-card aria-live="polite"></article>
+      <div class="travel-bgm-control" data-travel-bgm-control>
+        <audio data-travel-bgm-audio src="/audio/travel/cirrus-scott-buckley.mp3" preload="none" loop></audio>
+        <a class="travel-bgm-credit" href="https://www.scottbuckley.com.au/library/cirrus/" target="_blank" rel="noopener">
+          Cirrus · Scott Buckley · CC BY 4.0
+        </a>
+        <button type="button" class="travel-bgm-btn" title="播放 Cirrus" aria-label="播放背景音乐 Cirrus" aria-pressed="false" data-travel-bgm-toggle>
+          <svg class="travel-bgm-play" aria-hidden="true" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"></path></svg>
+          <svg class="travel-bgm-pause" aria-hidden="true" viewBox="0 0 24 24"><rect x="7" y="5" width="3.6" height="14" rx="1"></rect><rect x="13.4" y="5" width="3.6" height="14" rx="1"></rect></svg>
+        </button>
+      </div>
     </section>
 
     <aside class="travel-sidebar" data-travel-sidebar aria-label="旅行时间线">

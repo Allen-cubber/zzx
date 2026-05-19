@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/计算机网络/第一章 概述/index.md",
+                "file": "content/notes/计算机网络/第六章 应用层/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/计算机网络/第一章 概述/index.md",
+                "file": "content/notes/计算机网络/第六章 应用层/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -169,8 +169,20 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "3a1e922b6bef2dc8",
+  "active": "9b30a7014f56edaf",
   "lastOpenFiles": [
+    "public/js/travel.min.5870dcc944a6a197af3e13713dae9ee80af41e2a4a99ed5a5f003f95457fe527.js",
+    "public/notes/计算机网络/第一章-概述/Pastedimage20260518193414.png",
+    "public/notes/计算机网络/第一章-概述/Pastedimage20260518191551.png",
+    "public/audio/travel/cirrus-scott-buckley.mp3",
+    "public/audio/travel",
+    "public/audio",
+    "public/academic/page/2/index.html",
+    "public/academic/page/2",
+    "static/audio/travel/cirrus-scott-buckley.mp3",
+    "static/audio/travel",
+    "static/audio",
+    "content/notes/计算机网络/第一章 概述/index.md",
     "content/notes/计算机网络/第一章 概述/Pastedimage20260518193414.png",
     "content/notes/计算机网络/第一章 概述/Pastedimage20260518191551.png",
     "content/notes/计算机网络/第一章 概述/Pasted image 20260518193414.png",
@@ -181,7 +193,6 @@
     "content/academic/ConnectFour/index.md",
     "content/academic/ConnectFour/Pastedimage20260518003638.png",
     "content/academic/ConnectFour/Pasted image 20260518003638.png",
-    "Pasted image 20260518003638.png",
     "content/notes/高频电子线路/简答题/index.md",
     "content/notes/高频电子线路/高频电子线路/index.md",
     "content/academic/未命名.md",
@@ -189,33 +200,22 @@
     "content/notes/计算机网络/第三章 数据链路层/index.md",
     "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/计算机网络/第六章 应用层/index.md",
-    "content/notes/计算机网络/第六章 应用层/Pastedimage20260514110100.png",
-    "content/notes/计算机网络/第六章 应用层/Pastedimage20260514110120.png",
     "content/academic/智能跟踪小车/CURRENT_FEATURES.md",
     "content/academic/智能头盔调研/index.md",
     "CURRENT_FEATURES.md",
     "content/academic/智能跟踪小车",
-    "content/academic/新建文件夹",
     "content/academic/CURRENT_FEATURES.md",
     "content/academic/未命名 1.md",
     "content/academic/pi0.7/index.md",
     "content/academic/zm.md",
     "content/notes/数字图像处理/实验六/index.md",
     "content/academic/RoboOmni/index.md",
-    "content/notes/数字图像处理/实验六/metrics.txt",
-    "content/academic/pi0.7",
     "content/notes/计算机网络/第五章 运输层/index.md",
-    "content/notes/计算机网络/第六章 应用层",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-    "content/academic/RoboOmni/intro.jpg.crdownload",
     "content/academic/光纤通信技术论文汇报/index.md",
     "content/academic/SRP项目/index.md",
-    "content/academic/RoboOmni",
     "content/essays/gpt前夜/index.md",
     "content/essays/思想自由应该有边界吗/index.md",
-    "content/essays/gpt前夜",
-    "data/travel.yaml.crswap",
-    "content/academic/智能头盔调研/简述.md",
-    "content/academic/智能头盔调研/index_clean.md"
+    "content/academic/智能头盔调研/简述.md"
   ]
 }

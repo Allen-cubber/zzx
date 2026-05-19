@@ -317,6 +317,100 @@
     background: rgba(255, 255, 255, 0.72);
 }
 
+.travel-bgm-control {
+    position: absolute;
+    right: 16px;
+    bottom: 36px;
+    z-index: 820;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    pointer-events: auto;
+}
+
+.travel-bgm-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border: 1px solid var(--travel-line);
+    border-radius: var(--travel-radius);
+    color: var(--travel-ink);
+    background: var(--travel-surface-strong);
+    box-shadow: 0 14px 34px rgba(31, 45, 61, 0.14);
+    cursor: pointer;
+    transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+    backdrop-filter: blur(18px) saturate(1.25);
+}
+
+.travel-bgm-btn:hover {
+    transform: translateY(-1px);
+    border-color: rgba(0, 122, 255, 0.32);
+    box-shadow: 0 18px 40px rgba(31, 45, 61, 0.18);
+}
+
+.travel-bgm-btn svg {
+    grid-area: 1 / 1;
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    stroke: none;
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.travel-bgm-btn .travel-bgm-pause {
+    opacity: 0;
+    transform: scale(0.86);
+}
+
+.travel-bgm-control.is-playing .travel-bgm-play {
+    opacity: 0;
+    transform: scale(0.86);
+}
+
+.travel-bgm-control.is-playing .travel-bgm-pause {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.travel-bgm-control.is-playing .travel-bgm-btn {
+    color: #fff;
+    border-color: rgba(0, 122, 255, 0.36);
+    background: color-mix(in srgb, var(--travel-blue) 82%, #17202a);
+}
+
+.travel-bgm-credit {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    max-width: 0;
+    padding: 0;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: var(--travel-radius);
+    color: var(--travel-muted);
+    background: var(--travel-surface);
+    box-shadow: 0 12px 28px rgba(31, 45, 61, 0.1);
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-decoration: none;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(6px);
+    transition: max-width 220ms cubic-bezier(.2, .8, .2, 1), padding 180ms ease, opacity 160ms ease, transform 180ms ease, border-color 180ms ease;
+    backdrop-filter: blur(18px) saturate(1.2);
+}
+
+.travel-bgm-control:hover .travel-bgm-credit,
+.travel-bgm-control:focus-within .travel-bgm-credit {
+    max-width: 260px;
+    padding: 0 10px;
+    border-color: var(--travel-line);
+    opacity: 1;
+    transform: translateX(0);
+}
+
 .travel-leaflet-marker {
     border: 0;
     background: transparent;
@@ -1023,6 +1117,28 @@
     background: rgba(125, 185, 255, 0.18);
 }
 
+.dark .travel-bgm-btn,
+.dark .travel-bgm-credit {
+    color: #eef4ff;
+    border-color: rgba(255, 255, 255, 0.14);
+    background: rgba(16, 21, 29, 0.74);
+}
+
+.dark .travel-bgm-btn:hover {
+    border-color: rgba(125, 185, 255, 0.58);
+    background: rgba(125, 185, 255, 0.18);
+}
+
+.dark .travel-bgm-control.is-playing .travel-bgm-btn {
+    color: #09111c;
+    border-color: rgba(245, 248, 255, 0.7);
+    background: rgba(245, 248, 255, 0.94);
+}
+
+.dark .travel-bgm-credit {
+    color: rgba(238, 244, 255, 0.78);
+}
+
 .dark .travel-layer-switch button {
     color: rgba(238, 244, 255, 0.72);
 }
@@ -1253,6 +1369,21 @@
 
     .travel-timeline-note {
         -webkit-line-clamp: 1;
+    }
+
+    .travel-bgm-control {
+        right: 12px;
+        bottom: 28px;
+    }
+
+    .travel-bgm-btn {
+        width: 38px;
+        height: 38px;
+    }
+
+    .travel-bgm-control:hover .travel-bgm-credit,
+    .travel-bgm-control:focus-within .travel-bgm-credit {
+        max-width: 210px;
     }
 
     .travel-place-card {

@@ -22,7 +22,8 @@
         isTransitioning: false,
         lightboxItems: [],
         lightboxIndex: 0,
-        ambientKey: ""
+        ambientKey: "",
+        bgmEnabled: false
     };
 
     var els = {
@@ -43,6 +44,9 @@
         lightbox: root.querySelector("[data-travel-lightbox]"),
         lightboxImage: root.querySelector("[data-travel-lightbox-image]"),
         lightboxCaption: root.querySelector("[data-travel-lightbox-caption]"),
+        bgmAudio: root.querySelector("[data-travel-bgm-audio]"),
+        bgmToggle: root.querySelector("[data-travel-bgm-toggle]"),
+        bgmControl: root.querySelector("[data-travel-bgm-control]"),
         transitionLayer: null,
         ambient: null,
         ambientLayers: [],
@@ -56,6 +60,9 @@
     var placeCardHideDelay = 5000;
     var markerClusterDistance = 34;
     var travelPhotoBasePath = "/images/travel/";
+    var bgmPreferenceKey = "travel-bgm-enabled";
+    var bgmTimeKey = "travel-bgm-time";
+    var bgmVolume = 0.18;
     var imageryAttribution = "Sources: Esri, Maxar, Earthstar Geographics, and the GIS User Community";
 
     init();
@@ -68,6 +75,7 @@
         renderStats();
         renderTimeline();
         renderPhotoStrip();
+        initBgm();
         initMap();
         hidePlaceCard();
     }
@@ -126,6 +134,19 @@
         root.querySelector("[data-travel-fullscreen]").addEventListener("click", toggleFullscreen);
 
         els.back.addEventListener("click", exitDetailMode);
+
+        if (els.bgmToggle) {
+            els.bgmToggle.addEventListener("click", toggleBgm);
+        }
+        if (els.bgmAudio) {
+            els.bgmAudio.addEventListener("play", function () {
+                setBgmButtonState(true);
+            });
+            els.bgmAudio.addEventListener("pause", function () {
+                setBgmButtonState(false);
+            });
+            window.addEventListener("pagehide", persistBgmTime);
+        }
 
         els.card.addEventListener("click", function (event) {
             var closeButton = event.target.closest("[data-travel-card-close]");
@@ -206,6 +227,124 @@
                 shiftLightbox(1);
             }
         });
+    }
+
+    function initBgm() {
+        if (!els.bgmAudio || !els.bgmToggle) {
+            return;
+        }
+
+        els.bgmAudio.volume = bgmVolume;
+        els.bgmAudio.loop = true;
+        restoreBgmTime();
+        state.bgmEnabled = readLocalPreference(bgmPreferenceKey) === "on";
+        setBgmButtonState(false);
+
+        if (state.bgmEnabled) {
+            playBgm(false);
+        }
+    }
+
+    function toggleBgm() {
+        if (!els.bgmAudio) {
+            return;
+        }
+
+        if (els.bgmAudio.paused) {
+            playBgm(true);
+        } else {
+            pauseBgm(true);
+        }
+    }
+
+    function playBgm(fromUserGesture) {
+        if (!els.bgmAudio) {
+            return;
+        }
+
+        els.bgmAudio.volume = bgmVolume;
+        var playPromise = els.bgmAudio.play();
+        if (playPromise && typeof playPromise.then === "function") {
+            playPromise.then(function () {
+                state.bgmEnabled = true;
+                writeLocalPreference(bgmPreferenceKey, "on");
+                setBgmButtonState(true);
+            }).catch(function () {
+                setBgmButtonState(false);
+                if (fromUserGesture) {
+                    writeLocalPreference(bgmPreferenceKey, "off");
+                    state.bgmEnabled = false;
+                }
+            });
+            return;
+        }
+
+        state.bgmEnabled = true;
+        writeLocalPreference(bgmPreferenceKey, "on");
+        setBgmButtonState(true);
+    }
+
+    function pauseBgm(savePreference) {
+        if (!els.bgmAudio) {
+            return;
+        }
+
+        persistBgmTime();
+        els.bgmAudio.pause();
+        state.bgmEnabled = false;
+        if (savePreference) {
+            writeLocalPreference(bgmPreferenceKey, "off");
+        }
+        setBgmButtonState(false);
+    }
+
+    function setBgmButtonState(isPlaying) {
+        if (!els.bgmToggle || !els.bgmControl) {
+            return;
+        }
+
+        els.bgmControl.classList.toggle("is-playing", Boolean(isPlaying));
+        els.bgmToggle.setAttribute("aria-pressed", isPlaying ? "true" : "false");
+        els.bgmToggle.setAttribute("aria-label", isPlaying ? "暂停背景音乐 Cirrus" : "播放背景音乐 Cirrus");
+        els.bgmToggle.title = isPlaying ? "暂停 Cirrus" : "播放 Cirrus";
+    }
+
+    function restoreBgmTime() {
+        if (!els.bgmAudio) {
+            return;
+        }
+
+        var savedTime = Number(readLocalPreference(bgmTimeKey));
+        if (Number.isFinite(savedTime) && savedTime > 0) {
+            try {
+                els.bgmAudio.currentTime = savedTime;
+            } catch (error) {
+                // Some browsers only allow seeking after metadata is ready.
+            }
+        }
+    }
+
+    function persistBgmTime() {
+        if (!els.bgmAudio || !Number.isFinite(els.bgmAudio.currentTime)) {
+            return;
+        }
+        writeLocalPreference(bgmTimeKey, String(Math.floor(els.bgmAudio.currentTime)));
+    }
+
+    function readLocalPreference(key) {
+        try {
+            return window.localStorage.getItem(key) || "";
+        } catch (error) {
+            return "";
+        }
+    }
+
+    function writeLocalPreference(key, value) {
+        try {
+            window.localStorage.setItem(key, value);
+        } catch (error) {
+            // Ignore storage failures in private or restricted contexts.
+        }
     }
 
     function initMap() {
