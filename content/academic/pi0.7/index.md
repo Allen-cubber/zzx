@@ -9,14 +9,10 @@ summary: 具有涌现能力的可引导模型。
 [具有涌现能力的可导向模型](https://www.pi.website/blog/pi07)
 
 ---
-
-[π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](https://arxiv.org/abs/2604.15483)
-
----
 ## 1. 论文卡片
 
 **🏷️ 论文标题** 
-> _π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities_
+> [π0.7: a Steerable Generalist Robotic Foundation Model with Emergent Capabilities](https://arxiv.org/abs/2604.15483)
 
 **🔭 研究方向**
 

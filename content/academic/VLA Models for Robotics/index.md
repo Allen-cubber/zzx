@@ -1,7 +1,5 @@
 ---
-title: "Vision-Language-Action Models for Robotics: A\r
-
-  Review Towards Real-World Applications"
+title: Vision-Language-Action Models for Robotics
 date: 2026-05-20T00:00:00+08:00
 tags:
   - 论文研读
@@ -11,7 +9,7 @@ draft: true
 ---
 ## 1. 论文卡片
 
-- **论文标题**：Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications
+- **论文标题**：[Vision-Language-Action Models for Robotics: A Review Towards Real-World Applications](https://arxiv.org/pdf/2510.07077)
     
 - **研究发现**：
     
@@ -51,7 +49,7 @@ draft: true
 
 
 ## 3. 核心机制拆解：VLA模型的演进族谱
-![[Pasted image 20260520092153.png]]
+![](Pastedimage20260520092153.png)
 
 这张图片展示的是**具身智能（Embodied AI）和视觉-语言-动作（VLA）模型底层架构的演进时间线**。
 

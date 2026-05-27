@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/notes/计算机网络/第五章 运输层/index.md",
+                "file": "content/academic/WorldVLA/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/notes/计算机网络/第五章 运输层/index.md",
+                "file": "content/academic/WorldVLA/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -169,31 +169,34 @@
       "command-palette:打开命令面板": false
     }
   },
-  "active": "53c970d1945cfaee",
+  "active": "3a1e922b6bef2dc8",
   "lastOpenFiles": [
-    "ChatGPT Image 2026年5月23日 16_51_24.png",
-    "content/notes/计算机网络/第五章 运输层/ChatGPTImage2026年5月23日16_51_24.png",
-    "content/notes/计算机网络/第五章 运输层/Pastedimage20260522151446.png",
-    "content/notes/计算机网络/第五章 运输层/ChatGPT Image 2026年5月23日 16_51_24.png",
-    "content/notes/计算机网络/第五章 运输层/Pasted image 20260522151446.png",
-    "Pasted image 20260522151446.png",
-    "content/notes/计算机网络/第六章 应用层/ChatGPT Image 2026年5月23日 16_51_24.png",
-    "content/notes/计算机网络/第六章 应用层/Pasted image 20260522151446.png",
-    "content/notes/计算机网络/第一章 概述/index.md",
-    "content/notes/计算机网络/第二章 物理层/index.md",
-    "content/notes/计算机网络/第三章 数据链路层/index.md",
-    "content/notes/计算机网络/第五章 运输层/index.md",
+    "content/academic/WorldVLA/Pastedimage20260527234014.png",
+    "content/academic/WorldVLA/Pastedimage20260527233953.png",
+    "content/academic/WorldVLA/Pastedimage20260527233935.png",
+    "content/academic/WorldVLA/Pastedimage20260527233913.png",
+    "content/academic/WorldVLA/Pastedimage20260527233532.png",
+    "content/academic/WorldVLA/Pastedimage20260527233451.png",
+    "content/academic/WorldVLA/Pastedimage20260527232725.png",
+    "content/academic/WorldVLA/Pastedimage20260527232554.png",
+    "content/academic/WorldVLA/Pasted image 20260527232554.png",
+    "content/academic/WorldVLA/Pasted image 20260527234014.png",
+    "content/academic/WorldVLA/Pasted image 20260527233953.png",
+    "content/academic/VLA Models for Robotics/index.md",
+    "content/academic/WorldVLA/index.md",
+    "content/academic/WorldVLA",
+    "content/academic/新建文件夹",
+    "content/academic/未命名.md",
+    "content/academic/pi0.7/index.md",
+    "content/academic/RoboOmni/index.md",
     "content/notes/计算机网络/第四章 网络层/index.md",
     "content/notes/计算机网络/第六章 应用层/index.md",
-    "content/notes/计算机网络/第五章 运输层/chapter5_tcp_congestion_control.png",
-    "content/academic/未命名.md",
-    "content/academic/VLA Models for Robotics/index.md",
+    "content/notes/计算机网络/第三章 数据链路层/index.md",
+    "content/notes/计算机网络/第二章 物理层/index.md",
+    "content/notes/计算机网络/第一章 概述/index.md",
+    "content/notes/计算机网络/第五章 运输层/index.md",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-    "content/academic/VLA Models for Robotics/Pastedimage20260520092153.png",
-    "content/academic/VLA Models for Robotics/Pasted image 20260520092153.png",
-    "content/academic/pi0.7/index.md",
     "content/academic/VLA Models for Robotics",
-    "content/academic/新建文件夹",
     "content/notes/数字图像处理/实验七/index.md",
     "public/js/travel.min.5870dcc944a6a197af3e13713dae9ee80af41e2a4a99ed5a5f003f95457fe527.js",
     "public/audio/travel/cirrus-scott-buckley.mp3",
@@ -202,7 +205,6 @@
     "public/academic/page/2/index.html",
     "public/academic/page/2",
     "static/audio/travel/cirrus-scott-buckley.mp3",
-    "static/audio/travel",
     "content/academic/ConnectFour/index.md",
     "content/notes/高频电子线路/简答题/index.md",
     "content/notes/高频电子线路/高频电子线路/index.md",
@@ -213,9 +215,7 @@
     "content/academic/未命名 1.md",
     "content/academic/zm.md",
     "content/notes/数字图像处理/实验六/index.md",
-    "content/academic/RoboOmni/index.md",
     "content/academic/光纤通信技术论文汇报/index.md",
-    "content/academic/SRP项目/index.md",
-    "content/essays/gpt前夜/index.md"
+    "content/academic/SRP项目/index.md"
   ]
 }
