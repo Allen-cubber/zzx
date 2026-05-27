@@ -303,33 +303,7 @@ WorldVLA 的核心架构可以总结为三点：
 
 WorldVLA 里一个很关键、但容易被忽略的设计，是它对 **attention mask** 做了专门修改。
 ![](Pastedimage20260527233451.png)
-$$
-\begin{aligned}
-\mathcal{D}_{\mathrm{action}} ={}&
-\mathrm{[BOS]}\{\mathrm{text}\}
-\underbrace{
-\mathrm{[BOI]}\{\mathrm{image}\}\cdots\{\mathrm{image}\}\mathrm{[EOI]}
-}_{\times M}
-\mathrm{[EOS]}
-\overbrace{
-\mathrm{[BOA]}
-\underbrace{
-\{\mathrm{action}\}\cdots\{\mathrm{action}\}
-}_{\times K}
-\mathrm{[EOA]}\mathrm{[EOS]}
-}^{\mathcal{L}_{\mathrm{action}}}, \\[6pt]
-\mathcal{D}_{\mathrm{world}} ={}&
-\mathrm{[BOS]}\{\mathrm{text}\}
-\underbrace{
-\mathrm{[BOI]}\{\mathrm{image}\}\mathrm{[EOI]}
-\mathrm{[BOA]}\{\mathrm{action}\}\mathrm{[EOA]}
-\mathrm{[EOS]}
-}_{\times N}
-\overbrace{
-\mathrm{[BOI]}\{\mathrm{image}\}\mathrm{[EOI]}\mathrm{[EOS]}
-}^{\mathcal{L}_{\mathrm{world}}}.
-\end{aligned}
-$$
+
 如果说前面的架构图回答的是：
 
 ```text
