@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "content/academic/WorldVLA/index.md",
+                "file": "content/notes/计算机网络/第三章 数据链路层/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -142,7 +142,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "content/academic/WorldVLA/index.md",
+                "file": "content/notes/计算机网络/第三章 数据链路层/index.md",
                 "followCursor": false,
                 "showSearch": true,
                 "searchQuery": ""
@@ -171,8 +171,13 @@
   },
   "active": "53c970d1945cfaee",
   "lastOpenFiles": [
-    "content/academic/VLA Models for Robotics/index.md",
+    "content/notes/计算机网络/第一章 概述/index.md",
+    "content/notes/计算机网络/第三章 数据链路层/index.md",
+    "content/notes/计算机网络/第二章 物理层/index.md",
+    "content/notes/计算机网络/第四章 网络层/index.md",
+    "content/notes/计算机网络/第六章 应用层/index.md",
     "content/academic/WorldVLA/index.md",
+    "content/academic/VLA Models for Robotics/index.md",
     "content/academic/WorldVLA/Pastedimage20260527234014.png",
     "content/academic/WorldVLA/Pastedimage20260527233953.png",
     "content/academic/WorldVLA/Pastedimage20260527233935.png",
@@ -188,11 +193,6 @@
     "content/academic/未命名.md",
     "content/academic/pi0.7/index.md",
     "content/academic/RoboOmni/index.md",
-    "content/notes/计算机网络/第四章 网络层/index.md",
-    "content/notes/计算机网络/第六章 应用层/index.md",
-    "content/notes/计算机网络/第三章 数据链路层/index.md",
-    "content/notes/计算机网络/第二章 物理层/index.md",
-    "content/notes/计算机网络/第一章 概述/index.md",
     "content/notes/计算机网络/第五章 运输层/index.md",
     "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
     "content/academic/VLA Models for Robotics",
