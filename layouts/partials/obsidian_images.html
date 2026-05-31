@@ -1,0 +1,21 @@
+{{- $page := .Page -}}
+{{- $content := printf "%s" .Content -}}
+{{- $segments := split $content "<pre" -}}
+{{- $output := "" -}}
+
+{{- range $index, $segment := $segments -}}
+  {{- if eq $index 0 -}}
+    {{- $output = printf "%s%s" $output (partial "obsidian_images_code_safe.html" (dict "Page" $page "Content" $segment)) -}}
+  {{- else -}}
+    {{- $parts := split $segment "</pre>" -}}
+    {{- if gt (len $parts) 1 -}}
+      {{- $pre := index $parts 0 -}}
+      {{- $rest := delimit (after 1 $parts) "</pre>" -}}
+      {{- $output = printf "%s<pre%s</pre>%s" $output $pre (partial "obsidian_images_code_safe.html" (dict "Page" $page "Content" $rest)) -}}
+    {{- else -}}
+      {{- $output = printf "%s<pre%s" $output $segment -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return ($output | safeHTML) -}}

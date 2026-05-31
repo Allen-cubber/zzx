@@ -4,7 +4,7 @@
     <h1 class="page-title">{{ .Title }}</h1>
     {{- if .Content }}
     <div class="page-description">
-        {{ .Content }}
+        {{- partial "render_content.html" (dict "Page" . "Content" .Content) -}}
     </div>
     {{- end }}
 </header>

@@ -1,0 +1,24 @@
+{
+  "id": "conv-1780195742646-6em1oac7h",
+  "providerId": "claude",
+  "title": "Read QwenVLA paper and write notes",
+  "titleGenerationStatus": "success",
+  "createdAt": 1780195742651,
+  "updatedAt": 1780197337093,
+  "lastResponseAt": 1780197337093,
+  "sessionId": "93fc98e6-60a5-4137-b4b4-b809ad4234d2",
+  "providerState": {
+    "providerSessionId": "93fc98e6-60a5-4137-b4b4-b809ad4234d2"
+  },
+  "currentNote": "academic/QwenVLA/index.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 57,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 68992,
+    "contextWindow": 200000,
+    "contextTokens": 69049,
+    "percentage": 35,
+    "contextWindowIsAuthoritative": true
+  }
+}

@@ -1,0 +1,51 @@
+{{- $page := .Page -}}
+{{- $target := .Target | htmlUnescape | strings.TrimSpace -}}
+{{- $alt := .Alt | default $target | htmlUnescape | strings.TrimSpace -}}
+{{- $width := .Width | default "" | strings.TrimSpace -}}
+{{- $u := urls.Parse $target -}}
+{{- $src := $u.String -}}
+
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path -}}
+  {{- $path = strings.TrimPrefix "/" $path -}}
+  {{- $resource := or ($page.Resources.Get $path) (resources.Get $path) -}}
+  {{- if and (not $resource) (strings.Contains $path " ") -}}
+    {{- $pathNoSpaces := replace $path " " "" -}}
+    {{- $pathDashes := replace $path " " "-" -}}
+    {{- $resource = or ($page.Resources.Get $pathNoSpaces) (resources.Get $pathNoSpaces) ($page.Resources.Get $pathDashes) (resources.Get $pathDashes) -}}
+  {{- end -}}
+  {{- with $resource -}}
+    {{- $src = .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $src = printf "%s?%s" $src . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $src = printf "%s#%s" $src . -}}
+    {{- end -}}
+  {{- else -}}
+    {{- if strings.HasPrefix $path "content/" -}}
+      {{- $contentPath := strings.TrimPrefix "content/" $path -}}
+      {{- $contentURL := printf "/%s" $contentPath -}}
+      {{- $contentU := urls.Parse $contentURL -}}
+      {{- $src = $contentU.String -}}
+      {{- with $u.RawQuery -}}
+        {{- $src = printf "%s?%s" $src . -}}
+      {{- end -}}
+      {{- with $u.Fragment -}}
+        {{- $src = printf "%s#%s" $src . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $attributes := dict "alt" $alt "src" $src "loading" "lazy" -}}
+{{- if $width -}}
+  {{- $attributes = merge $attributes (dict "width" $width) -}}
+{{- end -}}
+<img
+  {{- range $k, $v := $attributes -}}
+    {{- if $v -}}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
+    {{- end -}}
+  {{- end -}}>
+{{- /**/ -}}

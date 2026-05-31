@@ -1,0 +1,36 @@
+{{- $page := .Page -}}
+{{- $content := printf "%s" .Content -}}
+{{- $imageExt := `(?i)\.(apng|avif|bmp|gif|jpe?g|png|svg|webp)(\?.*)?(#.*)?$` -}}
+
+{{- range $match := findRESubmatch `!\[\[([^\]\n]+)\]\]` $content -}}
+  {{- $full := index $match 0 -}}
+  {{- $inner := index $match 1 | htmlUnescape | strings.TrimSpace -}}
+  {{- $parts := split $inner "|" -}}
+  {{- $target := index $parts 0 | strings.TrimSpace -}}
+  {{- if findRE $imageExt $target -}}
+    {{- $alt := $target -}}
+    {{- $width := "" -}}
+    {{- if gt (len $parts) 1 -}}
+      {{- $option := index $parts 1 | strings.TrimSpace -}}
+      {{- if gt (len (findRE `^[0-9]+(?:px)?$` $option)) 0 -}}
+        {{- $width = strings.TrimSuffix "px" $option -}}
+      {{- else if gt (len (findRE `^[0-9]+x[0-9]+$` $option)) 0 -}}
+        {{- $width = index (split $option "x") 0 -}}
+      {{- else -}}
+        {{- $alt = $option -}}
+      {{- end -}}
+    {{- end -}}
+    {{- $img := partial "obsidian_image.html" (dict "Page" $page "Target" $target "Alt" $alt "Width" $width) -}}
+    {{- $content = replace $content $full $img -}}
+  {{- end -}}
+{{- end -}}
+
+{{- range $match := findRESubmatch `(?i)!\[([^\]\n]*)\]\(([^)\n]+\.(?:apng|avif|bmp|gif|jpe?g|png|svg|webp)(?:[?#][^)\n]*)?)\)` $content -}}
+  {{- $full := index $match 0 -}}
+  {{- $alt := index $match 1 | htmlUnescape | strings.TrimSpace -}}
+  {{- $target := index $match 2 | htmlUnescape | strings.TrimSpace -}}
+  {{- $img := partial "obsidian_image.html" (dict "Page" $page "Target" $target "Alt" $alt) -}}
+  {{- $content = replace $content $full $img -}}
+{{- end -}}
+
+{{- return $content -}}

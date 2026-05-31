@@ -1,20 +1,24 @@
 {
   "main": {
-    "id": "7503f04e0dcc3333",
+    "id": "f2aaaa3209b7ebd2",
     "type": "split",
     "children": [
       {
-        "id": "b82d1f446aca4e12",
+        "id": "f18bdc645ffac184",
         "type": "tabs",
         "children": [
           {
-            "id": "753bb3762f329391",
+            "id": "83000f94dd291bf2",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "academic/QwenVLA/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "index"
             }
           }
         ]
@@ -23,15 +27,15 @@
     "direction": "vertical"
   },
   "left": {
-    "id": "d6b1a060872148d0",
+    "id": "b5f87ec0f1d78f8a",
     "type": "split",
     "children": [
       {
-        "id": "301bd575a78d47f7",
+        "id": "3aa8639ba866a008",
         "type": "tabs",
         "children": [
           {
-            "id": "3a1e922b6bef2dc8",
+            "id": "75b797dd2453e803",
             "type": "leaf",
             "state": {
               "type": "file-explorer",
@@ -44,12 +48,12 @@
             }
           },
           {
-            "id": "3a45bb364d6dd574",
+            "id": "e069acd1ea31f0f5",
             "type": "leaf",
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": "[\"url\"]",
                 "matchingCase": false,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -61,7 +65,7 @@
             }
           },
           {
-            "id": "ee784b23dff9f7d6",
+            "id": "c9f17ac19ea452de",
             "type": "leaf",
             "state": {
               "type": "bookmarks",
@@ -74,23 +78,23 @@
       }
     ],
     "direction": "horizontal",
-    "width": 242.49999618530273
+    "width": 300
   },
   "right": {
-    "id": "7ce2dd81d4fb5cdf",
+    "id": "b9d4500fcb9911b3",
     "type": "split",
     "children": [
       {
-        "id": "493394e6793df38c",
+        "id": "297b254607cbb4c0",
         "type": "tabs",
         "children": [
           {
-            "id": "5323fec181c86d00",
+            "id": "001db26f829a81f0",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "content/musings/工作簿.md",
+                "file": "academic/QwenVLA/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -100,16 +104,16 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "工作簿 的反向链接列表"
+              "title": "index 的反向链接列表"
             }
           },
           {
-            "id": "8b14168c6ccd2bdf",
+            "id": "c262cbcd192670e8",
             "type": "leaf",
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "content/posts/hello-hugo/index.md",
+                "file": "academic/QwenVLA/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -118,13 +122,13 @@
             }
           },
           {
-            "id": "ab4ee82af62ebbd9",
+            "id": "086c1321531600b1",
             "type": "leaf",
             "state": {
               "type": "tag",
               "state": {
                 "sortOrder": "frequency",
-                "useHierarchy": false,
+                "useHierarchy": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
@@ -133,21 +137,36 @@
             }
           },
           {
-            "id": "90e6ec60788ccd1e",
+            "id": "e2f453de77c2743f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "b9acc781dd2d596c",
             "type": "leaf",
             "state": {
               "type": "outline",
               "state": {
+                "file": "academic/QwenVLA/index.md",
                 "followCursor": false,
-                "showSearch": true,
+                "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "大纲"
+              "title": "index 的大纲"
             }
           },
           {
-            "id": "aea31006f34ca841",
+            "id": "63ab516ce7e3412c",
             "type": "leaf",
             "state": {
               "type": "claudian-view",
@@ -161,66 +180,33 @@
       }
     ],
     "direction": "horizontal",
-    "width": 313.5
+    "width": 356.5
   },
   "left-ribbon": {
     "hiddenItems": {
-      "bases:新建数据库": false,
       "switcher:打开快速切换": false,
       "graph:查看关系图谱": false,
       "canvas:新建白板": false,
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "753bb3762f329391",
+  "active": "75b797dd2453e803",
   "lastOpenFiles": [
-    "未命名.base",
-    "content/academic/QwenVLA/index.md",
-    "content/academic/QwenVLA/QwenVLA.pdf",
-    "content/academic/pi0.7/index.md",
-    "content/academic/VLA Models for Robotics/index.md",
-    "content/academic/VLA Models for Robotics/Pastedimage20260520092153.png",
-    "content/academic/RoboOmni/index.md",
-    "content/academic/未命名.md",
-    "content/academic/QwenVLA",
-    "content/notes/微机原理与单片机/微机原理与接口技术/index.md",
-    "content/notes/高频电子线路/高频电子线路/index.md",
-    "content/notes/计算机网络/第四章 网络层/index.md",
-    "content/notes/计算机网络/第三章 数据链路层/index.md",
-    "content/notes/计算机网络/第一章 概述/index.md",
-    "content/notes/计算机网络/第二章 物理层/index.md",
-    "content/notes/计算机网络/第六章 应用层/index.md",
-    "content/academic/WorldVLA/index.md",
-    "content/academic/WorldVLA/Pastedimage20260527234014.png",
-    "content/academic/WorldVLA/Pastedimage20260527233953.png",
-    "content/academic/WorldVLA/Pastedimage20260527233935.png",
-    "content/academic/WorldVLA/Pastedimage20260527233913.png",
-    "content/academic/WorldVLA/Pastedimage20260527233532.png",
-    "content/academic/WorldVLA/Pastedimage20260527233451.png",
-    "content/academic/WorldVLA/Pastedimage20260527232725.png",
-    "content/academic/WorldVLA/Pastedimage20260527232554.png",
-    "content/academic/WorldVLA/Pasted image 20260527232554.png",
-    "content/academic/WorldVLA",
-    "content/academic/新建文件夹",
-    "content/notes/计算机网络/第五章 运输层/index.md",
-    "content/academic/VLA Models for Robotics",
-    "content/notes/数字图像处理/实验七/index.md",
-    "public/js/travel.min.5870dcc944a6a197af3e13713dae9ee80af41e2a4a99ed5a5f003f95457fe527.js",
-    "public/audio/travel/cirrus-scott-buckley.mp3",
-    "public/audio/travel",
-    "public/audio",
-    "content/academic/ConnectFour/index.md",
-    "content/notes/高频电子线路/简答题/index.md",
-    "content/academic/智能跟踪小车/CURRENT_FEATURES.md",
-    "content/academic/智能头盔调研/index.md",
-    "CURRENT_FEATURES.md",
-    "content/academic/CURRENT_FEATURES.md",
-    "content/academic/未命名 1.md",
-    "content/academic/zm.md",
-    "content/notes/数字图像处理/实验六/index.md",
-    "content/academic/光纤通信技术论文汇报/index.md"
+    "academic/QwenVLA/Pasted image 20260531112545.png",
+    "Pasted image 20260531112545.png",
+    "academic/QwenVLA/Pasted-image-20260531105721.png",
+    "academic/QwenVLA/Pasted-image-20260531105651.png",
+    "academic/QwenVLA/Pasted image 20260531105721.png",
+    "academic/QwenVLA/Pasted image 20260531105651.png",
+    "Pasted image 20260531105721.png",
+    "Pasted image 20260531105651.png",
+    "academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.jpg",
+    "academic/RoboOmni/598f30bd5da9909734e2d5b6da0c084e.jpg",
+    "academic/QwenVLA/index.md",
+    "academic/QwenVLA/index.md.tmp.15744.be766d553522"
   ]
 }

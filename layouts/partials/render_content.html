@@ -1,0 +1,6 @@
+{{- $page := .Page -}}
+{{- $content := .Content -}}
+{{- if not ($page.Param "disableAnchoredHeadings") -}}
+  {{- $content = partial "anchored_headings.html" $content -}}
+{{- end -}}
+{{- partial "obsidian_images.html" (dict "Page" $page "Content" $content) -}}

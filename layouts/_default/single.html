@@ -54,9 +54,7 @@
 
   {{- if .Content }}
   <div class="post-content">
-    {{- if not (.Param "disableAnchoredHeadings") }}
-    {{- partial "anchored_headings.html" .Content -}}
-    {{- else }}{{ .Content }}{{ end }}
+    {{- partial "render_content.html" (dict "Page" . "Content" .Content) -}}
   </div>
   {{- end }}
   <hr style="margin: 1rem 0; opacity: 0.2;">

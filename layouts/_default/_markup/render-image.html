@@ -15,7 +15,13 @@
 {{- $src := $u.String -}}
 {{- if not $u.IsAbs -}}
   {{- $path := strings.TrimPrefix "./" $u.Path }}
-  {{- with or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+  {{- $resource := or (.PageInner.Resources.Get $path) (resources.Get $path) -}}
+  {{- if and (not $resource) (strings.Contains $path " ") -}}
+    {{- $pathNoSpaces := replace $path " " "" -}}
+    {{- $pathDashes := replace $path " " "-" -}}
+    {{- $resource = or (.PageInner.Resources.Get $pathNoSpaces) (resources.Get $pathNoSpaces) (.PageInner.Resources.Get $pathDashes) (resources.Get $pathDashes) -}}
+  {{- end -}}
+  {{- with $resource -}}
     {{- $src = .RelPermalink -}}
     {{- with $u.RawQuery -}}
       {{- $src = printf "%s?%s" $src . -}}
