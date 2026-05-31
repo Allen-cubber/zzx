@@ -8,12 +8,12 @@
         "type": "tabs",
         "children": [
           {
-            "id": "83000f94dd291bf2",
+            "id": "e3f47dbea915dcac",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "academic/QwenVLA/index.md",
+                "file": "notes/计算机网络/简答题/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -156,7 +156,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "academic/QwenVLA/index.md",
+                "file": "notes/计算机网络/简答题/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -180,7 +180,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 356.5
+    "width": 402.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -194,8 +194,16 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "75b797dd2453e803",
+  "active": "e3f47dbea915dcac",
   "lastOpenFiles": [
+    "notes/计算机网络/第一章 概述/index.md",
+    "notes/计算机网络/第五章 运输层/index.md",
+    "notes/计算机网络/简答题/index.md",
+    "notes/计算机网络/第四章 网络层/index.md",
+    "notes/计算机网络/简答题",
+    "notes/计算机网络/第三章 数据链路层/index.md",
+    "notes/计算机网络/第六章 应用层/index.md",
+    "academic/QwenVLA/index.md",
     "academic/QwenVLA/Pasted image 20260531112545.png",
     "Pasted image 20260531112545.png",
     "academic/QwenVLA/Pasted-image-20260531105721.png",
@@ -206,7 +214,6 @@
     "Pasted image 20260531105651.png",
     "academic/RoboOmni/adee1fd74352484f69e4bdcf11b21389.jpg",
     "academic/RoboOmni/598f30bd5da9909734e2d5b6da0c084e.jpg",
-    "academic/QwenVLA/index.md",
     "academic/QwenVLA/index.md.tmp.15744.be766d553522"
   ]
 }
