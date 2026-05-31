@@ -6,9 +6,9 @@
     {{- $.Scratch.Add "index" (dict 
         "title" .Title 
         "permalink" .Permalink 
-        "summary" (partial "summary_text.html" (dict "Page" . "Length" 180))
+        "summary" .Summary 
         "tags" .Params.tags
-        "content" (.RawContent | plainify)
+        "content" .Plain 
         ) 
     -}}
   {{- end -}}

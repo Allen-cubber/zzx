@@ -30,18 +30,6 @@ menu:
 # Markdown 渲染器配置 (核心)
 markup:
   goldmark:
-    extensions:
-      passthrough:
-        enable: true
-        delimiters:
-          block:
-            - - $$
-              - $$
-            - - \[
-              - \]
-          inline:
-            - - \(
-              - \)
     renderer:
       # 必须开启，允许 KaTeX 脚本生成的 HTML 标签通过
       unsafe: true

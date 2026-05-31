@@ -121,7 +121,7 @@ Please predict the next {chunk_size} control actions to execute the following ta
 
 先对每个活跃通道 $k < c$ 计算：
 
-$$\ell_k = \frac{\sum_{h=1}^{H} \mathbf{M}_{h,k} \|v_\theta(\mathbf{Y}, \tau \mid o_{1:t}, x, e, z) - (\mathbf{Y}_1 - \mathbf{Y}_0)\|_{h,k}^2}{\sum_{h=1}^{H} \mathbf{M}_{h,k}}$$
+$$\ell_k = \frac{\sum\_{h=1}^{H} \mathbf{M}\_{h,k} \|v_\theta(\mathbf{Y}, \tau \mid o\_{1:t}, x, e, z) - (\mathbf{Y}_1 - \mathbf{Y}_0)\|\_{h,k}^2}{\sum\_{h=1}^{H} \mathbf{M}\_{h,k}}$$
 
 再跨活跃通道平均：$\mathcal{L}_{act} = \frac{1}{c}\sum_{k=0}^{c-1} \ell_k$
 
@@ -129,7 +129,7 @@ $$\ell_k = \frac{\sum_{h=1}^{H} \mathbf{M}_{h,k} \|v_\theta(\mathbf{Y}, \tau \mi
 
 **视觉语言损失**：标准 next-token prediction，防止灾难性遗忘。
 
-$$\mathcal{L} = \lambda_{act}\mathcal{L}_{act} + \lambda_{vl}\mathcal{L}_{vl}$$
+$$\mathcal{L} = \lambda\_{act}\mathcal{L}\_{act} + \lambda\_{vl}\mathcal{L}\_{vl}$$
 
 ---
 
