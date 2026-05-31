@@ -519,56 +519,6 @@ body.home.list::before {
     flex-wrap: wrap;
 }
 
-.tag-learning-path {
-    margin-top: 1.6rem;
-    border: 1px solid var(--border);
-    background: var(--entry);
-    border-radius: var(--radius);
-    padding: 1rem 1rem 0.8rem;
-}
-
-.tag-learning-grid {
-    margin-top: 0.8rem;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 12px;
-}
-
-.tag-learning-col {
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 0.8rem 0.9rem;
-    background: var(--theme);
-}
-
-.tag-learning-title {
-    margin: 0;
-    font-size: 0.98rem;
-}
-
-.tag-learning-list {
-    margin: 0.55rem 0 0;
-    padding-left: 1.1rem;
-    font-size: 0.9rem;
-}
-
-.tag-learning-list li {
-    margin-bottom: 0.35rem;
-}
-
-.tag-learning-list a {
-    color: var(--primary);
-    text-decoration: none;
-}
-
-.tag-learning-list a:hover {
-    text-decoration: underline;
-}
-
-.tag-learning-empty {
-    color: var(--secondary);
-}
-
 .tag-landing-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -650,9 +600,6 @@ body.home.list::before {
 @media (max-width: 768px) {
     .tag-landing-toolbar {
         justify-content: flex-start;
-    }
-    .tag-learning-grid {
-        grid-template-columns: 1fr;
     }
     .tag-landing-grid {
         grid-template-columns: 1fr;
