@@ -193,7 +193,7 @@
           <h2 class="tag-landing-card-title">{{ .Title }}</h2>
         </div>
         <div class="tag-landing-card-content">
-          <p>{{ .Summary | plainify | truncate 120 }}</p>
+          <p>{{ partial "summary_text.html" (dict "Page" . "Length" 120) }}</p>
         </div>
         <div class="tag-landing-card-footer">
           <span class="card-meta">发布 {{ .Date.Format "2006-01-02" }}</span>

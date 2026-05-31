@@ -72,9 +72,9 @@
       <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{- with $authorEmail }}<author>{{ . }}{{ with $authorName }} ({{ . }}){{ end }}</author>{{ end }}
       <guid>{{ .Permalink }}</guid>
-      <description>{{ with .Description | html }}{{ . }}{{ else }}{{ .Summary | html }}{{ end -}}</description>
-      {{- if and site.Params.ShowFullTextinRSS .Content }}
-      <content:encoded>{{ (printf "<![CDATA[%s]]>" .Content) | safeHTML }}</content:encoded>
+      <description>{{ with .Description | html }}{{ . }}{{ else }}{{ partial "summary_text.html" (dict "Page" . "Length" 280) | html }}{{ end -}}</description>
+      {{- if and site.Params.ShowFullTextinRSS .RawContent }}
+      <content:encoded>{{ (printf "<![CDATA[%s]]>" (.RawContent | plainify)) | safeHTML }}</content:encoded>
       {{- end }}
     </item>
     {{- end }}

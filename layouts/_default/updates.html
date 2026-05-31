@@ -77,7 +77,7 @@
             </h2>
         </div>
         <div class="card-content">
-            <p class="card-summary">{{ .Summary }}</p>
+            <p class="card-summary">{{ partial "summary_text.html" (dict "Page" . "Length" 180) }}</p>
         </div>
         <div class="card-footer">
             <span class="card-meta">
