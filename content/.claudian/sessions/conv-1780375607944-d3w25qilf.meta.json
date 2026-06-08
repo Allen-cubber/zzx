@@ -1,0 +1,24 @@
+{
+  "id": "conv-1780375607944-d3w25qilf",
+  "providerId": "claude",
+  "title": "生成计算机网络第五章练习题",
+  "titleGenerationStatus": "success",
+  "createdAt": 1780375607968,
+  "updatedAt": 1780733597303,
+  "lastResponseAt": 1780730910321,
+  "sessionId": "06640406-33e4-4347-8135-64e6a510c5f4",
+  "providerState": {
+    "providerSessionId": "06640406-33e4-4347-8135-64e6a510c5f4"
+  },
+  "currentNote": "notes/计算机网络/第五章 运输层/index.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 271,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 86656,
+    "contextWindow": 200000,
+    "contextTokens": 86927,
+    "percentage": 43,
+    "contextWindowIsAuthoritative": true
+  }
+}

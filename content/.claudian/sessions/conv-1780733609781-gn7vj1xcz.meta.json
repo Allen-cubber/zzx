@@ -1,0 +1,24 @@
+{
+  "id": "conv-1780733609781-gn7vj1xcz",
+  "providerId": "claude",
+  "title": "Analyze virtual circuit vs datagram switching",
+  "titleGenerationStatus": "success",
+  "createdAt": 1780733609804,
+  "updatedAt": 1780805965473,
+  "lastResponseAt": 1780736162055,
+  "sessionId": "736daba7-2978-4cb4-adc9-f9e22f8fd17c",
+  "providerState": {
+    "providerSessionId": "736daba7-2978-4cb4-adc9-f9e22f8fd17c"
+  },
+  "currentNote": "notes/计算机网络/第六章 应用层/index.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 966,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 24064,
+    "contextWindow": 200000,
+    "contextTokens": 25030,
+    "percentage": 13,
+    "contextWindowIsAuthoritative": true
+  }
+}

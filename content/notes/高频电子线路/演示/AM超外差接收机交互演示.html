@@ -1,0 +1,918 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AM波形产生与超外差接收机 — 交互式演示</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --accent: #58a6ff;
+    --green: #3fb950;
+    --orange: #d2991d;
+    --red: #f85149;
+    --purple: #a371f7;
+    --cyan: #39c5cf;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  h1 { text-align: center; font-size: 1.8em; margin-bottom: 8px; color: var(--accent); }
+  .subtitle { text-align: center; color: var(--text2); margin-bottom: 30px; font-size: 0.95em; }
+
+  .section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 28px;
+  }
+  .section h2 {
+    font-size: 1.3em;
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section h2 .dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+  /* Controls */
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 16px;
+    margin-bottom: 20px; align-items: flex-end;
+  }
+  .control-group {
+    display: flex; flex-direction: column; gap: 4px;
+    min-width: 160px;
+  }
+  .control-group label {
+    font-size: 0.85em; color: var(--text2);
+    display: flex; justify-content: space-between;
+  }
+  .control-group label .val { color: var(--accent); font-weight: bold; }
+  input[type="range"] {
+    -webkit-appearance: none; height: 6px;
+    background: var(--border); border-radius: 3px; outline: none;
+  }
+  input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 18px; height: 18px;
+    background: var(--accent); border-radius: 50%; cursor: pointer;
+  }
+
+  /* Canvas row */
+  .canvas-row {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 16px; margin-bottom: 16px;
+  }
+  @media (max-width: 900px) { .canvas-row { grid-template-columns: 1fr; } }
+  .canvas-panel {
+    background: #0d1117; border: 1px solid var(--border);
+    border-radius: 8px; padding: 8px; position: relative;
+  }
+  .canvas-panel h3 {
+    font-size: 0.9em; color: var(--text2);
+    text-align: center; margin-bottom: 4px;
+    display: flex; align-items: center; justify-content: center; gap: 6px;
+  }
+  .canvas-panel h3 .badge {
+    font-size: 0.75em; padding: 1px 8px; border-radius: 10px;
+    font-weight: normal;
+  }
+  canvas { display: block; width: 100%; border-radius: 4px; }
+
+  /* Block Diagram */
+  .block-diagram {
+    display: flex; flex-wrap: wrap; align-items: center;
+    justify-content: center; gap: 6px;
+    margin-bottom: 20px;
+  }
+  .block {
+    padding: 12px 16px; border-radius: 8px;
+    border: 2px solid var(--border);
+    background: var(--surface);
+    cursor: pointer; text-align: center;
+    font-size: 0.85em; font-weight: bold;
+    transition: all 0.2s; user-select: none;
+    min-width: 70px;
+  }
+  .block:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(88,166,255,0.2); }
+  .block.active { border-color: var(--accent); background: #1a2332; box-shadow: 0 0 16px rgba(88,166,255,0.3); }
+  .arrow { color: var(--text2); font-size: 1.2em; font-weight: bold; }
+  .block.stage-ant    { border-left: 4px solid #8b9492; }
+  .block.stage-rf     { border-left: 4px solid var(--accent); }
+  .block.stage-lo     { border-left: 4px solid var(--orange); }
+  .block.stage-mixer  { border-left: 4px solid var(--red); }
+  .block.stage-if     { border-left: 4px solid var(--purple); }
+  .block.stage-det    { border-left: 4px solid var(--cyan); }
+  .block.stage-af     { border-left: 4px solid var(--green); }
+
+  /* Stage detail */
+  .stage-detail {
+    background: #0d1117; border: 1px solid var(--border);
+    border-radius: 8px; padding: 20px; min-height: 200px;
+  }
+  .stage-detail h3 { color: var(--accent); margin-bottom: 4px; }
+  .stage-detail .desc { color: var(--text2); font-size: 0.9em; margin-bottom: 16px; }
+  .stage-canvases { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 900px) { .stage-canvases { grid-template-columns: 1fr; } }
+
+  /* Legend */
+  .legend { display: flex; flex-wrap: wrap; gap: 16px; margin-bottom: 8px; justify-content: center; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.8em; color: var(--text2); }
+  .legend-dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+
+  /* Tabs for modulation type */
+  .tabs { display: flex; gap: 4px; margin-bottom: 16px; }
+  .tab {
+    padding: 8px 20px; border: 1px solid var(--border);
+    border-radius: 6px 6px 0 0; cursor: pointer;
+    background: var(--surface); color: var(--text2);
+    font-size: 0.9em; transition: all 0.2s;
+  }
+  .tab.active { background: #0d1117; color: var(--accent); border-bottom-color: #0d1117; }
+
+  .note {
+    background: #1a2332; border-left: 3px solid var(--accent);
+    padding: 10px 16px; border-radius: 0 6px 6px 0;
+    font-size: 0.85em; color: var(--text2); margin-top: 12px;
+  }
+</style>
+</head>
+<body>
+
+<h1>📡 AM波形产生与超外差接收机 — 交互式演示</h1>
+<p class="subtitle">高频电子线路 · 时域与频域波形分析</p>
+
+<!-- ========== Section 1: AM Modulation ========== -->
+<div class="section" id="sec-am">
+  <h2><span class="dot" style="background:var(--accent)"></span>第一部分：AM调幅波形的产生</h2>
+
+  <div class="tabs">
+    <div class="tab active" data-tab="standard">标准AM (DSB-TC)</div>
+    <div class="tab" data-tab="dsb">DSB-SC (抑制载波)</div>
+  </div>
+
+  <div class="controls">
+    <div class="control-group">
+      <label>载波频率 f<sub>c</sub> <span class="val" id="val-fc">1000 kHz</span></label>
+      <input type="range" id="fc" min="500" max="2000" value="1000" step="10">
+    </div>
+    <div class="control-group">
+      <label>调制频率 f<sub>m</sub> <span class="val" id="val-fm">5 kHz</span></label>
+      <input type="range" id="fm" min="1" max="50" value="5" step="1">
+    </div>
+    <div class="control-group" id="ctrl-ma">
+      <label>调制度 m<sub>a</sub> <span class="val" id="val-ma">0.6</span></label>
+      <input type="range" id="ma" min="0" max="1" value="0.6" step="0.05">
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="legend-dot" style="background:#58a6ff"></span>载波 c(t)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#3fb950"></span>调制信号 m(t)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#f85149"></span>已调波 s(t)</div>
+    <div class="legend-item"><span class="legend-dot" style="background:#d2991d"></span>包络</div>
+  </div>
+
+  <div class="canvas-row">
+    <div class="canvas-panel">
+      <h3>⏱ 时域波形 <span class="badge" style="background:var(--accent);color:#000;">Time Domain</span></h3>
+      <canvas id="canvas-am-time" width="800" height="400"></canvas>
+    </div>
+    <div class="canvas-panel">
+      <h3>📊 频域频谱 <span class="badge" style="background:var(--purple);">Frequency Domain</span></h3>
+      <canvas id="canvas-am-freq" width="800" height="400"></canvas>
+    </div>
+  </div>
+
+  <div class="note">
+    <strong>💡 知识点：</strong> 标准AM调幅波表达式为 <strong>s(t) = A<sub>c</sub>[1 + m<sub>a</sub>·cos(2πf<sub>m</sub>t)]·cos(2πf<sub>c</sub>t)</strong>。
+    频谱包含载频 f<sub>c</sub> 和两个边频 f<sub>c</sub>±f<sub>m</sub>。调制度 m<sub>a</sub> 决定边频相对幅度（m<sub>a</sub>/2），
+    m<sub>a</sub> &gt; 1 时产生过调制失真。DSB-SC抑制载波，仅保留上下边带。
+  </div>
+</div>
+
+<!-- ========== Section 2: Superheterodyne Receiver ========== -->
+<div class="section" id="sec-rx">
+  <h2><span class="dot" style="background:var(--green)"></span>第二部分：超外差接收机各阶段波形</h2>
+
+  <p style="color:var(--text2);margin-bottom:12px;font-size:0.9em;">
+    参数设定：RF载波 <strong id="rx-fc">1000 kHz</strong>，音频调制 <strong id="rx-fm">5 kHz</strong>，中频 <strong>f<sub>IF</sub> = 455 kHz</strong>，
+    本振 <strong>f<sub>LO</sub> = f<sub>c</sub> + f<sub>IF</sub></strong>（高本振）。
+    点击下方方框查看各阶段波形。
+  </p>
+
+  <!-- Block Diagram -->
+  <div class="block-diagram" id="block-diagram">
+    <div class="block stage-ant active" data-stage="ant">📡 天线<br><small>RF输入</small></div>
+    <div class="arrow">→</div>
+    <div class="block stage-rf" data-stage="rf">🔊 高频小信号<br>放大器</div>
+    <div class="arrow">→</div>
+    <div class="block stage-mixer" data-stage="mixer">⚡ 混频器<br><small>Mixer</small></div>
+    <div class="arrow">→</div>
+    <div class="block stage-if" data-stage="if">🔍 中频放大器<br><small>455 kHz</small></div>
+    <div class="arrow">→</div>
+    <div class="block stage-det" data-stage="detector">🔎 检波器<br><small>包络检波</small></div>
+    <div class="arrow">→</div>
+    <div class="block stage-af" data-stage="af">🔈 低频放大器<br><small>音频输出</small></div>
+  </div>
+  <div style="text-align:center;margin-bottom:16px;">
+    <span style="display:inline-block;vertical-align:middle;" class="block stage-lo" data-stage="lo">🌀 本地振荡器<br><small>f<sub>LO</sub></small></span>
+    <span class="arrow" style="vertical-align:middle;">→</span>
+    <span style="color:var(--text2);vertical-align:middle;font-size:0.85em;">送入混频器</span>
+  </div>
+
+  <!-- Stage Detail -->
+  <div class="stage-detail" id="stage-detail">
+    <h3 id="stage-title">📡 天线 — RF输入信号</h3>
+    <p class="desc" id="stage-desc">天线接收到的空中电磁波信号，包含多个电台的AM调制信号。经过输入调谐回路选出所需电台（此处以 f<sub>c</sub> = 1000 kHz 为例）。</p>
+    <div class="stage-canvases">
+      <div class="canvas-panel">
+        <h3>⏱ 时域波形</h3>
+        <canvas id="canvas-rx-time" width="800" height="350"></canvas>
+      </div>
+      <div class="canvas-panel">
+        <h3>📊 频域频谱</h3>
+        <canvas id="canvas-rx-freq" width="800" height="350"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="note" id="stage-note">
+    <strong>💡 本阶段要点：</strong> 天线接收到的信号是微弱的高频调幅波，载频为 f<sub>c</sub>=1000 kHz，边频位于 f<sub>c</sub>±f<sub>m</sub>=995 kHz 和 1005 kHz。信号幅度通常在 μV~mV 量级，需要后续放大。
+  </div>
+</div>
+
+<script>
+// ============ GLOBAL STATE ============
+let activeTab = 'standard';
+let activeStage = 'ant';
+
+// Canvas drawing utilities
+function clearCanvas(canvas, color) {
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = color || '#0d1117';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function drawGrid(ctx, w, h, xLabel, yLabel, color) {
+  ctx.strokeStyle = color || '#21262d';
+  ctx.lineWidth = 0.5;
+  const xSteps = 10, ySteps = 8;
+  for (let i = 0; i <= xSteps; i++) {
+    const x = (i / xSteps) * w;
+    ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+  }
+  for (let i = 0; i <= ySteps; i++) {
+    const y = (i / ySteps) * h;
+    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
+  }
+  // Axis
+  ctx.strokeStyle = '#8b9492';
+  ctx.lineWidth = 1;
+  const midY = h / 2;
+  ctx.beginPath(); ctx.moveTo(0, midY); ctx.lineTo(w, midY); ctx.stroke();
+}
+
+function drawSpectrumAxis(ctx, w, h) {
+  ctx.strokeStyle = '#8b9492';
+  ctx.lineWidth = 1;
+  // Horizontal axis at bottom
+  ctx.beginPath(); ctx.moveTo(0, h - 2); ctx.lineTo(w, h - 2); ctx.stroke();
+  // Vertical axis
+  ctx.beginPath(); ctx.moveTo(40, 0); ctx.lineTo(40, h); ctx.stroke();
+}
+
+// ============ SECTION 1: AM Modulation ============
+const canvasAMTime = document.getElementById('canvas-am-time');
+const canvasAMFreq = document.getElementById('canvas-am-freq');
+
+function getAMParams() {
+  const fc = parseInt(document.getElementById('fc').value) * 1000; // Hz
+  const fm = parseInt(document.getElementById('fm').value) * 1000; // Hz
+  const ma = parseFloat(document.getElementById('ma').value);
+  return { fc, fm, ma };
+}
+
+function drawAMTime() {
+  const canvas = canvasAMTime;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(canvas, '#0d1117');
+  drawGrid(ctx, w, h);
+
+  const { fc, fm, ma } = getAMParams();
+
+  // Scale: show about 2-3 periods of modulating signal
+  const Tm = 1 / fm;
+  const duration = 2.5 * Tm;
+  const midY = h / 2;
+
+  // Draw modulating signal (dashed green) - scaled to show envelope relationship
+  ctx.strokeStyle = '#3fb950';
+  ctx.lineWidth = 1.5;
+  ctx.setLineDash([6, 4]);
+  ctx.beginPath();
+  for (let px = 0; px < w; px++) {
+    const t = (px / w) * duration;
+    const m = ma * Math.cos(2 * Math.PI * fm * t);
+    const y = midY - m * (h * 0.35);
+    if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw AM envelope (orange dashed)
+  ctx.strokeStyle = '#d2991d';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath();
+  for (let px = 0; px < w; px++) {
+    const t = (px / w) * duration;
+    const env = 1 + ma * Math.cos(2 * Math.PI * fm * t);
+    const y = midY - env * (h * 0.35);
+    if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+  }
+  ctx.stroke();
+  // Lower envelope
+  ctx.beginPath();
+  for (let px = 0; px < w; px++) {
+    const t = (px / w) * duration;
+    const env = -(1 + ma * Math.cos(2 * Math.PI * fm * t));
+    const y = midY - env * (h * 0.35);
+    if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Draw AM modulated wave (red)
+  ctx.strokeStyle = '#f85149';
+  ctx.lineWidth = 1.2;
+  ctx.beginPath();
+  for (let px = 0; px < w; px++) {
+    const t = (px / w) * duration;
+    const env = activeTab === 'standard' ? (1 + ma * Math.cos(2 * Math.PI * fm * t)) : (ma * Math.cos(2 * Math.PI * fm * t));
+    const signal = env * Math.cos(2 * Math.PI * fc * t);
+    const y = midY - signal * (h * 0.35);
+    if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+  }
+  ctx.stroke();
+
+  // Title
+  ctx.fillStyle = '#8b9492';
+  ctx.font = '11px "Microsoft YaHei"';
+  ctx.fillText(`载波: ${fc/1000}kHz | 调制: ${fm/1000}kHz | ma: ${ma.toFixed(2)} | 显示: ${(duration*1000).toFixed(1)}ms`, 10, h - 8);
+}
+
+function drawAMFreq() {
+  const canvas = canvasAMFreq;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(canvas, '#0d1117');
+  drawSpectrumAxis(ctx, w, h);
+
+  const { fc, fm, ma } = getAMParams();
+  const baseX = 40, axisY = h - 2;
+  // Map frequency range to x: center around fc, span ±3fm
+  const fMin = fc - 3 * fm, fMax = fc + 3 * fm;
+  function freqToX(f) { return baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10); }
+
+  // Draw frequency axis labels
+  ctx.fillStyle = '#8b9492';
+  ctx.font = '11px "Microsoft YaHei"';
+  const fcX = freqToX(fc);
+  ctx.fillText(`fc=${(fc/1000).toFixed(0)}k`, fcX - 20, axisY - 5);
+
+  // Draw spectral lines
+  const carrierAmp = activeTab === 'standard' ? 1.0 : 0;
+  const sideAmp = ma / 2;
+
+  // Carrier
+  if (carrierAmp > 0.01) {
+    const carrierY = axisY - carrierAmp * (h - 60);
+    ctx.strokeStyle = '#58a6ff';
+    ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(fcX, axisY); ctx.lineTo(fcX, carrierY); ctx.stroke();
+    // Arrow head
+    ctx.fillStyle = '#58a6ff';
+    ctx.beginPath(); ctx.moveTo(fcX, carrierY); ctx.lineTo(fcX-5, carrierY+8); ctx.lineTo(fcX+5, carrierY+8); ctx.closePath(); ctx.fill();
+
+    ctx.fillStyle = '#58a6ff';
+    ctx.font = 'bold 12px "Microsoft YaHei"';
+    ctx.fillText(`${carrierAmp.toFixed(1)}`, fcX - 18, carrierY - 6);
+  }
+
+  // Sidebands
+  const sideColors = { upper: '#f85149', lower: '#f85149' };
+  [fm, -fm].forEach((offset, idx) => {
+    const fSide = fc + offset;
+    const x = freqToX(fSide);
+    const topY = axisY - sideAmp * (h - 60);
+    ctx.strokeStyle = '#f85149';
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, topY); ctx.stroke();
+    ctx.fillStyle = '#f85149';
+    ctx.beginPath(); ctx.moveTo(x, topY); ctx.lineTo(x-5, topY+8); ctx.lineTo(x+5, topY+8); ctx.closePath(); ctx.fill();
+    ctx.fillStyle = '#f85149';
+    ctx.font = 'bold 12px "Microsoft YaHei"';
+    ctx.fillText(`${sideAmp.toFixed(2)}`, x - 20, topY - 6);
+    ctx.fillStyle = '#8b9492';
+    ctx.font = '10px "Microsoft YaHei"';
+    const label = offset > 0 ? `fc+fm` : `fc-fm`;
+    ctx.fillText(`${label} (${(fSide/1000).toFixed(0)}k)`, x - 30, axisY + 14);
+  });
+
+  // Also label carrier frequency
+  ctx.fillStyle = '#8b9492';
+  ctx.font = '10px "Microsoft YaHei"';
+  ctx.fillText(`(${(fc/1000).toFixed(0)}k)`, fcX - 18, axisY + 14);
+
+  // Vertical axis label
+  ctx.save();
+  ctx.translate(8, h/2);
+  ctx.rotate(-Math.PI/2);
+  ctx.fillStyle = '#8b9492';
+  ctx.font = '11px "Microsoft YaHei"';
+  ctx.fillText('相对幅度', -30, 0);
+  ctx.restore();
+
+  // DSB-SC note
+  if (activeTab === 'dsb') {
+    ctx.fillStyle = '#d2991d';
+    ctx.font = 'bold 12px "Microsoft YaHei"';
+    ctx.fillText('载波被抑制 →', fcX - 50, 30);
+    // Dashed ghost carrier
+    ctx.setLineDash([3, 3]);
+    ctx.strokeStyle = 'rgba(88,166,255,0.3)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(fcX, axisY); ctx.lineTo(fcX, axisY - 0.7 * (h - 60)); ctx.stroke();
+    ctx.setLineDash([]);
+  }
+}
+
+function updateAMDisplays() {
+  drawAMTime();
+  drawAMFreq();
+}
+
+// ============ SECTION 2: Superheterodyne Receiver ============
+const canvasRXTime = document.getElementById('canvas-rx-time');
+const canvasRXFreq = document.getElementById('canvas-rx-freq');
+
+function getRXParams() {
+  const fc = parseInt(document.getElementById('fc').value) * 1000;
+  const fm = parseInt(document.getElementById('fm').value) * 1000;
+  const ma = parseFloat(document.getElementById('ma').value);
+  const fIF = 455000;
+  const fLO = fc + fIF; // High-side injection
+  return { fc, fm, ma, fIF, fLO };
+}
+
+// Stage descriptions
+const stageInfo = {
+  ant: {
+    title: '📡 天线 — RF输入信号',
+    desc: '天线接收到的空中电磁波信号，包含多个电台的AM调制信号。经过输入调谐回路选出所需电台（此处以 f<sub>c</sub> = 1000 kHz 为例）。信号幅度极小，通常在 μV~mV 量级。',
+    note: '天线接收的信号是微弱的高频调幅波，载频为 f<sub>c</sub>，边频位于 f<sub>c</sub>±f<sub>m</sub>。此时信号尚未经过任何放大，幅度极小，频谱纯净（仅含载波和一对边频）。'
+  },
+  rf: {
+    title: '🔊 高频小信号放大器 — 输出信号',
+    desc: '对天线选出的微弱高频信号进行选频放大。谐振回路调谐在 f<sub>c</sub>=1000 kHz，提供增益的同时抑制邻道干扰。输出信号的频谱结构与输入相同（载波+边频），但幅度显著增大。',
+    note: '高频小信号放大器工作于A类，提供约20~30dB增益。输出信号频率成分不变（仍为f<sub>c</sub>和f<sub>c</sub>±f<sub>m</sub>），仅幅度增大。谐振回路的Q值决定选择性。'
+  },
+  lo: {
+    title: '🌀 本地振荡器 — 输出信号',
+    desc: '本地振荡器产生一个等幅高频正弦波，频率 f<sub>LO</sub> = f<sub>c</sub> + f<sub>IF</sub> = 1455 kHz（高本振方式）。这是一个纯净的单频信号，无调制。',
+    note: '本振采用高本振方式（f<sub>LO</sub> > f<sub>c</sub>），差频产生中频 f<sub>IF</sub>=455 kHz。本振频率稳定度至关重要——频率漂移将导致中频偏离，影响接收质量。频率范围为 f<sub>c</sub>+f<sub>IF</sub> = 990~2060 kHz。'
+  },
+  mixer: {
+    title: '⚡ 混频器 — 输出信号',
+    desc: '混频器将RF信号与本振信号相乘（利用非线性器件），输出包含多种频率分量：和频 f<sub>LO</sub>+f<sub>c</sub>、差频 f<sub>LO</sub>-f<sub>c</sub>=f<sub>IF</sub>、以及原始频率等。其中差频分量(455 kHz)携带了与原信号相同的调制信息。',
+    note: '混频是超外差接收的核心！输出频谱丰富：包含 f<sub>c</sub>、f<sub>LO</sub>、f<sub>LO</sub>-f<sub>c</sub>(=f<sub>IF</sub>)、f<sub>LO</sub>+f<sub>c</sub> 等分量。调制信息被线性搬移到中频 f<sub>IF</sub> 上——AM信号的载波移到455 kHz，边带移到455kHz±f<sub>m</sub>。利用非线性器件的乘法效应实现频率变换。'
+  },
+  if: {
+    title: '🔍 中频放大器 — 输出信号',
+    desc: '中频放大器通过LC调谐回路选出 455 kHz 的中频分量，滤除其他无用频率成分（和频、本振泄漏等）。提供接收机的主要增益（约60~80dB），并决定整机的选择性。',
+    note: '中频放大器是超外差接收机的心脏！固定中频455 kHz便于设计高增益、高选择性的放大器。输出为纯净的中频AM信号：载波455 kHz，边带450 kHz和460 kHz。中频固定不变，无论接收哪个电台，中频始终为455 kHz。'
+  },
+  detector: {
+    title: '🔎 检波器（包络检波）— 输出信号',
+    desc: '包络检波器利用二极管的单向导电性和RC低通滤波，从中频AM信号中提取出调制信号（音频包络）。输出为低频信号 f<sub>m</sub>=5 kHz，叠加少量直流分量和残余中频纹波。',
+    note: '检波是解调过程——从已调波中恢复原始调制信号。二极管包络检波是最简单的AM解调方式：二极管整流+电容滤波=提取包络。要求RC时间常数满足：1/f<sub>c</sub> ≪ RC ≪ 1/f<sub>m,max</sub>，否则会产生对角线失真。'
+  },
+  af: {
+    title: '🔈 低频放大器 — 输出信号',
+    desc: '对检波器输出的音频信号进行电压放大和功率放大，驱动扬声器发声。输出为纯净的音频正弦波 f<sub>m</sub>=5 kHz（已被放大到足够功率）。',
+    note: '低频放大器包括前置电压放大和功率放大两级。输出信号即为恢复出的原始音频信号 f<sub>m</sub>，幅度足以驱动扬声器（通常几伏到几十伏）。整个超外差接收过程完成！'
+  }
+};
+
+function drawRXTime(stage) {
+  const canvas = canvasRXTime;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(canvas, '#0d1117');
+  drawGrid(ctx, w, h);
+
+  const { fc, fm, ma, fIF, fLO } = getRXParams();
+  const midY = h / 2;
+  const ampH = h * 0.35;
+
+  ctx.strokeStyle = '#58a6ff';
+  ctx.lineWidth = 1.5;
+
+  switch (stage) {
+    case 'ant':
+    case 'rf': {
+      // AM modulated wave - amplified for RF stage
+      const scale = stage === 'rf' ? 3 : 1;
+      const duration = 3 / fm;
+      ctx.strokeStyle = '#f85149';
+      ctx.lineWidth = 1.2;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = 1 + ma * Math.cos(2 * Math.PI * fm * t);
+        const signal = env * Math.cos(2 * Math.PI * fc * t);
+        const y = midY - signal * ampH * scale * (stage === 'rf' ? 0.8 : 1);
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      // Envelope
+      ctx.strokeStyle = '#d2991d';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = (1 + ma * Math.cos(2 * Math.PI * fm * t)) * scale * (stage === 'rf' ? 0.8 : 1);
+        const y = midY - env * ampH;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = -(1 + ma * Math.cos(2 * Math.PI * fm * t)) * scale * (stage === 'rf' ? 0.8 : 1);
+        const y = midY - env * ampH;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(stage === 'rf' ? '放大后的RF信号 (幅度增大)' : 'RF输入信号 (微弱)', 10, h - 8);
+      break;
+    }
+    case 'lo': {
+      // Pure sine wave at fLO
+      const duration = 5 / fLO;
+      ctx.strokeStyle = '#d2991d';
+      ctx.lineWidth = 1.5;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const y = midY - Math.cos(2 * Math.PI * fLO * t) * ampH;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(`等幅正弦波: fLO = ${(fLO/1000).toFixed(0)} kHz`, 10, h - 8);
+      break;
+    }
+    case 'mixer': {
+      // Mixer output - complex waveform
+      const duration = 3 / fm;
+      ctx.strokeStyle = '#f85149';
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        // Show the envelope of the IF component
+        const rfEnv = 1 + ma * Math.cos(2 * Math.PI * fm * t);
+        const rf = rfEnv * Math.cos(2 * Math.PI * fc * t);
+        const lo = Math.cos(2 * Math.PI * fLO * t);
+        const mixed = rf * lo; // Simplified mixer model
+        const y = midY - mixed * ampH * 0.8;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      // Envelope showing modulation
+      ctx.strokeStyle = '#d2991d';
+      ctx.lineWidth = 1.2;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = 1 + ma * Math.cos(2 * Math.PI * fm * t);
+        const y = midY - env * ampH * 0.8;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText('混频输出 (含多种频率分量，包络保持调制信息)', 10, h - 8);
+      break;
+    }
+    case 'if': {
+      // IF amplifier output - AM at 455 kHz
+      const duration = 4 / fm;
+      ctx.strokeStyle = '#a371f7';
+      ctx.lineWidth = 1.3;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = 1 + ma * Math.cos(2 * Math.PI * fm * t);
+        const signal = env * Math.cos(2 * Math.PI * fIF * t);
+        const y = midY - signal * ampH * 3;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      // Envelope
+      ctx.strokeStyle = '#d2991d';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([4, 4]);
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const env = (1 + ma * Math.cos(2 * Math.PI * fm * t)) * 3;
+        const y = midY - env * ampH;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(`中频AM信号: fIF = 455 kHz (已放大)`, 10, h - 8);
+      break;
+    }
+    case 'detector': {
+      // Detected audio
+      const duration = 3 / fm;
+      ctx.strokeStyle = '#3fb950';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const audio = ma * Math.cos(2 * Math.PI * fm * t);
+        const y = midY - audio * ampH;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      // DC level
+      ctx.strokeStyle = 'rgba(139,148,158,0.4)';
+      ctx.lineWidth = 1;
+      ctx.setLineDash([3, 5]);
+      ctx.beginPath(); ctx.moveTo(0, midY); ctx.lineTo(w, midY); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(`检波输出: 音频信号 ${(fm/1000).toFixed(0)} kHz (+ 直流分量)`, 10, h - 8);
+      break;
+    }
+    case 'af': {
+      // Amplified audio
+      const duration = 3 / fm;
+      ctx.strokeStyle = '#3fb950';
+      ctx.lineWidth = 2.5;
+      ctx.beginPath();
+      for (let px = 0; px < w; px++) {
+        const t = (px / w) * duration;
+        const audio = ma * Math.cos(2 * Math.PI * fm * t);
+        const y = midY - audio * ampH * 1.2;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.stroke();
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(`放大后的音频信号: ${(fm/1000).toFixed(0)} kHz (驱动扬声器)`, 10, h - 8);
+      break;
+    }
+  }
+}
+
+function drawRXFreq(stage) {
+  const canvas = canvasRXFreq;
+  const ctx = canvas.getContext('2d');
+  const w = canvas.width, h = canvas.height;
+  clearCanvas(canvas, '#0d1117');
+  drawSpectrumAxis(ctx, w, h);
+
+  const { fc, fm, ma, fIF, fLO } = getRXParams();
+  const baseX = 40, axisY = h - 2;
+
+  function drawSpectralLine(x, amp, color, label, freqLabel) {
+    if (amp < 0.01) return;
+    const topY = axisY - amp * (h - 60);
+    ctx.strokeStyle = color;
+    ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.moveTo(x, axisY); ctx.lineTo(x, topY); ctx.stroke();
+    // Arrow
+    ctx.fillStyle = color;
+    ctx.beginPath(); ctx.moveTo(x, topY); ctx.lineTo(x-4, topY+7); ctx.lineTo(x+4, topY+7); ctx.closePath(); ctx.fill();
+    // Label
+    ctx.fillStyle = color;
+    ctx.font = 'bold 11px "Microsoft YaHei"';
+    ctx.fillText(label, x - 15, topY - 6);
+    if (freqLabel) {
+      ctx.fillStyle = '#8b9492';
+      ctx.font = '9px "Microsoft YaHei"';
+      ctx.fillText(freqLabel, x - 25, axisY + 13);
+    }
+  }
+
+  switch (stage) {
+    case 'ant':
+    case 'rf': {
+      const fMin = fc - 3 * fm, fMax = fc + 3 * fm;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      const scale = stage === 'rf' ? 3 : 1;
+      drawSpectralLine(fx(fc), 1.0 * scale, '#58a6ff', `${(1.0*scale).toFixed(1)}`, `fc=${(fc/1000).toFixed(0)}k`);
+      drawSpectralLine(fx(fc - fm), ma / 2 * scale, '#f85149', `${(ma/2*scale).toFixed(2)}`, `${((fc-fm)/1000).toFixed(0)}k`);
+      drawSpectralLine(fx(fc + fm), ma / 2 * scale, '#f85149', `${(ma/2*scale).toFixed(2)}`, `${((fc+fm)/1000).toFixed(0)}k`);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText(stage === 'rf' ? '(幅度增大3倍)' : '(原始幅度)', fx(fc) + 30, 30);
+      break;
+    }
+    case 'lo': {
+      const fMin = fLO - 100000, fMax = fLO + 100000;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      drawSpectralLine(fx(fLO), 1.0, '#d2991d', '1.0', `fLO=${(fLO/1000).toFixed(0)}k`);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText('纯净单频信号', fx(fLO) + 30, 30);
+      break;
+    }
+    case 'mixer': {
+      // Show multiple frequency components
+      const allFreqs = [
+        { f: fc, amp: 0.4, color: '#8b9492', label: '残余RF' },
+        { f: fLO, amp: 0.4, color: '#8b9492', label: '残余LO' },
+        { f: fIF, amp: 1.0, color: '#a371f7', label: `fIF(差频)` },
+        { f: fIF - fm, amp: ma / 2, color: '#f85149', label: `下边带` },
+        { f: fIF + fm, amp: ma / 2, color: '#f85149', label: `上边带` },
+        { f: fLO + fc, amp: 0.2, color: 'rgba(139,148,158,0.5)', label: '和频' },
+      ];
+      const fMin = 0, fMax = fLO + fc + fm;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      allFreqs.forEach(({ f, amp, color, label }) => {
+        drawSpectralLine(fx(f), amp, color, label, `${(f/1000).toFixed(0)}kHz`);
+      });
+      // IF passband highlight
+      ctx.fillStyle = 'rgba(163,113,247,0.08)';
+      const ifLeft = fx(fIF - fm - 5000), ifRight = fx(fIF + fm + 5000);
+      ctx.fillRect(ifLeft, 0, ifRight - ifLeft, axisY);
+      ctx.fillStyle = '#a371f7';
+      ctx.font = '10px "Microsoft YaHei"';
+      ctx.fillText('← 中频滤波器通带', ifLeft, 20);
+      break;
+    }
+    case 'if': {
+      const fMin = fIF - 3 * fm, fMax = fIF + 3 * fm;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      drawSpectralLine(fx(fIF), 3.0, '#a371f7', '3.0', `fIF=455k`);
+      drawSpectralLine(fx(fIF - fm), ma / 2 * 3, '#f85149', `${(ma/2*3).toFixed(2)}`, `${(fIF-fm)/1000}k`);
+      drawSpectralLine(fx(fIF + fm), ma / 2 * 3, '#f85149', `${(ma/2*3).toFixed(2)}`, `${(fIF+fm)/1000}k`);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText('纯净中频AM信号 (其他分量已被滤除)', fx(fIF) + 40, 30);
+      break;
+    }
+    case 'detector': {
+      const fMin = 0, fMax = 3 * fm;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      drawSpectralLine(fx(fm), 1.0, '#3fb950', '1.0', `音频${(fm/1000).toFixed(0)}kHz`);
+      drawSpectralLine(fx(0), 0.3, 'rgba(139,148,158,0.6)', 'DC', '直流');
+      // Residual IF ripple (very small)
+      if (fIF < 3 * fm * 3) {
+        drawSpectralLine(fx(fIF), 0.05, 'rgba(139,148,158,0.3)', '残余IF', '');
+      }
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText('恢复的音频信号 + 直流分量', fx(0) + 40, 30);
+      break;
+    }
+    case 'af': {
+      const fMin = 0, fMax = 3 * fm;
+      const fx = f => baseX + ((f - fMin) / (fMax - fMin)) * (w - baseX - 10);
+      drawSpectralLine(fx(fm), 2.5, '#3fb950', '2.5', `音频${(fm/1000).toFixed(0)}kHz`);
+      ctx.fillStyle = '#8b9492';
+      ctx.fillText('放大后的纯净音频信号', fx(fm) + 40, 30);
+      break;
+    }
+  }
+}
+
+function updateRXDisplays() {
+  drawRXTime(activeStage);
+  drawRXFreq(activeStage);
+}
+
+// ============ EVENT HANDLERS ============
+
+// Tab switching for AM type
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    activeTab = tab.dataset.tab;
+    // Show/hide ma control for DSB
+    const maCtrl = document.getElementById('ctrl-ma');
+    if (activeTab === 'dsb') {
+      maCtrl.style.opacity = '0.5';
+    } else {
+      maCtrl.style.opacity = '1';
+    }
+    updateAMDisplays();
+  });
+});
+
+// Slider changes
+['fc', 'fm', 'ma'].forEach(id => {
+  document.getElementById(id).addEventListener('input', () => {
+    const fc = parseInt(document.getElementById('fc').value);
+    const fm = parseInt(document.getElementById('fm').value);
+    const ma = parseFloat(document.getElementById('ma').value);
+    const fLO = fc + 455;
+
+    document.getElementById('val-fc').textContent = fc + ' kHz';
+    document.getElementById('val-fm').textContent = fm + ' kHz';
+    document.getElementById('val-ma').textContent = ma.toFixed(2);
+    document.getElementById('rx-fc').textContent = fc + ' kHz';
+    document.getElementById('rx-fm').textContent = fm + ' kHz';
+
+    // Update LO display in block diagram
+    const loBlock = document.querySelector('.block.stage-lo');
+    if (loBlock) {
+      loBlock.innerHTML = `🌀 本地振荡器<br><small>f<sub>LO</sub>=${fLO} kHz</small>`;
+    }
+
+    updateAMDisplays();
+    updateRXDisplays();
+  });
+});
+
+// Stage clicking - both in block diagram and LO block
+document.getElementById('block-diagram').addEventListener('click', (e) => {
+  const block = e.target.closest('.block[data-stage]');
+  if (!block) return;
+  selectStage(block.dataset.stage);
+});
+
+document.querySelector('.block.stage-lo')?.addEventListener('click', function() {
+  selectStage('lo');
+});
+
+function selectStage(stage) {
+  activeStage = stage;
+  // Update active class
+  document.querySelectorAll('.block[data-stage]').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.block[data-stage="${stage}"]`)?.classList.add('active');
+  document.querySelector('.block.stage-lo')?.classList.remove('active');
+  if (stage === 'lo') {
+    document.querySelector('.block.stage-lo')?.classList.add('active');
+  }
+
+  // Update detail panel
+  const info = stageInfo[stage];
+  document.getElementById('stage-title').innerHTML = info.title;
+  document.getElementById('stage-desc').innerHTML = info.desc;
+  document.getElementById('stage-note').innerHTML = `<strong>💡 本阶段要点：</strong> ${info.note}`;
+
+  updateRXDisplays();
+}
+
+// ============ RESIZE HANDLING ============
+function resizeCanvases() {
+  const canvases = document.querySelectorAll('canvas');
+  canvases.forEach(c => {
+    const rect = c.parentElement.getBoundingClientRect();
+    if (rect.width > 100) {
+      c.style.width = '100%';
+    }
+  });
+}
+
+window.addEventListener('resize', () => {
+  updateAMDisplays();
+  updateRXDisplays();
+});
+
+// ============ INITIAL DRAW ============
+document.getElementById('val-fc').textContent = '1000 kHz';
+document.getElementById('val-fm').textContent = '5 kHz';
+document.getElementById('val-ma').textContent = '0.60';
+
+updateAMDisplays();
+updateRXDisplays();
+
+console.log('✅ AM波形与超外差接收机交互演示已就绪');
+console.log('  - 可调整载波频率、调制频率、调制度');
+console.log('  - 可切换标准AM / DSB-SC');
+console.log('  - 点击超外差接收机各级查看波形');
+</script>
+
+</body>
+</html>

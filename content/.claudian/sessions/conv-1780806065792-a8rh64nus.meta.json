@@ -1,0 +1,24 @@
+{
+  "id": "conv-1780806065792-a8rh64nus",
+  "providerId": "claude",
+  "title": "Answer RF power amplifier frequency change problem",
+  "titleGenerationStatus": "success",
+  "createdAt": 1780806065794,
+  "updatedAt": 1780807018051,
+  "lastResponseAt": 1780807018051,
+  "sessionId": "e7f4042c-9486-492b-aae3-41db8ef5c6fd",
+  "providerState": {
+    "providerSessionId": "e7f4042c-9486-492b-aae3-41db8ef5c6fd"
+  },
+  "currentNote": "notes/高频电子线路/试卷解析/index.md",
+  "usage": {
+    "model": "haiku",
+    "inputTokens": 852,
+    "cacheCreationInputTokens": 0,
+    "cacheReadInputTokens": 104832,
+    "contextWindow": 200000,
+    "contextTokens": 105684,
+    "percentage": 53,
+    "contextWindowIsAuthoritative": true
+  }
+}
