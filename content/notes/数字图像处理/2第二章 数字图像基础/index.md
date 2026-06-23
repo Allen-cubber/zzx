@@ -153,6 +153,7 @@ summary: 数字图像基础
     
     通过改变仿射矩阵 $A$ 中的元素，可以实现恒等、平移、缩放、旋转以及剪切等操作 。例如旋转变换矩阵的左上角核心部分为：$\begin{bmatrix}\cos\theta & -\sin\theta \\ \sin\theta & \cos\theta\end{bmatrix}$ 。
     
+![[Pasted image 20260622131320.png]]
 
 ---
 
