@@ -4,7 +4,7 @@
   "title": "整理第十二章的笔记到index",
   "titleGenerationStatus": "failed",
   "createdAt": 1782103983805,
-  "updatedAt": 1782104319836,
+  "updatedAt": 1783227766088,
   "lastResponseAt": 1782104319836,
   "sessionId": "50ce7516-176f-4cd6-87e2-8e3a2df2ffb5",
   "providerState": {
@@ -12,13 +12,13 @@
   },
   "currentNote": "notes/数字图像处理/第十二章 图像模式分类/index.md",
   "usage": {
-    "model": "haiku",
+    "model": "sonnet",
     "inputTokens": 1518,
     "cacheCreationInputTokens": 72,
     "cacheReadInputTokens": 60044,
     "contextWindow": 200000,
     "contextTokens": 61634,
     "percentage": 31,
-    "contextWindowIsAuthoritative": true
+    "contextWindowIsAuthoritative": false
   }
 }

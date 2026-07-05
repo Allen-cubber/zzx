@@ -1766,7 +1766,7 @@ math: true
     *   $\rho\_{sp} = (\vec{P}_1 - \vec{P}_2) \cdot \hat{a}_z|\_{z=0}$
     *   或者，由于镜像系统在原场域内等效，可以用 $q'$ 和 $q''$ 来理解分界面上的效应。
 *   **特殊情况:**
-    *   若 $\epsilon_2 \to \infty$ (介质2为理想导体)，则 $q' = -q$, $q''=0$。退化为接地导体平面情况。
+    *   若 $\epsilon_2 \to \infty$ (介质2为理想导体)，则 $q' = -q$, $q''=2q$。退化为接地导体平面情况。
     *   若 $\epsilon_1 = \epsilon_2$ (同种介质)，则 $q'=0, q''=q$。无界面，只有原电荷。
 
 ##### 4.3 点电荷与<font color="orange">导体球</font> 🔮
@@ -2688,7 +2688,7 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   <font color="orange">相速</font> $v_p = \frac{\omega}{\beta} = \frac{1}{\sqrt{\mu\epsilon}}$。
     *   <font color="orange">波长</font> $\lambda = v_p T = \frac{2\pi}{\beta}$。
     *   <font color="orange">波数</font> $k = \beta$ (无耗媒质)。
-    *   <font color="orange">能量</font>：平均坡印廷矢量 $\vec{\bar{S}}_{av} = \vec{a}_z \frac{E_{0m}^2}{2\eta}$ (仅+z向波，$\eta$为实数)。$w_e = w_m$。
+    *   <font color="orange">能量</font>：平均坡印廷矢量 $\vec{\bar{S}}\_{av} = \vec{a}_z \frac{E_{0m}^2}{2\eta}$ (仅+z向波，$\eta$为实数)。$w_e = w_m$。
 
 **理想介质中均匀平面波传播特点总结** ✨:
 *   $\vec{E} \perp \vec{H} \perp \vec{k}$ (TEM波)。
@@ -2741,7 +2741,7 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   <font color="orange">右旋圆极化 (RHCP)</font> 👍: $\Delta\phi = -\pi/2 + 2m\pi$ ($E_y$ 相位滞后 $E_x$ $\pi/2$)。在 $z=const$ 平面，$\vec{E}$ 顺时针旋转 (对着波的传播方向看)。
     
     *   <font color="orange">左旋圆极化 (LHCP)</font> 👎: $\Delta\phi = +\pi/2 + 2m\pi$ ($E_y$ 相位超前 $E_x$ $\pi/2$)。在 $z=const$ 平面，$\vec{E}$ 逆时针旋转 (对着波的传播方向看)。
-    
+    *  伸出你的右手，四指同大拇指垂直，右手四指从相位超前的分量旋转至相位落后的分量，如果电磁波的传播方向为右手拇指的指向，那么就是右旋圆极化波，反之，则为左旋圆极化波。
 *   <font color="orange">椭圆极化 (Elliptical Polarization)</font> 🥚:
     *   条件：除线极化和圆极化以外的其他情况 (即 $E_{xm} \neq E_{ym}$ 或 $\Delta\phi \neq m\pi$ 且 $\Delta\phi \neq \pm \pi/2 + 2m\pi$ 同时 $E_{xm} = E_{ym}$ 不成立)。
     *   特点：$\vec{E}$ 的大小和方向都随时间变化。电场末端点轨迹为一椭圆。
@@ -2784,8 +2784,8 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
 *   相速 $v_p = \frac{\omega}{\beta} = \frac{1}{\sqrt{\mu\epsilon} \sqrt{\frac{1}{2}[\sqrt{1+(\sigma/\omega\epsilon)^2}+1]}} < \frac{1}{\sqrt{\mu\epsilon}}$。
 *   波长 $\lambda = \frac{2\pi}{\beta} < \lambda_{\text{理想}}$。
 *   <font color="orange">相速和波长均小于理想介质，且与频率有关 (色散现象)</font>。
-*   平均坡印廷矢量 $\vec{\bar{S}}_{av} = \vec{a}_z \frac{E_{m0}^2}{2|\eta_c|} e^{-2\alpha z} \cos\theta_\eta$。能量不断损耗（焦耳热）。
-*   平均磁能密度 $w_{mav} >$ 平均电能密度 $w_{eav}$。
+*   平均坡印廷矢量 $\vec{\bar{S}}\_{av} = \vec{a}_z \frac{E\_{m0}^2}{2|\eta_c|} e^{-2\alpha z} \cos\theta_\eta$。能量不断损耗（焦耳热）。
+*   平均磁能密度 $w\_{mav} >$ 平均电能密度 $w\_{eav}$。
 
 #### 4. 💨 低损耗媒质和良导体媒质
 *   <font color="orange">损耗角正切</font> $\tan\delta_c = \frac{\sigma}{\omega\epsilon} = \frac{|\sigma\vec{E}|}{|j\omega\epsilon\vec{E}|}$ (传导电流幅值与位移电流幅值之比)。
@@ -3010,6 +3010,15 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     $\int_S (\nabla \times \vec{A}) \cdot d\vec{S} = \oint_C \vec{A} \cdot d\vec{l}$
 *   **亥姆霍兹定理**: 任何矢量场可唯一分解为**无旋场**（梯度的负）和**无散场**（旋度）之和。场的性质由其**散度**和**旋度**唯一确定。
 
+*   **恒等式 1**: <span style="color:orange">标量场梯度的旋度恒等于零</span>。
+    $$ \boxed{ \nabla \times (\nabla u) = 0 } $$
+*   **恒等式 2**: <span style="color:orange">矢量场旋度的散度恒等于零</span>。
+    $$ \boxed{ \nabla \cdot (\nabla \times \vec{A}) = 0 } $$
+    
+18A 1；18B 1
+![[Pasted image 20260623144243.png]]
+![[Pasted image 20260623144300.png]]
+
 ---
 
 ### **第二章 静电场**
@@ -3043,6 +3052,10 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   **场表示**: $W_e = \frac{1}{2} \int \vec{D} \cdot \vec{E} dV$
     *   **能量密度**: $w_e = \frac{1}{2} \vec{D} \cdot \vec{E} = \frac{1}{2} \epsilon E^2$
 
+18A 2，3
+![[Pasted image 20260623145613.png]]
+![[Pasted image 20260623145745.png]]
+
 ---
 
 ### **第三章 恒定电场**
@@ -3062,6 +3075,8 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
 | $Q$ (电荷) | $I$ (电流) |
 | $C$ (电容) | $G$ (电导) |
 *   **关系**: 对于同样几何结构，电导 $G = \frac{\sigma}{\epsilon} C$。
+18A 5
+![[Pasted image 20260623150502.png]]
 
 ---
 
@@ -3091,6 +3106,9 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   **源/电路表示**: $W_m = \frac{1}{2} L I^2$
     *   **场表示**: $W_m = \frac{1}{2} \int \vec{B} \cdot \vec{H} dV$
     *   **能量密度**: $w_m = \frac{1}{2} \vec{B} \cdot \vec{H} = \frac{1}{2} \mu H^2$
+![[Pasted image 20260623150658.png]]
+![[Pasted image 20260623150713.png]]
+![[Pasted image 20260623150915.png]]
 
 ---
 
@@ -3102,6 +3120,10 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   **点电荷 vs 接地导体平面**: 镜像电荷在对称位置，等大反号。
     *   **点电荷 vs 介质平面**: 两个区域需分别设置不同的镜像/等效电荷。
     *   **点电荷 vs 接地导体球**: 镜像电荷在球内，位置 $b=R^2/d$，电荷量 $q' = -q(R/d)$。
+
+![[Pasted image 20260623150810.png]]
+![[Pasted image 20260623150951.png]]
+![[Pasted image 20260623151030.png]]
 
 ---
 
@@ -3128,6 +3150,9 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   $\nabla \times \vec{H} = (\sigma + j\omega \epsilon) \vec{E}$
 *   **亥姆霍兹方程**: $\nabla^2\vec{E} + k^2\vec{E} = 0$
 *   **平均坡印廷矢量**: $\vec{S}_{av} = \frac{1}{2}\text{Re}[\vec{E} \times \vec{H}^*]$
+
+![[Pasted image 20260623151054.png]]
+![[Pasted image 20260623151215.png]]
 
 ---
 
@@ -3164,6 +3189,10 @@ $j\\omega \\int\_V (\\frac{1}{2} \\mu |\\vec{H}|^2 - \\frac{1}{2} \\varepsilon |
     *   $n_1 \sin\theta_i = n_2 \sin\theta_t$ (其中 $n=\sqrt{\mu_r\epsilon_r}$)
 *   **布儒斯特角 (全透射角, 仅平行极化)**: $\tan\theta_B = \sqrt{\epsilon_2/\epsilon_1}$
 *   **全反射临界角 (从光密到光疏)**: $\sin\theta_c = \sqrt{\epsilon_2/\epsilon_1}$
+
+![[Pasted image 20260623151540.png]]
+![[Pasted image 20260623151604.png]]
+![[Pasted image 20260623151625.png]]
 
 ---
 
