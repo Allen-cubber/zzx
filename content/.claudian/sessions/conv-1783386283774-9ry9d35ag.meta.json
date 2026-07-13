@@ -1,0 +1,24 @@
+{
+  "id": "conv-1783386283774-9ry9d35ag",
+  "providerId": "claude",
+  "title": "帮我阅读并整理MaskWAM这篇论文的内容并写成一篇总结到index",
+  "titleGenerationStatus": "failed",
+  "createdAt": 1783386283774,
+  "updatedAt": 1783386458702,
+  "lastResponseAt": 1783386458702,
+  "sessionId": "806dde5c-55bb-4c52-b37e-4f0736a81483",
+  "providerState": {
+    "providerSessionId": "806dde5c-55bb-4c52-b37e-4f0736a81483"
+  },
+  "currentNote": "academic/MaskWAM/index.md",
+  "usage": {
+    "model": "sonnet",
+    "inputTokens": 0,
+    "cacheCreationInputTokens": 4823,
+    "cacheReadInputTokens": 57027,
+    "contextWindow": 200000,
+    "contextTokens": 61850,
+    "percentage": 31,
+    "contextWindowIsAuthoritative": true
+  }
+}

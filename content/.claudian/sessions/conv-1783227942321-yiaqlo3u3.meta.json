@@ -4,8 +4,8 @@
   "title": "帮我阅读并整理AtomicVLA这篇论文的内容并写成一篇总结到index",
   "titleGenerationStatus": "failed",
   "createdAt": 1783227942344,
-  "updatedAt": 1783233546816,
-  "lastResponseAt": 1783233546816,
+  "updatedAt": 1783386203291,
+  "lastResponseAt": 1783239225292,
   "sessionId": "ee08a676-a4c6-4962-ad23-b2480b6a85f4",
   "providerState": {
     "providerSessionId": "ee08a676-a4c6-4962-ad23-b2480b6a85f4"
@@ -13,11 +13,11 @@
   "usage": {
     "model": "sonnet",
     "inputTokens": 0,
-    "cacheCreationInputTokens": 193,
-    "cacheReadInputTokens": 79380,
+    "cacheCreationInputTokens": 69986,
+    "cacheReadInputTokens": 22565,
     "contextWindow": 200000,
-    "contextTokens": 79573,
-    "percentage": 40,
+    "contextTokens": 92551,
+    "percentage": 46,
     "contextWindowIsAuthoritative": true
   }
 }
