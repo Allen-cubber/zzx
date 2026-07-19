@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/"><channel><title>Academics on Z2X BLOG</title><link>https://www.z2x-blog.top/academic/</link><description>Recent content in Academics on Z2X BLOG</description><generator>Hugo -- 0.147.6</generator><language>zh-cn</language><lastBuildDate>Thu, 16 Jul 2026 00:00:00 +0800</lastBuildDate><atom:link href="https://www.z2x-blog.top/academic/index.xml" rel="self" type="application/rss+xml"/><item><title>Aspire：让机器人像软件工程师一样"写代码、调 Bug、攒经验"</title><link>https://www.z2x-blog.top/academic/aspire/</link><pubDate>Thu, 16 Jul 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/aspire/</guid><description>Aspire 是 NVIDIA GEAR 提出的机器人持续学习系统，它把&amp;quot;代码即策略（code-as-policy）&amp;ldquo;和软件工程 Agent 的&amp;quot;写—执行—调试&amp;quot;闭环结合起来：一个编码智能体自主编写机器人控制程序，借助暴露逐原语多模态轨迹的执行引擎定位失败、合成修复、验证结果，并把经过验证的修复蒸馏进一个不断增长的可复用技能库。任务越做越多，技能库越大，适应新任务越快——在 LIBERO-Pro 扰动、Robosuite 双臂交接、BEHAVIOR-1K 长时域任务上分别领先此前方法最多 77%、72%、32%，并展现出跨本体的仿真到真机技能迁移能力。</description></item><item><title>LingBot-VLA 2.0: From Foundation to Application</title><link>https://www.z2x-blog.top/academic/lingbot-vla-2.0/</link><pubDate>Wed, 15 Jul 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/lingbot-vla-2.0/</guid><description>LingBot-VLA 2.0 从数据、动作空间、时序推理三个维度出发,把 VLA 基础模型往真实部署方向又推进了一步——60000 小时预训练数据、全身自由度动作空间、以及基于深度/视频双教师蒸馏的预测性动力学建模。</description></item><item><title>MaskWAM: 统一掩码提示与预测的世界-动作模型</title><link>https://www.z2x-blog.top/academic/maskwam/</link><pubDate>Tue, 07 Jul 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/maskwam/</guid><description>通过联合预测未来掩码与接受首帧掩码视觉提示，MaskWAM 让机器人策略聚焦于任务相关区域，同时解决了语言描述的空间歧义问题。</description></item><item><title>AtomicVLA：原子技能驱动的机器人长时域操作框架</title><link>https://www.z2x-blog.top/academic/atomicvla/</link><pubDate>Sun, 05 Jul 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/atomicvla/</guid><description>AtomicVLA 将任务规划与动作执行统一到一个框架中，通过技能引导的混合专家架构（SG-MoE）构建可扩展的原子技能库，每个专家专注于掌握单一原子技能，并借助可扩展的路由编码器实现持续学习，在长时域任务和终身技能习得上均显著超越基线。</description></item><item><title>VLA 模型长程任务解决方法综述</title><link>https://www.z2x-blog.top/academic/vla%E9%95%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</link><pubDate>Sun, 05 Jul 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/vla%E9%95%BF%E7%A8%8B%E4%BB%BB%E5%8A%A1%E8%A7%A3%E5%86%B3%E6%96%B9%E6%B3%95/</guid><description>从原子技能拆分、组合泛化机制到数据采集范式，系统梳理 VLA 模型应对长程、多步骤机器人操作任务的前沿方法，涵盖 AtomicVLA、LiLo-VLA、Long-VLA、AtomSkill、SCaR 等代表性工作，以及强化学习与世界模型的最新融合进展。</description></item><item><title>Qwen-VLA：统一视觉-语言-动作建模</title><link>https://www.z2x-blog.top/academic/qwenvla/</link><pubDate>Sun, 31 May 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/qwenvla/</guid><description>Qwen-VLA 是 Qwen 团队提出的统一具身基础模型，将操作、导航和轨迹预测整合到共享的动作-轨迹预测框架中，基于 Qwen3.5-4B 视觉语言骨干网络 + DiT Flow Matching 动作解码器，支持跨任务、跨环境和跨机器人实体的泛化。</description></item><item><title>WorldVLA</title><link>https://www.z2x-blog.top/academic/worldvla/</link><pubDate>Wed, 27 May 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/worldvla/</guid><description>世界模型利用当前图像和动作预测未来图像，动作模型则根据语言指令和视觉观测生成后续动作，两者在同一框架下相互增强。</description></item><item><title>Vision-Language-Action Models for Robotics</title><link>https://www.z2x-blog.top/academic/vla-models-for-robotics/</link><pubDate>Wed, 20 May 2026 00:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/vla-models-for-robotics/</guid><description>这篇论文视角非常宏大且务实，堪称全面梳理具身智能底层技术栈的绝佳读物。它的最大亮点在于“全栈”——没有把目光局限在纯粹的算法设计上，而是真正探讨了如何跨越从代码到物理世界的鸿沟。</description></item><item><title>π0.7: a Steerable Model with Emergent Capabilities</title><link>https://www.z2x-blog.top/academic/pi0.7/</link><pubDate>Tue, 12 May 2026 09:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/pi0.7/</guid><description>具有涌现能力的可引导模型。</description></item><item><title>RoboOmni：Proactive Robot Manipulation in Omni-modal Context</title><link>https://www.z2x-blog.top/academic/roboomni/</link><pubDate>Sun, 10 May 2026 09:00:00 +0800</pubDate><guid>https://www.z2x-blog.top/academic/roboomni/</guid><description>作者提出了一种全新的全模态大模型架构，通过首次将“人类语音”与“环境声学特征”融入 VLA 系统，打破了传统机器人“给一个指令、做一个动作”的被动响应模式，让机器人具备了察言观色、主动询问并执行物理动作的能力。</description></item><item><title/><link>https://www.z2x-blog.top/academic/openarm-demo/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.z2x-blog.top/academic/openarm-demo/</guid><description>&lt;p>我建议你们的 demo 不要设计成“炫技但很难稳定”的任务，而要设计成一个&lt;strong>稳定可演示、能体现 VLA/世界模型潜力、还能自然扩展成研究课题&lt;/strong>的场景。&lt;/p>
+&lt;p>我的首推方案是：&lt;/p>
+&lt;h1 id="实验室移动助理按自然语言指令取物运送放置归位">“实验室移动助理”：按自然语言指令取物、运送、放置、归位&lt;/h1>
+&lt;p>这个场景非常适合你们现在的条件：&lt;strong>OpenArm + AGV + VLA + 世界模型 + 机器人操作&lt;/strong>。OpenArm 官方定位就是面向 physical AI、接触丰富操作和安全人机交互的 7 自由度开源机械臂；而移动操作领域的近期工作也强调移动底盘和机械臂需要协同完成 pick-and-place、开关抽屉、物品整理等任务。(&lt;a href="https://github.com/enactic/openarm?utm_source=chatgpt.com" title="GitHub - enactic/openarm: A fully open-source humanoid arm for physical ...">GitHub&lt;/a>)&lt;/p>
+&lt;h1 id="一推荐主场景">一、推荐主场景&lt;/h1>
+&lt;p>场景可以叫：&lt;/p>
+&lt;p>&lt;strong>“面向实验室场景的移动具身智能助手”&lt;/strong>&lt;/p>
+&lt;p>布置三个区域：&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>区域&lt;/th>
+&lt;th>场景功能&lt;/th>
+&lt;th>示例物品&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>A 区：物品架 / 耗材台&lt;/td>
+&lt;td>机器人取物&lt;/td>
+&lt;td>螺丝刀、胶带、马克笔、小盒子、芯片盒、纸杯&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>B 区：用户工位 / 实验台&lt;/td>
+&lt;td>机器人送达&lt;/td>
+&lt;td>托盘、指定放置区、编号工位&lt;/td>
+&lt;/tr>
+&lt;tr>
+&lt;td>C 区：回收 / 归位区&lt;/td>
+&lt;td>机器人整理&lt;/td>
+&lt;td>空杯、废纸盒、工具归位槽&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;p>用户发出自然语言指令，例如：&lt;/p>
+&lt;blockquote>
+&lt;p>“帮我把 A 区货架上的蓝色芯片盒拿到 2 号工位，然后把桌上的空纸杯放到回收区。”&lt;/p>&lt;/blockquote>
+&lt;p>这个任务的好处是：&lt;strong>外行能看懂，老师觉得有系统性，后续也能拆成论文问题。&lt;/strong>&lt;/p>
+&lt;hr>
+&lt;h1 id="二具体任务流程设计">二、具体任务流程设计&lt;/h1>
+&lt;p>完整流程可以这样设计：&lt;/p>
+&lt;h2 id="step-1用户下达自然语言指令">Step 1：用户下达自然语言指令&lt;/h2>
+&lt;p>输入方式可以先用键盘文本，后续再接语音。&lt;/p>
+&lt;p>例子：&lt;/p></description></item><item><title/><link>https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/</guid><description>&lt;h1 id="plug-and-play-原子技能组合泛化方案整合笔记">Plug-and-Play 原子技能组合泛化方案整合笔记&lt;/h1>
+&lt;p>本文是在 &lt;code>plug_and_play_skill_composition_notes.md&lt;/code> 的基础上整理的整合版。主线仍然是：&lt;/p>
+&lt;blockquote>
+&lt;p>面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。&lt;/p>&lt;/blockquote>
+&lt;p>本版新增整合：&lt;/p>
+&lt;ul>
+&lt;li>&lt;strong>SeqVLA&lt;/strong>：completion head / done head 的直接先例，尤其是 head 接 action expert feature。&lt;/li>
+&lt;li>&lt;strong>AtomSkill / Learning Semantic Atomic Skills&lt;/strong>：semantic skill alignment、keypose imagination、keypose-based skill transition。&lt;/li>
+&lt;li>后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。&lt;/li>
+&lt;/ul>
+&lt;h2 id="1-核心定位">1. 核心定位&lt;/h2>
+&lt;p>相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>已有 VLM + flow-matching action head/action expert 的 VLA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>冻结或少量微调 backbone
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>外挂 skill-conditioned adapter / LoRA
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>外挂 completion/progress/keypose head
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>给定 skill plan 下自动切换技能
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> ↓
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>提升 held-out atomic skill recombination
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>一句话定位：&lt;/p></description></item><item><title/><link>https://www.z2x-blog.top/academic/plug_and_play_skill_composition_teacher_report/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.z2x-blog.top/academic/plug_and_play_skill_composition_teacher_report/</guid><description>&lt;h1 id="plug-and-play-原子技能组合泛化方案汇报稿">Plug-and-Play 原子技能组合泛化方案汇报稿&lt;/h1>
+&lt;h2 id="1-研究问题">1. 研究问题&lt;/h2>
+&lt;p>长程机器人任务本质上不是一个连续动作预测问题，而是：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>长程任务 = 子任务划分 + 子任务执行 + 子任务切换 + 失败恢复
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>例如：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>open box → grasp object → insert object → close box
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>所以如果想让 VLA 完成长程任务，必须解决两个层次：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>1. 知道当前应该执行哪个 subtask / atomic skill
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>2. 知道当前 subtask 是否完成，什么时候切到下一个
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>当前我们关注的是：&lt;strong>少量真机数据下，已有开源 VLA 如何从已学原子技能组合泛化到未见长程组合。&lt;/strong>&lt;/p>
+&lt;h2 id="2-路线一vla-自己预测-subtask">2. 路线一：VLA 自己预测 Subtask&lt;/h2>
+&lt;p>理想方案是让 VLA 自己具备：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>task chain generation
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>current subtask prediction
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>atomic skill abstraction
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>skill transition reasoning
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也就是用户给一个长程指令，VLA 内部自动判断：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>现在该做 open
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>open 完成后该做 grasp
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>grasp 完成后该做 insert
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>...
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这个方向更接近真正意义上的组合泛化，因为模型不仅执行技能，还能自己理解任务结构。&lt;/p></description></item><item><title/><link>https://www.z2x-blog.top/academic/skill_routing_action_expert_design_notes/</link><pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate><guid>https://www.z2x-blog.top/academic/skill_routing_action_expert_design_notes/</guid><description>&lt;h1 id="不同-skill-路由与-action-expert-注入设计笔记">不同 Skill 路由与 Action Expert 注入设计笔记&lt;/h1>
+&lt;p>本文整理前几轮关于“不同 skill 的路由、如何让 pi0.5-style action expert 针对不同 skill 注入不同信息”的讨论。重点不是文献综述式概括，而是按可实现的网络结构来拆解：每种方案的输入、输出、接入位置、训练方式、优缺点，以及更适合 OpenArm + LeRobot + 约 1k 真机数据的第一版方案。&lt;/p>
+&lt;h2 id="1-问题定义">1. 问题定义&lt;/h2>
+&lt;p>你的整体设定是：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>用户长程指令
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -&amp;gt; LLM / structural prompt 生成 skill plan
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -&amp;gt; Skill Plan Wrapper 给出 current_skill_id
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -&amp;gt; pi0.5-style VLA 生成动作
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -&amp;gt; done head 判断当前 skill 是否完成
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span> -&amp;gt; 完成后切到下一个 skill
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>这里讨论的是中间这一块：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>current_skill_id 如何影响 action expert？
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>也就是：&lt;/p>
+&lt;div class="highlight">&lt;pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">&lt;code class="language-text" data-lang="text">&lt;span style="display:flex;">&lt;span>同一个 pi0.5 action expert，
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>在执行 grasp / place / open_drawer / close_drawer 等不同 skill 时，
+&lt;/span>&lt;/span>&lt;span style="display:flex;">&lt;span>是否应该激活不同参数、不同 adapter、不同 LoRA，或者注入不同 skill embedding？
+&lt;/span>&lt;/span>&lt;/code>&lt;/pre>&lt;/div>&lt;p>核心目标：&lt;/p></description></item></channel></rss>

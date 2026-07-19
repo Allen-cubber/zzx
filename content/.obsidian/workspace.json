@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "ac5326b104f2b55a",
+        "id": "dc973c3f6a4f5d0d",
         "type": "tabs",
         "children": [
           {
-            "id": "f4783c38709efba8",
+            "id": "d3dbc982e94f7f7c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "academic/LingBot-VLA 2.0/index.md",
+                "file": "academic/aspire/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -94,7 +94,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "academic/LingBot-VLA 2.0/index.md",
+                "file": "academic/aspire/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -193,8 +193,15 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "b9acc781dd2d596c",
+  "active": "d3dbc982e94f7f7c",
   "lastOpenFiles": [
+    "academic/aspire/Aspire.pdf",
+    "academic/aspire/3.png",
+    "academic/aspire/2.png",
+    "academic/aspire/1.png",
+    "academic/aspire/index.md",
+    "notes/高频电子线路/高频电子线路/index.md",
+    "academic/LingBot-VLA 2.0/index.md",
     "academic/LingBot-VLA 2.0/Pasted image 20260715155132.png",
     "academic/LingBot-VLA 2.0/Pasted image 20260715155055.png",
     "academic/LingBot-VLA 2.0/Pasted image 20260715155024.png",
@@ -221,25 +228,17 @@
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.a2149139f19d",
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.637133b4c236",
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.8627a1be87ba",
-    "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.b01e6d7ab3f9",
-    "academic/智能跟踪小车/Pasted image 20260705135820.png",
     "academic/AtomicVLA/index.md",
     "academic/智能跟踪小车/CURRENT_FEATURES.md",
     "academic/WorldVLA/index.md",
     "academic/VLA长程任务解决方法/VLA模型长程任务调研.md",
     "academic/新建文件夹/VLA模型长程任务调研.md",
-    "academic/AtomicVLA/page1_2x.png",
-    "academic/AtomicVLA/figure2.png",
-    "academic/AtomicVLA/figure1.png",
     "notes/数字图像处理/5第五章 图像恢复与重建/index.md",
     "notes/数字图像处理/10第十章 图像分割/index.md",
     "notes/第 10 章 确定性网络.md",
     "notes/数字图像处理/8第八章  图像压缩/index.md",
     "notes/数字图像处理/1第一章 概论/index.md",
     "notes/数字图像处理/4第四章 图像变换及频率域图像增强/index.md",
-    "notes/数字图像处理/2第二章 数字图像基础/index.md",
-    "notes/数字图像处理/3第三章 空间域图像增强/index.md",
-    "notes/数字图像处理/11第十一章 表达和描述/index.md",
-    "notes/数字图像处理/12第十二章 图像模式分类/index.md"
+    "notes/数字图像处理/2第二章 数字图像基础/index.md"
   ]
 }

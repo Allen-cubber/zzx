@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantumweb</title>
+    <style>
+        body { margin: 0; overflow: hidden; font-family: sans-serif; background-color: #111; color: #eee; display: flex; align-items: center; justify-content: center; height: 100vh; }
+        #particleCanvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+        #particle { width: 50px; height: 50px; background-color: #fff; border-radius: 50%; position: absolute; cursor: grab; box-shadow: 0 0 15px rgba(255,255,255,0.6), 0 0 30px rgba(255,255,255,0.4); transition: transform 0.15s linear, box-shadow 0.15s linear; display: flex; align-items: center; justify-content: center; font-size: 10px; text-align: center; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 1; will-change: left, top, transform, box-shadow; }
+        #controls { position: fixed; top: 10px; right: 10px; padding: 10px; background-color: rgba(0,0,0,0.5); border-radius: 5px; z-index: 2; display: flex; flex-direction: column; gap: 5px; }
+        #controls button { background-color: #333; color: #eee; border: none; padding: 5px 10px; cursor: pointer; border-radius: 3px; width: 100px; text-align: center; }
+        #controls button:hover { background-color: #444; }
+        #controls button.field-effect-on { background-color: #c0392b; }
+        #controls button.field-effect-on:hover { background-color: #e74c3c; }
+        #info { position: fixed; top: 10px; left: 10px; background-color: rgba(0,0,0,0.7); border-radius: 5px; font-size: 12px; z-index: 2; width: 180px; box-shadow: 0 2px 10px rgba(0,0,0,0.3); }
+        #info-toggle-header { padding: 8px 10px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #555; user-select: none; }
+        #info-toggle-header:hover { background-color: rgba(255,255,255,0.1); }
+        #info-toggle-symbol { font-family: monospace; font-size: 14px; font-weight: bold; }
+        #info-details { padding: 8px 10px; max-height: 150px; overflow: hidden; opacity: 1; transition: max-height 0.3s ease-in-out, opacity 0.2s ease-in-out, padding-top 0.3s ease-in-out, padding-bottom 0.3s ease-in-out; }
+        #info-details.collapsed { max-height: 0; opacity: 0; padding-top: 0; padding-bottom: 0; border-top: none; }
+        #info-toggle-header.collapsed-state { border-bottom-color: transparent; }
+        #lock-controls { position: fixed; bottom: 10px; right: 10px; z-index: 2; }
+        #lock-controls button { background-color: #333; color: #eee; border: 1px solid #555; padding: 8px 15px; cursor: pointer; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        #lock-controls button:hover { background-color: #444; }
+        #lock-controls button.locked { background-color: #c0392b; border-color: #a03020; }
+        #lock-controls button.locked:hover { background-color: #e74c3c; }
+    </style>
+</head>
+<body>
+    <canvas id="particleCanvas"></canvas>
+    <div id="particle"></div>
+    <div id="info">
+        <div id="info-toggle-header"><span>信息面板</span><span id="info-toggle-symbol">[-]</span></div>
+        <div id="info-details">ID: <span id="my-id"></span><br>远程粒子: <span id="remote-info">无</span><br>距离: <span id="distance-info">N/A</span><br>微粒数: <span id="micro-particle-count">0</span></div>
+    </div>
+    <div id="controls"><button id="toggleFieldButton">显示场效应</button></div>
+    <div id="lock-controls"><button id="toggleLockPositionButton">锁定位置</button></div>
+
+    <script>
+        const mainParticleElement = document.getElementById('particle');
+        const myIdDisplay = document.getElementById('my-id');
+        const remoteInfoDisplay = document.getElementById('remote-info');
+        const distanceInfoDisplay = document.getElementById('distance-info');
+        const microParticleCountDisplay = document.getElementById('micro-particle-count');
+        const toggleFieldButton = document.getElementById('toggleFieldButton');
+        const toggleLockPositionButton = document.getElementById('toggleLockPositionButton');
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        const infoToggleHeader = document.getElementById('info-toggle-header');
+        const infoDetails = document.getElementById('info-details');
+        const infoToggleSymbol = document.getElementById('info-toggle-symbol');
+
+        let isFieldVisible = false;
+        const FIELD_BASE_COLOR = '#111';
+        let isParticleLockedToScreen = false;
+        let lockedScreenAbsX = 0, lockedScreenAbsY = 0;
+
+        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+
+        let myWindowId = 'particle_sim_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5);
+        myIdDisplay.textContent = myWindowId.substring(myWindowId.indexOf('_sim_') + 5, myWindowId.indexOf('_sim_') + 10);
+
+        let otherParticles = {};
+        const STALE_THRESHOLD = 2000; // Can be adjusted, e.g., 2 seconds
+        const channel = new BroadcastChannel('particle_interaction_final_v1'); // New channel name
+
+        // Message type constants
+        const MSG_TYPE_POSITION = 'position';
+        const MSG_TYPE_LEAVING = 'leaving';
+
+        let microParticles = [];
+        const MAX_MICRO_PARTICLES = 300; const MICRO_PARTICLE_LIFESPAN_MIN = 80; const MICRO_PARTICLE_LIFESPAN_MAX = 200;
+        const MICRO_PARTICLE_BASE_SPEED = 1.2; const MICRO_PARTICLE_SPEED_VARIATION = 0.9;
+        const MICRO_PARTICLE_SIZE_MIN = 1; const MICRO_PARTICLE_SIZE_MAX = 2.5; const EMISSION_RATE = 2;
+        const ATTRACTION_STRENGTH = 3500; const MIN_ATTRACTION_DISTANCE_SQ = 50*50;
+        const MAX_ATTRACTION_DISTANCE_SQ = (Math.max(screen.width, screen.height) * 0.8)**2;
+
+        // Field radius based on screen size
+        const FIELD_PARTICLE_INFLUENCE_RADIUS = Math.min(screen.width, screen.height) * 0.3;
+
+
+        function createMicroParticle(emitterX_abs, emitterY_abs) { const angle = Math.random() * Math.PI * 2; const speed = MICRO_PARTICLE_BASE_SPEED + Math.random() * MICRO_PARTICLE_SPEED_VARIATION; return { x_abs: emitterX_abs, y_abs: emitterY_abs, vx: Math.cos(angle) * speed, vy: Math.sin(angle) * speed, age: 0, lifespan: MICRO_PARTICLE_LIFESPAN_MIN + Math.random() * (MICRO_PARTICLE_LIFESPAN_MAX - MICRO_PARTICLE_LIFESPAN_MIN), size: MICRO_PARTICLE_SIZE_MIN + Math.random() * (MICRO_PARTICLE_SIZE_MAX - MICRO_PARTICLE_SIZE_MIN) }; }
+        let currentClosestParticleDataForMain = null;
+        function getParticleAbsoluteScreenCenter(element) { const rect = element.getBoundingClientRect(); const absoluteX = (window.screenX || window.screenLeft || 0) + rect.left + rect.width / 2; const absoluteY = (window.screenY || window.screenTop || 0) + rect.top + rect.height / 2; return { x_abs: absoluteX, y_abs: absoluteY }; }
+
+        function drawField() { ctx.save(); ctx.fillStyle = FIELD_BASE_COLOR; ctx.fillRect(0, 0, canvas.width, canvas.height); ctx.globalCompositeOperation = 'lighter'; const myAbsPos = isParticleLockedToScreen ? { x_abs: lockedScreenAbsX, y_abs: lockedScreenAbsY } : getParticleAbsoluteScreenCenter(mainParticleElement); const allMainParticlesForField = [{ x_abs: myAbsPos.x_abs, y_abs: myAbsPos.y_abs }]; Object.values(otherParticles).forEach(p => { if (Date.now() - p.lastSeen <= STALE_THRESHOLD) { allMainParticlesForField.push({ x_abs: p.x_abs, y_abs: p.y_abs }); } }); const currentScreenX = window.screenX || window.screenLeft || 0; const currentScreenY = window.screenY || window.screenTop || 0; allMainParticlesForField.forEach(particleAbsPos => { const drawX = particleAbsPos.x_abs - currentScreenX; const drawY = particleAbsPos.y_abs - currentScreenY; const gradient = ctx.createRadialGradient(drawX, drawY, 0, drawX, drawY, FIELD_PARTICLE_INFLUENCE_RADIUS); gradient.addColorStop(0, 'rgba(255, 0, 0, 0.25)'); gradient.addColorStop(0.2, 'rgba(255, 0, 150, 0.2)'); gradient.addColorStop(0.5, 'rgba(100, 0, 255, 0.15)'); gradient.addColorStop(0.8, 'rgba(0, 100, 255, 0.1)'); gradient.addColorStop(1, 'rgba(0, 0, 255, 0)'); ctx.fillStyle = gradient; ctx.beginPath(); ctx.arc(drawX, drawY, FIELD_PARTICLE_INFLUENCE_RADIUS, 0, Math.PI * 2); ctx.fill(); }); ctx.restore(); }
+        function updateParticleVisualPosition() { if (isParticleLockedToScreen) { const currentScreenX = window.screenX || window.screenLeft || 0; const currentScreenY = window.screenY || window.screenTop || 0; const targetViewportCenterX = lockedScreenAbsX - currentScreenX; const targetViewportCenterY = lockedScreenAbsY - currentScreenY; let newLeftPercent = (targetViewportCenterX / window.innerWidth) * 100; let newTopPercent = (targetViewportCenterY / window.innerHeight) * 100; mainParticleElement.style.left = `${newLeftPercent}%`; mainParticleElement.style.top = `${newTopPercent}%`; } }
+
+        function animateMicroParticlesAndVisuals() { updateParticleVisualPosition(); if (isFieldVisible) { drawField(); } else { ctx.clearRect(0, 0, canvas.width, canvas.height); } const emitterAbsPos = isParticleLockedToScreen ? { x_abs: lockedScreenAbsX, y_abs: lockedScreenAbsY } : getParticleAbsoluteScreenCenter(mainParticleElement); for (let i = 0; i < EMISSION_RATE; i++) { if (microParticles.length < MAX_MICRO_PARTICLES) { microParticles.push(createMicroParticle(emitterAbsPos.x_abs, emitterAbsPos.y_abs)); } } const currentScreenX = window.screenX || window.screenLeft || 0; const currentScreenY = window.screenY || window.screenTop || 0; const viewportRightEdgeAbs = currentScreenX + canvas.width; const viewportBottomEdgeAbs = currentScreenY + canvas.height; for (let i = microParticles.length - 1; i >= 0; i--) { const p = microParticles[i]; p.age++; if (p.age > p.lifespan || p.x_abs < currentScreenX - p.size || p.x_abs > viewportRightEdgeAbs + p.size || p.y_abs < currentScreenY - p.size || p.y_abs > viewportBottomEdgeAbs + p.size) { microParticles.splice(i, 1); continue; } let totalAx = 0; let totalAy = 0; Object.values(otherParticles).forEach(attractor => { if (Date.now() - attractor.lastSeen > STALE_THRESHOLD) return; const dx = attractor.x_abs - p.x_abs; const dy = attractor.y_abs - p.y_abs; const distSq = dx * dx + dy * dy; if (distSq > 1 && distSq < MAX_ATTRACTION_DISTANCE_SQ) { const dist = Math.sqrt(distSq); const forceMag = ATTRACTION_STRENGTH / Math.max(distSq, MIN_ATTRACTION_DISTANCE_SQ); totalAx += (dx / dist) * forceMag; totalAy += (dy / dist) * forceMag; } }); p.vx += totalAx; p.vy += totalAy; const speedSq = p.vx * p.vx + p.vy * p.vy; const maxSpeed = 7; if (speedSq > maxSpeed * maxSpeed) { const speed = Math.sqrt(speedSq); p.vx = (p.vx / speed) * maxSpeed; p.vy = (p.vy / speed) * maxSpeed; } p.x_abs += p.vx; p.y_abs += p.vy; const drawX = p.x_abs - currentScreenX; const drawY = p.y_abs - currentScreenY; const opacity = 1 - (p.age / p.lifespan); ctx.fillStyle = `rgba(255, 255, 255, ${Math.max(0, opacity * 0.9).toFixed(2)})`; ctx.beginPath(); ctx.arc(drawX, drawY, p.size, 0, Math.PI * 2); ctx.fill(); } microParticleCountDisplay.textContent = microParticles.length; requestAnimationFrame(animateMicroParticlesAndVisuals); }
+
+        function broadcastPosition() { const absPosition = isParticleLockedToScreen ? { x_abs: lockedScreenAbsX, y_abs: lockedScreenAbsY } : getParticleAbsoluteScreenCenter(mainParticleElement); channel.postMessage({ type: MSG_TYPE_POSITION, id: myWindowId, x_abs: absPosition.x_abs, y_abs: absPosition.y_abs, lastSeen: Date.now() }); }
+
+        channel.onmessage = (event) => {
+            const data = event.data;
+            if (!data || !data.id || data.id === myWindowId) return;
+            if (data.type === MSG_TYPE_POSITION && data.x_abs !== undefined && data.y_abs !== undefined) {
+                otherParticles[data.id] = { x_abs: data.x_abs, y_abs: data.y_abs, lastSeen: data.lastSeen || Date.now() };
+            } else if (data.type === MSG_TYPE_LEAVING) {
+                console.log(`Window ${data.id.slice(-5)} sent LEAVING. Removing.`);
+                delete otherParticles[data.id];
+            }
+        };
+        window.addEventListener('pagehide', (event) => {
+            if (!event.persisted) {
+                console.log(`This window (${myWindowId.slice(-5)}) is pagehiding. Broadcasting LEAVING.`);
+                try { channel.postMessage({ type: MSG_TYPE_LEAVING, id: myWindowId }); channel.close(); }
+                catch (e) { console.error("Error in pagehide: ", e); }
+            }
+        });
+
+        function updateMainParticleEffect() { const myAbsPos = isParticleLockedToScreen ? { x_abs: lockedScreenAbsX, y_abs: lockedScreenAbsY } : getParticleAbsoluteScreenCenter(mainParticleElement); let closestDistSq = Infinity; currentClosestParticleDataForMain = null; const now = Date.now(); for (const id in otherParticles) { if (now - otherParticles[id].lastSeen > STALE_THRESHOLD) { console.log(`Particle ${id.slice(-5)} is STALE. Removing.`); delete otherParticles[id]; continue; } const dx = otherParticles[id].x_abs - myAbsPos.x_abs; const dy = otherParticles[id].y_abs - myAbsPos.y_abs; const distanceSq = dx * dx + dy * dy; if (distanceSq < closestDistSq) { closestDistSq = distanceSq; currentClosestParticleDataForMain = { ...otherParticles[id], dx, dy, distance: Math.sqrt(distanceSq), id }; } } const remoteCount = Object.keys(otherParticles).length; if (remoteCount > 0) { let remoteIdSubstring = 'N/A'; if (currentClosestParticleDataForMain && currentClosestParticleDataForMain.id) { remoteIdSubstring = currentClosestParticleDataForMain.id.substring(currentClosestParticleDataForMain.id.lastIndexOf('_') + 1); } remoteInfoDisplay.textContent = `有 ${remoteCount} 个 (最近: ${remoteIdSubstring})`; } else { remoteInfoDisplay.textContent = "无"; } if (currentClosestParticleDataForMain) { distanceInfoDisplay.textContent = `${currentClosestParticleDataForMain.distance.toFixed(0)} px (abs)`; const { dx, dy, distance } = currentClosestParticleDataForMain; const angle = Math.atan2(dy, dx); const effectDistance = Math.max(window.innerWidth, window.innerHeight) * 0.8; mainParticleElement.style.transform = `translate(-50%, -50%) rotate(${angle}rad)`; const maxIntensityDistance = effectDistance * 0.5; let intensityFactor = 1 - Math.min(distance, effectDistance) / effectDistance; if (distance < maxIntensityDistance) { intensityFactor = 1 - (distance / maxIntensityDistance) * 0.5; } else { intensityFactor = 0.5 * (1 - (distance - maxIntensityDistance) / (effectDistance - maxIntensityDistance)); } intensityFactor = Math.max(0, Math.min(1, intensityFactor)); const baseBlur = 15; const baseSpread = 5; const maxBlurIncrease = 30; const maxSpreadIncrease = 15; const currentBlur = baseBlur + maxBlurIncrease * intensityFactor; const currentSpread = baseSpread + maxSpreadIncrease * intensityFactor; const opacity1 = 0.5 + 0.4 * intensityFactor; const opacity2 = 0.3 + 0.5 * intensityFactor; mainParticleElement.style.boxShadow = `0 0 ${currentBlur}px ${currentSpread}px rgba(255,255,255,${opacity1.toFixed(2)}), 0 0 ${currentBlur * 0.6}px ${currentSpread * 0.4}px rgba(255,255,255,${opacity2.toFixed(2)})`; } else { distanceInfoDisplay.textContent = "N/A"; mainParticleElement.style.transform = 'translate(-50%, -50%) rotate(0rad)'; mainParticleElement.style.boxShadow = `0 0 15px rgba(255,255,255,0.6), 0 0 30px rgba(255,255,255,0.4)`; } }
+        const mainLoopInterval = setInterval(() => { broadcastPosition(); updateMainParticleEffect(); }, 60);
+        let isDragging = false; let offsetX, offsetY; mainParticleElement.addEventListener('mousedown', (e) => { if (isParticleLockedToScreen) { isParticleLockedToScreen = false; toggleLockPositionButton.textContent = '锁定位置'; toggleLockPositionButton.classList.remove('locked'); } isDragging = true; mainParticleElement.style.cursor = 'grabbing'; const rect = mainParticleElement.getBoundingClientRect(); offsetX = e.clientX - rect.left; offsetY = e.clientY - rect.top; e.preventDefault(); }); document.addEventListener('mousemove', (e) => { if (!isDragging) return; if (isParticleLockedToScreen) { isDragging = false; return; } let newLeftPx = e.clientX - offsetX; let newTopPx = e.clientY - offsetY; let newLeftPercent = (newLeftPx + mainParticleElement.offsetWidth / 2) / window.innerWidth * 100; let newTopPercent = (newTopPx + mainParticleElement.offsetHeight / 2) / window.innerHeight * 100; const minLeft = (mainParticleElement.offsetWidth / 2) / window.innerWidth * 100; const maxLeft = (window.innerWidth - mainParticleElement.offsetWidth / 2) / window.innerWidth * 100; const minTop = (mainParticleElement.offsetHeight / 2) / window.innerHeight * 100; const maxTop = (window.innerHeight - mainParticleElement.offsetHeight / 2) / window.innerHeight * 100; newLeftPercent = Math.max(minLeft, Math.min(newLeftPercent, maxLeft)); newTopPercent = Math.max(minTop, Math.min(newTopPercent, maxTop)); mainParticleElement.style.left = `${newLeftPercent}%`; mainParticleElement.style.top = `${newTopPercent}%`; }); document.addEventListener('mouseup', () => { if (isDragging) { isDragging = false; mainParticleElement.style.cursor = 'grab'; } });
+        window.addEventListener('resize', () => { if (!isParticleLockedToScreen) { const rect = mainParticleElement.getBoundingClientRect(); let currentCenterX = rect.left + rect.width / 2; let currentCenterY = rect.top + rect.height / 2; let newLeftPercent = currentCenterX / window.innerWidth * 100; let newTopPercent = currentCenterY / window.innerHeight * 100; const minLeft = (mainParticleElement.offsetWidth / 2) / window.innerWidth * 100; const maxLeft = (window.innerWidth - mainParticleElement.offsetWidth / 2) / window.innerWidth * 100; const minTop = (mainParticleElement.offsetHeight / 2) / window.innerHeight * 100; const maxTop = (window.innerHeight - mainParticleElement.offsetHeight / 2) / window.innerHeight * 100; newLeftPercent = Math.max(minLeft, Math.min(newLeftPercent, maxLeft)); newTopPercent = Math.max(minTop, Math.min(newTopPercent, maxTop)); mainParticleElement.style.left = `${newLeftPercent}%`; mainParticleElement.style.top = `${newTopPercent}%`; } });
+        infoToggleHeader.addEventListener('click', () => { infoDetails.classList.toggle('collapsed'); const isCollapsed = infoDetails.classList.contains('collapsed'); infoToggleSymbol.textContent = isCollapsed ? '[+]' : '[-]'; infoToggleHeader.classList.toggle('collapsed-state', isCollapsed); });
+
+        toggleFieldButton.addEventListener('click', () => {
+            isFieldVisible = !isFieldVisible;
+            if (isFieldVisible) { // 场效应现在开启
+                toggleFieldButton.textContent = '关闭显示';
+                toggleFieldButton.classList.add('field-effect-on');
+            } else { // 场效应现在关闭
+                toggleFieldButton.textContent = '显示场效应';
+                toggleFieldButton.classList.remove('field-effect-on');
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+        });
+        // Initialize field button state
+        if (isFieldVisible) { toggleFieldButton.textContent = '关闭显示'; toggleFieldButton.classList.add('field-effect-on'); }
+        else { toggleFieldButton.textContent = '显示场效应'; toggleFieldButton.classList.remove('field-effect-on'); }
+
+        toggleLockPositionButton.addEventListener('click', () => { isParticleLockedToScreen = !isParticleLockedToScreen; if (isParticleLockedToScreen) { const absPos = getParticleAbsoluteScreenCenter(mainParticleElement); lockedScreenAbsX = absPos.x_abs; lockedScreenAbsY = absPos.y_abs; toggleLockPositionButton.textContent = '解锁位置'; toggleLockPositionButton.classList.add('locked'); } else { toggleLockPositionButton.textContent = '锁定位置'; toggleLockPositionButton.classList.remove('locked'); const rect = mainParticleElement.getBoundingClientRect(); let currentCenterX = rect.left + rect.width / 2; let currentCenterY = rect.top + rect.height / 2; let newLeftPercent = currentCenterX / window.innerWidth * 100; let newTopPercent = currentCenterY / window.innerHeight * 100; mainParticleElement.style.left = `${newLeftPercent}%`; mainParticleElement.style.top = `${newTopPercent}%`; } });
+
+        broadcastPosition();
+        setTimeout(() => { updateMainParticleEffect(); if (isParticleLockedToScreen) updateParticleVisualPosition(); }, 100);
+        animateMicroParticlesAndVisuals();
+    </script>
+</body>
+</html>

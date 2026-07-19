@@ -1,0 +1,630 @@
+<!doctype html><html lang=zh dir=auto><head><meta charset=utf-8><meta http-equiv=X-UA-Compatible content="IE=edge"><meta name=viewport content="width=device-width,initial-scale=1,shrink-to-fit=no"><meta name=robots content="index, follow"><title>Z2X BLOG</title><meta name=keywords content><meta name=description content="Plug-and-Play 原子技能组合泛化方案整合笔记
+本文是在 plug_and_play_skill_composition_notes.md 的基础上整理的整合版。主线仍然是：
+
+面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。
+本版新增整合：
+
+SeqVLA：completion head / done head 的直接先例，尤其是 head 接 action expert feature。
+AtomSkill / Learning Semantic Atomic Skills：semantic skill alignment、keypose imagination、keypose-based skill transition。
+后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。
+
+1. 核心定位
+相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：
+已有 VLM + flow-matching action head/action expert 的 VLA
+        ↓
+冻结或少量微调 backbone
+        ↓
+外挂 skill-conditioned adapter / LoRA
+        ↓
+外挂 completion/progress/keypose head
+        ↓
+给定 skill plan 下自动切换技能
+        ↓
+提升 held-out atomic skill recombination
+一句话定位："><meta name=author content><link rel=canonical href=https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/><link crossorigin=anonymous href=/assets/css/stylesheet.6a63981de11ce87e64c56a3d77eec55ab048e00042a29f8681e55a196731d1a4.css integrity="sha256-amOYHeEc6H5kxWo9d+7FWrBI4ABCop+GgeVaGWcx0aQ=" rel="preload stylesheet" as=style><link rel=icon href=https://www.z2x-blog.top/favicon.ico><link rel=icon type=image/png sizes=16x16 href=https://www.z2x-blog.top/favicon-16x16.png><link rel=icon type=image/png sizes=32x32 href=https://www.z2x-blog.top/favicon-32x32.png><link rel=apple-touch-icon href=https://www.z2x-blog.top/apple-touch-icon.png><link rel=mask-icon href=https://www.z2x-blog.top/safari-pinned-tab.svg><meta name=theme-color content="#2e2e33"><meta name=msapplication-TileColor content="#2e2e33"><link rel=alternate hreflang=zh href=https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/><noscript><style>#theme-toggle,.top-link{display:none}</style><style>@media(prefers-color-scheme:dark){:root{--theme:rgb(29, 30, 32);--entry:rgb(46, 46, 51);--primary:rgb(218, 218, 219);--secondary:rgb(155, 156, 157);--tertiary:rgb(65, 66, 68);--content:rgb(196, 196, 197);--code-block-bg:rgb(46, 46, 51);--code-bg:rgb(55, 56, 62);--border:rgb(51, 51, 51)}.list{background:var(--theme)}.list:not(.dark)::-webkit-scrollbar-track{background:0 0}.list:not(.dark)::-webkit-scrollbar-thumb{border-color:var(--theme)}}</style></noscript><script type=text/javascript async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">MathJax.Hub.Config({tex2jax:{inlineMath:[["$","$"],["\\(","\\)"]],displayMath:[["$$","$$"],["[[","]]"]],processEscapes:!0,processEnvironments:!0,skipTags:["script","noscript","style","textarea","pre"],TeX:{equationNumbers:{autoNumber:"AMS"},extensions:["AMSmath.js","AMSsymbols.js"]}}}),MathJax.Hub.Queue(function(){var e,t=MathJax.Hub.getAllJax();for(e=0;e<t.length;e+=1)t[e].SourceElement().parentNode.className+=" has-jax"})</script><style>code.has-jax{font:inherit;font-size:100%;background:inherit;border:inherit;color:#515151}</style><script defer src=https://www.z2x-blog.top/js/home_animations.js></script><style>.post-single .post-title{font-size:40px}@media screen and (max-width:768px){.post-single .post-title{font-size:24px}}</style><div id=width-toggle-btn style="position:fixed;bottom:30px;left:30px;z-index:9999;cursor:pointer;background:var(--entry);padding:10px;border-radius:50%;box-shadow:0 4px 6px rgba(0,0,0,.1);display:none"><svg id="icon-expand" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+<svg id="icon-compress" style="display:none" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 14 10 14 10 20"/><polyline points="20 10 14 10 14 4"/><line x1="14" y1="10" x2="21" y2="3"/><line x1="3" y1="21" x2="10" y2="14"/></svg></div><style>.main{transition:margin-right .3s ease,margin-left .3s ease}@media screen and (min-width:1300px){#width-toggle-btn{display:block !important}.main{max-width:none !important;width:auto !important;margin-left:23% !important;margin-right:23% !important}body.wide-mode .main{margin-right:2% !important}}@media screen and (min-width:1800px){.main{margin-left:25% !important;margin-right:5% !important}body.wide-mode .main{margin-right:2% !important}}@media screen and (max-width:1299px){.main{margin:auto !important;max-width:calc(100% - 30px) !important;width:100% !important}#width-toggle-btn{display:none !important}}</style><script>(function(){const s=document.getElementById("width-toggle-btn"),e=document.getElementById("icon-expand"),t=document.getElementById("icon-compress"),o=localStorage.getItem("blog-wide-mode")==="true";o&&(document.body.classList.add("wide-mode"),n(!0));function n(n){n?(e.style.display="none",t.style.display="block"):(e.style.display="block",t.style.display="none")}s.addEventListener("click",function(){document.body.classList.toggle("wide-mode");const e=document.body.classList.contains("wide-mode");n(e),localStorage.setItem("blog-wide-mode",e)})})()</script><meta property="og:url" content="https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/"><meta property="og:site_name" content="Z2X BLOG"><meta property="og:title" content="Z2X BLOG"><meta property="og:description" content="Plug-and-Play 原子技能组合泛化方案整合笔记 本文是在 plug_and_play_skill_composition_notes.md 的基础上整理的整合版。主线仍然是：
+面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。
+本版新增整合：
+SeqVLA：completion head / done head 的直接先例，尤其是 head 接 action expert feature。 AtomSkill / Learning Semantic Atomic Skills：semantic skill alignment、keypose imagination、keypose-based skill transition。 后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。 1. 核心定位 相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：
+已有 VLM + flow-matching action head/action expert 的 VLA ↓ 冻结或少量微调 backbone ↓ 外挂 skill-conditioned adapter / LoRA ↓ 外挂 completion/progress/keypose head ↓ 给定 skill plan 下自动切换技能 ↓ 提升 held-out atomic skill recombination 一句话定位："><meta property="og:locale" content="zh-cn"><meta property="og:type" content="article"><meta property="article:section" content="academic"><meta property="article:modified_time" content="2026-07-05T15:01:44+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content><meta name=twitter:description content="Plug-and-Play 原子技能组合泛化方案整合笔记
+本文是在 plug_and_play_skill_composition_notes.md 的基础上整理的整合版。主线仍然是：
+
+面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。
+本版新增整合：
+
+SeqVLA：completion head / done head 的直接先例，尤其是 head 接 action expert feature。
+AtomSkill / Learning Semantic Atomic Skills：semantic skill alignment、keypose imagination、keypose-based skill transition。
+后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。
+
+1. 核心定位
+相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：
+已有 VLM + flow-matching action head/action expert 的 VLA
+        ↓
+冻结或少量微调 backbone
+        ↓
+外挂 skill-conditioned adapter / LoRA
+        ↓
+外挂 completion/progress/keypose head
+        ↓
+给定 skill plan 下自动切换技能
+        ↓
+提升 held-out atomic skill recombination
+一句话定位："><script type=application/ld+json>{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Academics","item":"https://www.z2x-blog.top/academic/"},{"@type":"ListItem","position":2,"name":"","item":"https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/"}]}</script><script type=application/ld+json>{"@context":"https://schema.org","@type":"BlogPosting","headline":"","name":"","description":"Plug-and-Play 原子技能组合泛化方案整合笔记 本文是在 plug_and_play_skill_composition_notes.md 的基础上整理的整合版。主线仍然是：\n面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。\n本版新增整合：\nSeqVLA：completion head / done head 的直接先例，尤其是 head 接 action expert feature。 AtomSkill / Learning Semantic Atomic Skills：semantic skill alignment、keypose imagination、keypose-based skill transition。 后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。 1. 核心定位 相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：\n已有 VLM + flow-matching action head/action expert 的 VLA ↓ 冻结或少量微调 backbone ↓ 外挂 skill-conditioned adapter / LoRA ↓ 外挂 completion/progress/keypose head ↓ 给定 skill plan 下自动切换技能 ↓ 提升 held-out atomic skill recombination 一句话定位：\n","keywords":[],"articleBody":"Plug-and-Play 原子技能组合泛化方案整合笔记 本文是在 plug_and_play_skill_composition_notes.md 的基础上整理的整合版。主线仍然是：\n面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。\n本版新增整合：\nSeqVLA：completion head / done head 的直接先例，尤其是 head 接 action expert feature。 AtomSkill / Learning Semantic Atomic Skills：semantic skill alignment、keypose imagination、keypose-based skill transition。 后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。 1. 核心定位 相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：\n已有 VLM + flow-matching action head/action expert 的 VLA ↓ 冻结或少量微调 backbone ↓ 外挂 skill-conditioned adapter / LoRA ↓ 外挂 completion/progress/keypose head ↓ 给定 skill plan 下自动切换技能 ↓ 提升 held-out atomic skill recombination 一句话定位：\nAtomicVLA 是“重新设计一个会原子技能的 VLA”； 本方案是“让已有开源 VLA 快速获得原子技能组合能力的即插即用模块”。 适配目标：\nWall-OSS-0.5 pi0.5 / openpi OpenVLA-OFT 其他 VLM + flow matching action head 的 VLA 核心卖点：\n1. 不大改 VLA backbone 2. 不要求重新训练 foundation VLA 3. 模块主要加在 action head / action expert 侧 4. 可以快速迁移到不同开源 VLA 5. 专门提升 few-shot real-robot atomic skill recombination 推荐贡献表述：\nWe propose a plug-and-play skill composition layer for VLM + flow-matching VLA policies. Instead of redesigning the VLA architecture, our method freezes the pretrained backbone and attaches skill-conditioned action adapters and a multimodal completion/keypose head to the action generation side, enabling few-demo real-robot atomic skill recombination under a predefined high-level skill plan. 2. 当前方案属于哪个版本 可以把长程技能组合分成四个版本：\nV0 Oracle boundary: 人工给 current_skill 和切换时刻，只测每个 skill adapter 的执行能力。 V1 Plan + learned done: 给定 skill plan，模型自己判断当前 skill 是否完成，完成后按 plan 切到下一个。 V2 Plan + learned router: 给定 skill plan，模型判断 done，也允许局部选择、重复或融合 skill adapter。 V3 Full planner: 模型自己生成 skill plan、判断当前进度，并决定下一步 skill。 第一篇文章建议主做 V1：\n任务的原子技能序列预先给定或提前生成。 执行过程中，模型不自由规划下一步是什么。 新增模块主要判断当前原子技能是否完成。 完成后按预设 skill plan 顺序切换。 示例：\nTask: put the red block into the box and close it skill plan: [open, grasp, insert, close] execution: current_skill = open done(open) -\u003e current_skill = grasp done(grasp) -\u003e current_skill = insert done(insert) -\u003e current_skill = close 不建议把“模型自己生成 task chain / atomic skill abstraction”作为第一篇主方法。1k 真机数据更适合训练：\nper-skill adapter skill-conditioned action head current skill classifier done/progress/keypose head 固定技能集合下的轻量 router 不太适合训练：\nVLA 自己生成完整 task chain 通用 atomic skill abstraction 自由 next-skill planning 错误恢复式 long-horizon planner 3. 相对 AtomicVLA 的差异 AtomicVLA 更接近模型内部 full skill reasoning：\nobservation + language + state ↓ Think-Act mechanism ↓ 模型生成 task chain / progress / atomic skill abstraction ↓ skill-guided MoE router ↓ atomic skill expert ↓ action 本方案更轻：\nobservation + language + skill plan ↓ 原 VLA backbone ↓ completion/progress/keypose head 判断当前 skill 是否完成 ↓ 按预设 skill plan 切到下一个 skill ↓ 激活对应 skill adapter ↓ 原 action head / action expert 输出动作 对比：\nAtomicVLA: model-internal planning Think/Act switching skill abstraction generation SG-MoE action decoder 架构改动重 本方案: external/predefined skill plan learned completion/progress/keypose switching action-side skill adapter 插件式接入 flow action expert 架构改动轻 AtomicVLA 中“当前原子任务是否完成”不是一个显式 done head，而是通过：\nlearned [think]/[act] 切换 + progress generation + atomic skill abstraction update 隐式处理。我们的方案不做 Think-Act，而是把该问题显式化为 completion/progress/keypose prediction，更容易落地到开源 VLA。\n4. SeqVLA 对本方案的直接启发 SeqVLA 是 Plan + Learned Completion 路线的直接先例。它基于 π0 风格 VLA，在 action expert feature 上接一个 completion detection head。\nSeqVLA 架构：\nmulti-view images + joint states + subtask language prompt ↓ π0 VLA backbone ↓ action expert feature ├── action head -\u003e continuous action └── completion detection head -\u003e completion probability 关键点：\ncompletion head 接在 action expert feature 上， 不是接在 VLM 生成文本后面。 这支持本方案的设计判断：\ndone/progress head 优先从 action expert hidden 引出， 而不是只从 VLM hidden 引出。 SeqVLA 的子任务来自人工预定义的固定长程任务序列，不是模型自己生成。它采两类数据：\n1. subtask-level demonstrations: 每个子任务单独采，每个子任务一个唯一 prompt。 用于训练 SeqVLA 的 action 和 completion head。 2. complete long-horizon demonstrations: 完整长程任务轨迹。 主要用于训练 baseline VLA。 Completion label：\nlabel = 1: 当前 frame 仍然在推进这个 subtask label = 0: 当前 subtask 已经完成，后续动作不再对该 subtask 有贡献 典型形式：\n1111110000 SeqVLA 的重要结论：\naction loss + completion loss 联合训练优于先训 action 再训 completion； completion head 接 action expert feature 更贴近动作进度； 单独 completion head 已不是首创点。 因此本方案的 novelty 不能写成“首次提出 done head”，而应写成：\ncompletion-aware switching + per-skill action adapters + held-out atomic skill recombination + plug-and-play VLA adaptation 5. AtomSkill 对本方案的新增启发 AtomSkill / Learning Semantic Atomic Skills 不是 VLA plug-in，而是多任务模仿学习框架。它的三个核心模块是：\n1. Semantic Skill Discovery with VLM 从 demonstration 中切分 variable-length atomic skill segments， 并用 VLM 给每个 segment 生成语义 skill label。 2. Atomic Skill Learning with Semantic Contrastive Alignment 用 VQ-VAE 学离散 skill codebook， 再用 temporal contrastive loss 和 semantic contrastive loss 组织 skill space。 3. Inference with Atomic Skill Priors 用 diffusion sampler 采样高层 skill embedding， action decoder 执行 action chunk， keypose prediction 判断何时切换到下一个 skill。 5.1 Semantic skill alignment AtomSkill 的关键判断是：\n机器人动作片段虽然看起来不一样，但语义上可能是同一个技能。 如果只按动作轨迹聚类，skill token 会很碎、很难复用。 例子：\ngrasp cup grasp pen grasp flower 低层轨迹不同，但语义都是 grasp。AtomSkill 用 supervised contrastive learning 让同语义技能靠近。\n对本方案的轻量转化：\nh_segment = pool(action_expert_hidden over a skill segment) positive: same current_skill across different tasks negative: different current_skill L_skill_align: supervised contrastive loss 注意：\nskill embedding e_skill 是输入条件向量； h_segment 是模型处理真实 observation/action segment 后产生的内部动作表示。 二者不同：\ne_skill: skill.current_id -\u003e Embedding table 用来告诉模型当前执行哪个 skill h_segment: VLA/action expert 在一段 skill trajectory 上产生的 hidden representation 用于 semantic alignment 推荐第一版做：\nL_align = SupCon(h_segment, skill.current_id) 可选增强：\nL_match = contrast(h_segment, e_skill) 5.2 Keypose imagination AtomSkill 不用 binary done head，而是预测当前 skill 的 terminal keypose：\nkeypose_pred = KeyposeHead(h_action, e_skill) 推理时：\n当当前/预测动作足够接近 predicted keypose 触发下一 skill 这给本方案一个比纯 done head 更结构化的增强：\np_done = DoneHead(...) keypose_pred = KeyposeHead(...) switch if: p_done high and action/keypose distance small 优点：\ndone head 是二分类，容易受边界标注噪声影响； keypose 是连续目标，更适合空间定位和物理解释； 对于 place / insert / open / close 尤其有帮助。 第一版可做：\nL = L_action + λ_done L_done + λ_keypose L_keypose + λ_align L_skill_align 如果实现压力大，L_keypose 和 L_align 可以作为 ablation 或增强版。\n6. 最终推荐模块设计 以 pi0.5 / openpi 为例，基础数据流：\nimage observations + proprio/state + language instruction ↓ VLM backbone ↓ condition hidden h ↓ flow-matching action expert ↓ action chunk 本方案不破坏主链路，增加四类模块：\n1. Skill/Plan Input Adapter 2. Skill Embedding Module 3. Completion / Progress / Keypose Head 4. Skill-Conditioned Action Adapter 7. 模块 1：Skill/Plan Input Adapter 作用：\n把 LeRobot 中的 skill metadata 转成 VLA 可用的 prompt 和结构化 id。 输入：\nobservation.images.* observation.state action task.instruction task.skill_sequence skill.current_id skill.phase_id skill.done 或 skill.continue skill.progress optional skill.keypose optional object.active_name optional object.target_name optional 输出：\n1. prompt text 2. structured skill ids prompt 示例：\nTask: put the red block into the box and close it. Plan: open -\u003e grasp -\u003e insert -\u003e close. Current skill: grasp. Phase: approach. Active object: red block. Target: box. 接入位置：\nLeRobot sample ↓ Skill/Plan Input Adapter ↓ pi0.5/openpi 原始输入格式 8. 模块 2：Skill Embedding Module 作用：\n把离散 skill id / phase id / plan id 变成连续向量，作为 action expert 和 completion head 的条件变量。 输入：\nskill.current_id skill.phase_id task.skill_sequence 输出：\ne_skill ∈ R^d e_phase ∈ R^d e_plan ∈ R^d optional 接入方式：\nh_skill = h + W_skill e_skill 或：\ngamma, beta = MLP(e_skill) h_skill = gamma * h + beta 它不替代 VLM，也不替代 action expert，只提供“当前执行哪个原子技能”的控制信号。\n9. 模块 3：Completion / Progress / Keypose Head 9.1 输入来源选择 对“是否完成”的判断，最推荐从 action expert hidden 引出，而不是只用 VLM hidden。\n原因：\nskill completion 既依赖语义状态变化， 也依赖低层控制进度。 输入优先级：\n首选: action expert hidden feature + current skill embedding + proprio / gripper state + recent action history 增强: + pooled VLM hidden + phase embedding + object/target features 推荐主方法：\nHybrid-Done: VLM semantic context + action-expert control features + skill embedding + proprio/history 结构：\nobservation + instruction + current_skill ↓ VLM backbone ↓ h_vlm ─────────────┐ ↓ Completion Head → p_done / progress / keypose ↑ flow action expert ↓ ↓ h_action ──────────┘ 9.2 输出 最小版：\np_done(current_skill) ∈ [0, 1] SeqVLA 风格也可定义：\np_continue = 1 表示继续 p_continue = 0 表示完成 推荐扩展：\nprogress ∈ [0, 1] keypose_pred 切换逻辑：\nif p_done \u003e threshold for M consecutive chunks: current_skill = next_skill_in_plan 增强版：\nif p_done \u003e threshold and ||predicted_next_action - predicted_keypose|| \u003c δ: current_skill = next_skill_in_plan 9.3 Loss L_done = BCE(p_done, skill.done) L_progress = MSE(progress, progress_gt) L_keypose = L1(keypose_pred, keypose_gt) 推荐联合训练：\nL_total = L_action + λ_done L_done + λ_progress L_progress + λ_keypose L_keypose + λ_align L_skill_align SeqVLA 表明 action 和 completion 联合训练比先后训练更好，因此不建议第一版把 adapter 和 completion 完全分开训。\n10. 模块 4：Skill-Conditioned Action Adapter 作用：\n让一个共享 action expert 在不同原子技能下表现出不同动作偏置。 基本形式：\nbase action expert + grasp adapter + place adapter + insert adapter + open adapter ... 当前执行什么 skill，就激活对应 adapter。\n10.1 Hidden residual 形式 h = VLA_backbone(obs, lang) Δh = Adapter_skill(h) h' = h + Δh v_t = ActionExpert(z_t, t, h') 10.2 Flow residual 形式 v_base = ActionExpert_base(z_t, t, h) Δv = Adapter_skill(z_t, t, h, e_skill) v = v_base + Δv 这个形式最贴近 pi0.5 / Wall-OSS-0.5 的 flow matching action head。\n10.3 LoRA 形式 对 action expert 内部线性层加 skill-specific LoRA：\nW' = W + B_skill A_skill 当前 skill 是 grasp：\nactivate LoRA_grasp 当前 skill 是 insert：\nactivate LoRA_insert 推荐优先级：\n第一优先：flow matching action expert 内部 FFN / projection LoRA 第二优先：action expert 输出层 LoRA 第三优先：VLM-to-action condition projector LoRA 不建议第一版：大范围 VLM backbone LoRA 11. 完整前向流程 训练时：\nLeRobot sample images, state, instruction skill_sequence, current_skill, phase, done, progress/keypose optional ↓ Skill/Plan Input Adapter ↓ prompt + skill ids ↓ VLA backbone ↓ h_vlm ↓ Skill Embedding ↓ h_skill ↓ flow-matching action expert ↓ h_action ├── selected skill LoRA / adapter -\u003e action chunk ├── completion/progress head -\u003e p_done / progress └── keypose head optional -\u003e keypose_pred 推理时：\ninstruction: put red block into box and close it skill plan: [open, grasp, insert, close] current_skill = open while not task done: obs = robot.get_obs() h_vlm, h_action = VLA(obs, instruction, plan, current_skill) p_done, progress, keypose = completion_module(h_vlm, h_action, current_skill) if switch_condition_met: current_skill = next(plan) activate Adapter[current_skill] action = flow_action_expert(...) robot.step(action) 12. 数据采集与训练数据结构 训练数据不应只采单个原子任务，也不应只采完整长程任务。建议：\n训练数据 = 原子技能 episode + 已见组合 episode + transition/boundary samples 测试数据 = 未见组合 episode 原因：\n原子数据: 教会每个 skill 怎么做。 已见组合数据: 教会技能之间的状态衔接、切换边界和长程状态分布。 transition/boundary 数据: 强化 done/progress/keypose head 对边界附近状态的判断。 未见组合数据: 只用于测试组合泛化。 1k demos 推荐分配：\n400 条：单个原子技能 350 条：已见组合任务 100 条：关键 transition / boundary 强化 50 条：validation 100 条：held-out 未见组合测试 LeRobot 最小字段：\nobservation.images observation.state action task.instruction task.skill_sequence skill.current_id skill.segment_start skill.segment_end skill.done 或 skill.continue 推荐增加：\nskill.phase_id skill.progress skill.keypose object.active_name object.target_name object.active_bbox optional object.target_bbox optional 训练使用方式：\n1. 训练 skill adapter: atomic episode 和组合 episode 都按 skill boundary 切成 segment。 每个 segment 带 current_skill。 2. 训练 completion/progress/keypose: 主要用完整组合 episode 和 boundary samples。 强化快完成、刚完成、未完成、误完成状态。 3. 训练 semantic alignment: 对 action expert hidden 做 segment-level pooling。 same skill across tasks 为 positive。 13. Done 判断风险与解决 如果输入只有：\n总共有几个阶段 当前阶段 id 模型不能可靠判断当前阶段是否完成。阶段 id 只能告诉它“现在应该做什么”，不能告诉它“是否已经做完”。\ndone/progress/head 必须看状态证据：\n1. 当前视觉 observation 2. proprio / gripper / ee pose 3. 当前 skill id 4. 最近若干帧历史 5. previous action chunk 6. active object / target object 7. object-target relation 8. action expert hidden feature 推荐：\nif p_done \u003e 0.7 for 3 consecutive chunks: switch skill 或者：\nif progress \u003e 0.9 for 3 consecutive chunks: switch skill 如果加入 keypose：\nif p_done high and distance_to_keypose \u003c δ: switch skill 可选外部安全机制：\n低频 VLM completion checker 简单规则 checker 但主方法不要依赖慢速 VLM 每步判断。\n14. Long-VLA 与 phase 设计 Long-VLA 的核心不是 skill adapter，而是 phase-aware input masking。它把长程任务拆成多个子任务，并把每个子任务拆成：\nmoving phase interaction phase 不同 phase 关注不同输入：\nmoving phase: 关注目标位置、全局空间关系、移动路径 interaction phase: 关注局部物体、夹爪、接触状态、当前操作目标 对本方案的轻量借鉴：\nLeRobot 增加: skill.phase_id Prompt 增加: Current skill: grasp Phase: interaction Completion head 输入: h_context skill embedding phase embedding proprio recent action history 一句话：\nLong-VLA 解决“不同阶段该看什么”； 本方案解决“不同原子技能该用什么动作 adapter，以及什么时候切换”。 15. 与 InSight 的关系 InSight: Self-Guided Skill Acquisition via Steerable VLAs 进一步做的是：\nVLM 发现 primitive gap 机器人自主尝试 rollout VLM oracle 检查成功 成功 rollout 加回训练集 重新 fine-tune VLA 它的重点是 autonomous skill acquisition，而本方案重点是 known atomic skills 的 held-out recombination。\n可借鉴：\n1. primitive-level steerability 2. automatic primitive segmentation 3. progress channel 4. VLM completion check 5. successful rollout -\u003e retraining data flywheel 不建议第一版完整照搬：\n自主找 primitive gap 自动试错采新技能 VLM oracle 验收 反复 retrain 因为真机安全和工程复杂度较高。\n16. 最小可实现版本 第一版建议：\n1. LeRobot 增加: skill.current_id skill.phase_id skill.done / skill.continue task.skill_sequence 2. Prompt 增加: Plan / Current skill / Phase 3. VLA action expert 加: per-skill LoRA adapter 4. action expert hidden 后加: completion/progress head 5. 推理: 给定 skill plan completion/progress 判断切换 current_skill 决定激活哪个 adapter 不建议第一版加入：\n复杂 scene graph 完整 planner 自由预测 next skill 大范围 VLM backbone finetune 复杂 soft MoE skill diffusion sampler 完整 VQ-VAE skill codebook 17. 增强版本 在最小版本跑通后，按优先级增加：\n1. Keypose head 从 skill segment 最后一帧提取 keypose label。 用 keypose 辅助切换。 2. Semantic skill alignment 对 h_segment 做 supervised contrastive loss。 3. Object-centric input 加 active object / target object / bbox / crop。 4. Adapter fusion 在 skill transition 附近融合前后两个 adapters。 5. VLM completion checker 只在不确定或 OOD 状态下低频调用。 18. 推荐实验对照 必须比较：\n1. Direct VLA fine-tuning 2. Skill-token only 3. Shared LoRA + skill embedding 4. Per-skill LoRA with oracle skill boundary 5. Per-skill LoRA + learned completion/progress head 增强 ablation：\n6. + keypose head 7. + semantic skill alignment 8. + object/phase-conditioned completion head 9. + adapter fusion at skill transitions 10. VLM hidden only vs action hidden only vs hybrid done head 其中 done head 输入来源建议作为重点 ablation：\nVLM-Done: 只用 VLM hidden Action-Done: 只用 action expert hidden Hybrid-Done: VLM hidden + action expert hidden + skill/proprio/history 主方法推荐：\nHybrid-Done 19. 推荐指标 Atomic Success Rate Seen Composition Success Rate Held-out Composition Success Rate Composition Gap Completed Prefix Length Done Prediction F1 Progress MAE Keypose Error Skill Transition Accuracy Failure Position Distribution Compositional Failure Share Atomic Score Average Task Progress 失败类型建议人工或半自动标注：\nmanipulation failure transition failure wrong-order failure repeat-subtask failure premature-switch failure late-switch failure object selection failure timeout / safety abort 20. Novelty 边界 已经有人做过的点：\ndone/completion head: SeqVLA 已经做过。 skill-guided expert: AtomicVLA 已经做过重架构版本。 semantic skill library: AtomSkill 已经做过 VQ + contrastive skill alignment。 keypose-based skill transition: AtomSkill 已经做过 keypose imagination。 因此不能写成：\n首次提出 done head 首次提出原子技能专家 首次提出 keypose 应该写成：\n我们提出一个面向开源 VLM + flow-matching VLA 的 plug-and-play skill composition layer， 把 completion-aware switching、skill-conditioned action adapters、可选 keypose/progress/semantic alignment 组合起来， 在少量真机数据下提升 known atomic skills 的 held-out long-horizon recombination。 建议英文表述：\nSeqVLA demonstrates that completion-aware switching is crucial for long-horizon VLA execution. Building on this insight, we study a different problem: whether pretrained VLAs can recombine known atomic skills under unseen long-horizon compositions. To this end, we couple completion-aware switching with skill-conditioned action adapters attached to the flow-matching action expert, enabling plug-and-play compositional adaptation without redesigning the VLA backbone. 再加上 AtomSkill：\nInspired by semantic skill alignment and keypose imagination in AtomSkill, we further regularize action-expert segment representations by skill labels and optionally predict skill terminal keyposes, while avoiding the need to train a full VQ skill codebook or diffusion skill sampler. 21. 推荐论文故事线 直接微调 VLA: 可以学会 seen long-horizon tasks， 但 held-out skill recombination 掉点明显。 Skill token: 告诉模型当前技能，有帮助但不稳定。 Per-skill action adapter: 降低不同技能之间的动作干扰。 Completion/progress head: 让模型能基于多模态状态判断技能完成，并按 plan 切换。 Keypose/semantic alignment: 进一步让切换更物理可解释，让 skill hidden 更语义一致。 Plug-and-play: 模块主要挂在 action expert/action head， 可迁移到 pi0.5、Wall-OSS-0.5、OpenVLA-OFT。 最小故事：\nDirect VLA fine-tuning learns seen compositions but fails to recombine known atomic skills. Skill-conditioned adapters reduce skill interference. Completion-aware switching enables plan-conditioned long-horizon execution. Keypose/progress and semantic alignment further improve robust transitions and held-out composition. ","wordCount":"2286","inLanguage":"zh","datePublished":"0001-01-01T00:00:00Z","dateModified":"2026-07-05T15:01:44+08:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://www.z2x-blog.top/academic/plug_and_play_skill_composition_integrated_notes/"},"publisher":{"@type":"Organization","name":"Z2X BLOG","logo":{"@type":"ImageObject","url":"https://www.z2x-blog.top/favicon.ico"}}}</script></head><body id=top><script>localStorage.getItem("pref-theme")==="dark"?document.body.classList.add("dark"):localStorage.getItem("pref-theme")==="light"?document.body.classList.remove("dark"):window.matchMedia("(prefers-color-scheme: dark)").matches&&document.body.classList.add("dark")</script><header class=header><nav class=nav><div class=logo><a href=https://www.z2x-blog.top/ accesskey=h title="Z2X BLOG (Alt + H)">Z2X BLOG</a><div class=logo-switches><button id=theme-toggle accesskey=t title="(Alt + T)" aria-label="Toggle theme">
+<svg id="moon" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+<svg id="sun" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button></div></div><ul id=menu><li><a href=https://www.z2x-blog.top/updates/ title=最近更新><span>最近更新</span></a></li><li><a href=https://www.z2x-blog.top/tags/ title=标签><span>标签</span></a></li><li><a href=https://www.z2x-blog.top/notes/ title=笔记><span>笔记</span></a></li><li><a href=https://www.z2x-blog.top/academic/ title=学术><span>学术</span></a></li><li><a href=https://www.z2x-blog.top/essays/ title=散文><span>散文</span></a></li><li><a href=https://www.z2x-blog.top/travel/ title=我的旅行地图><span>旅行</span></a></li><li><a href=https://www.z2x-blog.top/search/ title=搜索><span>搜索</span></a></li></ul></nav></header><main class=main><article class=post-single><header class=post-header><h1 class="post-title entry-hint-parent"></h1><div class=post-meta>预计阅读 55 分钟</div></header><aside id=toc-container class="toc-container wide"><div class=toc><div class=content-search><details><summary>文内查找</summary><div class=inner><div class=search-container><input type=text id=contentSearchInput placeholder=输入关键词搜索...></div><div id=searchResultsSummary></div><div id=searchNavigation><button id=prevMatchButton disabled>
+上一个
+</button>
+<span id=matchCounter></span>
+<button id=nextMatchButton disabled>
+下一个
+</button>
+<button id=clearSearchButton>
+清除</button></div></div></details></div><script>document.addEventListener("DOMContentLoaded",function(){const o=document.getElementById("contentSearchInput"),n=document.getElementById("prevMatchButton"),s=document.getElementById("nextMatchButton"),m=document.getElementById("clearSearchButton"),i=document.getElementById("searchResultsSummary"),a=document.getElementById("matchCounter");let e=[],t=-1,r="";function f(){if(d(),r=o.value.trim(),!r){i.textContent="",a.textContent="",n.disabled=!0,s.disabled=!0;return}const u=document.querySelector(".post-content");if(!u)return;u.dataset.originalContent||(u.dataset.originalContent=u.innerHTML);let f=u.dataset.originalContent;const g=r.replace(/[.*+?^${}()|[\]\\]/g,"\\$&"),h=new RegExp(`(${g})`,"gi");e=[];let m,v=0,p="";for(;(m=h.exec(f))!==null;)m.index===h.lastIndex&&h.lastIndex++,e.push({term:m[0],index:m.index});e.length>0?(p=f.replace(h,'<mark class="search-highlight" style="background-color: rgba(255, 255, 0, 0.5); border-radius: 2px;">$1</mark>'),u.innerHTML=p,i.textContent=`找到 ${e.length} 个匹配项`,t=0,c(),l(t)):(i.textContent="未找到匹配项",a.textContent="",n.disabled=!0,s.disabled=!0)}function d(){const n=document.querySelector(".post-content");n&&n.dataset.originalContent&&(n.innerHTML=n.dataset.originalContent),e=[],t=-1}function c(){e.length>0&&(a.textContent=`${t+1} / ${e.length}`,n.disabled=t<=0,s.disabled=t>=e.length-1)}function l(e){const t=document.querySelectorAll(".search-highlight");if(t&&t[e]){const n=t[e];n.style.animation="none",n.offsetHeight,n.style.animation="searchHighlightBlink 1s ease-in-out",n.scrollIntoView({behavior:"smooth",block:"center",inline:"nearest"})}}function u(){e.length>0&&t>0&&(t--,c(),l(t))}function h(){e.length>0&&t<e.length-1&&(t++,c(),l(t))}function p(){o.value="",d(),i.textContent="",a.textContent="",n.disabled=!0,s.disabled=!0,n.style.cursor="not-allowed",s.style.cursor="not-allowed",n.style.color="var(--secondary)",s.style.color="var(--secondary)"}o.addEventListener("keypress",function(e){e.key==="Enter"&&f()}),n.addEventListener("click",u),s.addEventListener("click",h),m.addEventListener("click",p),document.addEventListener("keydown",function(t){t.altKey&&t.key==="f"&&(t.preventDefault(),o.focus()),(t.key==="F3"||t.ctrlKey&&t.key==="g")&&!t.shiftKey&&(t.preventDefault(),e.length>0&&h()),(t.key==="F3"&&t.shiftKey||t.ctrlKey&&t.shiftKey&&t.key==="g")&&(t.preventDefault(),e.length>0&&u())})})</script><details open><summary accesskey=c title="(Alt + C)"><span class=details>目录</span></summary><div class=inner><ul><li><a href=#plug-and-play-%e5%8e%9f%e5%ad%90%e6%8a%80%e8%83%bd%e7%bb%84%e5%90%88%e6%b3%9b%e5%8c%96%e6%96%b9%e6%a1%88%e6%95%b4%e5%90%88%e7%ac%94%e8%ae%b0 aria-label="Plug-and-Play 原子技能组合泛化方案整合笔记">Plug-and-Play 原子技能组合泛化方案整合笔记</a><ul><li><a href=#1-%e6%a0%b8%e5%bf%83%e5%ae%9a%e4%bd%8d aria-label="1. 核心定位">1. 核心定位</a></li><li><a href=#2-%e5%bd%93%e5%89%8d%e6%96%b9%e6%a1%88%e5%b1%9e%e4%ba%8e%e5%93%aa%e4%b8%aa%e7%89%88%e6%9c%ac aria-label="2. 当前方案属于哪个版本">2. 当前方案属于哪个版本</a></li><li><a href=#3-%e7%9b%b8%e5%af%b9-atomicvla-%e7%9a%84%e5%b7%ae%e5%bc%82 aria-label="3. 相对 AtomicVLA 的差异">3. 相对 AtomicVLA 的差异</a></li><li><a href=#4-seqvla-%e5%af%b9%e6%9c%ac%e6%96%b9%e6%a1%88%e7%9a%84%e7%9b%b4%e6%8e%a5%e5%90%af%e5%8f%91 aria-label="4. SeqVLA 对本方案的直接启发">4. SeqVLA 对本方案的直接启发</a></li><li><a href=#5-atomskill-%e5%af%b9%e6%9c%ac%e6%96%b9%e6%a1%88%e7%9a%84%e6%96%b0%e5%a2%9e%e5%90%af%e5%8f%91 aria-label="5. AtomSkill 对本方案的新增启发">5. AtomSkill 对本方案的新增启发</a><ul><li><a href=#51-semantic-skill-alignment aria-label="5.1 Semantic skill alignment">5.1 Semantic skill alignment</a></li><li><a href=#52-keypose-imagination aria-label="5.2 Keypose imagination">5.2 Keypose imagination</a></li></ul></li><li><a href=#6-%e6%9c%80%e7%bb%88%e6%8e%a8%e8%8d%90%e6%a8%a1%e5%9d%97%e8%ae%be%e8%ae%a1 aria-label="6. 最终推荐模块设计">6. 最终推荐模块设计</a></li><li><a href=#7-%e6%a8%a1%e5%9d%97-1skillplan-input-adapter aria-label="7. 模块 1：Skill/Plan Input Adapter">7. 模块 1：Skill/Plan Input Adapter</a></li><li><a href=#8-%e6%a8%a1%e5%9d%97-2skill-embedding-module aria-label="8. 模块 2：Skill Embedding Module">8. 模块 2：Skill Embedding Module</a></li><li><a href=#9-%e6%a8%a1%e5%9d%97-3completion--progress--keypose-head aria-label="9. 模块 3：Completion / Progress / Keypose Head">9. 模块 3：Completion / Progress / Keypose Head</a><ul><li><a href=#91-%e8%be%93%e5%85%a5%e6%9d%a5%e6%ba%90%e9%80%89%e6%8b%a9 aria-label="9.1 输入来源选择">9.1 输入来源选择</a></li><li><a href=#92-%e8%be%93%e5%87%ba aria-label="9.2 输出">9.2 输出</a></li><li><a href=#93-loss aria-label="9.3 Loss">9.3 Loss</a></li></ul></li><li><a href=#10-%e6%a8%a1%e5%9d%97-4skill-conditioned-action-adapter aria-label="10. 模块 4：Skill-Conditioned Action Adapter">10. 模块 4：Skill-Conditioned Action Adapter</a><ul><li><a href=#101-hidden-residual-%e5%bd%a2%e5%bc%8f aria-label="10.1 Hidden residual 形式">10.1 Hidden residual 形式</a></li><li><a href=#102-flow-residual-%e5%bd%a2%e5%bc%8f aria-label="10.2 Flow residual 形式">10.2 Flow residual 形式</a></li><li><a href=#103-lora-%e5%bd%a2%e5%bc%8f aria-label="10.3 LoRA 形式">10.3 LoRA 形式</a></li></ul></li><li><a href=#11-%e5%ae%8c%e6%95%b4%e5%89%8d%e5%90%91%e6%b5%81%e7%a8%8b aria-label="11. 完整前向流程">11. 完整前向流程</a></li><li><a href=#12-%e6%95%b0%e6%8d%ae%e9%87%87%e9%9b%86%e4%b8%8e%e8%ae%ad%e7%bb%83%e6%95%b0%e6%8d%ae%e7%bb%93%e6%9e%84 aria-label="12. 数据采集与训练数据结构">12. 数据采集与训练数据结构</a></li><li><a href=#13-done-%e5%88%a4%e6%96%ad%e9%a3%8e%e9%99%a9%e4%b8%8e%e8%a7%a3%e5%86%b3 aria-label="13. Done 判断风险与解决">13. Done 判断风险与解决</a></li><li><a href=#14-long-vla-%e4%b8%8e-phase-%e8%ae%be%e8%ae%a1 aria-label="14. Long-VLA 与 phase 设计">14. Long-VLA 与 phase 设计</a></li><li><a href=#15-%e4%b8%8e-insight-%e7%9a%84%e5%85%b3%e7%b3%bb aria-label="15. 与 InSight 的关系">15. 与 InSight 的关系</a></li><li><a href=#16-%e6%9c%80%e5%b0%8f%e5%8f%af%e5%ae%9e%e7%8e%b0%e7%89%88%e6%9c%ac aria-label="16. 最小可实现版本">16. 最小可实现版本</a></li><li><a href=#17-%e5%a2%9e%e5%bc%ba%e7%89%88%e6%9c%ac aria-label="17. 增强版本">17. 增强版本</a></li><li><a href=#18-%e6%8e%a8%e8%8d%90%e5%ae%9e%e9%aa%8c%e5%af%b9%e7%85%a7 aria-label="18. 推荐实验对照">18. 推荐实验对照</a></li><li><a href=#19-%e6%8e%a8%e8%8d%90%e6%8c%87%e6%a0%87 aria-label="19. 推荐指标">19. 推荐指标</a></li><li><a href=#20-novelty-%e8%be%b9%e7%95%8c aria-label="20. Novelty 边界">20. Novelty 边界</a></li><li><a href=#21-%e6%8e%a8%e8%8d%90%e8%ae%ba%e6%96%87%e6%95%85%e4%ba%8b%e7%ba%bf aria-label="21. 推荐论文故事线">21. 推荐论文故事线</a></li></ul></li></ul></div></details></div></aside><script>let activeElement,elements;document.addEventListener("DOMContentLoaded",function(){if(checkTocPosition(),elements=document.querySelectorAll("h1[id],h2[id],h3[id],h4[id],h5[id],h6[id]"),elements.length>0){activeElement=elements[0];const e=encodeURI(activeElement.getAttribute("id")).toLowerCase();document.querySelector(`.inner ul li a[href="#${e}"]`).classList.add("active")}const t=document.getElementById("top-link");t&&t.addEventListener("click",e=>{e.preventDefault(),window.scrollTo({top:0,behavior:"smooth"})})},!1),window.addEventListener("resize",function(){checkTocPosition()},!1),window.addEventListener("scroll",()=>{const e=window.pageYOffset||document.documentElement.scrollTop;if(e===0)return;elements&&elements.length>0&&(activeElement=Array.from(elements).find(t=>{if(getOffsetTop(t)-e>0&&getOffsetTop(t)-e<window.innerHeight/2)return t})||activeElement,elements.forEach(e=>{const n=encodeURI(e.getAttribute("id")).toLowerCase(),t=document.querySelector(`.inner ul li a[href="#${n}"]`);if(e===activeElement){t.classList.add("active");const e=document.querySelector(".toc .inner"),n=t.offsetTop,s=e.clientHeight,o=t.clientHeight,i=n-s/2+o/2;e.scrollTo({top:i,behavior:"smooth"})}else t.classList.remove("active")}))},!1);const main=parseInt(getComputedStyle(document.body).getPropertyValue("--article-width"),10),toc=parseInt(getComputedStyle(document.body).getPropertyValue("--toc-width"),10),gap=parseInt(getComputedStyle(document.body).getPropertyValue("--gap"),10);function checkTocPosition(){const e=document.body.scrollWidth;e-main-toc*2-gap*4>0?document.getElementById("toc-container").classList.add("wide"):document.getElementById("toc-container").classList.remove("wide")}function getOffsetTop(e){if(!e.getClientRects().length)return 0;let t=e.getBoundingClientRect(),n=e.ownerDocument.defaultView;return t.top+n.pageYOffset}</script><div class=post-content><h1 id=plug-and-play-原子技能组合泛化方案整合笔记>Plug-and-Play 原子技能组合泛化方案整合笔记<a hidden class=anchor aria-hidden=true href=#plug-and-play-原子技能组合泛化方案整合笔记>#</a></h1><p>本文是在 <code>plug_and_play_skill_composition_notes.md</code> 的基础上整理的整合版。主线仍然是：</p><blockquote><p>面向 pi0.5 / Wall-OSS-0.5 / OpenVLA-OFT 等已有开源 VLA，设计一个轻量、可插拔的 skill composition layer，使模型在少量真机数据下能把已学原子技能组合到未见长程任务。</p></blockquote><p>本版新增整合：</p><ul><li><strong>SeqVLA</strong>：completion head / done head 的直接先例，尤其是 head 接 action expert feature。</li><li><strong>AtomSkill / Learning Semantic Atomic Skills</strong>：semantic skill alignment、keypose imagination、keypose-based skill transition。</li><li>后续讨论结论：数据采集结构、done head 输入来源、skill embedding 与 hidden 表示区别、novelty 边界、最小可实现版本和增强版本。</li></ul><h2 id=1-核心定位>1. 核心定位<a hidden class=anchor aria-hidden=true href=#1-核心定位>#</a></h2><p>相比 AtomicVLA 这类需要深度改造 VLA 内部结构的方法，本方案希望做一个轻量、可插拔的 skill composition layer：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>已有 VLM + flow-matching action head/action expert 的 VLA
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>冻结或少量微调 backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>外挂 skill-conditioned adapter / LoRA
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>外挂 completion/progress/keypose head
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>给定 skill plan 下自动切换技能
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>提升 held-out atomic skill recombination
+</span></span></code></pre></div><p>一句话定位：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>AtomicVLA 是“重新设计一个会原子技能的 VLA”；
+</span></span><span style=display:flex><span>本方案是“让已有开源 VLA 快速获得原子技能组合能力的即插即用模块”。
+</span></span></code></pre></div><p>适配目标：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Wall-OSS-0.5
+</span></span><span style=display:flex><span>pi0.5 / openpi
+</span></span><span style=display:flex><span>OpenVLA-OFT
+</span></span><span style=display:flex><span>其他 VLM + flow matching action head 的 VLA
+</span></span></code></pre></div><p>核心卖点：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. 不大改 VLA backbone
+</span></span><span style=display:flex><span>2. 不要求重新训练 foundation VLA
+</span></span><span style=display:flex><span>3. 模块主要加在 action head / action expert 侧
+</span></span><span style=display:flex><span>4. 可以快速迁移到不同开源 VLA
+</span></span><span style=display:flex><span>5. 专门提升 few-shot real-robot atomic skill recombination
+</span></span></code></pre></div><p>推荐贡献表述：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>We propose a plug-and-play skill composition layer for VLM + flow-matching VLA policies. Instead of redesigning the VLA architecture, our method freezes the pretrained backbone and attaches skill-conditioned action adapters and a multimodal completion/keypose head to the action generation side, enabling few-demo real-robot atomic skill recombination under a predefined high-level skill plan.
+</span></span></code></pre></div><h2 id=2-当前方案属于哪个版本>2. 当前方案属于哪个版本<a hidden class=anchor aria-hidden=true href=#2-当前方案属于哪个版本>#</a></h2><p>可以把长程技能组合分成四个版本：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>V0 Oracle boundary:
+</span></span><span style=display:flex><span>  人工给 current_skill 和切换时刻，只测每个 skill adapter 的执行能力。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>V1 Plan + learned done:
+</span></span><span style=display:flex><span>  给定 skill plan，模型自己判断当前 skill 是否完成，完成后按 plan 切到下一个。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>V2 Plan + learned router:
+</span></span><span style=display:flex><span>  给定 skill plan，模型判断 done，也允许局部选择、重复或融合 skill adapter。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>V3 Full planner:
+</span></span><span style=display:flex><span>  模型自己生成 skill plan、判断当前进度，并决定下一步 skill。
+</span></span></code></pre></div><p>第一篇文章建议主做 <strong>V1</strong>：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>任务的原子技能序列预先给定或提前生成。
+</span></span><span style=display:flex><span>执行过程中，模型不自由规划下一步是什么。
+</span></span><span style=display:flex><span>新增模块主要判断当前原子技能是否完成。
+</span></span><span style=display:flex><span>完成后按预设 skill plan 顺序切换。
+</span></span></code></pre></div><p>示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Task: put the red block into the box and close it
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>skill plan:
+</span></span><span style=display:flex><span>  [open, grasp, insert, close]
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>execution:
+</span></span><span style=display:flex><span>  current_skill = open
+</span></span><span style=display:flex><span>  done(open) -&gt; current_skill = grasp
+</span></span><span style=display:flex><span>  done(grasp) -&gt; current_skill = insert
+</span></span><span style=display:flex><span>  done(insert) -&gt; current_skill = close
+</span></span></code></pre></div><p>不建议把“模型自己生成 task chain / atomic skill abstraction”作为第一篇主方法。1k 真机数据更适合训练：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>per-skill adapter
+</span></span><span style=display:flex><span>skill-conditioned action head
+</span></span><span style=display:flex><span>current skill classifier
+</span></span><span style=display:flex><span>done/progress/keypose head
+</span></span><span style=display:flex><span>固定技能集合下的轻量 router
+</span></span></code></pre></div><p>不太适合训练：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>VLA 自己生成完整 task chain
+</span></span><span style=display:flex><span>通用 atomic skill abstraction
+</span></span><span style=display:flex><span>自由 next-skill planning
+</span></span><span style=display:flex><span>错误恢复式 long-horizon planner
+</span></span></code></pre></div><h2 id=3-相对-atomicvla-的差异>3. 相对 AtomicVLA 的差异<a hidden class=anchor aria-hidden=true href=#3-相对-atomicvla-的差异>#</a></h2><p>AtomicVLA 更接近模型内部 full skill reasoning：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>observation + language + state
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>Think-Act mechanism
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>模型生成 task chain / progress / atomic skill abstraction
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>skill-guided MoE router
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>atomic skill expert
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>action
+</span></span></code></pre></div><p>本方案更轻：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>observation + language + skill plan
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>原 VLA backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>completion/progress/keypose head 判断当前 skill 是否完成
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>按预设 skill plan 切到下一个 skill
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>激活对应 skill adapter
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>原 action head / action expert 输出动作
+</span></span></code></pre></div><p>对比：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>AtomicVLA:
+</span></span><span style=display:flex><span>  model-internal planning
+</span></span><span style=display:flex><span>  Think/Act switching
+</span></span><span style=display:flex><span>  skill abstraction generation
+</span></span><span style=display:flex><span>  SG-MoE action decoder
+</span></span><span style=display:flex><span>  架构改动重
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>本方案:
+</span></span><span style=display:flex><span>  external/predefined skill plan
+</span></span><span style=display:flex><span>  learned completion/progress/keypose switching
+</span></span><span style=display:flex><span>  action-side skill adapter
+</span></span><span style=display:flex><span>  插件式接入 flow action expert
+</span></span><span style=display:flex><span>  架构改动轻
+</span></span></code></pre></div><p>AtomicVLA 中“当前原子任务是否完成”不是一个显式 done head，而是通过：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>learned [think]/[act] 切换
+</span></span><span style=display:flex><span>+ progress generation
+</span></span><span style=display:flex><span>+ atomic skill abstraction update
+</span></span></code></pre></div><p>隐式处理。我们的方案不做 Think-Act，而是把该问题显式化为 completion/progress/keypose prediction，更容易落地到开源 VLA。</p><h2 id=4-seqvla-对本方案的直接启发>4. SeqVLA 对本方案的直接启发<a hidden class=anchor aria-hidden=true href=#4-seqvla-对本方案的直接启发>#</a></h2><p>SeqVLA 是 <code>Plan + Learned Completion</code> 路线的直接先例。它基于 π0 风格 VLA，在 action expert feature 上接一个 completion detection head。</p><p>SeqVLA 架构：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>multi-view images
+</span></span><span style=display:flex><span>+ joint states
+</span></span><span style=display:flex><span>+ subtask language prompt
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>π0 VLA backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>action expert feature
+</span></span><span style=display:flex><span>        ├── action head -&gt; continuous action
+</span></span><span style=display:flex><span>        └── completion detection head -&gt; completion probability
+</span></span></code></pre></div><p>关键点：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>completion head 接在 action expert feature 上，
+</span></span><span style=display:flex><span>不是接在 VLM 生成文本后面。
+</span></span></code></pre></div><p>这支持本方案的设计判断：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>done/progress head 优先从 action expert hidden 引出，
+</span></span><span style=display:flex><span>而不是只从 VLM hidden 引出。
+</span></span></code></pre></div><p>SeqVLA 的子任务来自人工预定义的固定长程任务序列，不是模型自己生成。它采两类数据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. subtask-level demonstrations:
+</span></span><span style=display:flex><span>   每个子任务单独采，每个子任务一个唯一 prompt。
+</span></span><span style=display:flex><span>   用于训练 SeqVLA 的 action 和 completion head。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. complete long-horizon demonstrations:
+</span></span><span style=display:flex><span>   完整长程任务轨迹。
+</span></span><span style=display:flex><span>   主要用于训练 baseline VLA。
+</span></span></code></pre></div><p>Completion label：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>label = 1:
+</span></span><span style=display:flex><span>  当前 frame 仍然在推进这个 subtask
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>label = 0:
+</span></span><span style=display:flex><span>  当前 subtask 已经完成，后续动作不再对该 subtask 有贡献
+</span></span></code></pre></div><p>典型形式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1111110000
+</span></span></code></pre></div><p>SeqVLA 的重要结论：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>action loss + completion loss 联合训练优于先训 action 再训 completion；
+</span></span><span style=display:flex><span>completion head 接 action expert feature 更贴近动作进度；
+</span></span><span style=display:flex><span>单独 completion head 已不是首创点。
+</span></span></code></pre></div><p>因此本方案的 novelty 不能写成“首次提出 done head”，而应写成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>completion-aware switching
+</span></span><span style=display:flex><span>+ per-skill action adapters
+</span></span><span style=display:flex><span>+ held-out atomic skill recombination
+</span></span><span style=display:flex><span>+ plug-and-play VLA adaptation
+</span></span></code></pre></div><h2 id=5-atomskill-对本方案的新增启发>5. AtomSkill 对本方案的新增启发<a hidden class=anchor aria-hidden=true href=#5-atomskill-对本方案的新增启发>#</a></h2><p>AtomSkill / Learning Semantic Atomic Skills 不是 VLA plug-in，而是多任务模仿学习框架。它的三个核心模块是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. Semantic Skill Discovery with VLM
+</span></span><span style=display:flex><span>   从 demonstration 中切分 variable-length atomic skill segments，
+</span></span><span style=display:flex><span>   并用 VLM 给每个 segment 生成语义 skill label。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. Atomic Skill Learning with Semantic Contrastive Alignment
+</span></span><span style=display:flex><span>   用 VQ-VAE 学离散 skill codebook，
+</span></span><span style=display:flex><span>   再用 temporal contrastive loss 和 semantic contrastive loss 组织 skill space。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>3. Inference with Atomic Skill Priors
+</span></span><span style=display:flex><span>   用 diffusion sampler 采样高层 skill embedding，
+</span></span><span style=display:flex><span>   action decoder 执行 action chunk，
+</span></span><span style=display:flex><span>   keypose prediction 判断何时切换到下一个 skill。
+</span></span></code></pre></div><h3 id=51-semantic-skill-alignment>5.1 Semantic skill alignment<a hidden class=anchor aria-hidden=true href=#51-semantic-skill-alignment>#</a></h3><p>AtomSkill 的关键判断是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>机器人动作片段虽然看起来不一样，但语义上可能是同一个技能。
+</span></span><span style=display:flex><span>如果只按动作轨迹聚类，skill token 会很碎、很难复用。
+</span></span></code></pre></div><p>例子：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>grasp cup
+</span></span><span style=display:flex><span>grasp pen
+</span></span><span style=display:flex><span>grasp flower
+</span></span></code></pre></div><p>低层轨迹不同，但语义都是 <code>grasp</code>。AtomSkill 用 supervised contrastive learning 让同语义技能靠近。</p><p>对本方案的轻量转化：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>h_segment = pool(action_expert_hidden over a skill segment)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>positive:
+</span></span><span style=display:flex><span>  same current_skill across different tasks
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>negative:
+</span></span><span style=display:flex><span>  different current_skill
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>L_skill_align:
+</span></span><span style=display:flex><span>  supervised contrastive loss
+</span></span></code></pre></div><p>注意：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>skill embedding e_skill 是输入条件向量；
+</span></span><span style=display:flex><span>h_segment 是模型处理真实 observation/action segment 后产生的内部动作表示。
+</span></span></code></pre></div><p>二者不同：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>e_skill:
+</span></span><span style=display:flex><span>  skill.current_id -&gt; Embedding table
+</span></span><span style=display:flex><span>  用来告诉模型当前执行哪个 skill
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>h_segment:
+</span></span><span style=display:flex><span>  VLA/action expert 在一段 skill trajectory 上产生的 hidden representation
+</span></span><span style=display:flex><span>  用于 semantic alignment
+</span></span></code></pre></div><p>推荐第一版做：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>L_align = SupCon(h_segment, skill.current_id)
+</span></span></code></pre></div><p>可选增强：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>L_match = contrast(h_segment, e_skill)
+</span></span></code></pre></div><h3 id=52-keypose-imagination>5.2 Keypose imagination<a hidden class=anchor aria-hidden=true href=#52-keypose-imagination>#</a></h3><p>AtomSkill 不用 binary done head，而是预测当前 skill 的 terminal keypose：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>keypose_pred = KeyposeHead(h_action, e_skill)
+</span></span></code></pre></div><p>推理时：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>当当前/预测动作足够接近 predicted keypose
+</span></span><span style=display:flex><span>触发下一 skill
+</span></span></code></pre></div><p>这给本方案一个比纯 done head 更结构化的增强：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>p_done = DoneHead(...)
+</span></span><span style=display:flex><span>keypose_pred = KeyposeHead(...)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>switch if:
+</span></span><span style=display:flex><span>  p_done high
+</span></span><span style=display:flex><span>  and action/keypose distance small
+</span></span></code></pre></div><p>优点：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>done head 是二分类，容易受边界标注噪声影响；
+</span></span><span style=display:flex><span>keypose 是连续目标，更适合空间定位和物理解释；
+</span></span><span style=display:flex><span>对于 place / insert / open / close 尤其有帮助。
+</span></span></code></pre></div><p>第一版可做：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>L = L_action
+</span></span><span style=display:flex><span>  + λ_done L_done
+</span></span><span style=display:flex><span>  + λ_keypose L_keypose
+</span></span><span style=display:flex><span>  + λ_align L_skill_align
+</span></span></code></pre></div><p>如果实现压力大，<code>L_keypose</code> 和 <code>L_align</code> 可以作为 ablation 或增强版。</p><h2 id=6-最终推荐模块设计>6. 最终推荐模块设计<a hidden class=anchor aria-hidden=true href=#6-最终推荐模块设计>#</a></h2><p>以 pi0.5 / openpi 为例，基础数据流：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>image observations
+</span></span><span style=display:flex><span>+ proprio/state
+</span></span><span style=display:flex><span>+ language instruction
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>VLM backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>condition hidden h
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>flow-matching action expert
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>action chunk
+</span></span></code></pre></div><p>本方案不破坏主链路，增加四类模块：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. Skill/Plan Input Adapter
+</span></span><span style=display:flex><span>2. Skill Embedding Module
+</span></span><span style=display:flex><span>3. Completion / Progress / Keypose Head
+</span></span><span style=display:flex><span>4. Skill-Conditioned Action Adapter
+</span></span></code></pre></div><h2 id=7-模块-1skillplan-input-adapter>7. 模块 1：Skill/Plan Input Adapter<a hidden class=anchor aria-hidden=true href=#7-模块-1skillplan-input-adapter>#</a></h2><p>作用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>把 LeRobot 中的 skill metadata 转成 VLA 可用的 prompt 和结构化 id。
+</span></span></code></pre></div><p>输入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>observation.images.*
+</span></span><span style=display:flex><span>observation.state
+</span></span><span style=display:flex><span>action
+</span></span><span style=display:flex><span>task.instruction
+</span></span><span style=display:flex><span>task.skill_sequence
+</span></span><span style=display:flex><span>skill.current_id
+</span></span><span style=display:flex><span>skill.phase_id
+</span></span><span style=display:flex><span>skill.done 或 skill.continue
+</span></span><span style=display:flex><span>skill.progress optional
+</span></span><span style=display:flex><span>skill.keypose optional
+</span></span><span style=display:flex><span>object.active_name optional
+</span></span><span style=display:flex><span>object.target_name optional
+</span></span></code></pre></div><p>输出：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. prompt text
+</span></span><span style=display:flex><span>2. structured skill ids
+</span></span></code></pre></div><p>prompt 示例：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Task: put the red block into the box and close it.
+</span></span><span style=display:flex><span>Plan: open -&gt; grasp -&gt; insert -&gt; close.
+</span></span><span style=display:flex><span>Current skill: grasp.
+</span></span><span style=display:flex><span>Phase: approach.
+</span></span><span style=display:flex><span>Active object: red block.
+</span></span><span style=display:flex><span>Target: box.
+</span></span></code></pre></div><p>接入位置：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>LeRobot sample
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>Skill/Plan Input Adapter
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>pi0.5/openpi 原始输入格式
+</span></span></code></pre></div><h2 id=8-模块-2skill-embedding-module>8. 模块 2：Skill Embedding Module<a hidden class=anchor aria-hidden=true href=#8-模块-2skill-embedding-module>#</a></h2><p>作用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>把离散 skill id / phase id / plan id 变成连续向量，作为 action expert 和 completion head 的条件变量。
+</span></span></code></pre></div><p>输入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>skill.current_id
+</span></span><span style=display:flex><span>skill.phase_id
+</span></span><span style=display:flex><span>task.skill_sequence
+</span></span></code></pre></div><p>输出：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>e_skill ∈ R^d
+</span></span><span style=display:flex><span>e_phase ∈ R^d
+</span></span><span style=display:flex><span>e_plan ∈ R^d optional
+</span></span></code></pre></div><p>接入方式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>h_skill = h + W_skill e_skill
+</span></span></code></pre></div><p>或：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>gamma, beta = MLP(e_skill)
+</span></span><span style=display:flex><span>h_skill = gamma * h + beta
+</span></span></code></pre></div><p>它不替代 VLM，也不替代 action expert，只提供“当前执行哪个原子技能”的控制信号。</p><h2 id=9-模块-3completion--progress--keypose-head>9. 模块 3：Completion / Progress / Keypose Head<a hidden class=anchor aria-hidden=true href=#9-模块-3completion--progress--keypose-head>#</a></h2><h3 id=91-输入来源选择>9.1 输入来源选择<a hidden class=anchor aria-hidden=true href=#91-输入来源选择>#</a></h3><p>对“是否完成”的判断，最推荐从 action expert hidden 引出，而不是只用 VLM hidden。</p><p>原因：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>skill completion 既依赖语义状态变化，
+</span></span><span style=display:flex><span>也依赖低层控制进度。
+</span></span></code></pre></div><p>输入优先级：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>首选:
+</span></span><span style=display:flex><span>  action expert hidden feature
+</span></span><span style=display:flex><span>  + current skill embedding
+</span></span><span style=display:flex><span>  + proprio / gripper state
+</span></span><span style=display:flex><span>  + recent action history
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>增强:
+</span></span><span style=display:flex><span>  + pooled VLM hidden
+</span></span><span style=display:flex><span>  + phase embedding
+</span></span><span style=display:flex><span>  + object/target features
+</span></span></code></pre></div><p>推荐主方法：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Hybrid-Done:
+</span></span><span style=display:flex><span>  VLM semantic context
+</span></span><span style=display:flex><span>  + action-expert control features
+</span></span><span style=display:flex><span>  + skill embedding
+</span></span><span style=display:flex><span>  + proprio/history
+</span></span></code></pre></div><p>结构：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>observation + instruction + current_skill
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>VLM backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>h_vlm ─────────────┐
+</span></span><span style=display:flex><span>                   ↓
+</span></span><span style=display:flex><span>             Completion Head → p_done / progress / keypose
+</span></span><span style=display:flex><span>                   ↑
+</span></span><span style=display:flex><span>flow action expert ↓
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>h_action ──────────┘
+</span></span></code></pre></div><h3 id=92-输出>9.2 输出<a hidden class=anchor aria-hidden=true href=#92-输出>#</a></h3><p>最小版：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>p_done(current_skill) ∈ [0, 1]
+</span></span></code></pre></div><p>SeqVLA 风格也可定义：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>p_continue = 1 表示继续
+</span></span><span style=display:flex><span>p_continue = 0 表示完成
+</span></span></code></pre></div><p>推荐扩展：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>progress ∈ [0, 1]
+</span></span><span style=display:flex><span>keypose_pred
+</span></span></code></pre></div><p>切换逻辑：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>if p_done &gt; threshold for M consecutive chunks:
+</span></span><span style=display:flex><span>    current_skill = next_skill_in_plan
+</span></span></code></pre></div><p>增强版：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>if p_done &gt; threshold
+</span></span><span style=display:flex><span>and ||predicted_next_action - predicted_keypose|| &lt; δ:
+</span></span><span style=display:flex><span>    current_skill = next_skill_in_plan
+</span></span></code></pre></div><h3 id=93-loss>9.3 Loss<a hidden class=anchor aria-hidden=true href=#93-loss>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>L_done = BCE(p_done, skill.done)
+</span></span><span style=display:flex><span>L_progress = MSE(progress, progress_gt)
+</span></span><span style=display:flex><span>L_keypose = L1(keypose_pred, keypose_gt)
+</span></span></code></pre></div><p>推荐联合训练：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>L_total = L_action
+</span></span><span style=display:flex><span>  + λ_done L_done
+</span></span><span style=display:flex><span>  + λ_progress L_progress
+</span></span><span style=display:flex><span>  + λ_keypose L_keypose
+</span></span><span style=display:flex><span>  + λ_align L_skill_align
+</span></span></code></pre></div><p>SeqVLA 表明 action 和 completion 联合训练比先后训练更好，因此不建议第一版把 adapter 和 completion 完全分开训。</p><h2 id=10-模块-4skill-conditioned-action-adapter>10. 模块 4：Skill-Conditioned Action Adapter<a hidden class=anchor aria-hidden=true href=#10-模块-4skill-conditioned-action-adapter>#</a></h2><p>作用：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>让一个共享 action expert 在不同原子技能下表现出不同动作偏置。
+</span></span></code></pre></div><p>基本形式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>base action expert
+</span></span><span style=display:flex><span>+ grasp adapter
+</span></span><span style=display:flex><span>+ place adapter
+</span></span><span style=display:flex><span>+ insert adapter
+</span></span><span style=display:flex><span>+ open adapter
+</span></span><span style=display:flex><span>...
+</span></span></code></pre></div><p>当前执行什么 skill，就激活对应 adapter。</p><h3 id=101-hidden-residual-形式>10.1 Hidden residual 形式<a hidden class=anchor aria-hidden=true href=#101-hidden-residual-形式>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>h = VLA_backbone(obs, lang)
+</span></span><span style=display:flex><span>Δh = Adapter_skill(h)
+</span></span><span style=display:flex><span>h&#39; = h + Δh
+</span></span><span style=display:flex><span>v_t = ActionExpert(z_t, t, h&#39;)
+</span></span></code></pre></div><h3 id=102-flow-residual-形式>10.2 Flow residual 形式<a hidden class=anchor aria-hidden=true href=#102-flow-residual-形式>#</a></h3><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>v_base = ActionExpert_base(z_t, t, h)
+</span></span><span style=display:flex><span>Δv = Adapter_skill(z_t, t, h, e_skill)
+</span></span><span style=display:flex><span>v = v_base + Δv
+</span></span></code></pre></div><p>这个形式最贴近 pi0.5 / Wall-OSS-0.5 的 flow matching action head。</p><h3 id=103-lora-形式>10.3 LoRA 形式<a hidden class=anchor aria-hidden=true href=#103-lora-形式>#</a></h3><p>对 action expert 内部线性层加 skill-specific LoRA：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>W&#39; = W + B_skill A_skill
+</span></span></code></pre></div><p>当前 skill 是 grasp：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>activate LoRA_grasp
+</span></span></code></pre></div><p>当前 skill 是 insert：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>activate LoRA_insert
+</span></span></code></pre></div><p>推荐优先级：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>第一优先：flow matching action expert 内部 FFN / projection LoRA
+</span></span><span style=display:flex><span>第二优先：action expert 输出层 LoRA
+</span></span><span style=display:flex><span>第三优先：VLM-to-action condition projector LoRA
+</span></span><span style=display:flex><span>不建议第一版：大范围 VLM backbone LoRA
+</span></span></code></pre></div><h2 id=11-完整前向流程>11. 完整前向流程<a hidden class=anchor aria-hidden=true href=#11-完整前向流程>#</a></h2><p>训练时：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>LeRobot sample
+</span></span><span style=display:flex><span>  images, state, instruction
+</span></span><span style=display:flex><span>  skill_sequence, current_skill, phase, done, progress/keypose optional
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>Skill/Plan Input Adapter
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>prompt + skill ids
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>VLA backbone
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>h_vlm
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>Skill Embedding
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>h_skill
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>flow-matching action expert
+</span></span><span style=display:flex><span>        ↓
+</span></span><span style=display:flex><span>h_action
+</span></span><span style=display:flex><span>        ├── selected skill LoRA / adapter -&gt; action chunk
+</span></span><span style=display:flex><span>        ├── completion/progress head -&gt; p_done / progress
+</span></span><span style=display:flex><span>        └── keypose head optional -&gt; keypose_pred
+</span></span></code></pre></div><p>推理时：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>instruction: put red block into box and close it
+</span></span><span style=display:flex><span>skill plan: [open, grasp, insert, close]
+</span></span><span style=display:flex><span>current_skill = open
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>while not task done:
+</span></span><span style=display:flex><span>    obs = robot.get_obs()
+</span></span><span style=display:flex><span>    h_vlm, h_action = VLA(obs, instruction, plan, current_skill)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    p_done, progress, keypose = completion_module(h_vlm, h_action, current_skill)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    if switch_condition_met:
+</span></span><span style=display:flex><span>        current_skill = next(plan)
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>    activate Adapter[current_skill]
+</span></span><span style=display:flex><span>    action = flow_action_expert(...)
+</span></span><span style=display:flex><span>    robot.step(action)
+</span></span></code></pre></div><h2 id=12-数据采集与训练数据结构>12. 数据采集与训练数据结构<a hidden class=anchor aria-hidden=true href=#12-数据采集与训练数据结构>#</a></h2><p>训练数据不应只采单个原子任务，也不应只采完整长程任务。建议：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>训练数据 = 原子技能 episode + 已见组合 episode + transition/boundary samples
+</span></span><span style=display:flex><span>测试数据 = 未见组合 episode
+</span></span></code></pre></div><p>原因：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>原子数据:
+</span></span><span style=display:flex><span>  教会每个 skill 怎么做。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>已见组合数据:
+</span></span><span style=display:flex><span>  教会技能之间的状态衔接、切换边界和长程状态分布。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>transition/boundary 数据:
+</span></span><span style=display:flex><span>  强化 done/progress/keypose head 对边界附近状态的判断。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>未见组合数据:
+</span></span><span style=display:flex><span>  只用于测试组合泛化。
+</span></span></code></pre></div><p>1k demos 推荐分配：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>400 条：单个原子技能
+</span></span><span style=display:flex><span>350 条：已见组合任务
+</span></span><span style=display:flex><span>100 条：关键 transition / boundary 强化
+</span></span><span style=display:flex><span>50 条：validation
+</span></span><span style=display:flex><span>100 条：held-out 未见组合测试
+</span></span></code></pre></div><p>LeRobot 最小字段：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>observation.images
+</span></span><span style=display:flex><span>observation.state
+</span></span><span style=display:flex><span>action
+</span></span><span style=display:flex><span>task.instruction
+</span></span><span style=display:flex><span>task.skill_sequence
+</span></span><span style=display:flex><span>skill.current_id
+</span></span><span style=display:flex><span>skill.segment_start
+</span></span><span style=display:flex><span>skill.segment_end
+</span></span><span style=display:flex><span>skill.done 或 skill.continue
+</span></span></code></pre></div><p>推荐增加：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>skill.phase_id
+</span></span><span style=display:flex><span>skill.progress
+</span></span><span style=display:flex><span>skill.keypose
+</span></span><span style=display:flex><span>object.active_name
+</span></span><span style=display:flex><span>object.target_name
+</span></span><span style=display:flex><span>object.active_bbox optional
+</span></span><span style=display:flex><span>object.target_bbox optional
+</span></span></code></pre></div><p>训练使用方式：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. 训练 skill adapter:
+</span></span><span style=display:flex><span>   atomic episode 和组合 episode 都按 skill boundary 切成 segment。
+</span></span><span style=display:flex><span>   每个 segment 带 current_skill。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. 训练 completion/progress/keypose:
+</span></span><span style=display:flex><span>   主要用完整组合 episode 和 boundary samples。
+</span></span><span style=display:flex><span>   强化快完成、刚完成、未完成、误完成状态。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>3. 训练 semantic alignment:
+</span></span><span style=display:flex><span>   对 action expert hidden 做 segment-level pooling。
+</span></span><span style=display:flex><span>   same skill across tasks 为 positive。
+</span></span></code></pre></div><h2 id=13-done-判断风险与解决>13. Done 判断风险与解决<a hidden class=anchor aria-hidden=true href=#13-done-判断风险与解决>#</a></h2><p>如果输入只有：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>总共有几个阶段
+</span></span><span style=display:flex><span>当前阶段 id
+</span></span></code></pre></div><p>模型不能可靠判断当前阶段是否完成。阶段 id 只能告诉它“现在应该做什么”，不能告诉它“是否已经做完”。</p><p>done/progress/head 必须看状态证据：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. 当前视觉 observation
+</span></span><span style=display:flex><span>2. proprio / gripper / ee pose
+</span></span><span style=display:flex><span>3. 当前 skill id
+</span></span><span style=display:flex><span>4. 最近若干帧历史
+</span></span><span style=display:flex><span>5. previous action chunk
+</span></span><span style=display:flex><span>6. active object / target object
+</span></span><span style=display:flex><span>7. object-target relation
+</span></span><span style=display:flex><span>8. action expert hidden feature
+</span></span></code></pre></div><p>推荐：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>if p_done &gt; 0.7 for 3 consecutive chunks:
+</span></span><span style=display:flex><span>    switch skill
+</span></span></code></pre></div><p>或者：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>if progress &gt; 0.9 for 3 consecutive chunks:
+</span></span><span style=display:flex><span>    switch skill
+</span></span></code></pre></div><p>如果加入 keypose：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>if p_done high and distance_to_keypose &lt; δ:
+</span></span><span style=display:flex><span>    switch skill
+</span></span></code></pre></div><p>可选外部安全机制：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>低频 VLM completion checker
+</span></span><span style=display:flex><span>简单规则 checker
+</span></span></code></pre></div><p>但主方法不要依赖慢速 VLM 每步判断。</p><h2 id=14-long-vla-与-phase-设计>14. Long-VLA 与 phase 设计<a hidden class=anchor aria-hidden=true href=#14-long-vla-与-phase-设计>#</a></h2><p>Long-VLA 的核心不是 skill adapter，而是 phase-aware input masking。它把长程任务拆成多个子任务，并把每个子任务拆成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>moving phase
+</span></span><span style=display:flex><span>interaction phase
+</span></span></code></pre></div><p>不同 phase 关注不同输入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>moving phase:
+</span></span><span style=display:flex><span>  关注目标位置、全局空间关系、移动路径
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>interaction phase:
+</span></span><span style=display:flex><span>  关注局部物体、夹爪、接触状态、当前操作目标
+</span></span></code></pre></div><p>对本方案的轻量借鉴：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>LeRobot 增加:
+</span></span><span style=display:flex><span>  skill.phase_id
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Prompt 增加:
+</span></span><span style=display:flex><span>  Current skill: grasp
+</span></span><span style=display:flex><span>  Phase: interaction
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Completion head 输入:
+</span></span><span style=display:flex><span>  h_context
+</span></span><span style=display:flex><span>  skill embedding
+</span></span><span style=display:flex><span>  phase embedding
+</span></span><span style=display:flex><span>  proprio
+</span></span><span style=display:flex><span>  recent action history
+</span></span></code></pre></div><p>一句话：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Long-VLA 解决“不同阶段该看什么”；
+</span></span><span style=display:flex><span>本方案解决“不同原子技能该用什么动作 adapter，以及什么时候切换”。
+</span></span></code></pre></div><h2 id=15-与-insight-的关系>15. 与 InSight 的关系<a hidden class=anchor aria-hidden=true href=#15-与-insight-的关系>#</a></h2><p>InSight: Self-Guided Skill Acquisition via Steerable VLAs 进一步做的是：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>VLM 发现 primitive gap
+</span></span><span style=display:flex><span>机器人自主尝试 rollout
+</span></span><span style=display:flex><span>VLM oracle 检查成功
+</span></span><span style=display:flex><span>成功 rollout 加回训练集
+</span></span><span style=display:flex><span>重新 fine-tune VLA
+</span></span></code></pre></div><p>它的重点是 autonomous skill acquisition，而本方案重点是 known atomic skills 的 held-out recombination。</p><p>可借鉴：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. primitive-level steerability
+</span></span><span style=display:flex><span>2. automatic primitive segmentation
+</span></span><span style=display:flex><span>3. progress channel
+</span></span><span style=display:flex><span>4. VLM completion check
+</span></span><span style=display:flex><span>5. successful rollout -&gt; retraining data flywheel
+</span></span></code></pre></div><p>不建议第一版完整照搬：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>自主找 primitive gap
+</span></span><span style=display:flex><span>自动试错采新技能
+</span></span><span style=display:flex><span>VLM oracle 验收
+</span></span><span style=display:flex><span>反复 retrain
+</span></span></code></pre></div><p>因为真机安全和工程复杂度较高。</p><h2 id=16-最小可实现版本>16. 最小可实现版本<a hidden class=anchor aria-hidden=true href=#16-最小可实现版本>#</a></h2><p>第一版建议：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. LeRobot 增加:
+</span></span><span style=display:flex><span>   skill.current_id
+</span></span><span style=display:flex><span>   skill.phase_id
+</span></span><span style=display:flex><span>   skill.done / skill.continue
+</span></span><span style=display:flex><span>   task.skill_sequence
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. Prompt 增加:
+</span></span><span style=display:flex><span>   Plan / Current skill / Phase
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>3. VLA action expert 加:
+</span></span><span style=display:flex><span>   per-skill LoRA adapter
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>4. action expert hidden 后加:
+</span></span><span style=display:flex><span>   completion/progress head
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>5. 推理:
+</span></span><span style=display:flex><span>   给定 skill plan
+</span></span><span style=display:flex><span>   completion/progress 判断切换
+</span></span><span style=display:flex><span>   current_skill 决定激活哪个 adapter
+</span></span></code></pre></div><p>不建议第一版加入：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>复杂 scene graph
+</span></span><span style=display:flex><span>完整 planner
+</span></span><span style=display:flex><span>自由预测 next skill
+</span></span><span style=display:flex><span>大范围 VLM backbone finetune
+</span></span><span style=display:flex><span>复杂 soft MoE
+</span></span><span style=display:flex><span>skill diffusion sampler
+</span></span><span style=display:flex><span>完整 VQ-VAE skill codebook
+</span></span></code></pre></div><h2 id=17-增强版本>17. 增强版本<a hidden class=anchor aria-hidden=true href=#17-增强版本>#</a></h2><p>在最小版本跑通后，按优先级增加：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. Keypose head
+</span></span><span style=display:flex><span>   从 skill segment 最后一帧提取 keypose label。
+</span></span><span style=display:flex><span>   用 keypose 辅助切换。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>2. Semantic skill alignment
+</span></span><span style=display:flex><span>   对 h_segment 做 supervised contrastive loss。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>3. Object-centric input
+</span></span><span style=display:flex><span>   加 active object / target object / bbox / crop。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>4. Adapter fusion
+</span></span><span style=display:flex><span>   在 skill transition 附近融合前后两个 adapters。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>5. VLM completion checker
+</span></span><span style=display:flex><span>   只在不确定或 OOD 状态下低频调用。
+</span></span></code></pre></div><h2 id=18-推荐实验对照>18. 推荐实验对照<a hidden class=anchor aria-hidden=true href=#18-推荐实验对照>#</a></h2><p>必须比较：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>1. Direct VLA fine-tuning
+</span></span><span style=display:flex><span>2. Skill-token only
+</span></span><span style=display:flex><span>3. Shared LoRA + skill embedding
+</span></span><span style=display:flex><span>4. Per-skill LoRA with oracle skill boundary
+</span></span><span style=display:flex><span>5. Per-skill LoRA + learned completion/progress head
+</span></span></code></pre></div><p>增强 ablation：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>6. + keypose head
+</span></span><span style=display:flex><span>7. + semantic skill alignment
+</span></span><span style=display:flex><span>8. + object/phase-conditioned completion head
+</span></span><span style=display:flex><span>9. + adapter fusion at skill transitions
+</span></span><span style=display:flex><span>10. VLM hidden only vs action hidden only vs hybrid done head
+</span></span></code></pre></div><p>其中 done head 输入来源建议作为重点 ablation：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>VLM-Done:
+</span></span><span style=display:flex><span>  只用 VLM hidden
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Action-Done:
+</span></span><span style=display:flex><span>  只用 action expert hidden
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Hybrid-Done:
+</span></span><span style=display:flex><span>  VLM hidden + action expert hidden + skill/proprio/history
+</span></span></code></pre></div><p>主方法推荐：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Hybrid-Done
+</span></span></code></pre></div><h2 id=19-推荐指标>19. 推荐指标<a hidden class=anchor aria-hidden=true href=#19-推荐指标>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Atomic Success Rate
+</span></span><span style=display:flex><span>Seen Composition Success Rate
+</span></span><span style=display:flex><span>Held-out Composition Success Rate
+</span></span><span style=display:flex><span>Composition Gap
+</span></span><span style=display:flex><span>Completed Prefix Length
+</span></span><span style=display:flex><span>Done Prediction F1
+</span></span><span style=display:flex><span>Progress MAE
+</span></span><span style=display:flex><span>Keypose Error
+</span></span><span style=display:flex><span>Skill Transition Accuracy
+</span></span><span style=display:flex><span>Failure Position Distribution
+</span></span><span style=display:flex><span>Compositional Failure Share
+</span></span><span style=display:flex><span>Atomic Score
+</span></span><span style=display:flex><span>Average Task Progress
+</span></span></code></pre></div><p>失败类型建议人工或半自动标注：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>manipulation failure
+</span></span><span style=display:flex><span>transition failure
+</span></span><span style=display:flex><span>wrong-order failure
+</span></span><span style=display:flex><span>repeat-subtask failure
+</span></span><span style=display:flex><span>premature-switch failure
+</span></span><span style=display:flex><span>late-switch failure
+</span></span><span style=display:flex><span>object selection failure
+</span></span><span style=display:flex><span>timeout / safety abort
+</span></span></code></pre></div><h2 id=20-novelty-边界>20. Novelty 边界<a hidden class=anchor aria-hidden=true href=#20-novelty-边界>#</a></h2><p>已经有人做过的点：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>done/completion head:
+</span></span><span style=display:flex><span>  SeqVLA 已经做过。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>skill-guided expert:
+</span></span><span style=display:flex><span>  AtomicVLA 已经做过重架构版本。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>semantic skill library:
+</span></span><span style=display:flex><span>  AtomSkill 已经做过 VQ + contrastive skill alignment。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>keypose-based skill transition:
+</span></span><span style=display:flex><span>  AtomSkill 已经做过 keypose imagination。
+</span></span></code></pre></div><p>因此不能写成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>首次提出 done head
+</span></span><span style=display:flex><span>首次提出原子技能专家
+</span></span><span style=display:flex><span>首次提出 keypose
+</span></span></code></pre></div><p>应该写成：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>我们提出一个面向开源 VLM + flow-matching VLA 的 plug-and-play skill composition layer，
+</span></span><span style=display:flex><span>把 completion-aware switching、skill-conditioned action adapters、可选 keypose/progress/semantic alignment 组合起来，
+</span></span><span style=display:flex><span>在少量真机数据下提升 known atomic skills 的 held-out long-horizon recombination。
+</span></span></code></pre></div><p>建议英文表述：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>SeqVLA demonstrates that completion-aware switching is crucial for long-horizon VLA execution. Building on this insight, we study a different problem: whether pretrained VLAs can recombine known atomic skills under unseen long-horizon compositions. To this end, we couple completion-aware switching with skill-conditioned action adapters attached to the flow-matching action expert, enabling plug-and-play compositional adaptation without redesigning the VLA backbone.
+</span></span></code></pre></div><p>再加上 AtomSkill：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Inspired by semantic skill alignment and keypose imagination in AtomSkill, we further regularize action-expert segment representations by skill labels and optionally predict skill terminal keyposes, while avoiding the need to train a full VQ skill codebook or diffusion skill sampler.
+</span></span></code></pre></div><h2 id=21-推荐论文故事线>21. 推荐论文故事线<a hidden class=anchor aria-hidden=true href=#21-推荐论文故事线>#</a></h2><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>直接微调 VLA:
+</span></span><span style=display:flex><span>  可以学会 seen long-horizon tasks，
+</span></span><span style=display:flex><span>  但 held-out skill recombination 掉点明显。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Skill token:
+</span></span><span style=display:flex><span>  告诉模型当前技能，有帮助但不稳定。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Per-skill action adapter:
+</span></span><span style=display:flex><span>  降低不同技能之间的动作干扰。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Completion/progress head:
+</span></span><span style=display:flex><span>  让模型能基于多模态状态判断技能完成，并按 plan 切换。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Keypose/semantic alignment:
+</span></span><span style=display:flex><span>  进一步让切换更物理可解释，让 skill hidden 更语义一致。
+</span></span><span style=display:flex><span>
+</span></span><span style=display:flex><span>Plug-and-play:
+</span></span><span style=display:flex><span>  模块主要挂在 action expert/action head，
+</span></span><span style=display:flex><span>  可迁移到 pi0.5、Wall-OSS-0.5、OpenVLA-OFT。
+</span></span></code></pre></div><p>最小故事：</p><div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-text data-lang=text><span style=display:flex><span>Direct VLA fine-tuning learns seen compositions but fails to recombine known atomic skills.
+</span></span><span style=display:flex><span>Skill-conditioned adapters reduce skill interference.
+</span></span><span style=display:flex><span>Completion-aware switching enables plan-conditioned long-horizon execution.
+</span></span><span style=display:flex><span>Keypose/progress and semantic alignment further improve robust transitions and held-out composition.
+</span></span></code></pre></div></div><hr style="margin:1rem 0;opacity:.2"><div style=text-align:center;margin-bottom:10px><a href=/guestbook/ target=_blank rel="noopener noreferrer" style=font-size:14px;text-decoration:none;color:var(--secondary)>内容有误？点这里反馈!</a></div><footer class=post-footer><ul class=share-buttons><li><a target=_blank rel="noopener noreferrer" aria-label="share  on x" href="https://x.com/intent/tweet/?text=&amp;url=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f&amp;hashtags="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446C483.971.0 512 28.03 512 62.554zM269.951 190.75 182.567 75.216H56L207.216 272.95 63.9 436.783h61.366L235.9 310.383l96.667 126.4H456L298.367 228.367l134-153.151H371.033zM127.633 110h36.468l219.38 290.065H349.5z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on linkedin" href="https://www.linkedin.com/shareArticle?mini=true&amp;url=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f&amp;title=&amp;summary=&amp;source=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM160.461 423.278V197.561h-75.04v225.717h75.04zm270.539.0V293.839c0-69.333-37.018-101.586-86.381-101.586-39.804.0-57.634 21.891-67.617 37.266v-31.958h-75.021c.995 21.181.0 225.717.0 225.717h75.02V297.222c0-6.748.486-13.492 2.474-18.315 5.414-13.475 17.767-27.434 38.494-27.434 27.135.0 38.007 20.707 38.007 51.037v120.768H431zM123.448 88.722C97.774 88.722 81 105.601 81 127.724c0 21.658 16.264 39.002 41.455 39.002h.484c26.165.0 42.452-17.344 42.452-39.002-.485-22.092-16.241-38.954-41.943-39.002z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on reddit" href="https://reddit.com/submit?url=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f&title="><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zM446 265.638c0-22.964-18.616-41.58-41.58-41.58-11.211.0-21.361 4.457-28.841 11.666-28.424-20.508-67.586-33.757-111.204-35.278l18.941-89.121 61.884 13.157c.756 15.734 13.642 28.29 29.56 28.29 16.407.0 29.706-13.299 29.706-29.701.0-16.403-13.299-29.702-29.706-29.702-11.666.0-21.657 6.792-26.515 16.578l-69.105-14.69c-1.922-.418-3.939-.042-5.585 1.036-1.658 1.073-2.811 2.761-3.224 4.686l-21.152 99.438c-44.258 1.228-84.046 14.494-112.837 35.232-7.468-7.164-17.589-11.591-28.757-11.591-22.965.0-41.585 18.616-41.585 41.58.0 16.896 10.095 31.41 24.568 37.918-.639 4.135-.99 8.328-.99 12.576.0 63.977 74.469 115.836 166.33 115.836s166.334-51.859 166.334-115.836c0-4.218-.347-8.387-.977-12.493 14.564-6.47 24.735-21.034 24.735-38.001zM326.526 373.831c-20.27 20.241-59.115 21.816-70.534 21.816-11.428.0-50.277-1.575-70.522-21.82-3.007-3.008-3.007-7.882.0-10.889 3.003-2.999 7.882-3.003 10.885.0 12.777 12.781 40.11 17.317 59.637 17.317 19.522.0 46.86-4.536 59.657-17.321 3.016-2.999 7.886-2.995 10.885.008 3.008 3.011 3.003 7.882-.008 10.889zm-5.23-48.781c-16.373.0-29.701-13.324-29.701-29.698.0-16.381 13.328-29.714 29.701-29.714 16.378.0 29.706 13.333 29.706 29.714.0 16.374-13.328 29.698-29.706 29.698zM160.91 295.348c0-16.381 13.328-29.71 29.714-29.71 16.369.0 29.689 13.329 29.689 29.71.0 16.373-13.32 29.693-29.689 29.693-16.386.0-29.714-13.32-29.714-29.693z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on facebook" href="https://facebook.com/sharer/sharer.php?u=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H342.978V319.085h66.6l12.672-82.621h-79.272v-53.617c0-22.603 11.073-44.636 46.58-44.636H425.6v-70.34s-32.71-5.582-63.982-5.582c-65.288.0-107.96 39.569-107.96 111.204v62.971h-72.573v82.621h72.573V512h-191.104c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on whatsapp" href="https://api.whatsapp.com/send?text=%20-%20https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f"><svg viewBox="0 0 512 512" height="30" width="30" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554v386.892C512 483.97 483.97 512 449.446 512H62.554c-34.524.0-62.554-28.03-62.554-62.554V62.554c0-34.524 28.029-62.554 62.554-62.554h386.892zm-58.673 127.703c-33.842-33.881-78.847-52.548-126.798-52.568-98.799.0-179.21 80.405-179.249 179.234-.013 31.593 8.241 62.428 23.927 89.612l-25.429 92.884 95.021-24.925c26.181 14.28 55.659 21.807 85.658 21.816h.074c98.789.0 179.206-80.413 179.247-179.243.018-47.895-18.61-92.93-52.451-126.81zM263.976 403.485h-.06c-26.734-.01-52.954-7.193-75.828-20.767l-5.441-3.229-56.386 14.792 15.05-54.977-3.542-5.637c-14.913-23.72-22.791-51.136-22.779-79.287.033-82.142 66.867-148.971 149.046-148.971 39.793.014 77.199 15.531 105.329 43.692 28.128 28.16 43.609 65.592 43.594 105.4-.034 82.149-66.866 148.983-148.983 148.984zm81.721-111.581c-4.479-2.242-26.499-13.075-30.604-14.571-4.105-1.495-7.091-2.241-10.077 2.241-2.986 4.483-11.569 14.572-14.182 17.562-2.612 2.988-5.225 3.364-9.703 1.12-4.479-2.241-18.91-6.97-36.017-22.23C231.8 264.15 222.81 249.484 220.198 245s-.279-6.908 1.963-9.14c2.016-2.007 4.48-5.232 6.719-7.847 2.24-2.615 2.986-4.484 4.479-7.472 1.493-2.99.747-5.604-.374-7.846-1.119-2.241-10.077-24.288-13.809-33.256-3.635-8.733-7.327-7.55-10.077-7.688-2.609-.13-5.598-.158-8.583-.158-2.986.0-7.839 1.121-11.944 5.604-4.105 4.484-15.675 15.32-15.675 37.364.0 22.046 16.048 43.342 18.287 46.332 2.24 2.99 31.582 48.227 76.511 67.627 10.685 4.615 19.028 7.371 25.533 9.434 10.728 3.41 20.492 2.929 28.209 1.775 8.605-1.285 26.499-10.833 30.231-21.295 3.732-10.464 3.732-19.431 2.612-21.298-1.119-1.869-4.105-2.99-8.583-5.232z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on telegram" href="https://telegram.me/share/url?text=&amp;url=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f"><svg viewBox="2 2 28 28" height="30" width="30" fill="currentColor"><path d="M26.49 29.86H5.5a3.37 3.37.0 01-2.47-1 3.35 3.35.0 01-1-2.47V5.48A3.36 3.36.0 013 3 3.37 3.37.0 015.5 2h21A3.38 3.38.0 0129 3a3.36 3.36.0 011 2.46V26.37a3.35 3.35.0 01-1 2.47 3.38 3.38.0 01-2.51 1.02zm-5.38-6.71a.79.79.0 00.85-.66L24.73 9.24a.55.55.0 00-.18-.46.62.62.0 00-.41-.17q-.08.0-16.53 6.11a.59.59.0 00-.41.59.57.57.0 00.43.52l4 1.24 1.61 4.83a.62.62.0 00.63.43.56.56.0 00.4-.17L16.54 20l4.09 3A.9.9.0 0021.11 23.15zM13.8 20.71l-1.21-4q8.72-5.55 8.78-5.55c.15.0.23.0.23.16a.18.18.0 010 .06s-2.51 2.3-7.52 6.8z"/></svg></a></li><li><a target=_blank rel="noopener noreferrer" aria-label="share  on ycombinator" href="https://news.ycombinator.com/submitlink?t=&u=https%3a%2f%2fwww.z2x-blog.top%2facademic%2fplug_and_play_skill_composition_integrated_notes%2f"><svg width="30" height="30" viewBox="0 0 512 512" fill="currentColor"><path d="M449.446.0C483.971.0 512 28.03 512 62.554V449.446C512 483.97 483.97 512 449.446 512H62.554C28.03 512 0 483.97.0 449.446V62.554C0 28.03 28.029.0 62.554.0H449.446zM183.8767 87.9921h-62.034L230.6673 292.4508V424.0079h50.6655V292.4508L390.1575 87.9921H328.1233L256 238.2489z"/></svg></a></li></ul></footer><script src=https://giscus.app/client.js data-repo=Allen-cubber/zzx data-repo-id=R_kgDOPjPlHQ data-category=Announcements data-category-id=DIC_kwDOPjPlHc4Culsd data-mapping=pathname data-strict=0 data-reactions-enabled=1 data-emit-metadata=0 data-input-position=bottom data-theme=preferred_color_scheme data-lang=zh-CN crossorigin=anonymous async></script></article></main><footer class=footer><span>&copy; 2026 <a href=https://www.z2x-blog.top/>Z2X BLOG</a></span> ·
+<span>Powered by
+<a href=https://gohugo.io/ rel="noopener noreferrer" target=_blank>Hugo</a> &
+<a href=https://github.com/adityatelange/hugo-PaperMod/ rel=noopener target=_blank>PaperMod</a></span></footer><a href=#top aria-label="go to top" title="Go to Top (Alt + G)" class=top-link id=top-link accesskey=g><span class=topInner><svg class="topSvg" viewBox="0 0 12 6" fill="currentColor"><path d="M12 6H0l6-6z"/></svg>
+<span id=read_progress></span>
+</span></a><script>document.addEventListener("scroll",function(){const t=document.getElementById("read_progress"),n=document.documentElement.scrollHeight,s=document.documentElement.clientHeight,o=document.documentElement.scrollTop||document.body.scrollTop;t.innerText=((o/(n-s)).toFixed(2)*100).toFixed(0)})</script><script>document.addEventListener("DOMContentLoaded",function(){const l=document.getElementById("view-toggle-button"),t=document.getElementById("view-options"),n=document.getElementById("post-list"),s=document.getElementById("sort-field"),o=document.getElementById("sort-direction"),e=document.getElementById("section-filter"),h=Array.from(document.querySelectorAll(".recent-filter-btn"));if(!l||!t||!n)return;l.addEventListener("click",function(e){e.stopPropagation(),t.classList.toggle("show")}),t.addEventListener("click",function(e){const n=e.target.closest("li");if(n&&n.dataset.view){const e=n.dataset.view;r(e),t.classList.remove("show")}}),document.addEventListener("click",function(){t.classList.contains("show")&&t.classList.remove("show")});function r(e){n.classList.remove("view-grid","view-list"),n.classList.add("view-"+e);const t=document.querySelector(".view-button .icon-grid"),s=document.querySelector(".view-button .icon-list");e==="grid"?(t.classList.add("active"),s.classList.remove("active")):(t.classList.remove("active"),s.classList.add("active")),localStorage.setItem("preferred-view",e)}const c=localStorage.getItem("preferred-view");if(r(c||"grid"),s&&o){const c="updates-sort-preference";function f(e,t){const s=Array.from(n.querySelectorAll(".archive-card")),i=t==="asc"?1:-1;s.sort(function(t,n){const s=Number(t.dataset[e])||0,o=Number(n.dataset[e])||0;return s===o?0:(s-o)*i});const o=document.createDocumentFragment();s.forEach(function(e){o.appendChild(e)}),n.appendChild(o)}function a(e,n){localStorage.setItem(c,JSON.stringify({field:e,direction:n,days:t.days,section:t.section}))}function p(){const e=localStorage.getItem(c);if(!e)return{field:"lastmod",direction:"desc",days:"all",section:"all"};try{const t=JSON.parse(e),n=t.field==="date"?"date":"lastmod",s=t.direction==="asc"?"asc":"desc",o=d(t.days),i=u(t.section);return{field:n,direction:s,days:o,section:i}}catch{return{field:"lastmod",direction:"desc",days:"all",section:"all"}}}function d(e){return e==="7"||e==="30"||e==="90"?e:"all"}function u(t){if(!e||t==="all")return"all";const n=Array.from(e.options).some(function(e){return e.value===t});return n?t:"all"}function g(e){h.forEach(function(t){const n=t.dataset.days===e;t.classList.toggle("active",n),t.setAttribute("aria-pressed",n?"true":"false")})}function v(e,t,s){const o=Array.from(n.querySelectorAll(".archive-card")),i=Math.floor(Date.now()/1e3)-Number(t)*86400;o.forEach(function(n){const o=Number(n.dataset[e])||0,a=s==="all"||n.dataset.section===s,r=t==="all"||o>=i;n.style.display=a&&r?"":"none"})}function i(){f(t.field,t.direction),v(t.field,t.days,t.section),g(t.days),e&&(e.value=t.section)}function m(){t.field=s.value,t.direction=o.value,i(),a(t.field,t.direction)}const r=p(),t={field:r.field,direction:r.direction,days:r.days,section:r.section};s.value=t.field,o.value=t.direction,i(),s.addEventListener("change",m),o.addEventListener("change",m),e&&e.addEventListener("change",function(){t.section=u(e.value),i(),a(t.field,t.direction)}),h.forEach(function(e){e.addEventListener("click",function(){t.days=d(e.dataset.days),i(),a(t.field,t.direction)})})}})</script><script src=https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.min.js></script><script>if(document.getElementById("search-input")){console.log("Search script loading...");const t=document.getElementById("search-input"),e=document.getElementById("search-results");fetch("/index.json").then(e=>e.json()).then(n=>{console.log("JSON index loaded:",n.length,"pages");const s={isCaseSensitive:!1,includeScore:!0,shouldSort:!0,threshold:.4,minMatchCharLength:2,keys:["title","summary","content","tags"]},o=new Fuse(n,s);t.addEventListener("input",function(t){const n=t.target.value;if(n.length<2){e.innerHTML="";return}const s=o.search(n);displayResults(s)})}).catch(t=>{console.error("Error loading search index:",t),e.innerHTML="<p>无法加载搜索索引，请稍后重试。</p>"});function displayResults(t){if(e.innerHTML="",t.length===0){e.innerHTML="<p>没有找到相关内容。</p>";return}t.slice(0,20).forEach(t=>{const n=t.item,s=document.createElement("article");s.classList.add("search-result-item");let o=n.summary||n.content.substring(0,150)+"...";s.innerHTML=`
+                    <h3><a href="${n.permalink}">${n.title}</a></h3>
+                    <p>${o}</p>
+                `,e.appendChild(s)})}}</script><script>let menu=document.getElementById("menu");menu&&(menu.scrollLeft=localStorage.getItem("menu-scroll-position"),menu.onscroll=function(){localStorage.setItem("menu-scroll-position",menu.scrollLeft)}),document.querySelectorAll('a[href^="#"]').forEach(e=>{e.addEventListener("click",function(e){e.preventDefault();var t=this.getAttribute("href").substr(1);window.matchMedia("(prefers-reduced-motion: reduce)").matches?document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView():document.querySelector(`[id='${decodeURIComponent(t)}']`).scrollIntoView({behavior:"smooth"}),t==="top"?history.replaceState(null,null," "):history.pushState(null,null,`#${t}`)})})</script><script>var mybutton=document.getElementById("top-link");window.onscroll=function(){document.body.scrollTop>800||document.documentElement.scrollTop>800?(mybutton.style.visibility="visible",mybutton.style.opacity="1"):(mybutton.style.visibility="hidden",mybutton.style.opacity="0")}</script><script>document.getElementById("theme-toggle").addEventListener("click",()=>{document.body.className.includes("dark")?(document.body.classList.remove("dark"),localStorage.setItem("pref-theme","light")):(document.body.classList.add("dark"),localStorage.setItem("pref-theme","dark"))})</script><script>document.querySelectorAll("pre > code").forEach(e=>{const n=e.parentNode.parentNode,t=document.createElement("button");t.classList.add("copy-code"),t.innerHTML="复制";function s(){t.innerHTML="已复制！",setTimeout(()=>{t.innerHTML="复制"},2e3)}t.addEventListener("click",t=>{if("clipboard"in navigator){navigator.clipboard.writeText(e.textContent),s();return}const n=document.createRange();n.selectNodeContents(e);const o=window.getSelection();o.removeAllRanges(),o.addRange(n);try{document.execCommand("copy"),s()}catch{}o.removeRange(n)}),n.classList.contains("highlight")?n.appendChild(t):n.parentNode.firstChild==n||(e.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName=="TABLE"?e.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(t):e.parentNode.appendChild(t))})</script></body></html>
