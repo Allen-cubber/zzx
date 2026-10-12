@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "dc973c3f6a4f5d0d",
+        "id": "48be6feafae18d67",
         "type": "tabs",
         "children": [
           {
-            "id": "d3dbc982e94f7f7c",
+            "id": "b10800657a019673",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "academic/aspire/index.md",
+                "file": "notes/数字系统设计/6.第七章仿真/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,7 +41,9 @@
               "type": "file-explorer",
               "state": {
                 "sortOrder": "alphabetical",
-                "autoReveal": false
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
               },
               "icon": "lucide-folder-closed",
               "title": "文件列表"
@@ -94,13 +96,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "academic/aspire/index.md",
-                "followCursor": false,
+                "file": "notes/数字系统设计/6.第七章仿真/index.md",
+                "followCursor": true,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "index 的大纲"
+              "title": "大纲"
             }
           },
           {
@@ -147,6 +149,20 @@
             }
           },
           {
+            "id": "e2f453de77c2743f",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
             "id": "086c1321531600b1",
             "type": "leaf",
             "state": {
@@ -159,20 +175,6 @@
               },
               "icon": "lucide-tags",
               "title": "标签"
-            }
-          },
-          {
-            "id": "e2f453de77c2743f",
-            "type": "leaf",
-            "state": {
-              "type": "all-properties",
-              "state": {
-                "sortOrder": "frequency",
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-archive",
-              "title": "添加笔记属性"
             }
           }
         ]
@@ -193,14 +195,24 @@
       "realclaudian:Open Claudian": false
     }
   },
-  "active": "d3dbc982e94f7f7c",
+  "active": "b10800657a019673",
   "lastOpenFiles": [
-    "academic/aspire/Aspire.pdf",
-    "academic/aspire/3.png",
-    "academic/aspire/2.png",
-    "academic/aspire/1.png",
-    "academic/aspire/index.md",
+    "notes/数字系统设计/1.第二章EDA开发硬件与软件平台/index.md",
+    "notes/信息论与编码/1.信息论基础/index.md",
+    "notes/数字通信原理/4.第五章数字基带信号传输/index.md",
+    "notes/数字通信原理/3.第三章模拟信号的数字编码/index.md",
+    "notes/数字信号处理/4.离散时间系统的时域分析/index.md",
+    "notes/数字通信原理/2.第二章信号分析基础/index.md",
+    "notes/数字通信原理/1.第一章绪论/index.md",
     "notes/高频电子线路/高频电子线路/index.md",
+    "notes/信号与系统/index - 副本.md",
+    "notes/信号与系统/index.md",
+    "notes/信号与系统/未命名.md",
+    "notes/高频电子线路/试卷解析/1.md",
+    "notes/高频电子线路/试卷解析/index.md",
+    "notes/高频电子线路/高频电子线路.zip",
+    "notes/高频电子线路/复习总结/index.md",
+    "notes/高频电子线路/频率分析/index.md",
     "academic/LingBot-VLA 2.0/index.md",
     "academic/LingBot-VLA 2.0/Pasted image 20260715155132.png",
     "academic/LingBot-VLA 2.0/Pasted image 20260715155055.png",
@@ -220,7 +232,6 @@
     "academic/MaskWAM/index.md.tmp.5940.c058315c191f",
     "notes/电磁波与电磁场/index - 副本.md",
     "notes/电磁波与电磁场/index.md",
-    "notes/信号与系统/index.md",
     "academic/plug_and_play_skill_composition_teacher_report.md",
     "image1.md",
     "academic/智能跟踪小车/index.md",
@@ -228,17 +239,9 @@
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.a2149139f19d",
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.637133b4c236",
     "academic/plug_and_play_skill_composition_teacher_report.md.tmp.9708.8627a1be87ba",
+    "academic/智能跟踪小车/Pasted image 20260705135820.png",
     "academic/AtomicVLA/index.md",
-    "academic/智能跟踪小车/CURRENT_FEATURES.md",
-    "academic/WorldVLA/index.md",
-    "academic/VLA长程任务解决方法/VLA模型长程任务调研.md",
-    "academic/新建文件夹/VLA模型长程任务调研.md",
-    "notes/数字图像处理/5第五章 图像恢复与重建/index.md",
-    "notes/数字图像处理/10第十章 图像分割/index.md",
-    "notes/第 10 章 确定性网络.md",
-    "notes/数字图像处理/8第八章  图像压缩/index.md",
-    "notes/数字图像处理/1第一章 概论/index.md",
-    "notes/数字图像处理/4第四章 图像变换及频率域图像增强/index.md",
-    "notes/数字图像处理/2第二章 数字图像基础/index.md"
+    "academic/AtomicVLA/page1_2x.png",
+    "academic/AtomicVLA/figure2.png"
   ]
 }

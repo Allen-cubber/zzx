@@ -289,7 +289,7 @@ $$
 
 相关图示：
 
-![](essays/Truckmodel/3.png)
+![](3.png)
 
 ![](2.jpg)
 

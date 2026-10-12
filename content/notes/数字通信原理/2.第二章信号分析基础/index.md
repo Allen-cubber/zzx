@@ -480,7 +480,7 @@ tags:
         $$y(t) = r(t) * h(t) = \int_{-\infty}^{+\infty} r(\tau) h(t - \tau) d\tau $$
 $$y(t) = \int_{-\infty}^{+\infty} r(\tau) s(t_0 - t + \tau) d\tau$$
 $$y(t_0) = \int_{-\infty}^{+\infty} r(\tau) s(t_0 - t_0 + \tau) d\tau$$
-
+·
 $$y(t_0) = \int_{-\infty}^{+\infty} r(\tau) s(\tau) d\tau$$
 ---
 

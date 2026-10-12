@@ -3,9 +3,8 @@
   "showLineNumber": true,
   "pdfExportSettings": {
     "pageSize": "A3",
-    "landscape": false,
+    "landscape": true,
     "margin": "0",
-    "downscalePercent": 100
-  },
-  "alwaysUpdateLinks": true
+    "downscalePercent": 83
+  }
 }

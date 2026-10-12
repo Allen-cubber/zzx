@@ -2290,7 +2290,7 @@ $a(t) = V_0 \{ J_0(m_f)\cos(\omega_0 t) + \sum_{n=1}^{\infty} J_n(m_f)[\cos((\om
 1.  已调波的<font color="orange">瞬时频率</font>与调制信号成<font color="orange">比例地变化</font>。这是基本要求。
 2.  未调制时的载波频率，即已调波的<font color="orange">中心频率</font>具有一定的<font color="orange">稳定度</font>。
 3.  最大频移与调制频率<font color="orange">无关</font>。
-4.  无<font color="orange">寄生调幅</font>或寄生调幅尽可能小。
+4.  无<font color="orange">寄生调幅</font>或寄23生调幅尽可能小。
 
 产生调频信号的方法很多，归纳起来主要有两类：
 1.  **直接调频**: 用调制信号<font color="orange">直接控制</font>载波的瞬时频率。
