@@ -134,7 +134,7 @@ $$
 这是Z变换在系统分析中最核心的应用。
 
 - **因果性 (Causality)** 🕰️:
-  - 一个LTI系统是因果的 $\iff$ 其系统函数 $H(z)$ 的ROC是<font color="orange">某个圆的外部</font>，并且<font color="orange">包含 $z=\infty$</font>。
+  - 一个LTI系统是因果的 $\iff$ 其系统函数 $H(z)$ 的ROC是<font color="orange">某个圆的外部</font>，并且包含 $z=\infty$。
   - 对于有理系统函数，这意味着分子的最高阶次不能大于分母的最高阶次。
 
 - **稳定性 (Stability)** ⚖️:

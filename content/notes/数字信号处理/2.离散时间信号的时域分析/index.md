@@ -110,8 +110,8 @@ $$ \boxed{y[n] = x[n] * h[n] = \sum_{k=-\infty}^{\infty} x[k]h[n-k]} $$
     *   **非周期序列**：不满足周期性。
 
 *   **能量和功率序列**：
-    *   **能量**：$ E_x = \sum_{n=-\infty}^{\infty} |x\[n\]|^2 $
-    *   **平均功率**：$ P_x = \lim_{K \to \infty} \frac{1}{2K+1} \sum_{n=-K}^{K} |x\[n\]|^2 $
+    *   **能量**：$E_x = \sum_{n=-\infty}^{\infty} |x\[n\]|^2$
+    *   **平均功率**：$P_x = \lim_{K \to \infty} \frac{1}{2K+1} \sum_{n=-K}^{K} |x\[n\]|^2$
     *   **能量信号**：能量有限 ($E_x < \infty$)，则功率为0。
     *   **功率信号**：功率有限 ($0 < P_x < \infty$)，则能量无限。
 
